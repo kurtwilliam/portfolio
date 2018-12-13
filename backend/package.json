@@ -1,0 +1,26 @@
+{
+  "name": "ethicsGradient-backend",
+  "version": "1",
+  "description": "backend for ethics graadient",
+  "main": "index.js",
+  "author": "Kurpt",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@loadable/component": "^5.2.1",
+    "apollo-server": "^2.2.6",
+    "dotenv": "^6.1.0",
+    "graphql": "^14.0.2",
+    "nodemon": "^1.18.7"
+  },
+  "devDependencies": {
+    "eslint": "^5.9.0",
+    "eslint-plugin-node": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  }
+}
