@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
-import Header from './Components/Header';
-import Body from './Components/Body';
-import Footer from './Components/Footer';
-import { createGlobalStyle } from 'styled-components'
+import React, { Component } from "react";
+import Body from "./Components/Body";
+import Footer from "./Components/Footer";
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -36,13 +35,12 @@ const GlobalStyle = createGlobalStyle`
     color:black;
     font-size:1.6rem;
   }
-`
+`;
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
         <Body />
         <Footer />
         <GlobalStyle />
