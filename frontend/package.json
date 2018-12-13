@@ -1,7 +1,7 @@
 {
-  "name": "ethgrad",
-  "version": "v1.12.1",
-  "private": true,
+  "name": "kurtwilliam.com",
+  "version": "v2",
+  "private": false,
   "dependencies": {
     "apollo-boost": "^0.1.22",
     "graphql": "^14.0.2",
