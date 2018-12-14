@@ -8,13 +8,13 @@ import Chunk from "../../shared/Chunk";
 
 class Shooter extends Component {
   state = {
-    score: 0
+    score: 0,
   };
   render() {
     const { score } = this.state;
     return (
       <Chunk>
-        <p class="score">{score}</p>
+        <p className="score">{score}</p>
       </Chunk>
     );
   }
