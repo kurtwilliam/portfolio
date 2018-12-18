@@ -7,22 +7,29 @@ const SkillCont = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-top: 50px;
+  width: 25%;
+
+  @media (max-width: 720px) {
+    width: 50%;
+  }
 `;
 
 const Title = styled.h2`
-  font-size: 2.8rem;
+  font-size: 2rem;
+  color: ${props => props.theme.grey};
 `;
 
 const List = styled.ul`
   margin: 0;
   padding: 0;
+  padding-left: 12px;
   display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  flex-direction: column;
 
   li {
-    width: 20%;
+    width: 100%;
     list-style: none;
+    font-size: 2.4rem;
   }
 `;
 

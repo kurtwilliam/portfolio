@@ -21,9 +21,7 @@ class JungleScene extends Component {
   render() {
     const { x, y, w, plant } = this.props;
     const { transition } = this.state;
-    // react-draggable affects its immediate childs top/left/transition property
-    // which is what we need to randomly generate position
-    // so we add an extra div to keep both react-draggable and the photo happy
+
     return (
       <Draggable onStart={this.startDrag} onStop={this.stopDrag}>
         <JungleBox
