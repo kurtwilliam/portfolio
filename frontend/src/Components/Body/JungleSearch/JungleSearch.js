@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import Chunk from "../../shared/Chunk";
 import JungleScene from "./JungleScene";
 import styled from "styled-components";
@@ -23,39 +23,83 @@ import Horse from "../../../assets/jungleSearch/animals/horse.jpg";
 import Spider from "../../../assets/jungleSearch/animals/spider.jpg";
 
 const animals = [Koala, Monkie, Cat, Cat2, Dog, Dog2, Chicken, Horse, Spider];
-const scenes = [Plant1, Montsera, Heart, Plant2, Plant3, Plant4, Plant5];
-
-const randomNumber = (max, min) => Math.random() * (max - min) + min;
+const plantsArray = [
+  Plant1,
+  Montsera,
+  Heart,
+  Plant2,
+  Plant3,
+  Plant4,
+  Plant5,
+  Plant1,
+  Plant2,
+  Plant3
+];
 
 const JungleChunk = styled(Chunk)`
   overflow: hidden;
-  background-image: url(${shuffle(animals)[0]});
   background-position: center;
   background-size: cover;
 `;
 
-const JungleSearch = () => (
-  <JungleChunk>
-    {shuffle(scenes).map((scene, i) => {
-      // Randomly generate x/y position for jungle box
-      let x = randomNumber(80, -20);
-      let y = randomNumber(80, -20);
+const ShuffleBtn = styled.button`
+  position: absolute;
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, 0);
+  border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: none;
 
-      // Randomly generate width/height for jungle box
-      let w = randomNumber(100, 35);
-      // let h = randomNumber(100, 60);
+  &:active {
+  }
+`;
 
-      // Ensures top left is at least covered
-      if (i < 3) {
-        x = randomNumber(10, -20);
-        y = randomNumber(10, -20);
-        w = randomNumber(80, 50);
-        // h = randomNumber(80, 50);
-      }
-      console.log(scene, x, y, w);
-      return <JungleScene key={i} x={x} y={y} w={w} scene={scene} />;
-    })}
-  </JungleChunk>
-);
+const randomNumber = (max, min) => Math.random() * (max - min) + min;
+
+class JungleSearch extends Component {
+  state = {
+    bg: shuffle(animals)[0],
+    plants: shuffle(plantsArray)
+  };
+
+  shuffle = () => {
+    // on click of the bg, shuffle everything!
+    const bg = shuffle(animals)[0];
+    const plants = shuffle(plantsArray);
+    this.setState({ bg, plants });
+  };
+
+  render() {
+    const { bg, plants } = this.state;
+    return (
+      <JungleChunk style={{ backgroundImage: `url(${bg})` }}>
+        {plants.map((plant, i) => {
+          // Randomly generate x/y position for jungle box
+          let x = randomNumber(60, -20);
+          let y = randomNumber(60, -20);
+
+          // Randomly generate width for jungle box
+          let w = randomNumber(100, 45);
+
+          // Ensures top left is at least covered
+          if (i < 5) {
+            x = randomNumber(40, 10);
+            y = randomNumber(40, 10);
+            w = randomNumber(80, 50);
+          }
+
+          return <JungleScene key={i} x={x} y={y} w={w} plant={plant} />;
+        })}
+        <ShuffleBtn onClick={this.shuffle}>
+          <span role="img" aria-label="search">
+            🔍🔍
+          </span>
+        </ShuffleBtn>
+      </JungleChunk>
+    );
+  }
+}
 
 export default JungleSearch;
