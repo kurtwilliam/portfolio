@@ -1,46 +1,9 @@
 import React, { Component } from "react";
-import Chunk from "../../shared/Chunk";
 import JungleScene from "./JungleScene";
 import styled from "styled-components";
-import { shuffle } from "../../../utils";
-
-import Plant1 from "../../../assets/jungleSearch/fauna/plant1.jpg";
-import Plant2 from "../../../assets/jungleSearch/fauna/plant2.png";
-import Plant3 from "../../../assets/jungleSearch/fauna/plant3.png";
-import Plant4 from "../../../assets/jungleSearch/fauna/plant4.png";
-import Plant5 from "../../../assets/jungleSearch/fauna/plant5.png";
-import Montsera from "../../../assets/jungleSearch/fauna/montsera.png";
-import Heart from "../../../assets/jungleSearch/fauna/heart.png";
-
-import Koala from "../../../assets/jungleSearch/animals/koala.jpg";
-import Monkie from "../../../assets/jungleSearch/animals/monkie.jpg";
-import Cat from "../../../assets/jungleSearch/animals/cat.jpg";
-import Cat2 from "../../../assets/jungleSearch/animals/cat2.jpg";
-import Dog from "../../../assets/jungleSearch/animals/dog.jpg";
-import Dog2 from "../../../assets/jungleSearch/animals/dog2.jpg";
-import Chicken from "../../../assets/jungleSearch/animals/chicken.jpg";
-import Horse from "../../../assets/jungleSearch/animals/horse.jpg";
-import Spider from "../../../assets/jungleSearch/animals/spider.jpg";
-
-const animals = [Koala, Monkie, Cat, Cat2, Dog, Dog2, Chicken, Horse, Spider];
-const plantsArray = [
-  Plant1,
-  Montsera,
-  Heart,
-  Plant2,
-  Plant3,
-  Plant4,
-  Plant5,
-  Plant1,
-  Plant2,
-  Plant3
-];
-
-const JungleChunk = styled(Chunk)`
-  overflow: hidden;
-  background-position: center;
-  background-size: cover;
-`;
+import { shuffle, animals, plantsArray } from "../../../utils";
+import ChunkDesc from "../../shared/ChunkDesc";
+import JungleChunk from "./JungleChunk";
 
 const ShuffleBtn = styled.button`
   position: absolute;
@@ -73,7 +36,7 @@ class JungleSearch extends Component {
 
   render() {
     const { bg, plants } = this.state;
-    return (
+    return [
       <JungleChunk style={{ backgroundImage: `url(${bg})` }}>
         {plants.map((plant, i) => {
           // Randomly generate x/y position for jungle box
@@ -97,8 +60,11 @@ class JungleSearch extends Component {
             🔍🔍
           </span>
         </ShuffleBtn>
-      </JungleChunk>
-    );
+      </JungleChunk>,
+      <ChunkDesc>
+        Spread the foliage to find some wild forest animals! Uses React.
+      </ChunkDesc>
+    ];
   }
 }
 

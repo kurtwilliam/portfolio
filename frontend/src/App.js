@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
     font-size:2.4rem;
   }
   h1,h2,h3,h4,h5,h6 { font-family: 'Ogg', serif; }
-  p,span,a,label,button,textarea,li { font-family:'Work Sans', sans-serif; font-size:1.6rem; }
+  p,span,a,label,button,textarea,li,figcaption { font-family:'Work Sans', sans-serif; font-size:1.6rem; }
 `;
 
 const AppCont = styled.div`
