@@ -6,7 +6,7 @@ const SkillCont = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 50px;
+  margin-top: 90px;
   width: 25%;
 
   @media (max-width: 720px) {
@@ -15,14 +15,14 @@ const SkillCont = styled.div`
 `;
 
 const Title = styled.h2`
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: ${props => props.theme.grey};
+  margin-bottom: 8px;
 `;
 
 const List = styled.ul`
   margin: 0;
   padding: 0;
-  padding-left: 12px;
   display: flex;
   flex-direction: column;
 
