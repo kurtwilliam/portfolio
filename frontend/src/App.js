@@ -1,16 +1,17 @@
-import React from "react";
-import Body from "./Components/Body";
-import Footer from "./Components/Footer";
-import Header from "./Components/Header";
-import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
-
-import Ogg from "./assets/fonts/Ogg-Roman.otf";
+import React from 'react';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
+import Body from './Components/Body';
+import Footer from './Components/Footer';
+import Header from './Components/Header';
+import Ogg from './assets/fonts/Ogg-Roman.otf';
 
 const theme = {
-  grey: "#B9B4AF",
-  main: "#232323",
+  grey: '#B9B4AF',
+  main: '#232323',
   gradient:
-    "linear-gradient(#5F6460, #AC836B, #C5E199, #5DC99F, #3B6D81, #6F677F, #812A3A, #79341A,#504235)"
+    'linear-gradient(#5F6460, #AC836B, #C5E199, #5DC99F, #3B6D81, #6F677F, #812A3A, #79341A,#504235)',
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -61,17 +62,23 @@ const Container = styled.div`
   }
 `;
 
+const client = new ApolloClient({
+  uri: 'http://localhost:4000',
+});
+
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <AppCont>
-      <Container>
-        <Header />
-        <Body />
-        <Footer />
-        <GlobalStyle />
-      </Container>
-    </AppCont>
-  </ThemeProvider>
+  <ApolloProvider client={client}>
+    <ThemeProvider theme={theme}>
+      <AppCont>
+        <Container>
+          <Header />
+          <Body />
+          <Footer />
+          <GlobalStyle />
+        </Container>
+      </AppCont>
+    </ThemeProvider>
+  </ApolloProvider>
 );
 
 export default App;

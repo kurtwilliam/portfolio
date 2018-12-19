@@ -1,17 +1,19 @@
 const { ApolloServer, gql } = require("apollo-server");
 
+// const skillz = require('./data')
+
 const typeDefs = gql`
-  type Chunk {
-    chunk: String
+  type Skill {
+    title: String
   }
   type Query {
-    chunks: [Chunk]
+    skillz: [Skill]
   }
 `;
 
 const resolvers = {
   Query: {
-    chunks: () => "Hello.",
+    skillz: () => "Hello",
   },
 };
 
