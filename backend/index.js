@@ -2,7 +2,7 @@ const { ApolloServer, gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Chunk {
-    chunkyBoy: String
+    chunk: String
   }
   type Query {
     chunks: [Chunk]
@@ -11,7 +11,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    chunks: () => 'Hello.',
+    chunks: () => "Hello.",
   },
 };
 

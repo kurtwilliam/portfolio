@@ -1,13 +1,12 @@
 {
-  "name": "ethicsGradient-backend",
+  "name": "kurtwilliam-backend",
   "version": "1",
-  "description": "backend for ethics graadient",
+  "description": "backend for portfolio ",
   "main": "index.js",
   "author": "Kurpt",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@loadable/component": "^5.2.1",
     "apollo-server": "^2.2.6",
     "dotenv": "^6.1.0",
     "graphql": "^14.0.2",
