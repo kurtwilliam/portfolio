@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Chunk from "../../shared/Chunk";
-import AestheticDimensionImg from "../../../assets/AestheticDimensionImg.png";
+import AestheticDimensionImg from "./AestheticDimensionImg.png";
 
 const AestheticDimensionChunk = styled(Chunk)`
   background-image: url(${AestheticDimensionImg});
