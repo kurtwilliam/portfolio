@@ -31,7 +31,7 @@ export const skillz = [
     skillz: ["ES6", "React", "Redux", "Node", "GraphQL", "Apollo", "jQuery"]
   },
   {
-    title: "CSS3",
+    title: "CSS4",
     skillz: ["SCSS", "Ant Design", "Styled Components", "Material UI"]
   },
   {

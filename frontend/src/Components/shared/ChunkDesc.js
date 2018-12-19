@@ -6,13 +6,12 @@ const ChunkDesc = styled.figcaption`
   padding:16px 32px
   text-align:center;
   color:${props => props.theme.grey};
-  margin-bottom: 32px;
   max-width:75%;
-  margin: 0 auto;
+  margin: 0 auto 64px;
 
   @media(max-width:600) {
     padding:8px 12px;
-  max-width:100%;
+    max-width:100%;
   }
 `;
 

@@ -37,7 +37,7 @@ class JungleSearch extends Component {
   render() {
     const { bg, plants } = this.state;
     return [
-      <JungleChunk style={{ backgroundImage: `url(${bg})` }}>
+      <JungleChunk key="chunk" style={{ backgroundImage: `url(${bg})` }}>
         {plants.map((plant, i) => {
           // Randomly generate x/y position for jungle box
           let x = randomNumber(60, -20);
@@ -61,7 +61,7 @@ class JungleSearch extends Component {
           </span>
         </ShuffleBtn>
       </JungleChunk>,
-      <ChunkDesc>
+      <ChunkDesc key="chunkdesc">
         Spread the foliage to find some wild forest animals! Uses React.
       </ChunkDesc>
     ];
