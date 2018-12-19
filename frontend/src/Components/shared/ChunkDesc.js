@@ -9,7 +9,7 @@ const ChunkDesc = styled.figcaption`
   max-width:75%;
   margin: 0 auto 64px;
 
-  @media(max-width:600) {
+  @media(max-width:600px) {
     padding:8px 12px;
     max-width:100%;
   }

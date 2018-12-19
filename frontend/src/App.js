@@ -33,6 +33,10 @@ const GlobalStyle = createGlobalStyle`
     padding:15px;
     color:${props => props.theme.main};
     font-size:2.4rem;
+
+    @media(max-width:550px) {
+      padding:10px;
+    }
   }
   h1,h2,h3,h4,h5,h6 { font-family: 'Ogg', serif; }
   p,span,a,label,button,textarea,li,figcaption { font-family:'Work Sans', sans-serif; font-size:1.6rem; }
@@ -53,7 +57,7 @@ const Container = styled.div`
 
   @media (max-width: 720px) {
     width: calc(100% - 40px);
-    padding-top: 60px;
+    padding-top: 40px;
   }
 `;
 

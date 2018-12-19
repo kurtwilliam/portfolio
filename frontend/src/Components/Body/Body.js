@@ -4,6 +4,7 @@ import JungleSearch from "./JungleSearch";
 import AestheticDimension from "./AestheticDimension";
 import Shooter from "./Shooter";
 import EmailBuilder from "./EmailBuilder";
+import WordSandwiches from "./WordSandwiches";
 
 // Map over body chunks we get from state
 // from here we render a body piece
@@ -17,6 +18,7 @@ class Body extends Component {
         <JungleSearch />
         <AestheticDimension />
         <EmailBuilder />
+        <WordSandwiches />
       </Chunk>
     );
   }

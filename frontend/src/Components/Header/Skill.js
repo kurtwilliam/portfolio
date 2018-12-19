@@ -11,6 +11,7 @@ const SkillCont = styled.div`
 
   @media (max-width: 720px) {
     width: 50%;
+    margin-top: 40px;
   }
 `;
 
