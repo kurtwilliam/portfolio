@@ -5,6 +5,7 @@ import { Query, Mutation } from 'react-apollo';
 import Score from './Score';
 
 import Chunk from '../../shared/Chunk';
+import ChunkDesc from '../../shared/ChunkDesc';
 import TargetContainer from './TargetContainer';
 
 // OnClick for chunk that mkes bullet hole...?
@@ -32,7 +33,7 @@ class Shooter extends Component {
 
   componentDidMount() {
     this.generateStyles();
-    setInterval(() => this.generateStyles(), 2000);
+    setInterval(() => this.generateStyles(), this.state.duration * 1000);
   }
 
   targetClicked = () => this.setState(state => ({
@@ -42,7 +43,7 @@ class Shooter extends Component {
   generateStyles = () => {
     const x = Math.random() * 100;
     const y = Math.random() * 100;
-    const duration = Math.random() * 3;
+    const duration = Math.random() * 5;
 
     this.setState({ x, y, duration });
   };
@@ -51,7 +52,7 @@ class Shooter extends Component {
     const {
       score, x, y, duration,
     } = this.state;
-    return (
+    return [
       <Chunk>
         <Query query={GET_SCORE}>
           {({ loading, error, data }) => {
@@ -63,16 +64,21 @@ class Shooter extends Component {
         </Query>
         <Mutation mutation={INCREMENT_SCORE} refetchQueries={() => ['score']}>
           {(increaseScore, { data }) => (
-            <TargetContainer
-              onClick={() => increaseScore({ variables: { score: 1 } })}
-              x={x}
-              y={y}
-              duration={duration}
-            />
+            <TargetContainer x={x} y={y} duration={duration}>
+              <div onClick={() => increaseScore({ variables: { score: 1 } })}>
+                <div onClick={() => increaseScore({ variables: { score: 2 } })}>
+                  <div onClick={() => increaseScore({ variables: { score: 3 } })} />
+                </div>
+              </div>
+            </TargetContainer>
           )}
         </Mutation>
-      </Chunk>
-    );
+      </Chunk>,
+      <ChunkDesc>
+        Shooting game! The score is global. Uses React, GraphQL, Apollo Server, and backend running
+        on Now.
+      </ChunkDesc>,
+    ];
   }
 }
 

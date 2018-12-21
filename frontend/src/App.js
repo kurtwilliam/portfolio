@@ -63,7 +63,7 @@ const Container = styled.div`
 `;
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000',
+  uri: 'https://nodejs-d46mbauhe.now.sh',
 });
 
 const App = () => (
