@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const TargetContainer = styled.div`
+  transition: all ${props => props.duration}s ease-out;
   position: absolute;
   top: ${props => props.y}%;
   left: ${props => props.x}%;
   width: 100px;
   height: 100px;
-  transition: all ${props => props.duration}s ease-out;
   border: 1px solid red;
   border-radius: 50%;
 

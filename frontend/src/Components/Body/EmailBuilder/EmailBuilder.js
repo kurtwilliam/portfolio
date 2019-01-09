@@ -51,7 +51,12 @@ const EmailBuilder = () => [
           </p>
         </section>
         <section id="values" className="feature scrollTo">
-          <h2>👨‍💻 Changing Numeric Values</h2>
+          <h2>
+            <span role="img" aria-label="developer">
+              👨‍💻
+            </span>{" "}
+            Changing Numeric Values
+          </h2>
           <div className="content">
             <div className="card">
               <img src={Values1} alt="Changing Values" />
@@ -85,7 +90,12 @@ const EmailBuilder = () => [
           </div>
         </section>
         <section id="sidebar" className="feature scrollTo">
-          <h2>🏡 Cleaning up the Right Settings Sidebar</h2>
+          <h2>
+            <span role="img" aria-label="home">
+              🏡
+            </span>{" "}
+            Cleaning up the Right Settings Sidebar
+          </h2>
           <div className="content">
             <div className="card">
               <img src={Sidebar1} alt="Changes to options sidebar" />
@@ -119,7 +129,12 @@ const EmailBuilder = () => [
           </div>
         </section>
         <section id="color" className="feature scrollTo">
-          <h2>👩‍🎨 Adding some Color</h2>
+          <h2>
+            <span role="img" aria-label="painter">
+              👩‍🎨
+            </span>{" "}
+            Adding some Color
+          </h2>
           <div className="content">
             <div className="card">
               <img src={Color1} alt="Changing Color the old way" />
@@ -150,7 +165,12 @@ const EmailBuilder = () => [
           </div>
         </section>
         <section id="components" className="feature scrollTo">
-          <h2>💰 Transactional Details</h2>
+          <h2>
+            <span role="img" aria-label="money">
+              💰
+            </span>{" "}
+            Transactional Details
+          </h2>
           <div className="content">
             <div className="card">
               <img src={Info1} alt="HTML Email changes" />
@@ -183,7 +203,12 @@ const EmailBuilder = () => [
           </div>
         </section>
         <section id="components" className="feature scrollTo">
-          <h2>📬 Email Templates</h2>
+          <h2>
+            <span role="img" aria-label="email">
+              📬
+            </span>{" "}
+            Email Templates
+          </h2>
           <div className="content">
             <div className="card">
               <img src={General1} alt="Email Template design changes" />
@@ -215,7 +240,12 @@ const EmailBuilder = () => [
           </div>
         </section>
         <section id="components" className="feature scrollTo">
-          <h2>😍 Example Template Designs</h2>
+          <h2>
+            <span role="img" aria-label="love">
+              😍
+            </span>{" "}
+            Example Template Designs
+          </h2>
           <div className="content">
             <div className="card">
               <img src={Templates} alt="New Template Designs" />

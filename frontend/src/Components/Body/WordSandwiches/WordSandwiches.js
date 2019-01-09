@@ -6,7 +6,8 @@ import WordSandwichesLogo from "./assets/WordSandwichesLogo.png";
 const AestheticDimension = () => [
   <WordSandwichesChunk key="chunk">
     <a href="http://kurtwilliam.com/word-sandwiches">
-      <img src={WordSandwichesLogo} />
+      {" "}
+      <img src={WordSandwichesLogo} alt="Link to Word Sandwiches" />
     </a>
   </WordSandwichesChunk>,
   <ChunkDesc key="chunkdesc">
