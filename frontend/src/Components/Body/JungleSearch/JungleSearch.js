@@ -13,8 +13,6 @@ import Plant5 from "./assets/fauna/plant5.png";
 import Montsera from "./assets/fauna/montsera.png";
 import Heart from "./assets/fauna/heart.png";
 
-import Koala from "./assets/animals/koala.jpg";
-// import Monkie from "./assets/animals/monkie.jpg";
 import Cat from "./assets/animals/cat.jpg";
 import Cat2 from "./assets/animals/cat2.jpg";
 import Dog from "./assets/animals/dog.jpg";
@@ -24,7 +22,7 @@ import Chicken from "./assets/animals/chicken.jpg";
 import Horse from "./assets/animals/horse.jpg";
 import Spider from "./assets/animals/spider.jpg";
 
-const animals = [Koala, Cat, Cat2, Dog, Dog2, Dog3, Chicken, Horse, Spider];
+const animals = [Cat, Cat2, Dog, Dog2, Dog3, Chicken, Horse, Spider];
 const plantsArray = [
   Plant1,
   Montsera,
