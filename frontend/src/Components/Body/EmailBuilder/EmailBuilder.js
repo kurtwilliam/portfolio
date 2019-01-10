@@ -31,13 +31,13 @@ const EmailBuilder = () => [
     <section className="container">
       <main>
         <section id="intro">
-          <h1>Spently Email Builder</h1>
+          <h1>Email Builder</h1>
           <p>
-            <a href="http://www.spently.com">Spently</a>'s Email Builder helps
-            Shopify store owners build their own emails. In each GIF below the
-            left side is the email the user edits, whilst the right sidebar
-            customizes the emails content. The user will use these emails as
-            their online order confirmation, shipment sent, etc...
+            This startup's Email Builder helps Shopify store owners build their
+            own emails. In each GIF below the left side is the email the user
+            edits, whilst the right sidebar customizes the emails content. The
+            user will use these emails as their online order confirmation,
+            shipment sent, etc...
           </p>
           <br />
           <p>
@@ -256,9 +256,9 @@ const EmailBuilder = () => [
     </section>
   </EmailBuilderStyles>,
   <ChunkDesc key="chunkdesc">
-    This project showcases some changes the Spently team and I made to Spently's
-    Email Builder. The builder itself uses React, Redux, Axios, SCSS, among
-    other tools.
+    This project showcases some changes my team and I made to their Email
+    Builder. The builder itself uses React, Redux, Axios, SCSS, among other
+    tools.
   </ChunkDesc>
 ];
 

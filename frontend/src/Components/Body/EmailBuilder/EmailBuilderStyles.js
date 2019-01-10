@@ -57,6 +57,11 @@ const EmailBuilderStyles = styled(Chunk)`
     font-size: 3.2rem;
     padding: 0 0 20px;
     font-weight: bold;
+
+    span[role=img] {
+      font-size:3.2rem;
+      
+    }
   }
 
   h3 {

@@ -16,7 +16,7 @@ const Body = () => (
     <AestheticDimension />
     <WordSandwiches />
     <Separator>Fun Projects</Separator>
-    <Shooter />
+    {/* <Shooter /> */}
     <JungleSearch />
   </main>
 );
