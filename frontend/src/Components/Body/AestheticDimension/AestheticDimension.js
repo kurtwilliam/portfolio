@@ -1,11 +1,21 @@
 import React from "react";
-import AestheticDimensionChunk from "./AestheticDimensionChunk";
+import LinkChunk from "../../shared/LinkChunk";
 import ChunkDesc from "../../shared/ChunkDesc";
 
+import AestheticDimensionImg from "./AestheticDimensionImg.png";
+
 const AestheticDimension = () => [
-  <AestheticDimensionChunk key="chunk">
-    <a href="http://aestheticdimension.com/" />
-  </AestheticDimensionChunk>,
+  <LinkChunk
+    href="http://aestheticdimension.com/"
+    key="chunk"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      src={AestheticDimensionImg}
+      alt="link to Aesthetic Dimension project"
+    />
+  </LinkChunk>,
   <ChunkDesc key="chunkdesc">
     A CMS site built for the design firm Aesthetic Dimension. Built using
     JavaScript, Craft CMS, Twig and SCSS. Please note I did not design the site.

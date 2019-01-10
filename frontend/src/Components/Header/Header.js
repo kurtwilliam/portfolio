@@ -8,9 +8,8 @@ import Introduction from "./Introduction";
 const Header = () => (
   <header style={{ minHeight: "90vh", marginBottom: "10vh" }}>
     <Introduction>
-      Hi, I'm Kurt, a JavaScript developer based out of Toronto. To build a
-      product I research applicable user experience, design the data schema,
-      then build it.
+      Hi, I'm Kurt, a Web Developer based out of Toronto. I use JavaScript to
+      solve meaningful problems.
     </Introduction>
     <SkillzContainer>
       {skillz.map(skill => (

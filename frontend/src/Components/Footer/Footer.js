@@ -1,14 +1,33 @@
 import React from "react";
-import styled from "styled-components";
+import FooterCont from "./FooterCont";
 
-const Contact = styled.p`
-  text-align: right;
-  font-family: "Ogg", serif;
-  color: ${props => props.theme.grey};
-  padding: 100px 0 30px;
-  font-size: 3.2rem;
-`;
-
-const Footer = () => <Contact>k.w.schneid@gmail.com</Contact>;
+const Footer = () => (
+  <FooterCont>
+    <a
+      href="https://github.com/kurtwilliam"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="fab fa-github" />
+    </a>
+    <a
+      href="https://linkedin.com/in/kurtwilliam"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <i class="fab fa-linkedin" />
+    </a>
+    <p>
+      |{" "}
+      <a
+        href="mailto:k.w.schneid@gmail.com"
+        target="_top"
+        rel="noopener noreferrer"
+      >
+        k.w.schneid@gmail.com
+      </a>
+    </p>
+  </FooterCont>
+);
 
 export default Footer;

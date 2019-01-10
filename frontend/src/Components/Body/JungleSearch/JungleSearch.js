@@ -95,11 +95,7 @@ class JungleSearch extends Component {
 
           return <JungleScene key={i} x={x} y={y} w={w} plant={plant} />;
         })}
-        <ShuffleBtn onClick={this.shuffle}>
-          <span role="img" aria-label="search">
-            🔍🔍
-          </span>
-        </ShuffleBtn>
+        <ShuffleBtn onClick={this.shuffle}>Reset</ShuffleBtn>
       </JungleChunk>,
       <ChunkDesc key="chunkdesc">
         Spread the foliage to find some wild forest animals! Uses React.

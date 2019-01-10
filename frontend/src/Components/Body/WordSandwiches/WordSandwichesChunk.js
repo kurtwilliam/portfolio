@@ -17,6 +17,14 @@ const WordSandwichesChunk = styled(Chunk)`
     justify-content: center;
     align-items: center;
   }
+
+  img {
+    max-width: 75%;
+
+    @media (max-width: 600px) {
+      max-width: 85%;
+    }
+  }
 `;
 
 export default WordSandwichesChunk;

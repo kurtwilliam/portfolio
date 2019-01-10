@@ -3,9 +3,13 @@ import WordSandwichesChunk from "./WordSandwichesChunk";
 import ChunkDesc from "../../shared/ChunkDesc";
 import WordSandwichesLogo from "./assets/WordSandwichesLogo.png";
 
-const AestheticDimension = () => [
+const WordSandwiches = () => [
   <WordSandwichesChunk key="chunk">
-    <a href="http://kurtwilliam.com/word-sandwiches">
+    <a
+      href="http://kurtwilliam.com/word-sandwiches"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
       {" "}
       <img src={WordSandwichesLogo} alt="Link to Word Sandwiches" />
     </a>
@@ -16,4 +20,4 @@ const AestheticDimension = () => [
   </ChunkDesc>
 ];
 
-export default AestheticDimension;
+export default WordSandwiches;
