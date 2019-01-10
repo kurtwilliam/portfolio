@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const ChunkDesc = styled.figcaption`
   position: relative;
@@ -11,7 +11,7 @@ const ChunkDesc = styled.figcaption`
   padding-bottom: 64px;
 
   @media(max-width:600px) {
-    padding:8px 12px 20px;
+    padding:8px 12px 50px;
     max-width:100%;
   }
 `;

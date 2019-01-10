@@ -25,6 +25,10 @@ const WordSandwichesChunk = styled(Chunk)`
       max-width: 85%;
     }
   }
+
+  @media (max-width: 600px) {
+    background-size:cover;
+  }
 `;
 
 export default WordSandwichesChunk;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Chunk = styled.div`
   position: relative;
@@ -10,6 +10,14 @@ const Chunk = styled.div`
 
   :hover {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    min-height: 50vh;
+  }
+
+  @media (max-width: 600px) {
+    min-height: 40vh;
   }
 `;
 
