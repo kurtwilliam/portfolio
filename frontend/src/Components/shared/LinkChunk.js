@@ -1,10 +1,12 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const LinkChunk = styled.a`
   width: 100%;
   height: auto;
   margin: 0 auto;
   max-height: 75vh;
+  text-decoration: none;
+  border-radius: 2px;
 
   img {
     width: 100%;

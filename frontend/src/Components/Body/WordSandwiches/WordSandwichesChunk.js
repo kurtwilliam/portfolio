@@ -1,6 +1,6 @@
-import styled from "styled-components";
-import Chunk from "../../shared/Chunk";
-import WordSandwichesBG from "./assets/WordSandwichesBG.png";
+import styled from 'styled-components';
+import Chunk from '../../shared/Chunk';
+import WordSandwichesBG from './assets/WordSandwichesBG.png';
 
 const WordSandwichesChunk = styled(Chunk)`
   background-image: url(${WordSandwichesBG});
@@ -19,15 +19,15 @@ const WordSandwichesChunk = styled(Chunk)`
   }
 
   img {
-    max-width: 75%;
+    max-width: 50%;
 
     @media (max-width: 600px) {
-      max-width: 85%;
+      max-width: 60%;
     }
   }
 
   @media (max-width: 600px) {
-    background-size:cover;
+    background-size: cover;
   }
 `;
 

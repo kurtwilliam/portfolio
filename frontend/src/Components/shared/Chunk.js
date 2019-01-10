@@ -7,6 +7,7 @@ const Chunk = styled.div`
   margin: 0 auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 200ms;
+  border-radius: 2px;
 
   :hover {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
