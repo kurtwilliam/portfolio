@@ -1,17 +1,18 @@
-import React from 'react';
-import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from 'react-apollo';
-import Body from './Components/Body';
-import Footer from './Components/Footer';
-import Header from './Components/Header';
-import Ogg from './assets/fonts/Ogg-Roman.otf';
+import React from "react";
+import styled, { createGlobalStyle, ThemeProvider } from "styled-components";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import Home from "./Components/Routes/Home";
+import Hiragana from "./Components/Routes/Hiragana";
+import Footer from "./Components/Footer";
+import Ogg from "./assets/fonts/Ogg-Roman.otf";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const theme = {
-  grey: '#B9B4AF',
-  main: '#232323',
+  grey: "#B9B4AF",
+  main: "#232323",
   gradient:
-    'linear-gradient(#5F6460, #AC836B, #C5E199, #5DC99F, #3B6D81, #6F677F, #812A3A, #79341A, #504235)',
+    "linear-gradient(#5F6460, #AC836B, #C5E199, #5DC99F, #3B6D81, #6F677F, #812A3A, #79341A, #504235)"
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -67,6 +68,7 @@ const InnerCont = styled.div`
   height: auto;
   margin: 0 auto;
   padding-top: 100px;
+  min-height: 100vh;
 
   @media (max-width: 720px) {
     width: calc(100% - 30px);
@@ -75,7 +77,7 @@ const InnerCont = styled.div`
 `;
 
 const client = new ApolloClient({
-  uri: 'https://nodejs-d46mbauhe.now.sh',
+  uri: "https://nodejs-d46mbauhe.now.sh"
 });
 
 const App = () => (
@@ -85,8 +87,10 @@ const App = () => (
         <Gradient>
           <Container>
             <InnerCont>
-              <Header />
-              <Body />
+              <Router>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/hiragana" component={Hiragana} />
+              </Router>
               <GlobalStyle />
             </InnerCont>
           </Container>

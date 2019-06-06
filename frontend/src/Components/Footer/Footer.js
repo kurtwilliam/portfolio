@@ -8,14 +8,14 @@ const Footer = () => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      <i class="fab fa-github" />
+      <i className="fab fa-github" />
     </a>
     <a
       href="https://linkedin.com/in/kurtwilliam"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <i class="fab fa-linkedin" />
+      <i className="fab fa-linkedin" />
     </a>
     <p>
       |{" "}
