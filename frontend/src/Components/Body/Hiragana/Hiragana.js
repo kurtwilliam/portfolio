@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import hiraganaChart from "../../../data/hiraganaChart.json";
+import hiraganaChart from "../../../data/hiraganaChart";
 import HiraganaContainer from "./HiraganaContainer";
 import Chart from "./Chart";
 import ChartRow from "./ChartRow";
@@ -14,7 +14,7 @@ const Hiragana = () => (
   <HiraganaContainer>
     <Chart>
       {Object.keys(hiraganaChart).map((y, i) => (
-        <ChartRow key={y}>
+        <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
           {hiraganaChart[y].map((char, index) => (
             <Character key={char.x + y} index={index} character={char} />
           ))}
