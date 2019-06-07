@@ -13,16 +13,22 @@ console.log(hiraganaChart);
 class Hiragana extends Component {
   state = {
     highlightY: null,
-    highlightX: null
+    highlightX: null,
+    word: ""
   };
 
   highlightLetters = (highlightX, highlightY) => {
     this.setState({ highlightX, highlightY });
   };
 
+  openWordOverlay = word => {
+    this.setState({ word });
+  };
+
   render() {
     const { highlightX, highlightY } = this.state;
-    return (
+    return [
+      <div />,
       <HiraganaContainer>
         <Chart>
           {Object.keys(hiraganaChart).map((y, i) => (
@@ -44,7 +50,7 @@ class Hiragana extends Component {
         <p>🖱️ = 🔊</p>
         <p>🖱️🖱️ = 🖼️</p>
       </HiraganaContainer>
-    );
+    ];
   }
 }
 

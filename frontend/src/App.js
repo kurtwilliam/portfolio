@@ -6,7 +6,7 @@ import Home from "./Components/Routes/Home";
 import Hiragana from "./Components/Routes/Hiragana";
 import Footer from "./Components/Footer";
 import Ogg from "./assets/fonts/Ogg-Roman.otf";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 const theme = {
   grey: "#B9B4AF",

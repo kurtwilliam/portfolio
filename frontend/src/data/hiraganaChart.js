@@ -50,372 +50,444 @@ const hiraganaChart = {
     {
       char: "n",
       x: 1,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "w",
       x: 2,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "r",
       x: 3,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "y",
       x: 4,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "m",
       x: 5,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "h",
       x: 6,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "n",
       x: 7,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "t",
       x: 8,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "s",
       x: 9,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "k",
       x: 10,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: null,
       x: 11,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: null,
       x: 12,
-      audio: []
+      audio: [],
+      words: []
     }
   ],
   "2": [
     {
       char: "ん",
       x: 1,
-      audio: [n]
+      audio: [n],
+      words: []
     },
     {
       char: "わ",
       x: 2,
-      audio: [wa]
+      audio: [wa],
+      words: []
     },
     {
       char: "ら",
       x: 3,
-      audio: [ra]
+      audio: [ra],
+      words: []
     },
     {
       char: "や",
       x: 4,
-      audio: [ya]
+      audio: [ya],
+      words: []
     },
     {
       char: "ま",
       x: 5,
-      audio: [ma]
+      audio: [ma],
+      words: []
     },
     {
       char: "は",
       x: 6,
-      audio: [ha]
+      audio: [ha],
+      words: ["はい"]
     },
     {
       char: "な",
       x: 7,
-      audio: [na]
+      audio: [na],
+      words: []
     },
     {
       char: "た",
       x: 8,
-      audio: [ta]
+      audio: [ta],
+      words: []
     },
     {
       char: "さ",
       x: 9,
-      audio: [sa]
+      audio: [sa],
+      words: []
     },
     {
       char: "か",
       x: 10,
-      audio: [ka]
+      audio: [ka],
+      words: []
     },
     {
       char: "あ",
       x: 11,
-      audio: [a]
+      audio: [a],
+      words: ["あお"]
     },
     {
       char: "a",
       x: 12,
-      audio: []
+      audio: [],
+      words: []
     }
   ],
   "3": [
     {
       char: null,
       x: 1,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: null,
       x: 2,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "り",
       x: 3,
-      audio: [ri]
+      audio: [ri],
+      words: []
     },
     {
       char: null,
       x: 4,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "み",
       x: 5,
-      audio: [mi]
+      audio: [mi],
+      words: []
     },
     {
       char: "ひ",
       x: 6,
-      audio: [hi]
+      audio: [hi],
+      words: []
     },
     {
       char: "に",
       x: 7,
-      audio: [ni]
+      audio: [ni],
+      words: []
     },
     {
       char: "ち",
       x: 8,
-      audio: [chi]
+      audio: [chi],
+      words: []
     },
     {
       char: "し",
       x: 9,
-      audio: [shi]
+      audio: [shi],
+      words: ["すし", "しお"]
     },
     {
       char: "き",
       x: 10,
-      audio: [ki]
+      audio: [ki],
+      words: []
     },
     {
       char: "い",
       x: 11,
-      audio: [i]
+      audio: [i],
+      words: ["いえ", "とけい", "はい", "いいえ"]
     },
     {
       char: "i",
       x: 12,
-      audio: []
+      audio: [],
+      words: []
     }
   ],
   "4": [
     {
       char: null,
       x: 1,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: null,
       x: 2,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "る",
       x: 3,
-      audio: [ru]
+      audio: [ru],
+      words: []
     },
     {
       char: "ゆ",
       x: 4,
-      audio: [yu]
+      audio: [yu],
+      words: []
     },
     {
       char: "む",
       x: 5,
-      audio: [mu]
+      audio: [mu],
+      words: []
     },
     {
       char: "ふ",
       x: 6,
-      audio: [fu]
+      audio: [fu],
+      words: []
     },
     {
       char: "ぬ",
       x: 7,
-      audio: [nu]
+      audio: [nu],
+      words: []
     },
     {
       char: "つ",
       x: 8,
-      audio: [tsu]
+      audio: [tsu],
+      words: []
     },
     {
       char: "す",
       x: 9,
-      audio: [su]
+      audio: [su],
+      words: ["すし"]
     },
     {
       char: "く",
       x: 10,
-      audio: [ku]
+      audio: [ku],
+      words: []
     },
     {
       char: "う",
       x: 11,
-      audio: [u]
+      audio: [u],
+      words: []
     },
     {
       char: "u",
       x: 12,
-      audio: []
+      audio: [],
+      words: []
     }
   ],
   "5": [
     {
       char: null,
       x: 1,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: null,
       x: 2,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "れ",
       x: 3,
-      audio: [re]
+      audio: [re],
+      words: []
     },
     {
       char: null,
       x: 4,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "め",
       x: 5,
-      audio: [me]
+      audio: [me],
+      words: []
     },
     {
       char: "へ",
       x: 6,
-      audio: [he]
+      audio: [he],
+      words: []
     },
     {
       char: "ね",
       x: 7,
-      audio: [ne]
+      audio: [ne],
+      words: []
     },
     {
       char: "て",
       x: 8,
-      audio: [te]
+      audio: [te],
+      words: []
     },
     {
       char: "せ",
       x: 9,
-      audio: [se]
+      audio: [se],
+      words: []
     },
     {
       char: "け",
       x: 10,
-      audio: [ke]
+      audio: [ke],
+      words: ["とけい"]
     },
     {
       char: "え",
       x: 11,
-      audio: [e]
+      audio: [e],
+      words: ["いえ", "いいえ"]
     },
     {
       char: "e",
       x: 12,
-      audio: []
+      audio: [],
+      words: []
     }
   ],
   "6": [
     {
       char: null,
       x: 1,
-      audio: []
+      audio: [],
+      words: []
     },
     {
       char: "を",
       x: 2,
-      audio: [wo]
+      audio: [wo],
+      words: []
     },
     {
       char: "ろ",
       x: 3,
-      audio: [ro]
+      audio: [ro],
+      words: []
     },
     {
       char: "よ",
       x: 4,
-      audio: [yo]
+      audio: [yo],
+      words: []
     },
     {
       char: "も",
       x: 5,
-      audio: [mo]
+      audio: [mo],
+      words: []
     },
     {
       char: "ほ",
       x: 6,
-      audio: [ho]
+      audio: [ho],
+      words: []
     },
     {
       char: "の",
       x: 7,
-      audio: [no]
+      audio: [no],
+      words: []
     },
     {
       char: "と",
       x: 8,
-      audio: [to]
+      audio: [to],
+      words: ["とけい"]
     },
     {
       char: "そ",
       x: 9,
-      audio: [so]
+      audio: [so],
+      words: []
     },
     {
       char: "こ",
       x: 10,
-      audio: [ko]
+      audio: [ko],
+      words: []
     },
     {
       char: "お",
       x: 11,
-      audio: [o]
+      audio: [o],
+      words: ["あお", "しお"]
     },
     {
       char: "o",
       x: 12,
-      audio: []
+      audio: [],
+      words: []
     }
   ]
 };

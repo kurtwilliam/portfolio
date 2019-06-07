@@ -4,7 +4,8 @@ import styled from "styled-components";
 class Character extends Component {
   state = {
     clicks: 0,
-    playing: false
+    playing: false,
+    word: false
   };
 
   handleClick = () => {
@@ -20,6 +21,8 @@ class Character extends Component {
 
     if (newClicks === 1) {
       this.player.play();
+    } else if (newClicks === 2) {
+      this.openWordOverlay();
     }
 
     this.setState({ playing: true, clicks: newClicks });
@@ -34,12 +37,15 @@ class Character extends Component {
     this.setState({ playing: false, clicks: 0 });
   };
 
+  openWordOverlay = () => {
+    console.log("open");
+  };
+
   render() {
     const { index, character, y, highlightY, highlightX } = this.props;
     const { x } = character;
     const { playing } = this.state;
-    console.log(x, highlightX);
-    // console.log(y, highlightY);
+
     return (
       <CharacterContainer
         className={`character ${character.x === 12 ? "hidden" : ""} ${
