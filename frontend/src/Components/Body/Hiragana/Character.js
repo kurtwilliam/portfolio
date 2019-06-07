@@ -9,6 +9,10 @@ class Character extends Component {
 
   handleClick = () => {
     const { clicks } = this.state;
+    const { highlightLetters, y, character } = this.props;
+    const { x, char } = character;
+
+    if (x === 12 || y === 1 || char === null) return;
 
     let newClicks = clicks;
     if (clicks === 0) newClicks = 1;
@@ -17,13 +21,34 @@ class Character extends Component {
     if (newClicks === 1) {
       this.player.play();
     }
+
+    this.setState({ playing: true, clicks: newClicks });
+    highlightLetters(character.x, y);
+    setTimeout(() => {
+      return this.stopPlaying();
+    }, 300);
+  };
+
+  stopPlaying = () => {
+    this.props.highlightLetters(null, null);
+    this.setState({ playing: false, clicks: 0 });
   };
 
   render() {
-    const { index, character } = this.props;
+    const { index, character, y, highlightY, highlightX } = this.props;
+    const { x } = character;
+    const { playing } = this.state;
+    console.log(x, highlightX);
+    // console.log(y, highlightY);
     return (
       <CharacterContainer
-        className={`${character.x === 12 ? "hidden" : ""}`}
+        className={`character ${character.x === 12 ? "hidden" : ""} ${
+          playing ? "highlight" : ""
+        } ${
+          (x === 12 && highlightY === y) || (y === 1 && highlightX === x)
+            ? "highlight"
+            : ""
+        }`}
         onClick={e => this.handleClick(character)}
       >
         {character.char}
@@ -44,9 +69,24 @@ const CharacterContainer = styled.div`
   justify-content: center;
   border: 1px solid lightgrey;
   width: calc(100% / 12);
+  transition: all 30ms;
+  cursor: pointer;
 
   &.hidden {
-    visibility: hidden;
+    border: none;
+    color: lightgrey;
+  }
+
+  &.hiddenOverride {
+    color: black;
+  }
+
+  &.highlight {
+    background: lightgrey;
+  }
+  &.highlight.hidden {
+    background: rgba(0, 0, 0, 0);
+    color: black;
   }
 
   &:after {
