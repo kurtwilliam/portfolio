@@ -11,7 +11,7 @@ class Character extends Component {
   handleClick = () => {
     const { clicks } = this.state;
     const { highlightLetters, y, character } = this.props;
-    const { x, char } = character;
+    const { x, char, words } = character;
 
     if (x === 12 || y === 1 || char === null) return;
 
@@ -22,7 +22,7 @@ class Character extends Component {
     if (newClicks === 1) {
       this.player.play();
     } else if (newClicks === 2) {
-      this.openWordOverlay();
+      this.openWordOverlay(words, char);
     }
 
     this.setState({ playing: true, clicks: newClicks });
@@ -37,8 +37,12 @@ class Character extends Component {
     this.setState({ playing: false, clicks: 0 });
   };
 
-  openWordOverlay = () => {
-    console.log("open");
+  openWordOverlay = (words, char) => {
+    const { openWordOverlay } = this.props;
+    // get random word from array to display
+    const word = words[Math.floor(Math.random() * words.length)];
+
+    openWordOverlay(word, char);
   };
 
   render() {

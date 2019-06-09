@@ -1,20 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import hiraganaChart from "../../../data/hiraganaChart";
+import words from "../../../data/words";
 import HiraganaContainer from "./HiraganaContainer";
+import HiraganaOverlay from "./HiraganaOverlay";
 import Chart from "./Chart";
 import ChartRow from "./ChartRow";
 import Character from "./Character";
-
-const totalX = 12;
-const totalY = 6;
-
-console.log(hiraganaChart);
 
 class Hiragana extends Component {
   state = {
     highlightY: null,
     highlightX: null,
-    word: ""
+    word: "",
+    splitWord: [],
+    currentCharacter: "",
+    english: false
   };
 
   highlightLetters = (highlightX, highlightY) => {
@@ -22,35 +22,83 @@ class Hiragana extends Component {
   };
 
   openWordOverlay = word => {
-    this.setState({ word });
+    if (!word) return;
+    const splitWord = word.split();
+    this.setState({ word, splitWord });
+  };
+
+  closeWordOverlay = e => {
+    e.stopPropagation();
+    this.setState({ word: "", splitWord: [] });
+  };
+
+  sayWord = e => {
+    e.stopPropagation();
+
+    // get audio file from word
+    // set state of audio playing to true
+    // set timeout to stop
+
+    // this.setState()
+  };
+
+  toggleEnglish = e => {
+    e.stopPropagation();
+    this.setState(prevState => ({ english: !prevState.english }));
   };
 
   render() {
-    const { highlightX, highlightY } = this.state;
-    return [
-      <div />,
-      <HiraganaContainer>
-        <Chart>
-          {Object.keys(hiraganaChart).map((y, i) => (
-            <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
-              {hiraganaChart[y].map((char, index) => (
-                <Character
-                  key={char.x + y}
-                  index={index}
-                  character={char}
-                  y={parseInt(y)}
-                  highlightX={highlightX}
-                  highlightY={highlightY}
-                  highlightLetters={this.highlightLetters}
-                />
+    const {
+      highlightX,
+      highlightY,
+      word,
+      splitWord,
+      currentCharacter,
+      english
+    } = this.state;
+    return (
+      <Fragment>
+        {word.length > 0 ? (
+          <HiraganaOverlay onClick={this.closeWordOverlay}>
+            <div className="hiraganaOverlay__content" onClick={this.sayWord}>
+              {words[word].content}
+            </div>
+            <div className="hiraganaOverlay__word" onClick={this.toggleEnglish}>
+              {splitWord.map((char, i) => (
+                <p
+                  className={`${char === currentCharacter ? "highlight" : ""}`}
+                >
+                  {english ? words[word].eng : char}
+                </p>
               ))}
-            </ChartRow>
-          ))}
-        </Chart>
-        <p>🖱️ = 🔊</p>
-        <p>🖱️🖱️ = 🖼️</p>
-      </HiraganaContainer>
-    ];
+            </div>
+          </HiraganaOverlay>
+        ) : null}
+
+        <HiraganaContainer>
+          <Chart>
+            {Object.keys(hiraganaChart).map((y, i) => (
+              <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
+                {hiraganaChart[y].map((char, index) => (
+                  <Character
+                    key={char.x + y}
+                    index={index}
+                    character={char}
+                    y={parseInt(y)}
+                    highlightX={highlightX}
+                    highlightY={highlightY}
+                    highlightLetters={this.highlightLetters}
+                    openWordOverlay={this.openWordOverlay}
+                  />
+                ))}
+              </ChartRow>
+            ))}
+          </Chart>
+          <p>🖱️ = 🔊</p>
+          <p>🖱️🖱️ = 🖼️</p>
+        </HiraganaContainer>
+      </Fragment>
+    );
   }
 }
 
