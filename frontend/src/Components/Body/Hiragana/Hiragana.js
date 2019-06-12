@@ -21,10 +21,10 @@ class Hiragana extends Component {
     this.setState({ highlightX, highlightY });
   };
 
-  openWordOverlay = word => {
+  openWordOverlay = (word, char) => {
     if (!word) return;
-    const splitWord = word.split();
-    this.setState({ word, splitWord });
+    const splitWord = word.split("");
+    this.setState({ word, splitWord, currentCharacter: char });
   };
 
   closeWordOverlay = e => {
@@ -64,13 +64,20 @@ class Hiragana extends Component {
               {words[word].content}
             </div>
             <div className="hiraganaOverlay__word" onClick={this.toggleEnglish}>
-              {splitWord.map((char, i) => (
-                <p
-                  className={`${char === currentCharacter ? "highlight" : ""}`}
-                >
-                  {english ? words[word].eng : char}
-                </p>
-              ))}
+              {splitWord.map((char, i) => {
+                console.log(char);
+                console.log(currentCharacter);
+                return (
+                  <p
+                    key={char + i}
+                    className={`${
+                      char === currentCharacter ? "highlight" : ""
+                    }`}
+                  >
+                    {english ? words[word].eng : char}
+                  </p>
+                );
+              })}
             </div>
           </HiraganaOverlay>
         ) : null}

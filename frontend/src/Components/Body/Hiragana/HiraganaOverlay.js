@@ -12,7 +12,7 @@ const HiraganaOverlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 1);
 
   .hiraganaOverlay {
     &__content {
@@ -22,6 +22,8 @@ const HiraganaOverlay = styled.div`
     &__word {
       min-height: 150px;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
 
       p {
         font-size: 8rem;
@@ -29,7 +31,17 @@ const HiraganaOverlay = styled.div`
       }
 
       p.highlight {
-        color: blue;
+        background: white;
+        color: transparent;
+        text-shadow: -2px 0 rgba(0, 0, 0, 1), 0 2px rgba(0, 0, 0, 1),
+          2px 0 rgba(0, 0, 0, 1), 0 -2px rgba(0, 0, 0, 1),
+          -2px 2px rgba(0, 0, 0, 1), 2px -2px rgba(0, 0, 0, 1),
+          2px 2px rgba(0, 0, 0, 1), -2px -2px rgba(0, 0, 0, 1);
+        min-width: 100px;
+        text-align: center;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
       }
     }
   }
