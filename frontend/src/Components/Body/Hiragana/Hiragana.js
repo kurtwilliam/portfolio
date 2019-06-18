@@ -14,7 +14,9 @@ class Hiragana extends Component {
     word: "",
     splitWord: [],
     currentCharacter: "",
-    english: false
+    english: false,
+    audio: [],
+    audioPlaying: ""
   };
 
   highlightLetters = (highlightX, highlightY) => {
@@ -32,14 +34,40 @@ class Hiragana extends Component {
     this.setState({ word: "", splitWord: [] });
   };
 
-  sayWord = e => {
+  addNewSound = sound => {
+    // get the sound from character and
+    // add to audio tag playlist
+    const { audio } = this.state;
+    let updatedAudio = [...audio];
+    console.log(sound);
+    updatedAudio.push(sound);
+
+    this.setState({ audio: updatedAudio }, () => this.playSound());
+  };
+
+  playSound = () => {
+    // if there is a queue in playlist
+    // play next sound
+    console.log("playing");
+    const { audio, audioPlaying } = this.state;
+    let updatedAudio = [...audio];
+    if (audioPlaying !== "" || updatedAudio.length < 1) return;
+    const newAudioPlaying = updatedAudio[0];
+
+    this.setState({ audioPlaying: newAudioPlaying }, () => this.player.play());
+  };
+
+  removeSound = e => {
+    // after playing, remove sound from playlist
+    // then play next song
     e.stopPropagation();
+    const { audio } = this.state;
+    let updatedAudio = [...audio];
+    updatedAudio.shift();
 
-    // get audio file from word
-    // set state of audio playing to true
-    // set timeout to stop
-
-    // this.setState()
+    this.setState({ audio: updatedAudio, audioPlaying: "" }, () =>
+      this.playSound()
+    );
   };
 
   toggleEnglish = e => {
@@ -54,27 +82,32 @@ class Hiragana extends Component {
       word,
       splitWord,
       currentCharacter,
-      english
+      english,
+      audioPlaying
     } = this.state;
+
     return (
       <Fragment>
         {word.length > 0 ? (
           <HiraganaOverlay onClick={this.closeWordOverlay}>
-            <div className="hiraganaOverlay__content" onClick={this.sayWord}>
+            <div
+              className="hiraganaOverlay__content"
+              onClick={
+                words[word].sound ? this.addNewSound(words[word].sound) : null
+              }
+            >
               {words[word].content}
             </div>
             <div className="hiraganaOverlay__word" onClick={this.toggleEnglish}>
               {splitWord.map((char, i) => {
-                console.log(char);
-                console.log(currentCharacter);
                 return (
                   <p
                     key={char + i}
                     className={`${
-                      char === currentCharacter ? "highlight" : ""
+                      char === currentCharacter && !english ? "highlight" : ""
                     }`}
                   >
-                    {english ? words[word].eng : char}
+                    {english ? (i === 0 ? words[word].eng : null) : char}
                   </p>
                 );
               })}
@@ -96,6 +129,7 @@ class Hiragana extends Component {
                     highlightY={highlightY}
                     highlightLetters={this.highlightLetters}
                     openWordOverlay={this.openWordOverlay}
+                    addNewSound={this.addNewSound}
                   />
                 ))}
               </ChartRow>
@@ -103,6 +137,11 @@ class Hiragana extends Component {
           </Chart>
           <p>🖱️ = 🔊</p>
           <p>🖱️🖱️ = 🖼️</p>
+          <audio
+            src={audioPlaying !== "" ? audioPlaying : null}
+            ref={ref => (this.player = ref)}
+            onEnded={this.removeSound}
+          />
         </HiraganaContainer>
       </Fragment>
     );

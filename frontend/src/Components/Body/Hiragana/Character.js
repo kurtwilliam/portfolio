@@ -1,17 +1,41 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import words from "../../../data/words";
 
 class Character extends Component {
   state = {
     clicks: 0,
     playing: false,
-    word: false
+    word: false,
+    words: []
+  };
+
+  componentDidMount = () => {
+    const { character } = this.props;
+    const { char } = character;
+
+    if (!char) return;
+
+    // get all words and push it to local state by key
+    let newWords = [];
+    for (let key in words) {
+      const currentWord = key;
+      const currentWordSplit = currentWord.split("");
+      for (let i = 0; i < currentWordSplit.length; i++) {
+        if (currentWordSplit[i] === char) {
+          newWords.push(currentWord);
+          break;
+        }
+      }
+    }
+
+    this.setState({ words: newWords });
   };
 
   handleClick = () => {
     const { clicks } = this.state;
-    const { highlightLetters, y, character } = this.props;
-    const { x, char, words } = character;
+    const { highlightLetters, y, character, addNewSound } = this.props;
+    const { x, char } = character;
 
     if (x === 12 || y === 1 || char === null) return;
 
@@ -20,9 +44,9 @@ class Character extends Component {
     else if (clicks === 1) newClicks = 2;
 
     if (newClicks === 1) {
-      this.player.play();
+      addNewSound(character.audio[0]);
     } else if (newClicks === 2) {
-      this.openWordOverlay(words, char);
+      this.openWordOverlay(char);
     }
 
     this.setState({ playing: true, clicks: newClicks });
@@ -37,8 +61,9 @@ class Character extends Component {
     this.setState({ playing: false, clicks: 0 });
   };
 
-  openWordOverlay = (words, char) => {
+  openWordOverlay = char => {
     const { openWordOverlay } = this.props;
+    const { words } = this.state;
     // get random word from array to display
     const word = words[Math.floor(Math.random() * words.length)];
 
@@ -46,7 +71,7 @@ class Character extends Component {
   };
 
   render() {
-    const { index, character, y, highlightY, highlightX } = this.props;
+    const { character, y, highlightY, highlightX } = this.props;
     const { x } = character;
     const { playing } = this.state;
 
@@ -62,10 +87,6 @@ class Character extends Component {
         onClick={e => this.handleClick(character)}
       >
         {character.char}
-        <audio
-          src={character.audio[0] ? character.audio[0] : null}
-          ref={ref => (this.player = ref)}
-        />
       </CharacterContainer>
     );
   }

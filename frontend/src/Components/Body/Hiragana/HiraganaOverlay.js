@@ -12,7 +12,7 @@ const HiraganaOverlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  background: rgba(0, 0, 0, 1);
+  background: rgba(0, 0, 0, 0.2);
 
   .hiraganaOverlay {
     &__content {
@@ -31,12 +31,11 @@ const HiraganaOverlay = styled.div`
       }
 
       p.highlight {
-        background: white;
-        color: transparent;
-        text-shadow: -2px 0 rgba(0, 0, 0, 1), 0 2px rgba(0, 0, 0, 1),
-          2px 0 rgba(0, 0, 0, 1), 0 -2px rgba(0, 0, 0, 1),
-          -2px 2px rgba(0, 0, 0, 1), 2px -2px rgba(0, 0, 0, 1),
-          2px 2px rgba(0, 0, 0, 1), -2px -2px rgba(0, 0, 0, 1);
+        color: white;
+        text-shadow: -3px 0 rgba(0, 0, 0, 1), 0 3px rgba(0, 0, 0, 1),
+          3px 0 rgba(0, 0, 0, 1), 0 -3px rgba(0, 0, 0, 1),
+          -3px 3px rgba(0, 0, 0, 1), 3px -3px rgba(0, 0, 0, 1),
+          3px 3px rgba(0, 0, 0, 1), -3px -3px rgba(0, 0, 0, 1);
         min-width: 100px;
         text-align: center;
         -webkit-background-clip: text;

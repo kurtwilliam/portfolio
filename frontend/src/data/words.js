@@ -13,6 +13,7 @@ import gyunyu from "../assets/japaneseWords/gyunyu.mp3";
 import shio from "../assets/japaneseWords/shio.mp3";
 import kudamono from "../assets/japaneseWords/kudamono.mp3";
 import yasai from "../assets/japaneseWords/yasai.mp3";
+import tabemono from "../assets/japaneseWords/tabemono.mp3";
 
 const words = {
   いえ: {
@@ -110,6 +111,11 @@ const words = {
     eng: "vegetables",
     content: "🥕🥔🥬",
     sound: yasai
+  },
+  たべもの: {
+    eng: "food",
+    content: "🥕🥘🍛",
+    sound: tabemono
   }
 };
 
