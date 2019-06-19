@@ -34,12 +34,12 @@ class Hiragana extends Component {
     this.setState({ word: "", splitWord: [] });
   };
 
-  addNewSound = sound => {
+  addNewSound = (e, sound) => {
+    if (e) e.stopPropagation();
     // get the sound from character and
     // add to audio tag playlist
     const { audio } = this.state;
     let updatedAudio = [...audio];
-    console.log(sound);
     updatedAudio.push(sound);
 
     this.setState({ audio: updatedAudio }, () => this.playSound());
@@ -48,7 +48,6 @@ class Hiragana extends Component {
   playSound = () => {
     // if there is a queue in playlist
     // play next sound
-    console.log("playing");
     const { audio, audioPlaying } = this.state;
     let updatedAudio = [...audio];
     if (audioPlaying !== "" || updatedAudio.length < 1) return;
@@ -93,10 +92,13 @@ class Hiragana extends Component {
             <div
               className="hiraganaOverlay__content"
               onClick={
-                words[word].sound ? this.addNewSound(words[word].sound) : null
+                words[word].sound && audioPlaying === ""
+                  ? e => this.addNewSound(e, words[word].sound)
+                  : e => e.stopPropagation()
               }
             >
               {words[word].content}
+              {!words[word].sound ? <span>🚫💬</span> : null}
             </div>
             <div className="hiraganaOverlay__word" onClick={this.toggleEnglish}>
               {splitWord.map((char, i) => {

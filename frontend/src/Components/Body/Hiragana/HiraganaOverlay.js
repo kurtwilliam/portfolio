@@ -17,6 +17,16 @@ const HiraganaOverlay = styled.div`
   .hiraganaOverlay {
     &__content {
       font-size: 20vw;
+      cursor: pointer;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        font-size: 2.6rem;
+      }
     }
 
     &__word {

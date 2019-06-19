@@ -44,7 +44,7 @@ class Character extends Component {
     else if (clicks === 1) newClicks = 2;
 
     if (newClicks === 1) {
-      addNewSound(character.audio[0]);
+      addNewSound(null, character.audio[0]);
     } else if (newClicks === 2) {
       this.openWordOverlay(char);
     }
