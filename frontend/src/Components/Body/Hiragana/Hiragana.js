@@ -26,7 +26,7 @@ class Hiragana extends Component {
   openWordOverlay = (word, char) => {
     if (!word) return;
     const splitWord = word.split("");
-    this.setState({ word, splitWord, currentCharacter: char });
+    this.setState({ word, splitWord, currentCharacter: char, english: false });
   };
 
   closeWordOverlay = e => {

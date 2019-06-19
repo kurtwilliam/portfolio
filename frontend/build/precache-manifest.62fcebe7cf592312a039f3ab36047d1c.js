@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "e6fd161a9bebec8971e71bd0387a7bd9",
-    "url": "/static/media/ko.e6fd161a.mp3"
+    "revision": "702bdf5dfc2ca19cd0a01b295842bc47",
+    "url": "/static/media/na.702bdf5d.mp3"
   },
   {
-    "revision": "16d507938a95cee5203b",
-    "url": "/static/css/main.cb0ac72e.chunk.css"
+    "revision": "175bf44321587835b494",
+    "url": "/static/css/main.c704a357.chunk.css"
   },
   {
-    "revision": "999fc9b22f75ae86043c",
-    "url": "/static/js/1.999fc9b2.chunk.js"
+    "revision": "0c22ee357d225a56b3aa",
+    "url": "/static/js/1.0c22ee35.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -140,8 +140,8 @@ self.__precacheManifest = [
     "url": "/static/media/ki.c1db9490.mp3"
   },
   {
-    "revision": "16d507938a95cee5203b",
-    "url": "/static/js/main.16d50793.chunk.js"
+    "revision": "e6fd161a9bebec8971e71bd0387a7bd9",
+    "url": "/static/media/ko.e6fd161a.mp3"
   },
   {
     "revision": "064163bcd1089721eb65ee91f9a8841b",
@@ -172,8 +172,8 @@ self.__precacheManifest = [
     "url": "/static/media/n.6e5c8d14.mp3"
   },
   {
-    "revision": "702bdf5dfc2ca19cd0a01b295842bc47",
-    "url": "/static/media/na.702bdf5d.mp3"
+    "revision": "175bf44321587835b494",
+    "url": "/static/js/main.175bf443.chunk.js"
   },
   {
     "revision": "921dfa951c53f2ea17e5e83cb59c94b1",
@@ -276,11 +276,75 @@ self.__precacheManifest = [
     "url": "/static/media/yu.10b114a0.mp3"
   },
   {
+    "revision": "3e3a644b9e26f95ec65f8b15ca5ade15",
+    "url": "/static/media/ao.3e3a644b.mp3"
+  },
+  {
+    "revision": "8613b96663a2edf8b1613b0c9a0ce9e2",
+    "url": "/static/media/iro.8613b966.mp3"
+  },
+  {
+    "revision": "370c4d44096cdd992b7226408033075e",
+    "url": "/static/media/orenji.370c4d44.mp3"
+  },
+  {
+    "revision": "d5c42eb54748e86ba1cd8e9b7d12db0b",
+    "url": "/static/media/ki-iro.d5c42eb5.mp3"
+  },
+  {
+    "revision": "e58b756a05eaef8cf33c7b4ce17ffb46",
+    "url": "/static/media/aka.e58b756a.mp3"
+  },
+  {
+    "revision": "955b74935fe2f6e95efd81e216a9b2e3",
+    "url": "/static/media/midori.955b7493.mp3"
+  },
+  {
+    "revision": "4e14bf5995acaacdf4034c518478aff3",
+    "url": "/static/media/kuro.4e14bf59.mp3"
+  },
+  {
+    "revision": "73b61baa2fcc43df4179bc32746da89f",
+    "url": "/static/media/pinku.73b61baa.mp3"
+  },
+  {
+    "revision": "ae06db1325c2db925b56497e5195a928",
+    "url": "/static/media/shiro.ae06db13.mp3"
+  },
+  {
+    "revision": "60fcca4db3801c2c266adeb3660fd7df",
+    "url": "/static/media/niku.60fcca4d.mp3"
+  },
+  {
+    "revision": "ad579f8d51e0b2b4520f45771b35d266",
+    "url": "/static/media/tamago.ad579f8d.mp3"
+  },
+  {
+    "revision": "6fc83de34d2cd890e31d05bb6bc45d8d",
+    "url": "/static/media/gyunyu.6fc83de3.mp3"
+  },
+  {
+    "revision": "7056600685a2b30238074de88687892a",
+    "url": "/static/media/shio.70566006.mp3"
+  },
+  {
+    "revision": "20eee25b4d326f793674b7fb930f7f0b",
+    "url": "/static/media/kudamono.20eee25b.mp3"
+  },
+  {
+    "revision": "3555f19cef2c0d6bb95ee69a17b0a729",
+    "url": "/static/media/yasai.3555f19c.mp3"
+  },
+  {
+    "revision": "5c8503565bbf87f31b9ca4b21bc2e34b",
+    "url": "/static/media/tabemono.5c850356.mp3"
+  },
+  {
     "revision": "56aae1505b6c837984ebd66a09b64c2a",
     "url": "/static/media/Ogg-Roman.56aae150.otf"
   },
   {
-    "revision": "302c870fcc8b3427ff9141299ac843cd",
+    "revision": "602b663d3c3a1e71bad5b5739475f345",
     "url": "/index.html"
   }
 ];

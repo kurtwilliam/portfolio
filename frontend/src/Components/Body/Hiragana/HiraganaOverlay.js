@@ -34,10 +34,17 @@ const HiraganaOverlay = styled.div`
       cursor: pointer;
       display: flex;
       justify-content: center;
+      max-width: 100%;
+
+      flex-wrap: wrap;
 
       p {
         font-size: 8rem;
         font-weight: bold;
+
+        @media (max-width: 600px) {
+          font-size: 6rem;
+        }
       }
 
       p.highlight {
@@ -51,6 +58,10 @@ const HiraganaOverlay = styled.div`
         -webkit-background-clip: text;
         -moz-background-clip: text;
         background-clip: text;
+
+        @media (max-width: 600px) {
+          min-width: 50px;
+        }
       }
     }
   }
