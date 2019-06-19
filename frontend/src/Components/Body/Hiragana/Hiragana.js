@@ -118,6 +118,10 @@ class Hiragana extends Component {
         ) : null}
 
         <HiraganaContainer>
+          <div className="hiragana__instructions">
+            <p>🖱️ = 🔊</p>
+            <p>🖱️🖱️ = 🖼️</p>
+          </div>
           <Chart>
             {Object.keys(hiraganaChart).map((y, i) => (
               <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
@@ -137,8 +141,7 @@ class Hiragana extends Component {
               </ChartRow>
             ))}
           </Chart>
-          <p>🖱️ = 🔊</p>
-          <p>🖱️🖱️ = 🖼️</p>
+
           <audio
             src={audioPlaying !== "" ? audioPlaying : null}
             ref={ref => (this.player = ref)}
