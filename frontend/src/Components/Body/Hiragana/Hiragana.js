@@ -17,11 +17,12 @@ class Hiragana extends Component {
     currentCharacter: "",
     english: false,
     audio: [],
-    audioPlaying: ""
+    audioPlaying: "",
+    currentChart: ""
   };
 
-  highlightLetters = (highlightX, highlightY) => {
-    this.setState({ highlightX, highlightY });
+  highlightLetters = (highlightX, highlightY, currentChart) => {
+    this.setState({ highlightX, highlightY, currentChart });
   };
 
   openWordOverlay = (word, char) => {
@@ -83,7 +84,8 @@ class Hiragana extends Component {
       splitWord,
       currentCharacter,
       english,
-      audioPlaying
+      audioPlaying,
+      currentChart
     } = this.state;
 
     return (
@@ -138,6 +140,8 @@ class Hiragana extends Component {
                     openWordOverlay={this.openWordOverlay}
                     addNewSound={this.addNewSound}
                     lastColumn={12}
+                    currentChart={currentChart}
+                    thisChart={"hiragana"}
                   />
                 ))}
               </ChartRow>
@@ -159,6 +163,8 @@ class Hiragana extends Component {
                     openWordOverlay={this.openWordOverlay}
                     addNewSound={this.addNewSound}
                     lastColumn={6}
+                    currentChart={currentChart}
+                    thisChart={"hiraganaMuddied"}
                   />
                 ))}
               </ChartRow>

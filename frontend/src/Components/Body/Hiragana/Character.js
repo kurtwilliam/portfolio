@@ -39,7 +39,8 @@ class Character extends Component {
       y,
       character,
       addNewSound,
-      lastColumn
+      lastColumn,
+      thisChart
     } = this.props;
     const { x, char } = character;
 
@@ -56,7 +57,7 @@ class Character extends Component {
     }
 
     this.setState({ playing: true, clicks: newClicks });
-    highlightLetters(character.x, y);
+    highlightLetters(character.x, y, thisChart);
     setTimeout(() => {
       return this.stopPlaying();
     }, 300);
@@ -77,21 +78,32 @@ class Character extends Component {
   };
 
   render() {
-    const { character, y, highlightY, highlightX, lastColumn } = this.props;
+    const {
+      character,
+      y,
+      highlightY,
+      highlightX,
+      lastColumn,
+      thisChart,
+      currentChart
+    } = this.props;
     const { x } = character;
     const { playing } = this.state;
+
+    const isCurrentChart = thisChart === currentChart ? true : false;
 
     return (
       <CharacterContainer
         className={`character ${character.x === lastColumn ? "hidden" : ""} ${
           playing ? "highlight" : ""
         } ${
-          (x === lastColumn && highlightY === y) ||
-          (y === 1 && highlightX === x)
+          (isCurrentChart && x === lastColumn && highlightY === y) ||
+          (isCurrentChart && y === 1 && highlightX === x)
             ? "highlight"
             : ""
         }`}
         onClick={e => this.handleClick(character)}
+        lastColumn={lastColumn}
       >
         {character.char}
       </CharacterContainer>
@@ -106,7 +118,7 @@ const CharacterContainer = styled.div`
   align-items: center;
   justify-content: center;
   border: 1px solid lightgrey;
-  width: calc(100% / 12);
+  width: calc(100% / ${props => props.lastColumn});
   transition: all 30ms;
   cursor: pointer;
 

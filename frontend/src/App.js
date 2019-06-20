@@ -57,7 +57,7 @@ const Gradient = styled.div`
   background: ${props => props.theme.gradient};
 
   @media (max-width: 550px) {
-    padding: 10px;
+    padding: 7.5px;
     padding-bottom: 0px;
   }
 `;
@@ -71,8 +71,8 @@ const InnerCont = styled.div`
   min-height: 100vh;
 
   @media (max-width: 720px) {
-    width: calc(100% - 30px);
-    padding-top: 40px;
+    width: calc(100% - 15px);
+    padding-top: 20px;
   }
 `;
 
