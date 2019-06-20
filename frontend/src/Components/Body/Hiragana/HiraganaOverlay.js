@@ -35,7 +35,6 @@ const HiraganaOverlay = styled.div`
       display: flex;
       justify-content: center;
       max-width: 100%;
-
       flex-wrap: wrap;
 
       p {

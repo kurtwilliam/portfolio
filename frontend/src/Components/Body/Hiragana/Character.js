@@ -34,10 +34,16 @@ class Character extends Component {
 
   handleClick = () => {
     const { clicks } = this.state;
-    const { highlightLetters, y, character, addNewSound } = this.props;
+    const {
+      highlightLetters,
+      y,
+      character,
+      addNewSound,
+      lastColumn
+    } = this.props;
     const { x, char } = character;
 
-    if (x === 12 || y === 1 || char === null) return;
+    if (x === lastColumn || y === 1 || char === null) return;
 
     let newClicks = clicks;
     if (clicks === 0) newClicks = 1;
@@ -71,16 +77,17 @@ class Character extends Component {
   };
 
   render() {
-    const { character, y, highlightY, highlightX } = this.props;
+    const { character, y, highlightY, highlightX, lastColumn } = this.props;
     const { x } = character;
     const { playing } = this.state;
 
     return (
       <CharacterContainer
-        className={`character ${character.x === 12 ? "hidden" : ""} ${
+        className={`character ${character.x === lastColumn ? "hidden" : ""} ${
           playing ? "highlight" : ""
         } ${
-          (x === 12 && highlightY === y) || (y === 1 && highlightX === x)
+          (x === lastColumn && highlightY === y) ||
+          (y === 1 && highlightX === x)
             ? "highlight"
             : ""
         }`}

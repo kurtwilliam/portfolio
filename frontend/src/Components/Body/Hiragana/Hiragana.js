@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from "react";
 import hiraganaChart from "../../../data/hiraganaChart";
+import hiraganaChartMuddied from "../../../data/hiraganaChartMuddied";
 import words from "../../../data/words";
 import HiraganaContainer from "./HiraganaContainer";
 import HiraganaOverlay from "./HiraganaOverlay";
@@ -136,6 +137,28 @@ class Hiragana extends Component {
                     highlightLetters={this.highlightLetters}
                     openWordOverlay={this.openWordOverlay}
                     addNewSound={this.addNewSound}
+                    lastColumn={12}
+                  />
+                ))}
+              </ChartRow>
+            ))}
+          </Chart>
+
+          <Chart>
+            {Object.keys(hiraganaChartMuddied).map((y, i) => (
+              <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
+                {hiraganaChartMuddied[y].map((char, index) => (
+                  <Character
+                    key={char.x + y}
+                    index={index}
+                    character={char}
+                    y={parseInt(y)}
+                    highlightX={highlightX}
+                    highlightY={highlightY}
+                    highlightLetters={this.highlightLetters}
+                    openWordOverlay={this.openWordOverlay}
+                    addNewSound={this.addNewSound}
+                    lastColumn={6}
                   />
                 ))}
               </ChartRow>
