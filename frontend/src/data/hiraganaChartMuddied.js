@@ -48,6 +48,11 @@ const hiraganaChart = {
       char: "g",
       x: 5,
       audio: []
+    },
+    {
+      char: null,
+      x: 6,
+      audio: []
     }
   ],
   "2": [

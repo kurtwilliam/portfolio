@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "702bdf5dfc2ca19cd0a01b295842bc47",
-    "url": "/static/media/na.702bdf5d.mp3"
+    "revision": "602c3eb71843ef4fd8ea08f3a1fb3d82",
+    "url": "/static/media/ru.602c3eb7.mp3"
   },
   {
-    "revision": "f9ca0b0edcc4f70ed56c",
-    "url": "/static/css/main.c704a357.chunk.css"
+    "revision": "d5398e640a09cef8c302",
+    "url": "/static/css/main.7aee541f.chunk.css"
   },
   {
-    "revision": "0c22ee357d225a56b3aa",
-    "url": "/static/js/1.0c22ee35.chunk.js"
+    "revision": "d5f56ff85928b49f9a72",
+    "url": "/static/js/1.d5f56ff8.chunk.js"
   },
   {
     "revision": "229c360febb4351a89df",
@@ -26,6 +26,14 @@ self.__precacheManifest = [
   {
     "revision": "99f374b9d366493fc6599adee8c522d9",
     "url": "/static/media/plant3.99f374b9.png"
+  },
+  {
+    "revision": "685da85f98b855b10cb6d9891b016678",
+    "url": "/static/media/ji.685da85f.mp3"
+  },
+  {
+    "revision": "14b6e0f02d610f855e80f1fe21fdfc5f",
+    "url": "/static/media/zu.14b6e0f0.mp3"
   },
   {
     "revision": "90f6e5061b9491383776875a566934b3",
@@ -172,8 +180,8 @@ self.__precacheManifest = [
     "url": "/static/media/n.6e5c8d14.mp3"
   },
   {
-    "revision": "f9ca0b0edcc4f70ed56c",
-    "url": "/static/js/main.f9ca0b0e.chunk.js"
+    "revision": "702bdf5dfc2ca19cd0a01b295842bc47",
+    "url": "/static/media/na.702bdf5d.mp3"
   },
   {
     "revision": "921dfa951c53f2ea17e5e83cb59c94b1",
@@ -212,8 +220,8 @@ self.__precacheManifest = [
     "url": "/static/media/ro.0721b3cc.mp3"
   },
   {
-    "revision": "602c3eb71843ef4fd8ea08f3a1fb3d82",
-    "url": "/static/media/ru.602c3eb7.mp3"
+    "revision": "d5398e640a09cef8c302",
+    "url": "/static/js/main.d5398e64.chunk.js"
   },
   {
     "revision": "b05b69f89bcc74fd4e7f5093fdb1a964",
@@ -274,6 +282,90 @@ self.__precacheManifest = [
   {
     "revision": "10b114a00b842daa14d6f9ac8450b37f",
     "url": "/static/media/yu.10b114a0.mp3"
+  },
+  {
+    "revision": "d2b81e628728c42b94a1fca1c99a96b7",
+    "url": "/static/media/ba.d2b81e62.mp3"
+  },
+  {
+    "revision": "09483641e5f7164391ebd1ed2b678aec",
+    "url": "/static/media/be.09483641.mp3"
+  },
+  {
+    "revision": "cf30c7b48f5ae520ffafd4fb8e4e08fd",
+    "url": "/static/media/bi.cf30c7b4.mp3"
+  },
+  {
+    "revision": "83302f5d5157152b8fa5a505f8d5a1aa",
+    "url": "/static/media/bo.83302f5d.mp3"
+  },
+  {
+    "revision": "fb791d59dd015391be251c6d21fded3f",
+    "url": "/static/media/bu.fb791d59.mp3"
+  },
+  {
+    "revision": "65db0732a535f52e7f1e256b08e96239",
+    "url": "/static/media/da.65db0732.mp3"
+  },
+  {
+    "revision": "708ad88a68ce9558cbadf6fe7e64d69b",
+    "url": "/static/media/de.708ad88a.mp3"
+  },
+  {
+    "revision": "877aebdf81dc727e3f977bdddb489b21",
+    "url": "/static/media/do.877aebdf.mp3"
+  },
+  {
+    "revision": "aaa62db778ffc85ddd55f8a14291a3af",
+    "url": "/static/media/ga.aaa62db7.mp3"
+  },
+  {
+    "revision": "9dc91fee57e322510d698beaf2f8d9ca",
+    "url": "/static/media/ge.9dc91fee.mp3"
+  },
+  {
+    "revision": "1a080e0e277e1795c6dc2e9f9d16ea07",
+    "url": "/static/media/gi.1a080e0e.mp3"
+  },
+  {
+    "revision": "672ab99493ff44788a68addcb2c5b178",
+    "url": "/static/media/go.672ab994.mp3"
+  },
+  {
+    "revision": "e397e35d18c6900b49db3df968f68e04",
+    "url": "/static/media/gu.e397e35d.mp3"
+  },
+  {
+    "revision": "5d80d04b10c6b180794a0c728a8fd8f6",
+    "url": "/static/media/pa.5d80d04b.mp3"
+  },
+  {
+    "revision": "e5d70f8a3aa6e056b59dd24ae387857e",
+    "url": "/static/media/pe.e5d70f8a.mp3"
+  },
+  {
+    "revision": "725c6b447e3f851ddb7ab31b8212c6c0",
+    "url": "/static/media/pi.725c6b44.mp3"
+  },
+  {
+    "revision": "758f094764a2bfbab4e14ba91c33d10c",
+    "url": "/static/media/pu.758f0947.mp3"
+  },
+  {
+    "revision": "d45cd6dca340e642017725fef9b644e8",
+    "url": "/static/media/po.d45cd6dc.mp3"
+  },
+  {
+    "revision": "97115465df0a716df753eaa429faeebd",
+    "url": "/static/media/za.97115465.mp3"
+  },
+  {
+    "revision": "18e132c3e6233a69b8ef070505bbaed8",
+    "url": "/static/media/ze.18e132c3.mp3"
+  },
+  {
+    "revision": "f033afd49e6567fffcf1f506545fe38f",
+    "url": "/static/media/zo.f033afd4.mp3"
   },
   {
     "revision": "3e3a644b9e26f95ec65f8b15ca5ade15",
@@ -344,7 +436,7 @@ self.__precacheManifest = [
     "url": "/static/media/Ogg-Roman.56aae150.otf"
   },
   {
-    "revision": "b5d88c5d16388e146bed74b6fe92aba9",
+    "revision": "07abfa188e3bec5d406f6fbf5d4d6289",
     "url": "/index.html"
   }
 ];

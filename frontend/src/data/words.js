@@ -116,6 +116,272 @@ const words = {
     eng: "food",
     content: "🥕🥘🍛",
     sound: tabemono
+  },
+  あめ: {
+    eng: "rain",
+    content: "☔️🌧",
+    sound: null
+  },
+  かさ: {
+    eng: "umbrella",
+    content: "☂",
+    sound: null
+  },
+
+  さかな: {
+    eng: "fish",
+    content: "🐟🐡",
+    sound: null
+  },
+  きもの: {
+    eng: "kimono",
+    content: "👘",
+    sound: null
+  },
+  うち: {
+    eng: "home",
+    content: "🏡",
+    sound: null
+  },
+  くすり: {
+    eng: "medicine",
+    content: "💊😷",
+    sound: null
+  },
+  えんぴつ: {
+    eng: "pencil",
+    content: "✏️",
+    sound: null
+  },
+  おかね: {
+    eng: "money",
+    content: " 💰💵",
+    sound: null
+  },
+  けーき: {
+    eng: "cake",
+    content: "🍰",
+    sound: null
+  },
+  ぱそこん: {
+    eng: "personal computer",
+    content: "💻🖥",
+    sound: null
+  },
+  はさみ: {
+    eng: "scissors",
+    content: "✂",
+    sound: null
+  },
+  ちず: {
+    eng: "map",
+    content: "🗺🗾",
+    sound: null
+  },
+  にほん: {
+    eng: "Japan",
+    content: "🇯🇵",
+    sound: null
+  },
+  ひこうき: {
+    eng: "airplane",
+    content: "✈️",
+    sound: null
+  },
+  いぬ: {
+    eng: "dog",
+    content: "🐕🐶",
+    sound: null
+  },
+  ねこ: {
+    eng: "cat",
+    content: "🐈",
+    sound: null
+  },
+  へりこぷたー: {
+    eng: "helicopter",
+    content: "🚁",
+    sound: null
+  },
+  ふろ: {
+    eng: "bath",
+    content: "🛀",
+    sound: null
+  },
+  てがい: {
+    eng: "letter",
+    content: "💌📬",
+    sound: null
+  },
+  のーと: {
+    eng: "note",
+    content: "📓🗒",
+    sound: null
+  },
+  ほん: {
+    eng: "book",
+    content: "📖📚",
+    sound: null
+  },
+  やま: {
+    eng: "mountain",
+    content: "🏔🗻",
+    sound: null
+  },
+  りんご: {
+    eng: "apple",
+    content: "🍎🍏",
+    sound: null
+  },
+  らじお: {
+    eng: "radio",
+    content: "📻",
+    sound: null
+  },
+  みず: {
+    eng: "water",
+    content: "🚰💧",
+    sound: null
+  },
+  ゆき: {
+    eng: "snow",
+    content: "☃️🌨",
+    sound: null
+  },
+  めがね: {
+    eng: "glasses",
+    content: "👓",
+    sound: null
+  },
+  わいん: {
+    eng: "wine",
+    content: "🍷",
+    sound: null
+  },
+  ぎたー: {
+    eng: "guitar",
+    content: "🎸",
+    sound: null
+  },
+  しんぶん: {
+    eng: "newspaper",
+    content: "📰🗞️",
+    sound: null
+  },
+  ずぼん: {
+    eng: "pants",
+    content: "👖",
+    sound: null
+  },
+  かぜ: {
+    eng: "wind",
+    content: "💨🍃",
+    sound: null
+  },
+  ごはん: {
+    eng: "rice",
+    content: "🍚",
+    sound: null
+  },
+  ぞう: {
+    eng: "elephant",
+    content: "🐘",
+    sound: null
+  },
+  かなだ: {
+    eng: "Canada",
+    content: "🇨🇦🍁",
+    sound: null
+  },
+  ぶす: {
+    eng: "bus",
+    content: "🚌🚍",
+    sound: null
+  },
+  ぱん: {
+    eng: "bread",
+    content: "🍞🥖",
+    sound: null
+  },
+  びーる: {
+    eng: "beer",
+    content: "🍺🍻",
+    sound: null
+  },
+  ぴあの: {
+    eng: "piano",
+    content: "🎹",
+    sound: null
+  },
+  てぶくろ: {
+    eng: "gloves",
+    content: "🧤",
+    sound: null
+  },
+  きつぷ: {
+    eng: "ticket",
+    content: "🎫🎟️",
+    sound: null
+  },
+  でんわ: {
+    eng: "telephone",
+    content: "☎️📱",
+    sound: null
+  },
+  べんとう: {
+    eng: "bento",
+    content: "🍱",
+    sound: null
+  },
+  ぺん: {
+    eng: "pen",
+    content: "🖊️🖋️",
+    sound: null
+  },
+  どあ: {
+    eng: "door",
+    content: "🚪",
+    sound: null
+  },
+  ばうし: {
+    eng: "hat",
+    content: "🧢🎩",
+    sound: null
+  },
+  ぽすよ: {
+    eng: "post",
+    content: "📮📫",
+    sound: null
+  },
+  じゃーす: {
+    eng: "juice",
+    content: "🧃🥤",
+    sound: null
+  },
+  ちょこれーと: {
+    eng: "chocolate",
+    content: "🍫",
+    sound: null
+  },
+  じてんしゃ: {
+    eng: "bicycle",
+    content: "🚲🚴",
+    sound: null
+  },
+  ひゃく: {
+    eng: "one hundred",
+    content: "💯",
+    sound: null
+  },
+  おちゃ: {
+    eng: "tea",
+    content: "🍵",
+    sound: null
+  },
+  にんぎょう: {
+    eng: "dolls",
+    content: "🎎",
+    sound: null
   }
 };
 

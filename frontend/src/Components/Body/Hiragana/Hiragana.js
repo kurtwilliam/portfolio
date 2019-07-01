@@ -60,7 +60,7 @@ class Hiragana extends Component {
 
   removeSound = e => {
     // after playing, remove sound from playlist
-    // then play next song
+    // then play next sound
     e.stopPropagation();
     const { audio } = this.state;
     let updatedAudio = [...audio];

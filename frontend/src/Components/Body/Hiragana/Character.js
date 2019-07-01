@@ -121,6 +121,8 @@ const CharacterContainer = styled.div`
   width: calc(100% / ${props => props.lastColumn});
   transition: all 30ms;
   cursor: pointer;
+  max-width: 64px;
+  max-height: 64px;
 
   &.hidden {
     border: none;
