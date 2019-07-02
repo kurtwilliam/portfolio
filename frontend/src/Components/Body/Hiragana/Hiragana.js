@@ -18,7 +18,8 @@ class Hiragana extends Component {
     english: false,
     audio: [],
     audioPlaying: "",
-    currentChart: ""
+    currentChart: "",
+    syllabary: "hiragana"
   };
 
   highlightLetters = (highlightX, highlightY, currentChart) => {
@@ -35,6 +36,8 @@ class Hiragana extends Component {
     e.stopPropagation();
     this.setState({ word: "", splitWord: [] });
   };
+
+  changeSyllabary = e => this.setState({ syllabary: e.target.value });
 
   addNewSound = (e, sound) => {
     if (e) e.stopPropagation();
@@ -85,9 +88,11 @@ class Hiragana extends Component {
       currentCharacter,
       english,
       audioPlaying,
-      currentChart
+      currentChart,
+      syllabary
     } = this.state;
 
+    console.log(syllabary);
     return (
       <Fragment>
         {word.length > 0 ? (
@@ -125,6 +130,30 @@ class Hiragana extends Component {
             <p>🖱️ = 🔊</p>
             <p>🖱️🖱️ = 🖼️</p>
           </div>
+          <form className="hiragana__syllabary">
+            <label htmlFor="hiragana__syllabary">
+              <input
+                id="hiragana__syllabary"
+                type="radio"
+                name="syllabary"
+                value="hiragana"
+                onChange={this.changeSyllabary}
+                checked={syllabary === "hiragana"}
+              />
+              ひらがな
+            </label>
+            <label htmlFor="katakana__syllabary">
+              <input
+                id="katakana__syllabary"
+                type="radio"
+                name="syllabary"
+                value="katakana"
+                onChange={this.changeSyllabary}
+                checked={syllabary === "katakana"}
+              />
+              カタカナ
+            </label>
+          </form>
           <Chart>
             {Object.keys(hiraganaChart).map((y, i) => (
               <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
