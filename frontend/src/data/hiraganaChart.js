@@ -112,57 +112,68 @@ const hiraganaChart = {
     {
       char: "ん",
       x: 1,
-      audio: [n]
+      audio: [n],
+      kana: "ン"
     },
     {
       char: "わ",
       x: 2,
-      audio: [wa]
+      audio: [wa],
+      kana: "ワ"
     },
     {
       char: "ら",
       x: 3,
-      audio: [ra]
+      audio: [ra],
+      kana: "ラ"
     },
     {
       char: "や",
       x: 4,
-      audio: [ya]
+      audio: [ya],
+      kana: "ヤ"
     },
     {
       char: "ま",
       x: 5,
-      audio: [ma]
+      audio: [ma],
+      kana: "マ"
     },
     {
       char: "は",
       x: 6,
-      audio: [ha]
+      audio: [ha],
+      kana: "ハ"
     },
     {
       char: "な",
       x: 7,
-      audio: [na]
+      audio: [na],
+      kana: "ナ"
     },
     {
       char: "た",
       x: 8,
-      audio: [ta]
+      audio: [ta],
+      kana: "タ"
     },
     {
       char: "さ",
       x: 9,
-      audio: [sa]
+      audio: [sa],
+      kana: "サ"
     },
     {
       char: "か",
       x: 10,
-      audio: [ka]
+      audio: [ka],
+      kana: "カ"
     },
     {
       char: "あ",
       x: 11,
-      audio: [a]
+      audio: [a],
+      kana: "ア"
     },
     {
       char: "a",
@@ -184,7 +195,8 @@ const hiraganaChart = {
     {
       char: "り",
       x: 3,
-      audio: [ri]
+      audio: [ri],
+      kana: "リ"
     },
     {
       char: null,
@@ -194,37 +206,44 @@ const hiraganaChart = {
     {
       char: "み",
       x: 5,
-      audio: [mi]
+      audio: [mi],
+      kana: "ミ"
     },
     {
       char: "ひ",
       x: 6,
-      audio: [hi]
+      audio: [hi],
+      kana: "ヒ"
     },
     {
       char: "に",
       x: 7,
-      audio: [ni]
+      audio: [ni],
+      kana: "ニ"
     },
     {
       char: "ち",
       x: 8,
-      audio: [chi]
+      audio: [chi],
+      kana: "チ"
     },
     {
       char: "し",
       x: 9,
-      audio: [shi]
+      audio: [shi],
+      kana: "シ"
     },
     {
       char: "き",
       x: 10,
-      audio: [ki]
+      audio: [ki],
+      kana: "キ"
     },
     {
       char: "い",
       x: 11,
-      audio: [i]
+      audio: [i],
+      kana: "イ"
     },
     {
       char: "i",
@@ -246,47 +265,56 @@ const hiraganaChart = {
     {
       char: "る",
       x: 3,
-      audio: [ru]
+      audio: [ru],
+      kana: "ル"
     },
     {
       char: "ゆ",
       x: 4,
-      audio: [yu]
+      audio: [yu],
+      kana: "ユ"
     },
     {
       char: "む",
       x: 5,
-      audio: [mu]
+      audio: [mu],
+      kana: "ム"
     },
     {
       char: "ふ",
       x: 6,
-      audio: [fu]
+      audio: [fu],
+      kana: "フ"
     },
     {
       char: "ぬ",
       x: 7,
-      audio: [nu]
+      audio: [nu],
+      kana: "ヌ"
     },
     {
       char: "つ",
       x: 8,
-      audio: [tsu]
+      audio: [tsu],
+      kana: "ツ"
     },
     {
       char: "す",
       x: 9,
-      audio: [su]
+      audio: [su],
+      kana: "ス"
     },
     {
       char: "く",
       x: 10,
-      audio: [ku]
+      audio: [ku],
+      kana: "ク"
     },
     {
       char: "う",
       x: 11,
-      audio: [u]
+      audio: [u],
+      kana: "ウ"
     },
     {
       char: "u",
@@ -308,7 +336,8 @@ const hiraganaChart = {
     {
       char: "れ",
       x: 3,
-      audio: [re]
+      audio: [re],
+      kana: "レ"
     },
     {
       char: null,
@@ -318,37 +347,44 @@ const hiraganaChart = {
     {
       char: "め",
       x: 5,
-      audio: [me]
+      audio: [me],
+      kana: "メ"
     },
     {
       char: "へ",
       x: 6,
-      audio: [he]
+      audio: [he],
+      kana: "ヘ"
     },
     {
       char: "ね",
       x: 7,
-      audio: [ne]
+      audio: [ne],
+      kana: "ネ"
     },
     {
       char: "て",
       x: 8,
-      audio: [te]
+      audio: [te],
+      kana: "テ"
     },
     {
       char: "せ",
       x: 9,
-      audio: [se]
+      audio: [se],
+      kana: "セ"
     },
     {
       char: "け",
       x: 10,
-      audio: [ke]
+      audio: [ke],
+      kana: "ケ"
     },
     {
       char: "え",
       x: 11,
-      audio: [e]
+      audio: [e],
+      kana: "エ"
     },
     {
       char: "e",
@@ -365,52 +401,62 @@ const hiraganaChart = {
     {
       char: "を",
       x: 2,
-      audio: [wo]
+      audio: [wo],
+      kana: "ヲ"
     },
     {
       char: "ろ",
       x: 3,
-      audio: [ro]
+      audio: [ro],
+      kana: "ロ"
     },
     {
       char: "よ",
       x: 4,
-      audio: [yo]
+      audio: [yo],
+      kana: "ヨ"
     },
     {
       char: "も",
       x: 5,
-      audio: [mo]
+      audio: [mo],
+      kana: "モ"
     },
     {
       char: "ほ",
       x: 6,
-      audio: [ho]
+      audio: [ho],
+      kana: "ホ"
     },
     {
       char: "の",
       x: 7,
-      audio: [no]
+      audio: [no],
+      kana: "ノ"
     },
     {
       char: "と",
       x: 8,
-      audio: [to]
+      audio: [to],
+      kana: "ト"
     },
     {
       char: "そ",
       x: 9,
-      audio: [so]
+      audio: [so],
+      kana: "ソ"
     },
     {
       char: "こ",
       x: 10,
-      audio: [ko]
+      audio: [ko],
+      kana: "コ"
     },
     {
       char: "お",
       x: 11,
-      audio: [o]
+      audio: [o],
+      kana: "オ"
     },
     {
       char: "o",

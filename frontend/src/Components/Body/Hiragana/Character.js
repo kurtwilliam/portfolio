@@ -85,12 +85,18 @@ class Character extends Component {
       highlightX,
       lastColumn,
       thisChart,
-      currentChart
+      currentChart,
+      syllabary
     } = this.props;
     const { x } = character;
     const { playing } = this.state;
 
     const isCurrentChart = thisChart === currentChart ? true : false;
+
+    // todo: add kanji support if it ever happens lol
+    let thisCharacter = character.char;
+    if (syllabary === "katakana" && character.kana)
+      thisCharacter = character.kana;
 
     return (
       <CharacterContainer
@@ -105,7 +111,7 @@ class Character extends Component {
         onClick={e => this.handleClick(character)}
         lastColumn={lastColumn}
       >
-        {character.char}
+        {thisCharacter}
       </CharacterContainer>
     );
   }

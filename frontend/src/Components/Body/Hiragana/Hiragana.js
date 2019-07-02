@@ -92,7 +92,6 @@ class Hiragana extends Component {
       syllabary
     } = this.state;
 
-    console.log(syllabary);
     return (
       <Fragment>
         {word.length > 0 ? (
@@ -171,6 +170,7 @@ class Hiragana extends Component {
                     lastColumn={12}
                     currentChart={currentChart}
                     thisChart={"hiragana"}
+                    syllabary={syllabary}
                   />
                 ))}
               </ChartRow>
@@ -194,6 +194,7 @@ class Hiragana extends Component {
                     lastColumn={6}
                     currentChart={currentChart}
                     thisChart={"hiraganaMuddied"}
+                    syllabary={syllabary}
                   />
                 ))}
               </ChartRow>

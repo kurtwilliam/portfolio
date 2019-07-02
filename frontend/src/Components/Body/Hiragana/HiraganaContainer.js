@@ -21,6 +21,19 @@ const HiraganaContainer = styled.div`
       margin-left: 0;
     }
   }
+
+  .hiragana__syllabary {
+    display: flex;
+    margin-top: 8px;
+
+    label {
+      padding-right: 16px;
+
+      input {
+        margin-right: 4px;
+      }
+    }
+  }
 `;
 
 export default HiraganaContainer;
