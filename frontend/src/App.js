@@ -4,9 +4,10 @@ import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Home from "./Components/Routes/Home";
 import Hiragana from "./Components/Routes/Hiragana";
+import GameOfLife from "./Components/Routes/GameOfLife";
 import Footer from "./Components/Footer";
 import Ogg from "./assets/fonts/Ogg-Roman.otf";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+// import { HashRouter as Router, Route, Link } from "react-router-dom";
 
 const theme = {
   grey: "#B9B4AF",
@@ -87,10 +88,12 @@ const App = () => (
         <Gradient>
           <Container>
             <InnerCont>
-              <Router>
+              {/* <Router>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/hiragana" component={Hiragana} />
-              </Router>
+                <Route exact path="/game-of-life" component={GameOfLife} />
+              </Router> */}
+              <GameOfLife />
               <GlobalStyle />
             </InnerCont>
           </Container>
