@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { Component, useEffect } from "react";
 import GameOfLifeOverlayLayout from "./GameOfLifeOverlayLayout";
 
-const GameOfLifeOverlay = () => {
-  return <GameOfLifeOverlayLayout />;
-};
+class GameOfLifeOverlay extends Component {
+  render() {
+    return <GameOfLifeOverlayLayout />;
+  }
+}
 
 export default GameOfLifeOverlay;
