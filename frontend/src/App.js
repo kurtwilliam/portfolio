@@ -47,7 +47,7 @@ const BodyCont = styled.div`
 const Container = styled.div`
   width: 100%;
   height: auto;
-  background: white;
+  background: rgb(24, 24, 26);
 `;
 
 const Gradient = styled.div`

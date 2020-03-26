@@ -6,9 +6,16 @@ class GridRow extends Component {
   state = {};
 
   shouldComponentUpdate(nextProps) {
-    const { shouldUpdate } = nextProps;
+    const { shouldUpdate, shouldUpdateRowId } = nextProps;
+    const { rowIndex } = this.props;
 
-    if (shouldUpdate) {
+    console.log(shouldUpdateRowId, " ", rowIndex);
+
+    if (
+      shouldUpdate ||
+      (shouldUpdateRowId !== null && shouldUpdateRowId === rowIndex)
+    ) {
+      console.log("YEEEEET ROW");
       return true;
     }
 
@@ -16,8 +23,14 @@ class GridRow extends Component {
   }
 
   render() {
-    const { gridRow, updateSquare, rowIndex } = this.props;
-    console.log("rerendered");
+    const {
+      gridRow,
+      updateSquare,
+      rowIndex,
+      shouldUpdateSquareId,
+      shouldUpdate
+    } = this.props;
+
     return (
       <GridRowLayout>
         {gridRow.map((square, squareIndex) => (
@@ -27,6 +40,8 @@ class GridRow extends Component {
             squareIndex={squareIndex}
             updateSquare={updateSquare}
             rowIndex={rowIndex}
+            shouldUpdate={shouldUpdate}
+            shouldUpdateSquareId={shouldUpdateSquareId}
           />
         ))}
       </GridRowLayout>
