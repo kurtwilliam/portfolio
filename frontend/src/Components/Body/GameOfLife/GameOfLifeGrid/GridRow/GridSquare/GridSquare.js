@@ -12,6 +12,7 @@ class GridSquare extends Component {
         gridSquareSize={gridSquareSize}
         onClick={() => updateSquare(rowIndex, squareIndex)}
         className={squareState}
+        id={square.id}
       />
     );
   }

@@ -5,11 +5,12 @@ import { numberOfSquaresInGrid } from "../../../../config";
 
 class GameOfLifeGrid extends Component {
   state = {
-    grid: []
+    grid: [],
+    incomingGrid: [],
+    shouldUpdate: true
   };
 
   componentDidMount() {
-    console.log("componentDidMount");
     const { grid } = this.state;
 
     if (grid.length < 1) {
@@ -25,15 +26,22 @@ class GameOfLifeGrid extends Component {
           };
         }
       }
-      this.setState({ grid: newGrid });
+
+      this.setState({
+        grid: newGrid,
+        incomingGrid: newGrid,
+        shouldUpdate: true
+      });
+
+      return this.startTimer();
     }
   }
 
   recalculateGrid = () => {
-    const { grid } = this.state;
-    const newGrid = [...grid];
+    const { incomingGrid } = this.state;
+    const newGrid = [...incomingGrid];
 
-    grid.forEach((row, rowIndex) => {
+    incomingGrid.forEach((row, rowIndex) => {
       row.forEach((square, squareIndex) => {
         let neighbour1 = null;
         let neighbour2 = null;
@@ -44,32 +52,32 @@ class GameOfLifeGrid extends Component {
         let neighbour7 = null;
         let neighbour8 = null;
 
-        if (grid[rowIndex - 1] !== undefined) {
-          if (grid[rowIndex - 1][squareIndex - 1] !== undefined) {
-            neighbour1 = grid[rowIndex - 1][squareIndex - 1];
+        if (incomingGrid[rowIndex - 1] !== undefined) {
+          if (incomingGrid[rowIndex - 1][squareIndex - 1] !== undefined) {
+            neighbour1 = incomingGrid[rowIndex - 1][squareIndex - 1].state;
           }
 
-          neighbour2 = grid[rowIndex - 1][squareIndex];
+          neighbour2 = incomingGrid[rowIndex - 1][squareIndex].state;
 
-          if (grid[rowIndex - 1][squareIndex + 1] !== undefined) {
-            neighbour3 = grid[rowIndex - 1][squareIndex + 1];
+          if (incomingGrid[rowIndex - 1][squareIndex + 1] !== undefined) {
+            neighbour3 = incomingGrid[rowIndex - 1][squareIndex + 1].state;
           }
         }
 
-        if (grid[rowIndex][squareIndex - 1] !== undefined) {
-          neighbour4 = grid[rowIndex][squareIndex - 1];
+        if (incomingGrid[rowIndex][squareIndex - 1] !== undefined) {
+          neighbour4 = incomingGrid[rowIndex][squareIndex - 1].state;
         }
-        if (grid[rowIndex][squareIndex + 1] !== undefined) {
-          neighbour5 = grid[rowIndex][squareIndex + 1];
+        if (incomingGrid[rowIndex][squareIndex + 1] !== undefined) {
+          neighbour5 = incomingGrid[rowIndex][squareIndex + 1].state;
         }
 
-        if (grid[rowIndex + 1] !== undefined) {
-          if (grid[rowIndex + 1][squareIndex - 1] !== undefined) {
-            neighbour6 = grid[rowIndex + 1][squareIndex - 1];
+        if (incomingGrid[rowIndex + 1] !== undefined) {
+          if (incomingGrid[rowIndex + 1][squareIndex - 1] !== undefined) {
+            neighbour6 = incomingGrid[rowIndex + 1][squareIndex - 1].state;
           }
-          neighbour7 = grid[rowIndex + 1][squareIndex];
-          if (grid[rowIndex + 1][squareIndex + 1] !== undefined) {
-            neighbour8 = grid[rowIndex + 1][squareIndex + 1];
+          neighbour7 = incomingGrid[rowIndex + 1][squareIndex].state;
+          if (incomingGrid[rowIndex + 1][squareIndex + 1] !== undefined) {
+            neighbour8 = incomingGrid[rowIndex + 1][squareIndex + 1].state;
           }
         }
 
@@ -103,45 +111,55 @@ class GameOfLifeGrid extends Component {
           if (sumOfAliveNeighbours === 3) {
             newGrid[rowIndex][squareIndex].state = true;
           } else {
-            newGrid[rowIndex][squareIndex] = "dead";
+            newGrid[rowIndex][squareIndex].state = "dead";
           }
         }
       });
     });
 
-    this.setState({ grid: newGrid });
+    this.setState({ grid: newGrid, incomingGrid: newGrid, shouldUpdate: true });
   };
 
-  startTimer = () => window.setInterval(() => this.recalculateGrid(), 2000);
+  startTimer = () => window.setInterval(() => this.recalculateGrid(), 10000);
 
   updateSquare = (rowIndex, squareIndex) => {
-    const { grid } = this.state;
+    const { incomingGrid } = this.state;
 
-    const newGrid = [...grid];
+    const newGrid = [...incomingGrid];
 
-    if (grid[rowIndex][squareIndex].state === "dead") {
+    const renderedSquare = document.getElementById(
+      `${incomingGrid[rowIndex][squareIndex].id}`
+    );
+
+    if (incomingGrid[rowIndex][squareIndex].state === "dead") {
       newGrid[rowIndex][squareIndex].state = "alive";
-    } else if (grid[rowIndex][squareIndex].state === "alive") {
+      renderedSquare.classList.remove("dead");
+      renderedSquare.classList.add("alive");
+    } else if (incomingGrid[rowIndex][squareIndex].state === "alive") {
       newGrid[rowIndex][squareIndex].state = "dead";
+      renderedSquare.classList.remove("alive");
+      renderedSquare.classList.add("dead");
     }
 
-    // console.log(newGrid[rowIndex][squareIndex].state);
-
-    return this.setState({ grid: newGrid });
+    return this.setState({
+      incomingGrid: newGrid,
+      shouldUpdate: false
+    });
   };
 
   render() {
-    const { grid } = this.state;
+    const { grid, shouldUpdate } = this.state;
     return (
       <GameOfLifeGridLayout>
         {grid.length > 0 &&
           grid.map((gridRow, rowIndex) => {
             return (
               <GridRow
-                key={rowIndex}
+                key={`${gridRow},${rowIndex}`}
                 gridRow={gridRow}
                 rowIndex={rowIndex}
                 updateSquare={this.updateSquare}
+                shouldUpdate={shouldUpdate}
               />
             );
           })}
