@@ -1,0 +1,44 @@
+﻿.buttonSelected
+{
+	border: 1px solid #7eb9d0;
+	padding: 10px 10px 10px 10px;
+	text-decoration: none;
+	display: inline-block;
+	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+	font-weight: bold;
+	color: #FFFFFF;
+	background-color: #a7cfdf;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#a7cfdf), to(#23538a));
+	background-image: -webkit-linear-gradient(top, #a7cfdf, #23538a);
+	background-image: -moz-linear-gradient(top, #a7cfdf, #23538a);
+	background-image: -ms-linear-gradient(top, #a7cfdf, #23538a);
+	background-image: -o-linear-gradient(top, #a7cfdf, #23538a);
+	background-image: linear-gradient(to bottom, #a7cfdf, #23538a);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#a7cfdf, endColorstr=#23538a);
+}
+
+#head_dateDepart {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 35px 0 35px;
+}
+
+#head_dateReturn {
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 35px 0 35px;
+}
+
+.navigationLabel {
+	color: red;
+	font-size: 13px;
+}
+
+.dayLink {
+	text-decoration: none;
+}
+
+.prevNextImage {
+	max-height: 32px;
+	margin-bottom: -10px;
+}

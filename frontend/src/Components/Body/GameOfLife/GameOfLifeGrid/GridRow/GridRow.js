@@ -9,13 +9,10 @@ class GridRow extends Component {
     const { shouldUpdate, shouldUpdateRowId } = nextProps;
     const { rowIndex } = this.props;
 
-    console.log(shouldUpdateRowId, " ", rowIndex);
-
     if (
       shouldUpdate ||
       (shouldUpdateRowId !== null && shouldUpdateRowId === rowIndex)
     ) {
-      console.log("YEEEEET ROW");
       return true;
     }
 

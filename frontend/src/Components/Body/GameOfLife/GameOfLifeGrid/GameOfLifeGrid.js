@@ -43,9 +43,7 @@ class GameOfLifeGrid extends Component {
 
   recalculateGrid = () => {
     const { incomingGrid } = this.state;
-    const newGrid = [...incomingGrid];
-
-    // console.log(incomingGrid[0][0]);
+    const newGrid = [];
 
     incomingGrid.forEach((row, rowIndex) => {
       row.forEach((square, squareIndex) => {
@@ -103,8 +101,6 @@ class GameOfLifeGrid extends Component {
           neighbour7,
           neighbour8
         ];
-        // console.log("square", square);
-        // console.log("neighbours", neighbours);
 
         let sumOfAliveNeighbours = 0;
 
@@ -116,23 +112,37 @@ class GameOfLifeGrid extends Component {
           }
         }
 
+        let stateToUpdateTo = "";
+
         // if current square is alive
         if (square.state === "alive") {
           if (sumOfAliveNeighbours <= 1) {
-            newGrid[rowIndex][squareIndex].state = "dead";
+            stateToUpdateTo = "dead";
           } else if (sumOfAliveNeighbours > 1 && sumOfAliveNeighbours < 4) {
-            newGrid[rowIndex][squareIndex].state = "alive";
+            stateToUpdateTo = "alive";
           } else if (sumOfAliveNeighbours >= 4) {
-            newGrid[rowIndex][squareIndex].state = "dead";
+            stateToUpdateTo = "dead";
           }
           // else current square is dead
         } else {
           if (sumOfAliveNeighbours === 3) {
-            newGrid[rowIndex][squareIndex].state = "alive";
+            stateToUpdateTo = "alive";
           } else {
-            newGrid[rowIndex][squareIndex].state = "dead";
+            stateToUpdateTo = "dead";
           }
         }
+
+        // lets add to newGrid!
+        // if this row is undefined, create it
+        // then push new square to it
+        if (newGrid[rowIndex] === undefined) {
+          newGrid[rowIndex] = [];
+        }
+
+        newGrid[rowIndex][squareIndex] = {
+          ...incomingGrid[rowIndex][squareIndex],
+          state: stateToUpdateTo
+        };
       });
     });
 
@@ -152,13 +162,12 @@ class GameOfLifeGrid extends Component {
 
     const newGrid = [...incomingGrid];
 
-    console.log("UPDATE ME", rowIndex, squareIndex);
-
+    let nextSquareState = "dead";
     if (incomingGrid[rowIndex][squareIndex].state === "dead") {
-      newGrid[rowIndex][squareIndex].state = "alive";
-    } else if (incomingGrid[rowIndex][squareIndex].state === "alive") {
-      newGrid[rowIndex][squareIndex].state = "dead";
+      nextSquareState = "alive";
     }
+
+    newGrid[rowIndex][squareIndex].state = nextSquareState;
 
     return this.setState({
       incomingGrid: newGrid,
@@ -175,6 +184,7 @@ class GameOfLifeGrid extends Component {
       shouldUpdateRowId,
       shouldUpdateSquareId
     } = this.state;
+
     return (
       <GameOfLifeGridLayout>
         {grid.length > 0 &&

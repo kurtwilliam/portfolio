@@ -1,0 +1,132 @@
+﻿.lastprint
+{
+	page-break-after: always;
+}
+.print
+{	
+	color:Black;
+	font-style: normal; 
+}
+.printpanel
+{
+	font-weight: normal; 
+	font-style: normal; 
+	margin-left:55px;
+	padding-top:5px; 
+	text-align: center; 
+	border: 1px solid rgb(0, 0, 0); 
+	background-color: rgb(255, 0, 0); 
+	height: 28px; 
+	width: 130px;
+}
+a:visited
+{
+	color:Black;	
+}
+a:link
+{
+	color:Black;	
+}
+a:active
+{
+	color:Black;	
+}
+a:hover
+{
+	color:Black;	
+}
+body {
+}
+.outerDiv
+{
+    color:Blue;
+}
+table 
+{
+	table-layout:fixed;
+	width:100%;
+}
+/*.innerDiv
+{
+	 page-break-after:always;
+}*/
+.outerTable
+{
+	width:913px;
+}
+.bold_Spacing
+{
+	font-size:18px; font-family:Arial; word-spacing: 14.5px;
+}
+.bold
+{
+	font-size:18px; font-family:Arial;
+}
+.Courier_New
+{
+	font-family:Courier New; 
+}
+.Courier_New_Spacing
+{
+	font-family:Courier New; word-spacing:7.5px;
+}
+.Courier_New_Spacing2
+{
+	font-family:Courier New; word-spacing:7.25px;
+}
+.Courier_New_Size
+{
+	font-family:Courier New; font-size:12px;
+}
+.terms_Small
+{
+	font-family:Courier New; font-size:5px;padding-left:50px;padding-right:15px; 
+}
+.terms_smallInner
+{
+	font-size: 8px; font-family: Courier New;
+}
+.imp_Instruction_UL
+{
+	font-size:14px; font-family:Courier New ;
+}
+.clear
+{
+	clear:both;display:block;overflow: auto;
+}
+.first_td_desc
+{
+	width:200px; padding-left:50px;padding-top:20px; vertical-align:top; 
+}
+.second_td_desc
+{
+	width:550px;
+}
+.third_td_desc
+{
+	width:100px ;
+}
+.GreyhoundLines
+{
+	font-family:Courier New; font-size:20px;
+}
+.message1_Padding
+{
+	padding-left:50px;	
+}
+.inst_padding
+{
+	padding-left:50px;padding-right:15px;
+}
+.city_padding
+{
+	padding-left:40px;
+}
+.bar_padding
+{
+	padding-right:15px; float:right;
+}
+.Courier_New_LargFont
+{
+	font-family:Courier New; font-size:20px;
+}

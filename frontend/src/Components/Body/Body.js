@@ -1,10 +1,10 @@
-import React from 'react';
-import JungleSearch from './JungleSearch';
-import AestheticDimension from './AestheticDimension';
-import Shooter from './Shooter';
-import EmailBuilder from './EmailBuilder';
-import WordSandwiches from './WordSandwiches';
-import NewYou from './NewYou';
+import React from "react";
+import JungleSearch from "./JungleSearch";
+import AestheticDimension from "./AestheticDimension";
+import Shooter from "./Shooter";
+import EmailBuilder from "./EmailBuilder";
+import WordSandwiches from "./WordSandwiches";
+import NewYou from "./NewYou";
 
 // Map over body chunks we get from state
 // from here we render a body piece
@@ -13,11 +13,11 @@ import NewYou from './NewYou';
 const Body = () => (
   <main>
     <EmailBuilder />
-    <AestheticDimension />
-    <WordSandwiches />
-    <NewYou />
     {/* <Shooter /> */}
-    <JungleSearch />
+    <AestheticDimension />
+    {/* <WordSandwiches /> */}
+    <NewYou />
+    {/* <JungleSearch /> */}
   </main>
 );
 
