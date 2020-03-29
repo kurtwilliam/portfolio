@@ -1,7 +1,0 @@
-﻿#wait_content img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -46px; /*set to a negative number 1/2 of your height*/ 
-  margin-left: -140px; /*set to a negative number 1/2 of your width*/ 
-}
