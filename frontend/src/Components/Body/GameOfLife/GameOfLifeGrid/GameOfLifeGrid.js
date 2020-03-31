@@ -69,9 +69,9 @@ class GameOfLifeGrid extends Component {
 
   resizeGrid = () => {
     const { gridSize } = this.props;
-    const { grid } = this.state;
+    const { incomingGrid } = this.state;
 
-    const newGrid = [...grid];
+    const newGrid = [...incomingGrid];
 
     const gridRowSize = gridSize / 10;
 
@@ -79,7 +79,7 @@ class GameOfLifeGrid extends Component {
 
     if (difference < 0) {
       for (let row = 0; row < gridRowSize; row++) {
-        newGrid[row] = [];
+        newGrid[row] = incomingGrid[row] ? incomingGrid[row] : [];
 
         // make squares in row
         for (let square = 0; square < gridRowSize; square++) {
