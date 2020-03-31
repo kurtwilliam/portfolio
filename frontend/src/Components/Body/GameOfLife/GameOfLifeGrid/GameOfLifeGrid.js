@@ -44,10 +44,13 @@ class GameOfLifeGrid extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { speed, paused } = this.props;
+    const { speed, paused, gridSize } = this.props;
 
     if (speed !== prevProps.speed || paused !== prevProps.paused) {
       this.clearThenResetSpeedUnlessPaused();
+    }
+    if (gridSize !== prevProps.gridSize) {
+      this.resizeGrid();
     }
   }
 
@@ -62,6 +65,43 @@ class GameOfLifeGrid extends Component {
         speed
       ));
     }
+  };
+
+  resizeGrid = () => {
+    const { gridSize } = this.props;
+    const { grid } = this.state;
+
+    const newGrid = [...grid];
+
+    const gridRowSize = gridSize / 10;
+
+    const difference = newGrid.length - gridRowSize;
+
+    if (difference < 0) {
+      for (let row = 0; row < gridRowSize; row++) {
+        newGrid[row] = [];
+
+        // make squares in row
+        for (let square = 0; square < gridRowSize; square++) {
+          if (typeof newGrid[row][square] !== "object") {
+            newGrid[row][square] = {
+              state: "dead",
+              id: `row${row}square${square}`,
+              rowId: row,
+              squareId: square
+            };
+          }
+        }
+      }
+    } else {
+      newGrid.length = gridRowSize;
+
+      for (let row = 0; row < gridRowSize; row++) {
+        newGrid[row].length = gridRowSize;
+      }
+    }
+
+    this.setState({ grid: newGrid, incomingGrid: newGrid });
   };
 
   recalculateGrid = () => {

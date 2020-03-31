@@ -14,7 +14,7 @@ class GameOfLifeSettings extends Component {
       <GameOfLifeSettingsLayout>
         <button onClick={toggleState}>{paused ? "Play" : "Pause"}</button>
         <div className="gol__settings--range">
-          <label>Speed</label>
+          <label>Speed - {speed / 1000}s</label>
           <input
             type="range"
             name="speed"
@@ -26,7 +26,9 @@ class GameOfLifeSettings extends Component {
           />
         </div>
         <div className="gol__settings--range">
-          <label>Grid Size</label>
+          <label>
+            Grid Size - {gridSize / 10} x {gridSize / 10}
+          </label>
           <input
             type="range"
             name="gridSize"
