@@ -6,25 +6,28 @@ import GameOfLifeSettings from "./GameOfLifeSettings";
 class GameOfLife extends Component {
   state = {
     speed: 1000,
-    paused: false
+    paused: false,
+    gridSize: 400
   };
 
-  handleChange = e => this.setState({ speed: e.target.value });
+  handleChange = e =>
+    this.setState({ [e.target.name]: parseInt(e.target.value, 10) });
   toggleState = () =>
     this.setState(prevState => ({ paused: !prevState.paused }));
 
   render() {
-    const { speed, paused } = this.state;
+    const { speed, paused, gridSize } = this.state;
 
     return (
       <GameOfLifeLayout>
         <GameOfLifeSettings
           speed={speed}
           paused={paused}
+          gridSize={gridSize}
           handleChange={this.handleChange}
           toggleState={this.toggleState}
         />
-        <GameOfLifeGrid />
+        <GameOfLifeGrid speed={speed} paused={paused} gridSize={gridSize} />
       </GameOfLifeLayout>
     );
   }

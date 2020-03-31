@@ -3,7 +3,6 @@ import Draggable from "react-draggable";
 import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
 import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
 import GridRow from "./GridRow";
-import { numberOfSquaresInGrid } from "../../../../config";
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -16,14 +15,15 @@ class GameOfLifeGrid extends Component {
 
   componentDidMount() {
     const { grid } = this.state;
+    const { gridSize } = this.props;
 
     if (grid.length < 1) {
       const newGrid = [...grid];
-      for (let row = 0; row < numberOfSquaresInGrid / 10; row++) {
+      for (let row = 0; row < gridSize / 10; row++) {
         newGrid[row] = [];
 
         // make squares in row
-        for (let square = 0; square < numberOfSquaresInGrid / 10; square++) {
+        for (let square = 0; square < gridSize / 10; square++) {
           newGrid[row][square] = {
             state: "dead",
             id: `row${row}square${square}`,
@@ -42,6 +42,27 @@ class GameOfLifeGrid extends Component {
       return this.startTimer();
     }
   }
+
+  componentDidUpdate(prevProps) {
+    const { speed, paused } = this.props;
+
+    if (speed !== prevProps.speed || paused !== prevProps.paused) {
+      this.clearThenResetSpeedUnlessPaused();
+    }
+  }
+
+  clearThenResetSpeedUnlessPaused = () => {
+    const { speed, paused } = this.props;
+
+    if (this.recalculateInterval) clearInterval(this.recalculateInterval);
+
+    if (!paused) {
+      return (this.recalculateInterval = setInterval(
+        () => this.recalculateGrid(),
+        speed
+      ));
+    }
+  };
 
   recalculateGrid = () => {
     const { incomingGrid } = this.state;
@@ -157,11 +178,11 @@ class GameOfLifeGrid extends Component {
     });
   };
 
-  startTimer = () => {
-    const { speed, paused } = this.props;
-
-    return window.setInterval(() => this.recalculateGrid(), speed);
-  };
+  startTimer = () =>
+    (this.recalculateInterval = setInterval(
+      () => this.recalculateGrid(),
+      this.props.speed
+    ));
 
   updateSquare = (rowIndex, squareIndex) => {
     const { incomingGrid } = this.state;
@@ -193,22 +214,22 @@ class GameOfLifeGrid extends Component {
 
     return (
       <GameOfLifeGridContainer>
-        <Draggable bounds="parent">
-          <GameOfLifeGridLayout>
-            {grid.length > 0 &&
-              grid.map((gridRow, rowIndex) => (
-                <GridRow
-                  key={`${gridRow},${rowIndex}`}
-                  gridRow={gridRow}
-                  rowIndex={rowIndex}
-                  updateSquare={this.updateSquare}
-                  shouldUpdate={shouldUpdate}
-                  shouldUpdateRowId={shouldUpdateRowId}
-                  shouldUpdateSquareId={shouldUpdateSquareId}
-                />
-              ))}
-          </GameOfLifeGridLayout>
-        </Draggable>
+        {/* <Draggable bounds="parent"> */}
+        <GameOfLifeGridLayout>
+          {grid.length > 0 &&
+            grid.map((gridRow, rowIndex) => (
+              <GridRow
+                key={`${gridRow},${rowIndex}`}
+                gridRow={gridRow}
+                rowIndex={rowIndex}
+                updateSquare={this.updateSquare}
+                shouldUpdate={shouldUpdate}
+                shouldUpdateRowId={shouldUpdateRowId}
+                shouldUpdateSquareId={shouldUpdateSquareId}
+              />
+            ))}
+        </GameOfLifeGridLayout>
+        {/* </Draggable> */}
       </GameOfLifeGridContainer>
     );
   }
