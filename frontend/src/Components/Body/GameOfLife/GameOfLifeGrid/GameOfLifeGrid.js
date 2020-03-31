@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+import Draggable from "react-draggable";
 import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
+import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
 import GridRow from "./GridRow";
 import { numberOfSquaresInGrid } from "../../../../config";
 
@@ -155,7 +157,11 @@ class GameOfLifeGrid extends Component {
     });
   };
 
-  startTimer = () => window.setInterval(() => this.recalculateGrid(), 8000);
+  startTimer = () => {
+    const { speed, paused } = this.props;
+
+    return window.setInterval(() => this.recalculateGrid(), speed);
+  };
 
   updateSquare = (rowIndex, squareIndex) => {
     const { incomingGrid } = this.state;
@@ -186,22 +192,24 @@ class GameOfLifeGrid extends Component {
     } = this.state;
 
     return (
-      <GameOfLifeGridLayout>
-        {grid.length > 0 &&
-          grid.map((gridRow, rowIndex) => {
-            return (
-              <GridRow
-                key={`${gridRow},${rowIndex}`}
-                gridRow={gridRow}
-                rowIndex={rowIndex}
-                updateSquare={this.updateSquare}
-                shouldUpdate={shouldUpdate}
-                shouldUpdateRowId={shouldUpdateRowId}
-                shouldUpdateSquareId={shouldUpdateSquareId}
-              />
-            );
-          })}
-      </GameOfLifeGridLayout>
+      <GameOfLifeGridContainer>
+        <Draggable bounds="parent">
+          <GameOfLifeGridLayout>
+            {grid.length > 0 &&
+              grid.map((gridRow, rowIndex) => (
+                <GridRow
+                  key={`${gridRow},${rowIndex}`}
+                  gridRow={gridRow}
+                  rowIndex={rowIndex}
+                  updateSquare={this.updateSquare}
+                  shouldUpdate={shouldUpdate}
+                  shouldUpdateRowId={shouldUpdateRowId}
+                  shouldUpdateSquareId={shouldUpdateSquareId}
+                />
+              ))}
+          </GameOfLifeGridLayout>
+        </Draggable>
+      </GameOfLifeGridContainer>
     );
   }
 }

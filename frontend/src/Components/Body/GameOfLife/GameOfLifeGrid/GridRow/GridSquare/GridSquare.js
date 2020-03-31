@@ -1,6 +1,7 @@
 import React, { Component, useEffect } from "react";
 import GridSquareLayout from "./GridSquareLayout";
-import { gridSquareSize } from "../../../../../../config";
+
+const gridSquareSize = 16;
 
 class GridSquare extends Component {
   shouldComponentUpdate(nextProps) {
