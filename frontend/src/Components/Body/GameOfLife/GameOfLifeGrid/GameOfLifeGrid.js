@@ -33,6 +33,13 @@ class GameOfLifeGrid extends Component {
         }
       }
 
+      // Initial pretty grid set up!
+      newGrid[5][5].state = "alive";
+      newGrid[4][5].state = "alive";
+      newGrid[5][4].state = "alive";
+      newGrid[6][5].state = "alive";
+      newGrid[5][6].state = "alive";
+
       this.setState({
         grid: newGrid,
         incomingGrid: newGrid,

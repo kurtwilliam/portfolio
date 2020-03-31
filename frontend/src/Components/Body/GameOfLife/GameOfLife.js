@@ -5,7 +5,7 @@ import GameOfLifeSettings from "./GameOfLifeSettings";
 
 class GameOfLife extends Component {
   state = {
-    speed: 1000,
+    speed: 400,
     paused: false,
     gridSize: 400
   };
