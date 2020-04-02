@@ -5,7 +5,10 @@ const GameOfLifeLayout = styled.div`
   height: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
+
+  background: rgb(24, 24, 26);
 `;
 
 export default GameOfLifeLayout;

@@ -44,8 +44,6 @@ const client = new ApolloClient({
   uri: "https://nodejs-d46mbauhe.now.sh"
 });
 
-// background: rgb(24, 24, 26);
-
 const App = () => (
   <ApolloProvider client={client}>
     <ThemeProvider theme={theme}>
