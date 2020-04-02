@@ -13,7 +13,7 @@ class GameOfLifeSettings extends Component {
     return (
       <GameOfLifeSettingsLayout>
         <button
-          className={`${paused ? "paused" : ""}`}
+          className={`${paused ? "" : "paused"}`}
           onClick={toggleState}
         ></button>
         <div className="gol__settings--range">

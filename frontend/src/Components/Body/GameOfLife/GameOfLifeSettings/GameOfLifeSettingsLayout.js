@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
 const GameOfLifeSettingsLayout = styled.div`
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5vh;
   width: 100%;
   height: auto;
   color: white;
@@ -23,8 +27,8 @@ const GameOfLifeSettingsLayout = styled.div`
     border-style: solid;
     border-width: 14px 0 14px 28px;
     box-sizing: border-box;
-    border-color: rgba(100, 100, 100, 0) rgba(100, 100, 100, 0)
-      rgba(100, 100, 100, 0) #202020;
+    background: transparent;
+    border-color: transparent transparent transparent #202020;
     // transition: 25ms all ease;
     cursor: pointer;
 

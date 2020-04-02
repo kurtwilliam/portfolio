@@ -13,9 +13,9 @@ class GameOfLifeExplanation extends Component {
           >
             The Game of Life
           </a>{" "}
-          is a grid of cells, where each cell is either Alive or Dead. After
-          each generation, each square counts how many Alive neighbours it has,
-          and if:
+          is a cellular automaton that takes place 2D grid, where each cell is
+          either Alive or Dead. After each generation, each square counts how
+          many Alive neighbours it has, and if:
         </p>
         <span className="gol__explanation--big-rule">
           The current Cell is Alive
