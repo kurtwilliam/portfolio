@@ -7,7 +7,7 @@ const GridSquare = styled.div`
   border-radius: 4px;
 
   &.alive {
-    background: green;
+    background: rgb(114, 38, 38);
   }
   &.dead {
     background: rgb(51, 51, 51);

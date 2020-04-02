@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GameOfLifeLayout from "./GameOfLifeLayout";
 import GameOfLifeGrid from "./GameOfLifeGrid";
 import GameOfLifeSettings from "./GameOfLifeSettings";
+import GameOfLifeExplanation from "./GameOfLifeExplanation";
 
 class GameOfLife extends Component {
   state = {
@@ -28,6 +29,7 @@ class GameOfLife extends Component {
           toggleState={this.toggleState}
         />
         <GameOfLifeGrid speed={speed} paused={paused} gridSize={gridSize} />
+        <GameOfLifeExplanation />
       </GameOfLifeLayout>
     );
   }

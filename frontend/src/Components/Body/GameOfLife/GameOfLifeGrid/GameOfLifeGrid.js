@@ -184,7 +184,6 @@ class GameOfLifeGrid extends Component {
 
         let stateToUpdateTo = "";
 
-        // if current square is alive
         if (square.state === "alive") {
           if (sumOfAliveNeighbours <= 1) {
             stateToUpdateTo = "dead";
@@ -193,7 +192,6 @@ class GameOfLifeGrid extends Component {
           } else if (sumOfAliveNeighbours >= 4) {
             stateToUpdateTo = "dead";
           }
-          // else current square is dead
         } else {
           if (sumOfAliveNeighbours === 3) {
             stateToUpdateTo = "alive";
