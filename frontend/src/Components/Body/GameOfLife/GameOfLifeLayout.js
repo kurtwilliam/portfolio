@@ -7,7 +7,6 @@ const GameOfLifeLayout = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 5vh;
   background: rgb(24, 24, 26);
 `;
 

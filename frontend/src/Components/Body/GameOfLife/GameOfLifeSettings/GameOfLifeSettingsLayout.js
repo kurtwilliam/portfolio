@@ -5,9 +5,8 @@ const GameOfLifeSettingsLayout = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: 5vh;
+  height: 8vh;
   width: 100%;
-  height: auto;
   color: white;
   display: flex;
   justify-content: center;

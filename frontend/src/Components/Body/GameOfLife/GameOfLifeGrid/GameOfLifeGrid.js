@@ -23,7 +23,8 @@ class GameOfLifeGrid extends Component {
   };
 
   componentDidMount = () => {
-    this.p5Canvas = new p5(this.Sketch, this.p5Ref.current);
+    console.log(this.p5Ref);
+    this.p5Canvas = new p5(this.Sketch, this.p5Ref);
   };
 
   calculateWidthAndHeight = () => {
@@ -41,7 +42,9 @@ class GameOfLifeGrid extends Component {
     let h = browserDimensions[1];
 
     s.setup = () => {
-      s.createCanvas(w, h);
+      console.log(this.p5Ref);
+      s.createCanvas(w, h).parent(this.p5Ref);
+      // canvas.style("display", "block");
     };
 
     // .scale() for zooming
@@ -51,6 +54,8 @@ class GameOfLifeGrid extends Component {
       s.fill(255);
       s.rect(100, 100, 50, 50);
     };
+
+    s.resizeCanvas(w, h);
   };
 
   render() {
@@ -63,7 +68,6 @@ class GameOfLifeGrid extends Component {
     return (
       <GameOfLifeGridContainer>
         <GameOfLifeGridLayout ref={ref => (this.p5Ref = ref)} />
-
         {/* <Draggable bounds="parent">
         <GameOfLifeGridLayout>
           {grid.length > 0 &&
