@@ -58,13 +58,21 @@ class GameOfLifeGrid extends Component {
     return newArray;
   };
 
+  getMousePosition = e => {
+    console.log(e.clientX);
+    console.log(e);
+  };
+
   Sketch = s => {
     const { browserDimensions } = this.state;
     let w = browserDimensions[0];
     let h = browserDimensions[1];
 
     s.setup = () => {
-      s.createCanvas(w, h).parent(this.p5Ref);
+      let canvas = s.createCanvas(w, h).parent(this.p5Ref);
+
+      canvas.mouseClicked(this.getMousePosition);
+
       numberOfColumns = Math.round(s.width / resolution);
       numberOfRows = Math.round(s.height / resolution);
 
