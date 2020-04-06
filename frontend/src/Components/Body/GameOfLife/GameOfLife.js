@@ -6,7 +6,7 @@ import GameOfLifeExplanation from "./GameOfLifeExplanation";
 
 class GameOfLife extends Component {
   state = {
-    speed: 400,
+    speed: 2,
     paused: false,
     gridSize: 400
   };

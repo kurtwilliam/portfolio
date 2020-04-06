@@ -32,12 +32,11 @@ class GameOfLifeGrid extends Component {
 
   calculateWidthAndHeight = () => {
     const { innerWidth: width, innerHeight: height } = window;
-
+    console.log(width, height);
     // height calculation for what the
     // settings and explanation sizes are
-    return this.setState(
-      { browserDimensions: [width, height * 0.84] },
-      () => this.Sketch
+    return this.setState({ browserDimensions: [width, height * 0.84] }, () =>
+      this.Sketch.windowResized()
     );
   };
 
@@ -58,29 +57,36 @@ class GameOfLifeGrid extends Component {
     return newArray;
   };
 
-  getMousePosition = e => {
-    console.log(e.clientX);
-    console.log(e);
-  };
-
   Sketch = s => {
+    console.log(s);
     const { browserDimensions } = this.state;
+    const { speed } = this.props;
     let w = browserDimensions[0];
     let h = browserDimensions[1];
+
+    const getMousePosition = e => {
+      console.log(e.clientX);
+      console.log(e);
+      // use layerX and layerY for pos in canvas
+    };
 
     s.setup = () => {
       let canvas = s.createCanvas(w, h).parent(this.p5Ref);
 
-      canvas.mouseClicked(this.getMousePosition);
+      canvas.mouseClicked(e => getMousePosition(e));
 
       numberOfColumns = Math.round(s.width / resolution);
       numberOfRows = Math.round(s.height / resolution);
 
-      grid = this.createNestedArray(numberOfColumns, numberOfRows, true);
+      grid =
+        grid.length < 1
+          ? this.createNestedArray(numberOfColumns, numberOfRows, true)
+          : grid;
     };
 
     s.draw = () => {
       s.background(0);
+      s.frameRate(speed);
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -123,7 +129,12 @@ class GameOfLifeGrid extends Component {
       grid = incomingGrid;
     };
 
-    s.resizeCanvas(w, h);
+    const windowResized = () => {
+      console.log(w, h);
+      return s.resizeCanvas(w, h);
+    };
+
+    this.Sketch.windowResized = windowResized;
   };
 
   countNeighbors = (grid, x, y) => {

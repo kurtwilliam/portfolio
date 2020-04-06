@@ -1,8 +1,8 @@
 import React, { Component, useEffect } from "react";
 import GameOfLifeSettingsLayout from "./GameOfLifeSettingsLayout";
 
-const speedMin = 200;
-const speedMax = 2000;
+const speedMin = 0.5;
+const speedMax = 10;
 
 const gridMin = 200;
 const gridMax = 600;
@@ -17,7 +17,7 @@ class GameOfLifeSettings extends Component {
           onClick={toggleState}
         ></button>
         <div className="gol__settings--range">
-          <label>Speed - {speed / 1000}s</label>
+          <label>Speed - {speed} frames / s</label>
           <input
             type="range"
             name="speed"
@@ -25,7 +25,7 @@ class GameOfLifeSettings extends Component {
             max={speedMax}
             value={speed}
             onChange={handleChange}
-            step={200}
+            step={0.5}
           />
         </div>
         <div className="gol__settings--range">
