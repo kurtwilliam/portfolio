@@ -30,13 +30,26 @@ class GameOfLifeGrid extends Component {
 
   componentDidMount = () => (this.p5Canvas = new p5(this.Sketch, this.p5Ref));
 
+  componentDidUpdate = prevProps => {
+    const { speed, paused, gridSize } = this.props;
+    if (paused !== prevProps.paused) {
+      this.p5Canvas.frameRate(paused === true ? 0 : speed);
+    } else if (speed !== prevProps.speed) {
+      this.p5Canvas.frameRate(speed);
+    }
+    // if (
+    //   gridSize !== prevProps.gridSize
+    // ) {
+    //   this.p5Canvas.frameRate(speed);
+    // }
+  };
+
   calculateWidthAndHeight = () => {
     const { innerWidth: width, innerHeight: height } = window;
-    console.log(width, height);
     // height calculation for what the
     // settings and explanation sizes are
     return this.setState({ browserDimensions: [width, height * 0.84] }, () =>
-      this.Sketch.windowResized()
+      this.p5Canvas.resizeCanvas(width, height)
     );
   };
 
@@ -58,7 +71,6 @@ class GameOfLifeGrid extends Component {
   };
 
   Sketch = s => {
-    console.log(s);
     const { browserDimensions } = this.state;
     const { speed } = this.props;
     let w = browserDimensions[0];
@@ -66,7 +78,7 @@ class GameOfLifeGrid extends Component {
 
     const getMousePosition = e => {
       console.log(e.clientX);
-      console.log(e);
+      // console.log(e);
       // use layerX and layerY for pos in canvas
     };
 
@@ -77,16 +89,16 @@ class GameOfLifeGrid extends Component {
 
       numberOfColumns = Math.round(s.width / resolution);
       numberOfRows = Math.round(s.height / resolution);
+      s.frameRate(speed);
 
       grid =
-        grid.length < 1
+        incomingGrid.length < 1
           ? this.createNestedArray(numberOfColumns, numberOfRows, true)
-          : grid;
+          : incomingGrid;
     };
 
     s.draw = () => {
       s.background(0);
-      s.frameRate(speed);
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -130,7 +142,6 @@ class GameOfLifeGrid extends Component {
     };
 
     const windowResized = () => {
-      console.log(w, h);
       return s.resizeCanvas(w, h);
     };
 

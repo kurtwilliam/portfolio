@@ -8,13 +8,19 @@ class GameOfLife extends Component {
   state = {
     speed: 2,
     paused: false,
+    randomize: false,
+    clear: false,
     gridSize: 400
   };
 
   handleChange = e =>
     this.setState({ [e.target.name]: parseInt(e.target.value, 10) });
-  toggleState = () =>
-    this.setState(prevState => ({ paused: !prevState.paused }));
+  toggleState = e => {
+    const { name } = e.target;
+    return this.setState(prevState => ({
+      [name]: !prevState[name]
+    }));
+  };
 
   render() {
     const { speed, paused, gridSize } = this.state;
