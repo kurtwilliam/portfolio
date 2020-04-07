@@ -15,6 +15,7 @@
     "jsx-a11y/label-has-for": 0,
     "react/forbid-prop-types": 0,
     "jsx-a11y/accessible-emoji": "off",
+    "react/no-unused-expressions": "warn",
     "import/no-extraneous-dependencies": [
       "error",
       {
