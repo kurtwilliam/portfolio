@@ -11,7 +11,6 @@ class GameOfLife extends Component {
     randomize: false,
     clear: false,
     gridSize: 400,
-    selectingShape: false,
     selectedShape: ""
   };
 
@@ -25,6 +24,11 @@ class GameOfLife extends Component {
       [name]: !prevState[name]
     }));
   };
+  updateSelectedShape = shapeName =>
+    this.setState(prevState => ({
+      selectedShape:
+        shapeName === "" && prevState.selectedShape === "" ? "Plus" : shapeName
+    }));
 
   render() {
     const {
@@ -33,7 +37,6 @@ class GameOfLife extends Component {
       gridSize,
       clear,
       randomize,
-      selectingShapes,
       selectedShape
     } = this.state;
 
@@ -45,6 +48,8 @@ class GameOfLife extends Component {
           gridSize={gridSize}
           handleChange={this.handleChange}
           toggleState={this.toggleState}
+          selectedShape={selectedShape}
+          updateSelectedShape={this.updateSelectedShape}
         />
         <GameOfLifeGrid
           speed={speed}
@@ -53,7 +58,6 @@ class GameOfLife extends Component {
           clear={clear}
           randomize={randomize}
           toggleState={this.toggleState}
-          selectingShapes={selectingShapes}
           selectedShape={selectedShape}
         />
         <GameOfLifeExplanation />

@@ -13,6 +13,12 @@ const GameOfLifeShapesLayout = styled.div`
   background: rgba(100, 100, 100, 0.2);
   padding: 4px 8px;
   // overflow: scroll;
+  transition: left 200ms;
+
+  &.hidden {
+    color: black;
+    left: -100%;
+  }
 
   .gol__shapes {
     &--shape {
@@ -21,6 +27,10 @@ const GameOfLifeShapesLayout = styled.div`
       background: black;
       margin: 4px 0px;
       cursor: pointer;
+
+      &.selected {
+        background: blue;
+      }
 
       &__square {
         width: 10px;

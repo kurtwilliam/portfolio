@@ -17,7 +17,8 @@ class GameOfLifeSettings extends Component {
       gridSize,
       handleChange,
       toggleState,
-      selectingShape
+      updateSelectedShape,
+      selectedShape
     } = this.props;
     return (
       <>
@@ -55,22 +56,18 @@ class GameOfLifeSettings extends Component {
           />
         </div> */}
             <div className="gol__settings--range">
-              <button className={``} onClick={toggleState} name="clear">
+              <button onClick={toggleState} name="clear">
                 Clear
               </button>
             </div>
             <div className="gol__settings--range">
-              <button className={``} onClick={toggleState} name="randomize">
+              <button onClick={toggleState} name="randomize">
                 Randomize
               </button>
             </div>
 
             <div className="gol__settings--range">
-              <button
-                className={``}
-                onClick={toggleState}
-                name="selectingShape"
-              >
+              <button onClick={() => updateSelectedShape("")}>
                 Add Shapes
               </button>
             </div>
@@ -78,7 +75,10 @@ class GameOfLifeSettings extends Component {
           {/* <label>Zoom</label>
         <input /> */}
         </GameOfLifeSettingsLayout>
-        <GameOfLifeShapes selectingShape={selectingShape} />
+        <GameOfLifeShapes
+          selectedShape={selectedShape}
+          updateSelectedShape={updateSelectedShape}
+        />
       </>
     );
   }
