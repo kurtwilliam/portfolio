@@ -1,6 +1,4 @@
-const Square = [
+export default [
   [true, true],
   [true, true]
 ];
-
-export default Square;

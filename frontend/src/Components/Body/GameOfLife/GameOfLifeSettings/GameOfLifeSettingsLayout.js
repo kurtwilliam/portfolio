@@ -14,6 +14,13 @@ const GameOfLifeSettingsLayout = styled.div`
   padding: 12px;
   background: rgb(100, 100, 100);
 
+  .gol__settings--container {
+    display: flex;
+    justify-content: center;
+    // flex-direction: column;
+    align-items: center;
+  }
+
   .gol__settings--range {
     display: flex;
     flex-direction: column;

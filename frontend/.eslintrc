@@ -41,6 +41,10 @@
       "node": {
         "paths": ["src"]
       }
+    },
+    "react": {
+      "pragma": "React",
+      "version": "16.6.0"
     }
   }
 }
