@@ -31,6 +31,7 @@ const GameOfLifeShapesLayout = styled.div`
       background: black;
       margin: 4px 0px;
       cursor: pointer;
+      padding: 4px;
 
       &.selected {
         background: blue;

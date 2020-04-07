@@ -19,6 +19,7 @@ class GameOfLifeShapes extends Component {
                 selectedShape === shapeName ? "selected" : ""
               }`}
               onClick={() => updateSelectedShape(shapeName)}
+              key={shapeName}
             >
               {shapeName}
             </span>
@@ -29,6 +30,7 @@ class GameOfLifeShapes extends Component {
               }`}
               key={shapeName}
               title={shapeName}
+              onClick={() => updateSelectedShape(shapeName)}
             >
               {shapes[shapeName].map((row, rowIndex) => (
                 <div
@@ -41,7 +43,6 @@ class GameOfLifeShapes extends Component {
                       className={`gol__shapes--shape__square gol__shapes--shape__${
                         shape ? "filled" : "empty"
                       }`}
-                      onClick={() => updateSelectedShape(shapeName)}
                     ></div>
                   ))}
                 </div>

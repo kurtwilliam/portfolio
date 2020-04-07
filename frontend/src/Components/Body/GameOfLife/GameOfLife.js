@@ -25,13 +25,15 @@ class GameOfLife extends Component {
       [name]: !prevState[name]
     }));
   };
-  updateSelectedShape = shapeName =>
-    this.setState(prevState => ({
+  updateSelectedShape = shapeName => {
+    console.log(shapeName);
+    return this.setState(prevState => ({
       selectedShape:
         shapeName === "" && prevState.selectedShape === ""
           ? Object.keys(shapes)[0]
           : shapeName
     }));
+  };
 
   render() {
     const {

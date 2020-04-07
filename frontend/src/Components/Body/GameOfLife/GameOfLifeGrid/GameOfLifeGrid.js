@@ -74,6 +74,10 @@ class GameOfLifeGrid extends Component {
     );
   };
 
+  // moveForwardOneFrame = () => {
+
+  // }
+
   setupGrid = (numberOfColumns, numberOfRows) => {
     const { toggleState, randomize } = this.props;
     let newGrid = this.createNestedArray(
@@ -174,7 +178,13 @@ class GameOfLifeGrid extends Component {
           incomingGrid[xPos + col][yPos + row].state = state;
           this.p5Canvas.fill(fill);
           this.p5Canvas.stroke(0);
-          this.p5Canvas.rect(x + col, y + col, resolution, resolution);
+
+          this.p5Canvas.rect(
+            x + row * resolution,
+            y + col * resolution,
+            resolution,
+            resolution
+          );
         }
       }
     } else {

@@ -2,6 +2,7 @@ import Plus from "./Plus";
 import Square from "./Square";
 import Explosion from "./Explosion";
 import BigGun from "./BigGun";
+import BigArrow from "./BigArrow";
 import BouncinBeans from "./BouncinBeans";
 import CantTurnRight from "./CantTurnRight";
 import InfiniteExplosion from "./InfiniteExplosion";
@@ -15,6 +16,8 @@ export default {
   Explosion: [...Explosion],
   CantTurnRight: [...CantTurnRight],
   InfiniteExplosion: [...InfiniteExplosion],
+  BigArrow: [...BigArrow],
+
   BouncinBeans: [...BouncinBeans],
   LineyBoy: [...LineyBoy],
   BigGun: [...BigGun]
