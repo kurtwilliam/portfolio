@@ -16,14 +16,16 @@ class GameOfLife extends Component {
   handleChange = e =>
     this.setState({ [e.target.name]: parseInt(e.target.value, 10) });
   toggleState = e => {
-    const { name } = e.target;
+    // if click event, e is normal event
+    // if called from grid, e is just a string
+    const name = e.target ? e.target.name : e;
     return this.setState(prevState => ({
       [name]: !prevState[name]
     }));
   };
 
   render() {
-    const { speed, paused, gridSize } = this.state;
+    const { speed, paused, gridSize, clear, randomize } = this.state;
 
     return (
       <GameOfLifeLayout>
@@ -34,7 +36,14 @@ class GameOfLife extends Component {
           handleChange={this.handleChange}
           toggleState={this.toggleState}
         />
-        <GameOfLifeGrid speed={speed} paused={paused} gridSize={gridSize} />
+        <GameOfLifeGrid
+          speed={speed}
+          paused={paused}
+          gridSize={gridSize}
+          clear={clear}
+          randomize={randomize}
+          toggleState={this.toggleState}
+        />
         <GameOfLifeExplanation />
       </GameOfLifeLayout>
     );

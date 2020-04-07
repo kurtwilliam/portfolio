@@ -13,12 +13,12 @@ class GameOfLifeSettings extends Component {
     return (
       <GameOfLifeSettingsLayout>
         <button
-          className={`${paused ? "" : "paused"}`}
+          className={`${paused ? "pause" : "pause paused"}`}
           onClick={toggleState}
           name="paused"
         ></button>
         <div className="gol__settings--range">
-          <label>Speed - {speed} frames / s</label>
+          <label>Speed - {speed} frames/s</label>
           <input
             type="range"
             name="speed"

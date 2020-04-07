@@ -54,21 +54,30 @@ class GameOfLifeExplanation extends Component {
           stateToUpdateTo = "dead"; } }
         </div>
         <p>These simple rules can create complex patterns.</p>
-        Developer Notes and Learnings The biggest lesson for me is, just because
-        you can use a library/framework to build something doesn't mean you
-        should (React, looking at you)😅. Also to research the right tools for
-        the job before you build anything. I originally built the grid in React
-        but it was not performant at all. I researched, and decided a canvas was
-        the way to go. I settled on the{" "}
-        <a href="https://p5js.org/" target="_blank">
-          p5
-        </a>{" "}
-        library to render the canvas with JS and used it as an instance instead
-        of globally to allow React to play nicely with it. The state structure
-        is a two dimentional array (array of arrays) for rows and nested objects
-        for squares. Thus, I was revisiting past learnings about accidental
-        state mutation and properly copying/updating nested objects in
-        application state 😐. Yay.
+        <h2>Developer Notes and Learnings</h2>
+        <p>
+          The biggest lesson for me is, just because you can use a
+          library/framework to build something doesn't mean you should (in this
+          project, React)😅. Also to research the right tools for the job before
+          you build anything.
+        </p>
+        <p>
+          I originally built the grid in React by rendering div's as the grid
+          but it was not performant at all. I researched, and decided a normal
+          HTML canvas was the way to go. I settled on the{" "}
+          <a href="https://p5js.org/" target="_blank">
+            p5
+          </a>{" "}
+          library to render the canvas with JS and used it as an instance
+          instead of globally to allow React to play nicely with it.{" "}
+        </p>
+        <p>
+          The state structure is a two dimentional array (array of arrays) for
+          rows and nested objects for squares. Thus, when I built in React the
+          first time I was revisiting past learnings about accidental state
+          mutation and properly copying/updating nested objects in application
+          state 😐. Yay.
+        </p>
       </GameOfLifeExplanationLayout>
     );
   }

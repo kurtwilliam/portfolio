@@ -18,15 +18,30 @@ const GameOfLifeSettingsLayout = styled.div`
     display: flex;
     flex-direction: column;
     margin-left: 12px;
+
+    input {
+      cursor: pointer;
+    }
   }
 
   button {
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    color: white;
+    cursor: pointer;
+  }
+
+  button.pause {
     width: 28px;
     height: 28px;
     border-style: solid;
     border-width: 14px 0 14px 28px;
     box-sizing: border-box;
     background: transparent;
+    border-radius: 0;
+    padding: 0;
     border-color: transparent transparent transparent #202020;
     // transition: 25ms all ease;
     cursor: pointer;

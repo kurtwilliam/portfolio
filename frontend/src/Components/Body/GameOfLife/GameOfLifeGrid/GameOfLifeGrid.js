@@ -32,11 +32,25 @@ class GameOfLifeGrid extends Component {
   componentDidMount = () => (this.p5Canvas = new p5(this.Sketch, this.p5Ref));
 
   componentDidUpdate = prevProps => {
-    const { speed, paused, gridSize } = this.props;
+    const {
+      speed,
+      paused,
+      gridSize,
+      clear,
+      randomize,
+      toggleState
+    } = this.props;
+
     if (paused !== prevProps.paused) {
       this.p5Canvas.frameRate(paused === true ? 0 : speed);
     } else if (paused !== true && speed !== prevProps.speed) {
       this.p5Canvas.frameRate(speed);
+    } else if (clear) {
+      grid = [];
+      toggleState("clear");
+    } else if (randomize) {
+      grid = this.createNestedArray(numberOfColumns, numberOfRows, true);
+      toggleState("randomize");
     }
     // if (
     //   gridSize !== prevProps.gridSize
@@ -55,12 +69,15 @@ class GameOfLifeGrid extends Component {
     );
   };
 
-  setupGrid = (numberOfColumns, numberOfRows, randomize) => {
+  setupGrid = (numberOfColumns, numberOfRows) => {
+    const { toggleState, randomize } = this.props;
     let newGrid = this.createNestedArray(
       numberOfColumns,
       numberOfRows,
       randomize
     );
+
+    if (randomize) toggleState("randomize");
 
     if (!randomize) {
       // Calculate middle of grid
@@ -91,18 +108,18 @@ class GameOfLifeGrid extends Component {
     return newGrid;
   };
 
-  createNestedArray = (cols, rows, randomize) => {
+  createNestedArray = (cols, rows, shouldRandomize) => {
     let newArray = [];
     for (let colNum = 0; colNum < cols; colNum++) {
       newArray[colNum] = [];
       for (let rowNum = 0; rowNum < rows; rowNum++) {
         newArray[colNum][rowNum] = {
           state:
-            randomize === true
+            shouldRandomize === true
               ? Math.random() < 0.5
                 ? "dead"
                 : "alive"
-              : null,
+              : "dead",
           id: `row${rowNum}col${colNum}`,
           rowId: rowNum,
           colId: colNum
@@ -114,7 +131,7 @@ class GameOfLifeGrid extends Component {
 
   Sketch = s => {
     const { browserDimensions } = this.state;
-    const { speed } = this.props;
+    const { speed, randomize } = this.props;
     let w = browserDimensions[0];
     let h = browserDimensions[1];
 
@@ -151,38 +168,42 @@ class GameOfLifeGrid extends Component {
 
       grid =
         incomingGrid.length < 1
-          ? // ? this.createNestedArray(numberOfColumns, numberOfRows, true)
-            this.setupGrid(numberOfColumns, numberOfRows, false)
+          ? this.setupGrid(numberOfColumns, numberOfRows)
           : incomingGrid;
     };
 
     s.draw = () => {
       s.background(0);
-
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
 
-      for (let colNum = 0; colNum < numberOfColumns; colNum++) {
-        for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-          let state = grid[colNum][rowNum].state;
-          let sumOfAliveNeighbours = this.countNeighbors(grid, colNum, rowNum);
+      if (grid.length > 0) {
+        for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+          for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+            let state = grid[colNum][rowNum].state;
+            let sumOfAliveNeighbours = this.countNeighbors(
+              grid,
+              colNum,
+              rowNum
+            );
 
-          let stateToUpdateTo = "";
-          if (state === "alive") {
-            if (sumOfAliveNeighbours <= 1) {
-              stateToUpdateTo = "dead";
-            } else if (sumOfAliveNeighbours > 1 && sumOfAliveNeighbours < 4) {
-              stateToUpdateTo = "alive";
-            } else if (sumOfAliveNeighbours >= 4) {
-              stateToUpdateTo = "dead";
-            }
-          } else {
-            if (sumOfAliveNeighbours === 3) {
-              stateToUpdateTo = "alive";
+            let stateToUpdateTo = "";
+            if (state === "alive") {
+              if (sumOfAliveNeighbours <= 1) {
+                stateToUpdateTo = "dead";
+              } else if (sumOfAliveNeighbours > 1 && sumOfAliveNeighbours < 4) {
+                stateToUpdateTo = "alive";
+              } else if (sumOfAliveNeighbours >= 4) {
+                stateToUpdateTo = "dead";
+              }
             } else {
-              stateToUpdateTo = "dead";
+              if (sumOfAliveNeighbours === 3) {
+                stateToUpdateTo = "alive";
+              } else {
+                stateToUpdateTo = "dead";
+              }
             }
+            incomingGrid[colNum][rowNum].state = stateToUpdateTo;
           }
-          incomingGrid[colNum][rowNum].state = stateToUpdateTo;
         }
       }
 
