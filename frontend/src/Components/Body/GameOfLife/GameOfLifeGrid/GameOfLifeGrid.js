@@ -11,6 +11,7 @@ let incomingGrid = [];
 let resolution = 20;
 let numberOfColumns = 0;
 let numberOfRows = 0;
+const paddingForHeight = 0.84;
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -48,20 +49,49 @@ class GameOfLifeGrid extends Component {
     const { innerWidth: width, innerHeight: height } = window;
     // height calculation for what the
     // settings and explanation sizes are
-    return this.setState({ browserDimensions: [width, height * 0.84] }, () =>
-      this.p5Canvas.resizeCanvas(width, height)
+    return this.setState(
+      { browserDimensions: [width, height * paddingForHeight] },
+      () => this.p5Canvas.resizeCanvas(width, height)
     );
   };
 
-  createNestedArray = (cols, rows, setup) => {
+  setupGrid = (numberOfColumns, numberOfRows, randomize) => {
+    let newGrid = this.createNestedArray(
+      numberOfColumns,
+      numberOfRows,
+      randomize
+    );
+
+    if (!randomize) {
+      // square in top left for testing purposes
+      // newGrid[1][1].state = "alive";
+      // newGrid[1][2].state = "alive";
+      // newGrid[2][1].state = "alive";
+      // newGrid[2][2].state = "alive";
+      //
+      // square in top right for testing purposes
+      // newGrid[numberOfColumns - 2][1].state = "alive";
+      // newGrid[numberOfColumns - 2][2].state = "alive";
+      // newGrid[numberOfColumns - 3][1].state = "alive";
+      // newGrid[numberOfColumns - 3][2].state = "alive";
+    }
+
+    return newGrid;
+  };
+
+  createNestedArray = (cols, rows, randomize) => {
     let newArray = [];
     for (let colNum = 0; colNum < cols; colNum++) {
       newArray[colNum] = [];
       for (let rowNum = 0; rowNum < rows; rowNum++) {
         newArray[colNum][rowNum] = {
           state:
-            setup === true ? (Math.random() < 0.5 ? "dead" : "alive") : null,
-          id: `row${rowNum}square${colNum}`,
+            randomize === true
+              ? Math.random() < 0.5
+                ? "dead"
+                : "alive"
+              : null,
+          id: `row${rowNum}col${colNum}`,
           rowId: rowNum,
           colId: colNum
         };
@@ -77,9 +107,25 @@ class GameOfLifeGrid extends Component {
     let h = browserDimensions[1];
 
     const getMousePosition = e => {
-      console.log(e.clientX);
-      // console.log(e);
-      // use layerX and layerY for pos in canvas
+      const xPos = Math.floor(e.layerX / resolution);
+      const yPos = Math.floor(e.layerY / resolution);
+
+      let x = xPos * resolution;
+      let y = yPos * resolution;
+
+      if (grid[xPos][yPos].state === "alive") {
+        grid[xPos][yPos].state = "dead";
+
+        s.fill(0);
+        s.stroke(0);
+        s.rect(x, y, resolution, resolution);
+      } else if (grid[xPos][yPos].state === "dead") {
+        grid[xPos][yPos].state = "alive";
+
+        s.fill(255);
+        s.stroke(0);
+        s.rect(x, y, resolution, resolution);
+      }
     };
 
     s.setup = () => {
@@ -93,7 +139,8 @@ class GameOfLifeGrid extends Component {
 
       grid =
         incomingGrid.length < 1
-          ? this.createNestedArray(numberOfColumns, numberOfRows, true)
+          ? // ? this.createNestedArray(numberOfColumns, numberOfRows, true)
+            this.setupGrid(numberOfColumns, numberOfRows, false)
           : incomingGrid;
     };
 
@@ -107,7 +154,7 @@ class GameOfLifeGrid extends Component {
           if (grid[colNum][rowNum].state === "alive") {
             s.fill(255);
             s.stroke(0);
-            s.rect(x, y, resolution - 1, resolution - 1);
+            s.rect(x, y, resolution, resolution);
           }
         }
       }
