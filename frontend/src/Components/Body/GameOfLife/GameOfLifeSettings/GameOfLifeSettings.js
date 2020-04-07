@@ -29,7 +29,7 @@ class GameOfLifeSettings extends Component {
             step={1}
           />
         </div>
-        <div className="gol__settings--range">
+        {/* <div className="gol__settings--range">
           <label>
             Grid Size - {gridSize / 10} x {gridSize / 10}
           </label>
@@ -42,7 +42,7 @@ class GameOfLifeSettings extends Component {
             onChange={handleChange}
             step={50}
           />
-        </div>
+        </div> */}
         <div className="gol__settings--range">
           <button className={``} onClick={toggleState} name="clear">
             Clear
