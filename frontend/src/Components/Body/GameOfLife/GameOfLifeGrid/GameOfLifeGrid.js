@@ -12,7 +12,6 @@ let resolution = 20;
 let numberOfColumns = 0;
 let numberOfRows = 0;
 const paddingForHeight = 0.84;
-let clickedGridItems = [];
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -69,9 +68,6 @@ class GameOfLifeGrid extends Component {
       const centerX = Math.floor(numberOfColumns / 2);
       const centerY = Math.floor(numberOfRows / 2);
 
-      console.log(centerX);
-      console.log(centerY);
-
       // square in top left for testing purposes
       // newGrid[1][1].state = "alive";
       // newGrid[1][2].state = "alive";
@@ -122,43 +118,32 @@ class GameOfLifeGrid extends Component {
     let w = browserDimensions[0];
     let h = browserDimensions[1];
 
-    const getMousePosition = e => {
+    const handleClick = e => {
       const xPos = Math.floor(e.layerX / resolution);
       const yPos = Math.floor(e.layerY / resolution);
 
       let x = xPos * resolution;
       let y = yPos * resolution;
 
-      console.log("CLICK", grid[xPos][yPos]);
-
       if (grid[xPos][yPos].state === "alive") {
-        grid[xPos][yPos].state = "dead";
-        // incomingGrid[xPos][yPos].state = "dead";
+        incomingGrid[xPos][yPos].state = "dead";
 
         s.fill(0);
         s.stroke(0);
         s.rect(x, y, resolution, resolution);
-        clickedGridItems.push({ rowNum: yPos, colNum: xPos, state: "dead" });
       } else if (grid[xPos][yPos].state === "dead") {
-        grid[xPos][yPos].state = "alive";
-        // incomingGrid[xPos][yPos].state = "alive";
+        incomingGrid[xPos][yPos].state = "alive";
 
         s.fill(255);
         s.stroke(0);
         s.rect(x, y, resolution, resolution);
-        clickedGridItems.push({
-          rowClicked: yPos,
-          colClicked: xPos,
-          state: "alive"
-        });
       }
-      console.log("after CLICK", grid[xPos][yPos]);
     };
 
     s.setup = () => {
       let canvas = s.createCanvas(w, h).parent(this.p5Ref);
 
-      canvas.mouseClicked(e => getMousePosition(e));
+      canvas.mouseClicked(e => handleClick(e));
 
       numberOfColumns = Math.round(s.width / resolution);
       numberOfRows = Math.round(s.height / resolution);
@@ -173,43 +158,8 @@ class GameOfLifeGrid extends Component {
 
     s.draw = () => {
       s.background(0);
-      console.log("drawing", grid[0][0]);
-      console.log("clickedGridItems", clickedGridItems);
 
-      for (let colNum = 0; colNum < numberOfColumns; colNum++) {
-        for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-          for (
-            let clickedIndex = 0;
-            clickedIndex < clickedGridItems.length;
-            clickedIndex++
-          ) {
-            const state = clickedGridItems[clickedIndex].state;
-            const { rowClicked, colClicked } = clickedGridItems[clickedIndex];
-            if (state === "dead") {
-              console.log("ahhhh nonononono", grid[colClicked][rowClicked]);
-              grid[colClicked][rowClicked].state = "alive";
-            } else if (state === "alive") {
-              console.log("ahhhh", grid[colClicked][rowClicked]);
-
-              grid[colClicked][rowClicked].state = "dead";
-            }
-            console.log("yoyoyoy", grid[colClicked][rowClicked]);
-          }
-          clickedGridItems = [];
-
-          if (grid[colNum][rowNum].state === "alive") {
-            let x = colNum * resolution;
-            let y = rowNum * resolution;
-
-            s.fill(255);
-            s.stroke(0);
-            s.rect(x, y, resolution, resolution);
-          }
-        }
-      }
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
-
-      console.log("incomingGrid", incomingGrid[0][0]);
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -237,6 +187,19 @@ class GameOfLifeGrid extends Component {
       }
 
       grid = incomingGrid;
+
+      for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+        for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+          if (grid[colNum][rowNum].state === "alive") {
+            let x = colNum * resolution;
+            let y = rowNum * resolution;
+
+            s.fill(255);
+            s.stroke(0);
+            s.rect(x, y, resolution, resolution);
+          }
+        }
+      }
     };
 
     const windowResized = () => {
