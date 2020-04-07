@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import p5 from "p5";
 
-import Draggable from "react-draggable";
 import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
 import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
-import GridRow from "./GridRow";
+
+import shapes from "../shapes";
+console.log(shapes);
 
 let grid = [];
 let incomingGrid = [];
@@ -38,7 +39,8 @@ class GameOfLifeGrid extends Component {
       gridSize,
       clear,
       randomize,
-      toggleState
+      toggleState,
+      selectedShape
     } = this.props;
 
     if (paused !== prevProps.paused) {
@@ -52,6 +54,9 @@ class GameOfLifeGrid extends Component {
       grid = this.createNestedArray(numberOfColumns, numberOfRows, true);
       toggleState("randomize");
     }
+    // else if (selectedShape !== prevProps.selectedShape) {
+
+    // }
     // if (
     //   gridSize !== prevProps.gridSize
     // ) {
@@ -129,38 +134,71 @@ class GameOfLifeGrid extends Component {
     return newArray;
   };
 
-  Sketch = s => {
-    const { browserDimensions } = this.state;
-    const { speed, randomize } = this.props;
-    let w = browserDimensions[0];
-    let h = browserDimensions[1];
+  handleClick = e => {
+    const { selectedShape } = this.props;
 
-    const handleClick = e => {
-      const xPos = Math.floor(e.layerX / resolution);
-      const yPos = Math.floor(e.layerY / resolution);
+    const xPos = Math.floor(e.layerX / resolution);
+    const yPos = Math.floor(e.layerY / resolution);
 
-      let x = xPos * resolution;
-      let y = yPos * resolution;
+    let x = xPos * resolution;
+    let y = yPos * resolution;
 
+    // if we are clicking the grid to put on a shape
+    // use the mouse pos to fill in the surrounding shapes
+    if (selectedShape !== "") {
+      const currentShape = shapes[selectedShape];
+      // const centerOfShapeCol = Math.floor(currentShape.length / 2);
+      // const centerOfShapeRow = Math.floor(
+      //   currentShape[centerOfShapeCol].length / 2
+      // );
+
+      for (let row = 0; row < currentShape.length; row++) {
+        for (let col = 0; col < currentShape[row].length; col++) {
+          // get mouse position
+          // and change there depending if alive/not
+          // then change the incoming grid
+          if (currentShape[row][col] === true) {
+            incomingGrid[xPos + col][yPos + row].state = "alive";
+
+            this.p5Canvas.fill(255);
+            this.p5Canvas.stroke(0);
+            this.p5Canvas.rect(x + col, y + col, resolution, resolution);
+          } else {
+            incomingGrid[xPos + col][yPos + row].state = "dead";
+
+            this.p5Canvas.fill(0);
+            this.p5Canvas.stroke(0);
+            this.p5Canvas.rect(x + col, y + col, resolution, resolution);
+          }
+        }
+      }
+    } else {
       if (grid[xPos][yPos].state === "alive") {
         incomingGrid[xPos][yPos].state = "dead";
 
-        s.fill(0);
-        s.stroke(0);
-        s.rect(x, y, resolution, resolution);
+        this.p5Canvas.fill(0);
+        this.p5Canvas.stroke(0);
+        this.p5Canvas.rect(x, y, resolution, resolution);
       } else if (grid[xPos][yPos].state === "dead") {
         incomingGrid[xPos][yPos].state = "alive";
 
-        s.fill(255);
-        s.stroke(0);
-        s.rect(x, y, resolution, resolution);
+        this.p5Canvas.fill(255);
+        this.p5Canvas.stroke(0);
+        this.p5Canvas.rect(x, y, resolution, resolution);
       }
-    };
+    }
+  };
+
+  Sketch = s => {
+    const { browserDimensions } = this.state;
+    const { speed, selectedShape } = this.props;
+    let w = browserDimensions[0];
+    let h = browserDimensions[1];
 
     s.setup = () => {
       let canvas = s.createCanvas(w, h).parent(this.p5Ref);
 
-      canvas.mouseClicked(e => handleClick(e));
+      canvas.mouseClicked(e => this.handleClick(e));
 
       numberOfColumns = Math.round(s.width / resolution);
       numberOfRows = Math.round(s.height / resolution);

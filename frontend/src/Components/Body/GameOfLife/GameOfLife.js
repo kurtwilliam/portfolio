@@ -3,6 +3,7 @@ import GameOfLifeLayout from "./GameOfLifeLayout";
 import GameOfLifeGrid from "./GameOfLifeGrid";
 import GameOfLifeSettings from "./GameOfLifeSettings";
 import GameOfLifeExplanation from "./GameOfLifeExplanation";
+import shapes from "./shapes";
 
 class GameOfLife extends Component {
   state = {
@@ -27,7 +28,9 @@ class GameOfLife extends Component {
   updateSelectedShape = shapeName =>
     this.setState(prevState => ({
       selectedShape:
-        shapeName === "" && prevState.selectedShape === "" ? "Plus" : shapeName
+        shapeName === "" && prevState.selectedShape === ""
+          ? Object.keys(shapes)[0]
+          : shapeName
     }));
 
   render() {

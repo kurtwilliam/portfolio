@@ -10,7 +10,7 @@ const GameOfLifeShapesLayout = styled.div`
   align-items: center;
   flex-direction: column;
   height: 84vh;
-  background: rgba(100, 100, 100, 0.2);
+  background: rgba(100, 100, 100, 0.4);
   padding: 4px 8px;
   // overflow: scroll;
   transition: left 200ms;
