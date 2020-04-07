@@ -12,6 +12,7 @@ let resolution = 20;
 let numberOfColumns = 0;
 let numberOfRows = 0;
 const paddingForHeight = 0.84;
+let clickedGridItems = [];
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -35,7 +36,7 @@ class GameOfLifeGrid extends Component {
     const { speed, paused, gridSize } = this.props;
     if (paused !== prevProps.paused) {
       this.p5Canvas.frameRate(paused === true ? 0 : speed);
-    } else if (speed !== prevProps.speed) {
+    } else if (paused !== true && speed !== prevProps.speed) {
       this.p5Canvas.frameRate(speed);
     }
     // if (
@@ -63,6 +64,14 @@ class GameOfLifeGrid extends Component {
     );
 
     if (!randomize) {
+      // Calculate middle of grid
+      // use this for centered patterns
+      const centerX = Math.floor(numberOfColumns / 2);
+      const centerY = Math.floor(numberOfRows / 2);
+
+      console.log(centerX);
+      console.log(centerY);
+
       // square in top left for testing purposes
       // newGrid[1][1].state = "alive";
       // newGrid[1][2].state = "alive";
@@ -74,6 +83,13 @@ class GameOfLifeGrid extends Component {
       // newGrid[numberOfColumns - 2][2].state = "alive";
       // newGrid[numberOfColumns - 3][1].state = "alive";
       // newGrid[numberOfColumns - 3][2].state = "alive";
+      //
+      // flourish in center
+      newGrid[centerX][centerY].state = "alive";
+      newGrid[centerX][centerY - 1].state = "alive";
+      newGrid[centerX][centerY + 1].state = "alive";
+      newGrid[centerX - 1][centerY].state = "alive";
+      newGrid[centerX + 1][centerY].state = "alive";
     }
 
     return newGrid;
@@ -113,19 +129,30 @@ class GameOfLifeGrid extends Component {
       let x = xPos * resolution;
       let y = yPos * resolution;
 
+      console.log("CLICK", grid[xPos][yPos]);
+
       if (grid[xPos][yPos].state === "alive") {
         grid[xPos][yPos].state = "dead";
+        // incomingGrid[xPos][yPos].state = "dead";
 
         s.fill(0);
         s.stroke(0);
         s.rect(x, y, resolution, resolution);
+        clickedGridItems.push({ rowNum: yPos, colNum: xPos, state: "dead" });
       } else if (grid[xPos][yPos].state === "dead") {
         grid[xPos][yPos].state = "alive";
+        // incomingGrid[xPos][yPos].state = "alive";
 
         s.fill(255);
         s.stroke(0);
         s.rect(x, y, resolution, resolution);
+        clickedGridItems.push({
+          rowClicked: yPos,
+          colClicked: xPos,
+          state: "alive"
+        });
       }
+      console.log("after CLICK", grid[xPos][yPos]);
     };
 
     s.setup = () => {
@@ -146,12 +173,34 @@ class GameOfLifeGrid extends Component {
 
     s.draw = () => {
       s.background(0);
+      console.log("drawing", grid[0][0]);
+      console.log("clickedGridItems", clickedGridItems);
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-          let x = colNum * resolution;
-          let y = rowNum * resolution;
+          for (
+            let clickedIndex = 0;
+            clickedIndex < clickedGridItems.length;
+            clickedIndex++
+          ) {
+            const state = clickedGridItems[clickedIndex].state;
+            const { rowClicked, colClicked } = clickedGridItems[clickedIndex];
+            if (state === "dead") {
+              console.log("ahhhh nonononono", grid[colClicked][rowClicked]);
+              grid[colClicked][rowClicked].state = "alive";
+            } else if (state === "alive") {
+              console.log("ahhhh", grid[colClicked][rowClicked]);
+
+              grid[colClicked][rowClicked].state = "dead";
+            }
+            console.log("yoyoyoy", grid[colClicked][rowClicked]);
+          }
+          clickedGridItems = [];
+
           if (grid[colNum][rowNum].state === "alive") {
+            let x = colNum * resolution;
+            let y = rowNum * resolution;
+
             s.fill(255);
             s.stroke(0);
             s.rect(x, y, resolution, resolution);
@@ -159,6 +208,8 @@ class GameOfLifeGrid extends Component {
         }
       }
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
+
+      console.log("incomingGrid", incomingGrid[0][0]);
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -233,239 +284,3 @@ class GameOfLifeGrid extends Component {
 }
 
 export default GameOfLifeGrid;
-
-// componentDidMount() {
-//   const { grid } = this.state;
-//   const { gridSize } = this.props;
-
-//   if (grid.length < 1) {
-//     const newGrid = [...grid];
-//     for (let row = 0; row < gridSize / 10; row++) {
-//       newGrid[row] = [];
-
-//       // make squares in row
-//       for (let square = 0; square < gridSize / 10; square++) {
-//         newGrid[row][square] = {
-//           state: "dead",
-//           id: `row${row}square${square}`,
-//           rowId: row,
-//           squareId: square
-//         };
-//       }
-//     }
-
-//     // Initial pretty grid set up!
-//     newGrid[5][5].state = "alive";
-//     newGrid[4][5].state = "alive";
-//     newGrid[5][4].state = "alive";
-//     newGrid[6][5].state = "alive";
-//     newGrid[5][6].state = "alive";
-
-//     this.setState({
-//       grid: newGrid,
-//       incomingGrid: newGrid,
-//       shouldUpdate: true
-//     });
-
-//     return this.startTimer();
-//   }
-// }
-
-// componentDidUpdate(prevProps) {
-//   const { speed, paused, gridSize } = this.props;
-
-//   if (speed !== prevProps.speed || paused !== prevProps.paused) {
-//     this.clearThenResetSpeedUnlessPaused();
-//   }
-//   if (gridSize !== prevProps.gridSize) {
-//     this.resizeGrid();
-//   }
-// }
-
-// clearThenResetSpeedUnlessPaused = () => {
-//   const { speed, paused } = this.props;
-
-//   if (this.recalculateInterval) clearInterval(this.recalculateInterval);
-
-//   if (!paused) {
-//     return (this.recalculateInterval = setInterval(
-//       () => this.recalculateGrid(),
-//       speed
-//     ));
-//   }
-// };
-
-// resizeGrid = () => {
-//   const { gridSize } = this.props;
-//   const { incomingGrid } = this.state;
-
-//   const newGrid = [...incomingGrid];
-
-//   const gridRowSize = gridSize / 10;
-
-//   const difference = newGrid.length - gridRowSize;
-
-//   if (difference < 0) {
-//     for (let row = 0; row < gridRowSize; row++) {
-//       newGrid[row] = incomingGrid[row] ? incomingGrid[row] : [];
-
-//       // make squares in row
-//       for (let square = 0; square < gridRowSize; square++) {
-//         if (typeof newGrid[row][square] !== "object") {
-//           newGrid[row][square] = {
-//             state: "dead",
-//             id: `row${row}square${square}`,
-//             rowId: row,
-//             squareId: square
-//           };
-//         }
-//       }
-//     }
-//   } else {
-//     newGrid.length = gridRowSize;
-
-//     for (let row = 0; row < gridRowSize; row++) {
-//       newGrid[row].length = gridRowSize;
-//     }
-//   }
-
-//   this.setState({ grid: newGrid, incomingGrid: newGrid });
-// };
-
-// recalculateGrid = () => {
-//   const { incomingGrid } = this.state;
-//   const newGrid = [];
-
-//   incomingGrid.forEach((row, rowIndex) => {
-//     row.forEach((square, squareIndex) => {
-//       // figure out all neighbours for each square
-//       let neighbour1 = null;
-//       let neighbour2 = null;
-//       let neighbour3 = null;
-//       let neighbour4 = null;
-//       let neighbour5 = null;
-//       let neighbour6 = null;
-//       let neighbour7 = null;
-//       let neighbour8 = null;
-
-//       // all these if statements figure out
-//       // whether or not the neighbour at that coordinate exists
-//       // then whether or not it's alive/dead
-//       if (incomingGrid[rowIndex - 1] !== undefined) {
-//         if (incomingGrid[rowIndex - 1][squareIndex - 1] !== undefined) {
-//           neighbour1 = incomingGrid[rowIndex - 1][squareIndex - 1].state;
-//         }
-
-//         neighbour2 = incomingGrid[rowIndex - 1][squareIndex].state;
-
-//         if (incomingGrid[rowIndex - 1][squareIndex + 1] !== undefined) {
-//           neighbour3 = incomingGrid[rowIndex - 1][squareIndex + 1].state;
-//         }
-//       }
-
-//       if (incomingGrid[rowIndex][squareIndex - 1] !== undefined) {
-//         neighbour4 = incomingGrid[rowIndex][squareIndex - 1].state;
-//       }
-//       if (incomingGrid[rowIndex][squareIndex + 1] !== undefined) {
-//         neighbour5 = incomingGrid[rowIndex][squareIndex + 1].state;
-//       }
-
-//       if (incomingGrid[rowIndex + 1] !== undefined) {
-//         if (incomingGrid[rowIndex + 1][squareIndex - 1] !== undefined) {
-//           neighbour6 = incomingGrid[rowIndex + 1][squareIndex - 1].state;
-//         }
-//         neighbour7 = incomingGrid[rowIndex + 1][squareIndex].state;
-//         if (incomingGrid[rowIndex + 1][squareIndex + 1] !== undefined) {
-//           neighbour8 = incomingGrid[rowIndex + 1][squareIndex + 1].state;
-//         }
-//       }
-
-//       // put all neighbours into an array
-//       // then count number of neighbours alive
-//       const neighbours = [
-//         neighbour1,
-//         neighbour2,
-//         neighbour3,
-//         neighbour4,
-//         neighbour5,
-//         neighbour6,
-//         neighbour7,
-//         neighbour8
-//       ];
-
-//       let sumOfAliveNeighbours = 0;
-
-//       for (let i = 0; i < neighbours.length; i++) {
-//         const neighbour = neighbours[i];
-
-//         if (neighbour === "alive") {
-//           sumOfAliveNeighbours += 1;
-//         }
-//       }
-
-//       let stateToUpdateTo = "";
-
-//       if (square.state === "alive") {
-//         if (sumOfAliveNeighbours <= 1) {
-//           stateToUpdateTo = "dead";
-//         } else if (sumOfAliveNeighbours > 1 && sumOfAliveNeighbours < 4) {
-//           stateToUpdateTo = "alive";
-//         } else if (sumOfAliveNeighbours >= 4) {
-//           stateToUpdateTo = "dead";
-//         }
-//       } else {
-//         if (sumOfAliveNeighbours === 3) {
-//           stateToUpdateTo = "alive";
-//         } else {
-//           stateToUpdateTo = "dead";
-//         }
-//       }
-
-//       // lets add to newGrid!
-//       // if this row is undefined, create it
-//       // then push new square to it
-//       if (newGrid[rowIndex] === undefined) {
-//         newGrid[rowIndex] = [];
-//       }
-
-//       newGrid[rowIndex][squareIndex] = {
-//         ...incomingGrid[rowIndex][squareIndex],
-//         state: stateToUpdateTo
-//       };
-//     });
-//   });
-
-//   this.setState({
-//     shouldUpdateRowId: null,
-//     shouldUpdateSquareId: null,
-//     grid: newGrid,
-//     incomingGrid: newGrid,
-//     shouldUpdate: true
-//   });
-// };
-
-// startTimer = () =>
-//   (this.recalculateInterval = setInterval(
-//     () => this.recalculateGrid(),
-//     this.props.speed
-//   ));
-
-// updateSquare = (rowIndex, squareIndex) => {
-//   const { incomingGrid } = this.state;
-
-//   const newGrid = [...incomingGrid];
-
-//   let nextSquareState = "dead";
-//   if (incomingGrid[rowIndex][squareIndex].state === "dead") {
-//     nextSquareState = "alive";
-//   }
-
-//   newGrid[rowIndex][squareIndex].state = nextSquareState;
-
-//   return this.setState({
-//     incomingGrid: newGrid,
-//     shouldUpdate: false,
-//     shouldUpdateRowId: rowIndex,
-//     shouldUpdateSquareId: squareIndex
-//   });
-// };

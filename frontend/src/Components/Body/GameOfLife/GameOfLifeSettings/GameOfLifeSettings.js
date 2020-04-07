@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from "react";
 import GameOfLifeSettingsLayout from "./GameOfLifeSettingsLayout";
 
-const speedMin = 0;
+const speedMin = 1;
 const speedMax = 60;
 
 const gridMin = 200;
