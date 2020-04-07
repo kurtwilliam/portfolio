@@ -11,28 +11,36 @@ const gridMax = 600;
 
 class GameOfLifeSettings extends Component {
   render() {
-    const { speed, paused, gridSize, handleChange, toggleState } = this.props;
+    const {
+      speed,
+      paused,
+      gridSize,
+      handleChange,
+      toggleState,
+      selectingShape
+    } = this.props;
     return (
-      <GameOfLifeSettingsLayout>
-        <div className="gol__settings--container">
-          <button
-            className={`${paused ? "pause" : "pause paused"}`}
-            onClick={toggleState}
-            name="paused"
-          ></button>
-          <div className="gol__settings--range">
-            <label>Speed - {speed} frames/s</label>
-            <input
-              type="range"
-              name="speed"
-              min={speedMin}
-              max={speedMax}
-              value={speed}
-              onChange={handleChange}
-              step={1}
-            />
-          </div>
-          {/* <div className="gol__settings--range">
+      <>
+        <GameOfLifeSettingsLayout>
+          <div className="gol__settings--container">
+            <button
+              className={`${paused ? "pause" : "pause paused"}`}
+              onClick={toggleState}
+              name="paused"
+            ></button>
+            <div className="gol__settings--range">
+              <label>Speed - {speed} frames/s</label>
+              <input
+                type="range"
+                name="speed"
+                min={speedMin}
+                max={speedMax}
+                value={speed}
+                onChange={handleChange}
+                step={1}
+              />
+            </div>
+            {/* <div className="gol__settings--range">
           <label>
             Grid Size - {gridSize / 10} x {gridSize / 10}
           </label>
@@ -46,27 +54,32 @@ class GameOfLifeSettings extends Component {
             step={50}
           />
         </div> */}
-          <div className="gol__settings--range">
-            <button className={``} onClick={toggleState} name="clear">
-              Clear
-            </button>
-          </div>
-          <div className="gol__settings--range">
-            <button className={``} onClick={toggleState} name="randomize">
-              Randomize
-            </button>
-          </div>
+            <div className="gol__settings--range">
+              <button className={``} onClick={toggleState} name="clear">
+                Clear
+              </button>
+            </div>
+            <div className="gol__settings--range">
+              <button className={``} onClick={toggleState} name="randomize">
+                Randomize
+              </button>
+            </div>
 
-          <div className="gol__settings--range">
-            <button className={``} onClick={toggleState} name="shapes">
-              Add Shapes
-            </button>
+            <div className="gol__settings--range">
+              <button
+                className={``}
+                onClick={toggleState}
+                name="selectingShape"
+              >
+                Add Shapes
+              </button>
+            </div>
           </div>
-        </div>
-        <GameOfLifeShapes />
-        {/* <label>Zoom</label>
+          {/* <label>Zoom</label>
         <input /> */}
-      </GameOfLifeSettingsLayout>
+        </GameOfLifeSettingsLayout>
+        <GameOfLifeShapes selectingShape={selectingShape} />
+      </>
     );
   }
 }
