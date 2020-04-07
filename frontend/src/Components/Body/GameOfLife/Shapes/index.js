@@ -11,11 +11,11 @@ import Speedy from "./Speedy";
 export default {
   Plus: [...Plus],
   Square: [...Square],
+  Speedy: [...Speedy],
   Explosion: [...Explosion],
-  BigGun: [...BigGun],
-  BouncinBeans: [...BouncinBeans],
   CantTurnRight: [...CantTurnRight],
   InfiniteExplosion: [...InfiniteExplosion],
+  BouncinBeans: [...BouncinBeans],
   LineyBoy: [...LineyBoy],
-  Speedy: [...Speedy]
+  BigGun: [...BigGun]
 };

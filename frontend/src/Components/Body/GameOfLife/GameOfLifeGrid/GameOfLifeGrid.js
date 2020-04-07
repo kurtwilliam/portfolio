@@ -157,19 +157,24 @@ class GameOfLifeGrid extends Component {
           // get mouse position
           // and change there depending if alive/not
           // then change the incoming grid
+          let state = "dead";
+          let fill = 0;
           if (currentShape[row][col] === true) {
-            incomingGrid[xPos + col][yPos + row].state = "alive";
-
-            this.p5Canvas.fill(255);
-            this.p5Canvas.stroke(0);
-            this.p5Canvas.rect(x + col, y + col, resolution, resolution);
-          } else {
-            incomingGrid[xPos + col][yPos + row].state = "dead";
-
-            this.p5Canvas.fill(0);
-            this.p5Canvas.stroke(0);
-            this.p5Canvas.rect(x + col, y + col, resolution, resolution);
+            state = "alive";
+            fill = 255;
           }
+
+          // if outside of grid when rendering
+          if (
+            !incomingGrid[xPos + col] ||
+            !incomingGrid[xPos + col][yPos + row]
+          )
+            continue;
+
+          incomingGrid[xPos + col][yPos + row].state = state;
+          this.p5Canvas.fill(fill);
+          this.p5Canvas.stroke(0);
+          this.p5Canvas.rect(x + col, y + col, resolution, resolution);
         }
       }
     } else {

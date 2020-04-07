@@ -15,6 +15,10 @@ const GameOfLifeShapesLayout = styled.div`
   // overflow: scroll;
   transition: left 200ms;
 
+  span {
+    color: white;
+  }
+
   &.hidden {
     color: black;
     left: -100%;
@@ -33,8 +37,8 @@ const GameOfLifeShapesLayout = styled.div`
       }
 
       &__square {
-        width: 10px;
-        height: 10px;
+        width: 6px;
+        height: 6px;
         border-radius: 1px;
         margin: 1px;
       }
