@@ -48,10 +48,15 @@ class GameOfLifeGrid extends Component {
     } else if (paused !== true && speed !== prevProps.speed) {
       this.p5Canvas.frameRate(speed);
     } else if (clear) {
-      grid = [];
+      this.clearGrid();
       toggleState("clear");
     } else if (randomize) {
-      grid = this.createNestedArray(numberOfColumns, numberOfRows, true);
+      this.clearGrid();
+      incomingGrid = this.createNestedArray(
+        numberOfColumns,
+        numberOfRows,
+        true
+      );
       toggleState("randomize");
     }
     // else if (selectedShape !== prevProps.selectedShape) {
@@ -62,6 +67,15 @@ class GameOfLifeGrid extends Component {
     // ) {
     //   this.p5Canvas.frameRate(speed);
     // }
+  };
+
+  clearGrid = () => {
+    for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+      for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+        incomingGrid[colNum][rowNum].state = "dead";
+      }
+    }
+    this.p5Canvas.background(0);
   };
 
   calculateWidthAndHeight = () => {
@@ -180,27 +194,26 @@ class GameOfLifeGrid extends Component {
           this.p5Canvas.stroke(0);
 
           this.p5Canvas.rect(
-            x + row * resolution,
-            y + col * resolution,
+            x + col * resolution,
+            y + row * resolution,
             resolution,
             resolution
           );
         }
       }
     } else {
-      if (grid[xPos][yPos].state === "alive") {
-        incomingGrid[xPos][yPos].state = "dead";
-
-        this.p5Canvas.fill(0);
-        this.p5Canvas.stroke(0);
-        this.p5Canvas.rect(x, y, resolution, resolution);
-      } else if (grid[xPos][yPos].state === "dead") {
-        incomingGrid[xPos][yPos].state = "alive";
-
-        this.p5Canvas.fill(255);
-        this.p5Canvas.stroke(0);
-        this.p5Canvas.rect(x, y, resolution, resolution);
+      console.log(incomingGrid);
+      let state = "dead";
+      let fill = 0;
+      if (grid[xPos][yPos].state === "dead") {
+        state = "alive";
+        fill = 255;
       }
+
+      incomingGrid[xPos][yPos].state = state;
+      this.p5Canvas.fill(fill);
+      this.p5Canvas.stroke(0);
+      this.p5Canvas.rect(x, y, resolution, resolution);
     }
   };
 

@@ -12,6 +12,13 @@ class GameOfLifeShapes extends Component {
       <GameOfLifeShapesLayout
         className={`gol__shapes ${selectedShape === "" ? "hidden" : ""}`}
       >
+        <span
+          className={`gol__shapes--shape`}
+          onClick={() => updateSelectedShape("")}
+          key="cancel"
+        >
+          Cancel
+        </span>
         {Object.keys(shapes).map((shapeName, i) =>
           shapes[shapeName][0].length > 6 ? (
             <span
