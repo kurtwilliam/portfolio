@@ -6,6 +6,7 @@ import shapes from "../../shapes";
 class GameOfLifeShapes extends Component {
   render() {
     const { updateSelectedShape, selectedShape } = this.props;
+    console.log(shapes);
     return (
       <GameOfLifeShapesLayout
         className={`gol__shapes ${selectedShape === "" ? "hidden" : ""}`}
@@ -37,9 +38,9 @@ class GameOfLifeShapes extends Component {
               title={shapeId}
               onClick={() => updateSelectedShape(shapeId)}
             >
-              {shapes[shapeId].map((row, rowIndex) => (
+              {shapes[shapeId].config.map((row, rowIndex) => (
                 <div className="gol__shapes--row" key={`${shapeId}${rowIndex}`}>
-                  {shapes[shapeId][rowIndex].map((shape, shapeIndex) => (
+                  {shapes[shapeId].config[rowIndex].map((shape, shapeIndex) => (
                     <div
                       key={`${shapeId}r${rowIndex}s${shapeIndex}`}
                       className={`gol__shapes--shape__square gol__shapes--shape__${
