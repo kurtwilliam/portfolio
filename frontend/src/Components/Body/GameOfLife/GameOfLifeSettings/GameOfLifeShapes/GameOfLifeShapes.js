@@ -6,8 +6,6 @@ import shapes from "../../shapes";
 class GameOfLifeShapes extends Component {
   render() {
     const { updateSelectedShape, selectedShape } = this.props;
-    console.log(shapes);
-    console.log(selectedShape);
     return (
       <GameOfLifeShapesLayout
         className={`gol__shapes ${selectedShape === "" ? "hidden" : ""}`}
@@ -19,34 +17,31 @@ class GameOfLifeShapes extends Component {
         >
           Cancel
         </span>
-        {Object.keys(shapes).map((shapeName, i) =>
-          shapes[shapeName][0].length > 6 ? (
+        {Object.keys(shapes).map((shapeId, i) =>
+          shapes[shapeId].config[0].length > 6 ? (
             <span
               className={`gol__shapes--shape ${
-                selectedShape === shapeName ? "selected" : ""
+                selectedShape === shapeId ? "selected" : ""
               }`}
-              onClick={() => updateSelectedShape(shapeName)}
-              key={shapeName}
+              onClick={() => updateSelectedShape(shapeId)}
+              key={shapeId}
             >
-              {shapeName}
+              {shapes[shapeId].name}
             </span>
           ) : (
             <div
               className={`gol__shapes--shape ${
-                selectedShape === shapeName ? "selected" : ""
+                selectedShape === shapeId ? "selected" : ""
               }`}
-              key={shapeName}
-              title={shapeName}
-              onClick={() => updateSelectedShape(shapeName)}
+              key={shapeId}
+              title={shapeId}
+              onClick={() => updateSelectedShape(shapeId)}
             >
-              {shapes[shapeName].map((row, rowIndex) => (
-                <div
-                  className="gol__shapes--row"
-                  key={`${shapeName}${rowIndex}`}
-                >
-                  {shapes[shapeName][rowIndex].map((shape, shapeIndex) => (
+              {shapes[shapeId].map((row, rowIndex) => (
+                <div className="gol__shapes--row" key={`${shapeId}${rowIndex}`}>
+                  {shapes[shapeId][rowIndex].map((shape, shapeIndex) => (
                     <div
-                      key={`${shapeName}r${rowIndex}s${shapeIndex}`}
+                      key={`${shapeId}r${rowIndex}s${shapeIndex}`}
                       className={`gol__shapes--shape__square gol__shapes--shape__${
                         shape ? "filled" : "empty"
                       }`}

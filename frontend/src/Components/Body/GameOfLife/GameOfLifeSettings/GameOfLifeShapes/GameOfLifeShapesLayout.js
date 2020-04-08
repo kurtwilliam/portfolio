@@ -3,17 +3,18 @@ import styled from "styled-components";
 const GameOfLifeShapesLayout = styled.div`
   position: absolute;
   left: 0;
-  top: 8vh;
-  bottom: 8vh;
+  right: 0;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  height: 84vh;
+  flex-wrap: wrap;
+  // flex-direction: column;
+  height: 8vh;
   background: rgba(100, 100, 100, 0.4);
   padding: 4px 8px;
-  // overflow: scroll;
-  transition: left 200ms;
+  overflow: scroll;
+  transition: bottom 200ms;
 
   span {
     color: white;
@@ -21,7 +22,7 @@ const GameOfLifeShapesLayout = styled.div`
 
   &.hidden {
     color: black;
-    left: -100%;
+    bottom: -8vh;
   }
 
   .gol__shapes {
@@ -29,7 +30,7 @@ const GameOfLifeShapesLayout = styled.div`
       display: flex;
       flex-direction: column;
       background: black;
-      margin: 4px 0px;
+      margin: 0px 4px;
       cursor: pointer;
       padding: 4px;
 

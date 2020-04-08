@@ -1,23 +1,3 @@
-// import Plus from "./Plus";
-// import Square from "./Square";
-// import Explosion from "./Explosion";
-// import BouncinBeans from "./BouncinBeans";
-// import InfiniteExplosion from "./InfiniteExplosion";
-// import LineyBoy from "./LineyBoy";
-// import Speedy from "./Speedy";
-// import Speedy from "./Speedy";
-
-// export default {
-//   Plus: [...Plus],
-//   Square: [...Square],
-//   Speedy: [...Speedy],
-//   Explosion: [...Explosion],
-//   InfiniteExplosion: [...InfiniteExplosion],
-//   BouncinBeans: [...BouncinBeans],
-//   LineyBoy: [...LineyBoy],
-// };
-
-// Return files object as default export
 const getFiles = () => {
   var context = require.context(".", true, /\.js$/);
   const files = {};
