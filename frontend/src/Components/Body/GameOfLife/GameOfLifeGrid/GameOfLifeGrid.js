@@ -12,7 +12,9 @@ let incomingGrid = [];
 let resolution = 20;
 let numberOfColumns = 0;
 let numberOfRows = 0;
+const gridSize = 10000;
 const paddingForHeight = 0.84;
+let scaleFactor = 1;
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -30,7 +32,11 @@ class GameOfLifeGrid extends Component {
     window.addEventListener("resize", this.calculateWidthAndHeight);
   };
 
-  componentDidMount = () => (this.p5Canvas = new p5(this.Sketch, this.p5Ref));
+  componentDidMount = () => {
+    this.p5Canvas = new p5(this.Sketch, this.p5Ref);
+    this.p5Ref.addEventListener("wheel", e => this.scaleFunctionality(e));
+    // this.p5Ref.addEventListener("pointermove", e => this.scaleFunctionality(e));
+  };
 
   componentDidUpdate = prevProps => {
     const {
@@ -63,6 +69,12 @@ class GameOfLifeGrid extends Component {
     // ) {
     //   this.p5Canvas.frameRate(speed);
     // }
+  };
+
+  scaleFunctionality = e => {
+    e.preventDefault();
+    if (e.deltaY > 0) scaleFactor *= 1.05;
+    else scaleFactor *= 0.95;
   };
 
   clearGrid = () => {
@@ -236,6 +248,7 @@ class GameOfLifeGrid extends Component {
 
     s.draw = () => {
       s.background(0);
+      s.scale(scaleFactor);
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
 
       if (grid.length > 0) {
