@@ -1,3 +1,4 @@
+// Aggregate all shapes into an object
 const getFiles = () => {
   var context = require.context(".", true, /\.js$/);
   const files = {};

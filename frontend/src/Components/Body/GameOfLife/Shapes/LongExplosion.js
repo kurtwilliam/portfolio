@@ -1,7 +1,7 @@
 export default {
   name: "Long Explosion",
   order: 10,
-  type: "oscilattor",
+  type: "oscillator",
   source: "",
   config: [
     [true, true, true, true, true],
