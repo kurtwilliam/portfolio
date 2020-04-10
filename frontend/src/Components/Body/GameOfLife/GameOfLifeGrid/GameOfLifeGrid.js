@@ -52,11 +52,7 @@ class GameOfLifeGrid extends Component {
       toggleState("clear");
     } else if (randomize) {
       this.clearGrid();
-      incomingGrid = this.createNestedArray(
-        numberOfColumns,
-        numberOfRows,
-        true
-      );
+      grid = this.createNestedArray(numberOfColumns, numberOfRows, true);
       toggleState("randomize");
     }
     // else if (selectedShape !== prevProps.selectedShape) {
@@ -164,7 +160,7 @@ class GameOfLifeGrid extends Component {
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
     if (selectedShape !== "") {
-      const currentShape = shapes[selectedShape];
+      const currentShape = shapes[selectedShape].config;
       // const centerOfShapeCol = Math.floor(currentShape.length / 2);
       // const centerOfShapeRow = Math.floor(
       //   currentShape[centerOfShapeCol].length / 2
