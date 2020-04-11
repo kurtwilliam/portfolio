@@ -9,10 +9,11 @@ console.log(shapes);
 
 let grid = [];
 let incomingGrid = [];
-let resolution = 20;
+let resolution = 10;
 let numberOfColumns = 0;
 let numberOfRows = 0;
-const gridSize = 10000;
+let centerX = 0;
+let centerY = 0;
 const paddingForHeight = 0.84;
 let scaleFactor = 1;
 
@@ -96,10 +97,6 @@ class GameOfLifeGrid extends Component {
     );
   };
 
-  // moveForwardOneFrame = () => {
-
-  // }
-
   setupGrid = (numberOfColumns, numberOfRows) => {
     const { toggleState, randomize } = this.props;
     let newGrid = this.createNestedArray(
@@ -111,11 +108,6 @@ class GameOfLifeGrid extends Component {
     if (randomize) toggleState("randomize");
 
     if (!randomize) {
-      // Calculate middle of grid
-      // use this for centered patterns
-      const centerX = Math.floor(numberOfColumns / 2);
-      const centerY = Math.floor(numberOfRows / 2);
-
       // square in top left for testing purposes
       // newGrid[1][1].state = "alive";
       // newGrid[1][2].state = "alive";
@@ -162,12 +154,16 @@ class GameOfLifeGrid extends Component {
 
   handleClick = e => {
     const { selectedShape } = this.props;
+    console.log("scaleFactor", scaleFactor);
 
     const xPos = Math.floor(e.layerX / resolution);
     const yPos = Math.floor(e.layerY / resolution);
 
-    let x = xPos * resolution;
-    let y = yPos * resolution;
+    let x = (xPos * resolution) / scaleFactor;
+    let y = (yPos * resolution) / scaleFactor;
+    console.log(xPos, yPos);
+    console.log(x, y);
+    console.log(xPos * resolution * scaleFactor);
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
@@ -199,7 +195,7 @@ class GameOfLifeGrid extends Component {
 
           incomingGrid[xPos + col][yPos + row].state = state;
           this.p5Canvas.fill(fill);
-          this.p5Canvas.stroke(0);
+          // this.p5Canvas.stroke(0);
 
           this.p5Canvas.rect(
             x + col * resolution,
@@ -220,7 +216,7 @@ class GameOfLifeGrid extends Component {
 
       incomingGrid[xPos][yPos].state = state;
       this.p5Canvas.fill(fill);
-      this.p5Canvas.stroke(0);
+      // this.p5Canvas.stroke(0);
       this.p5Canvas.rect(x, y, resolution, resolution);
     }
   };
@@ -236,9 +232,12 @@ class GameOfLifeGrid extends Component {
 
       canvas.mouseClicked(e => this.handleClick(e));
 
-      numberOfColumns = Math.round(s.width / resolution);
-      numberOfRows = Math.round(s.height / resolution);
+      numberOfColumns = Math.round((s.width / resolution) * 2);
+      numberOfRows = Math.round((s.height / resolution) * 2);
       s.frameRate(speed);
+
+      centerX = Math.floor(numberOfColumns / 2);
+      centerY = Math.floor(numberOfRows / 2);
 
       grid =
         incomingGrid.length < 1
@@ -291,7 +290,7 @@ class GameOfLifeGrid extends Component {
             let y = rowNum * resolution;
 
             s.fill(255);
-            s.stroke(0);
+            // s.stroke(0);
             s.rect(x, y, resolution, resolution);
           }
         }
