@@ -14,6 +14,8 @@ let numberOfColumns = 0;
 let numberOfRows = 0;
 let centerX = 0;
 let centerY = 0;
+let xPosition = 0;
+let yPosition = 0;
 const paddingForHeight = 0.84;
 let scaleFactor = 1;
 
@@ -74,8 +76,15 @@ class GameOfLifeGrid extends Component {
 
   scaleFunctionality = e => {
     e.preventDefault();
-    if (e.deltaY > 0) scaleFactor *= 1.05;
-    else scaleFactor *= 0.95;
+    if (e.deltaY > 0) {
+      scaleFactor *= 1.05;
+      if (scaleFactor >= 2) scaleFactor = 2;
+    } else {
+      scaleFactor *= 0.95;
+      if (scaleFactor <= 0.5) scaleFactor = 0.5;
+    }
+
+    this.p5Canvas.scale(scaleFactor);
   };
 
   clearGrid = () => {
@@ -195,13 +204,13 @@ class GameOfLifeGrid extends Component {
 
           incomingGrid[xPos + col][yPos + row].state = state;
           this.p5Canvas.fill(fill);
-          // this.p5Canvas.stroke(0);
+          this.p5Canvas.stroke(0);
 
           this.p5Canvas.rect(
-            x + col * resolution,
-            y + row * resolution,
-            resolution,
-            resolution
+            x + (col * resolution) / scaleFactor,
+            y + (row * resolution) / scaleFactor,
+            resolution - 1,
+            resolution - 1
           );
         }
       }
@@ -216,8 +225,8 @@ class GameOfLifeGrid extends Component {
 
       incomingGrid[xPos][yPos].state = state;
       this.p5Canvas.fill(fill);
-      // this.p5Canvas.stroke(0);
-      this.p5Canvas.rect(x, y, resolution, resolution);
+      this.p5Canvas.stroke(0);
+      this.p5Canvas.rect(x, y, resolution - 1, resolution - 1);
     }
   };
 
@@ -230,14 +239,23 @@ class GameOfLifeGrid extends Component {
     s.setup = () => {
       let canvas = s.createCanvas(w, h).parent(this.p5Ref);
 
+      // add click event for adding squares
       canvas.mouseClicked(e => this.handleClick(e));
 
+      // figure out how big canvas should be
       numberOfColumns = Math.round((s.width / resolution) * 2);
       numberOfRows = Math.round((s.height / resolution) * 2);
+
+      // set framerate depending on speed
       s.frameRate(speed);
 
+      // get center of canvas
       centerX = Math.floor(numberOfColumns / 2);
       centerY = Math.floor(numberOfRows / 2);
+
+      // set center of canvas to be center of screen
+      xPosition = centerX / 2;
+      yPosition = centerY / 2;
 
       grid =
         incomingGrid.length < 1
@@ -290,8 +308,8 @@ class GameOfLifeGrid extends Component {
             let y = rowNum * resolution;
 
             s.fill(255);
-            // s.stroke(0);
-            s.rect(x, y, resolution, resolution);
+            s.stroke(0);
+            s.rect(x, y, resolution - 1, resolution - 1);
           }
         }
       }
