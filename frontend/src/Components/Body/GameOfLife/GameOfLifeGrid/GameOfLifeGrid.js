@@ -14,8 +14,10 @@ let numberOfColumns = 0;
 let numberOfRows = 0;
 let centerX = 0;
 let centerY = 0;
-let xPosition = 0;
+let xPosition = 0; // pan x and y
 let yPosition = 0;
+let mouseX = 0;
+let mouseY = 0;
 const paddingForHeight = 0.84;
 let scaleFactor = 1;
 
@@ -163,70 +165,59 @@ class GameOfLifeGrid extends Component {
 
   handleClick = e => {
     const { selectedShape } = this.props;
-    console.log("scaleFactor", scaleFactor);
+    const clickPosX = e.layerX;
+    const clickPosY = e.layerY;
 
-    const xPos = Math.floor(e.layerX / resolution);
-    const yPos = Math.floor(e.layerY / resolution);
+    // we want to know what square we pressed
+    // so we need to take into account where user clicked on canvas (clickPos),
+    // the size of square (resolution), how big the canvas is scaled (scaleFactor)
+    const xPos = Math.floor(clickPosX / resolution / scaleFactor);
+    const yPos = Math.floor(clickPosY / resolution / scaleFactor);
 
-    let x = (xPos * resolution) / scaleFactor;
-    let y = (yPos * resolution) / scaleFactor;
+    let x = xPos * resolution;
+    let y = yPos * resolution;
     console.log(xPos, yPos);
     console.log(x, y);
     console.log(xPos * resolution * scaleFactor);
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
-    if (selectedShape !== "") {
-      const currentShape = shapes[selectedShape].config;
-      // const centerOfShapeCol = Math.floor(currentShape.length / 2);
-      // const centerOfShapeRow = Math.floor(
-      //   currentShape[centerOfShapeCol].length / 2
-      // );
+    const currentShape =
+      selectedShape === ""
+        ? shapes["Dot"].config
+        : shapes[selectedShape].config;
+    // const centerOfShapeCol = Math.floor(currentShape.length / 2);
+    // const centerOfShapeRow = Math.floor(
+    //   currentShape[centerOfShapeCol].length / 2
+    // );
 
-      for (let row = 0; row < currentShape.length; row++) {
-        for (let col = 0; col < currentShape[row].length; col++) {
-          // get mouse position
-          // and change there depending if alive/not
-          // then change the incoming grid
-          let state = "dead";
-          let fill = 0;
-          if (currentShape[row][col] === true) {
-            state = "alive";
-            fill = 255;
-          }
-
-          // if outside of grid when rendering
-          if (
-            !incomingGrid[xPos + col] ||
-            !incomingGrid[xPos + col][yPos + row]
-          )
-            continue;
-
-          incomingGrid[xPos + col][yPos + row].state = state;
-          this.p5Canvas.fill(fill);
-          this.p5Canvas.stroke(0);
-
-          this.p5Canvas.rect(
-            x + (col * resolution) / scaleFactor,
-            y + (row * resolution) / scaleFactor,
-            resolution - 1,
-            resolution - 1
-          );
+    for (let row = 0; row < currentShape.length; row++) {
+      for (let col = 0; col < currentShape[row].length; col++) {
+        // get mouse position
+        // and change there depending if alive/not
+        // then change the incoming grid
+        let state = "dead";
+        let fill = 0;
+        if (currentShape[row][col] === true) {
+          state = "alive";
+          fill = 255;
         }
-      }
-    } else {
-      console.log(incomingGrid);
-      let state = "dead";
-      let fill = 0;
-      if (grid[xPos][yPos].state === "dead") {
-        state = "alive";
-        fill = 255;
-      }
 
-      incomingGrid[xPos][yPos].state = state;
-      this.p5Canvas.fill(fill);
-      this.p5Canvas.stroke(0);
-      this.p5Canvas.rect(x, y, resolution - 1, resolution - 1);
+        // if outside of grid when rendering
+        if (!incomingGrid[xPos + col] || !incomingGrid[xPos + col][yPos + row])
+          continue;
+
+        incomingGrid[xPos + col][yPos + row].state = state;
+        this.p5Canvas.fill(fill);
+        this.p5Canvas.stroke(0);
+
+        this.p5Canvas.rect(
+          x + (col * resolution) / scaleFactor,
+          y + (row * resolution) / scaleFactor,
+          resolution - 1,
+          resolution - 1
+        );
+      }
     }
   };
 
@@ -266,6 +257,7 @@ class GameOfLifeGrid extends Component {
     s.draw = () => {
       s.background(0);
       s.scale(scaleFactor);
+
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
 
       if (grid.length > 0) {
