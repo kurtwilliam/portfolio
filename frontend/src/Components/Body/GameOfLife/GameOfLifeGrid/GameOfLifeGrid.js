@@ -18,8 +18,8 @@ let xPosition = 0; // pan x and y
 let yPosition = 0;
 let mouseX = 0;
 let mouseY = 0;
+let zoomLevelVar = 1;
 const paddingForHeight = 0.84;
-let scaleFactor = 1;
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -51,7 +51,8 @@ class GameOfLifeGrid extends Component {
       clear,
       randomize,
       toggleState,
-      selectedShape
+      selectedShape,
+      zoomLevel
     } = this.props;
 
     if (paused !== prevProps.paused) {
@@ -65,6 +66,9 @@ class GameOfLifeGrid extends Component {
       this.clearGrid();
       grid = this.createNestedArray(numberOfColumns, numberOfRows, true);
       toggleState("randomize");
+    } else if (zoomLevel !== prevProps.zoomLevel) {
+      zoomLevelVar = zoomLevel;
+      this.p5Canvas.scale(zoomLevelVar);
     }
     // else if (selectedShape !== prevProps.selectedShape) {
 
@@ -77,16 +81,22 @@ class GameOfLifeGrid extends Component {
   };
 
   scaleFunctionality = e => {
+    const { zoomLevel, updateZoom } = this.props;
     e.preventDefault();
+
+    let newZoomLevel = zoomLevel;
     if (e.deltaY > 0) {
-      scaleFactor *= 1.05;
-      if (scaleFactor >= 2) scaleFactor = 2;
+      newZoomLevel += 0.05;
+      if (newZoomLevel >= 2) newZoomLevel = 2;
     } else {
-      scaleFactor *= 0.95;
-      if (scaleFactor <= 0.5) scaleFactor = 0.5;
+      newZoomLevel -= 0.05;
+      if (newZoomLevel <= 0.5) newZoomLevel = 0.5;
     }
 
-    this.p5Canvas.scale(scaleFactor);
+    newZoomLevel = parseFloat(newZoomLevel).toFixed(2);
+
+    this.p5Canvas.scale(newZoomLevel);
+    updateZoom(newZoomLevel);
   };
 
   clearGrid = () => {
@@ -164,21 +174,21 @@ class GameOfLifeGrid extends Component {
   };
 
   handleClick = e => {
-    const { selectedShape } = this.props;
+    const { selectedShape, zoomLevel } = this.props;
     const clickPosX = e.layerX;
     const clickPosY = e.layerY;
 
     // we want to know what square we pressed
     // so we need to take into account where user clicked on canvas (clickPos),
-    // the size of square (resolution), how big the canvas is scaled (scaleFactor)
-    const xPos = Math.floor(clickPosX / resolution / scaleFactor);
-    const yPos = Math.floor(clickPosY / resolution / scaleFactor);
+    // the size of square (resolution), how big the canvas is scaled (zoomLevel)
+    const xPos = Math.floor(clickPosX / resolution / zoomLevel);
+    const yPos = Math.floor(clickPosY / resolution / zoomLevel);
 
     let x = xPos * resolution;
     let y = yPos * resolution;
     console.log(xPos, yPos);
     console.log(x, y);
-    console.log(xPos * resolution * scaleFactor);
+    console.log(xPos * resolution * zoomLevel);
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
@@ -212,8 +222,8 @@ class GameOfLifeGrid extends Component {
         this.p5Canvas.stroke(0);
 
         this.p5Canvas.rect(
-          x + (col * resolution) / scaleFactor,
-          y + (row * resolution) / scaleFactor,
+          x + (col * resolution) / zoomLevel,
+          y + (row * resolution) / zoomLevel,
           resolution - 1,
           resolution - 1
         );
@@ -256,7 +266,7 @@ class GameOfLifeGrid extends Component {
 
     s.draw = () => {
       s.background(0);
-      s.scale(scaleFactor);
+      s.scale(zoomLevelVar);
 
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
 

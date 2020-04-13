@@ -9,6 +9,9 @@ const speedMax = 60;
 const gridMin = 200;
 const gridMax = 600;
 
+const zoomMin = 200;
+const zoomMax = 600;
+
 class GameOfLifeSettings extends Component {
   render() {
     const {
@@ -18,7 +21,9 @@ class GameOfLifeSettings extends Component {
       handleChange,
       toggleState,
       updateSelectedShape,
-      selectedShape
+      selectedShape,
+      zoomLevel,
+      updateZoom
     } = this.props;
     return (
       <>
@@ -41,20 +46,18 @@ class GameOfLifeSettings extends Component {
                 step={1}
               />
             </div>
-            {/* <div className="gol__settings--range">
-          <label>
-            Grid Size - {gridSize / 10} x {gridSize / 10}
-          </label>
-          <input
-            type="range"
-            name="gridSize"
-            min={gridMin}
-            max={gridMax}
-            value={gridSize}
-            onChange={handleChange}
-            step={50}
-          />
-        </div> */}
+            <div className="gol__settings--range">
+              <label>Zoom - {zoomLevel}</label>
+              <input
+                type="range"
+                name="zoomLevel"
+                min={0.5}
+                max={2.0}
+                value={zoomLevel}
+                onChange={handleChange}
+                step={0.05}
+              />
+            </div>
             <div className="gol__settings--range">
               <button onClick={toggleState} name="clear">
                 Clear

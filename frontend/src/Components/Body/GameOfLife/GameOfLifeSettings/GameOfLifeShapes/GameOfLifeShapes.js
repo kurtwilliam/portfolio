@@ -6,7 +6,7 @@ import shapes from "../../shapes";
 class GameOfLifeShapes extends Component {
   render() {
     const { updateSelectedShape, selectedShape } = this.props;
-    console.log(shapes);
+    // console.log(shapes);
     return (
       <GameOfLifeShapesLayout
         className={`gol__shapes gol__shapes--sidebar ${

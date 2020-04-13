@@ -12,11 +12,13 @@ class GameOfLife extends Component {
     randomize: false,
     clear: false,
     gridSize: 400,
+    zoomLevel: 1.0,
     selectedShape: ""
   };
 
   handleChange = e =>
-    this.setState({ [e.target.name]: parseInt(e.target.value, 10) });
+    this.setState({ [e.target.name]: parseFloat(e.target.value).toFixed(2) });
+
   toggleState = e => {
     // if click event, e is normal event
     // if called from grid, e is just a string
@@ -25,15 +27,15 @@ class GameOfLife extends Component {
       [name]: !prevState[name]
     }));
   };
-  updateSelectedShape = shapeName => {
-    console.log(shapeName);
-    return this.setState(prevState => ({
+  updateSelectedShape = shapeName =>
+    this.setState(prevState => ({
       selectedShape:
         shapeName === "" && prevState.selectedShape === ""
           ? Object.keys(shapes)[0]
           : shapeName
     }));
-  };
+
+  updateZoom = zoomLevel => this.setState({ zoomLevel });
 
   render() {
     const {
@@ -42,6 +44,7 @@ class GameOfLife extends Component {
       gridSize,
       clear,
       randomize,
+      zoomLevel,
       selectedShape
     } = this.state;
 
@@ -55,6 +58,8 @@ class GameOfLife extends Component {
           toggleState={this.toggleState}
           selectedShape={selectedShape}
           updateSelectedShape={this.updateSelectedShape}
+          updateZoom={this.updateZoom}
+          zoomLevel={zoomLevel}
         />
         <GameOfLifeGrid
           speed={speed}
@@ -64,6 +69,8 @@ class GameOfLife extends Component {
           randomize={randomize}
           toggleState={this.toggleState}
           selectedShape={selectedShape}
+          updateZoom={this.updateZoom}
+          zoomLevel={zoomLevel}
         />
         <GameOfLifeExplanation />
       </GameOfLifeLayout>
