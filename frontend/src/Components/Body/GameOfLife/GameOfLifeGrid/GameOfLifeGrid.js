@@ -240,6 +240,7 @@ class GameOfLifeGrid extends Component {
 
       // add click event for adding squares
       canvas.mouseClicked(e => this.handleClick(e));
+      canvas.touchMoved(e => this.handleMove(e));
 
       // figure out how big canvas should be
       numberOfColumns = Math.round((s.width / resolution) * 2);
@@ -320,6 +321,12 @@ class GameOfLifeGrid extends Component {
 
     const windowResized = () => {
       return s.resizeCanvas(w, h);
+    };
+
+    s.mouseDragged = e => {
+      const { movementX, movementY } = e;
+      xPosition -= movementX;
+      yPosition -= movementY;
     };
 
     this.Sketch.windowResized = windowResized;
