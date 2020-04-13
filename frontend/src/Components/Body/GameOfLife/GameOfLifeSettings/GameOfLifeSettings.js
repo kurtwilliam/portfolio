@@ -54,7 +54,7 @@ class GameOfLifeSettings extends Component {
                 min={0.5}
                 max={2.0}
                 value={zoomLevel}
-                onChange={handleChange}
+                onChange={updateZoom}
                 step={0.05}
               />
             </div>

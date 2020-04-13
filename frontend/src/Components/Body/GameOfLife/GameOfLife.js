@@ -17,7 +17,9 @@ class GameOfLife extends Component {
   };
 
   handleChange = e =>
-    this.setState({ [e.target.name]: parseFloat(e.target.value).toFixed(2) });
+    this.setState({
+      [e.target.name]: parseInt(e.target.value, 10)
+    });
 
   toggleState = e => {
     // if click event, e is normal event
@@ -35,7 +37,10 @@ class GameOfLife extends Component {
           : shapeName
     }));
 
-  updateZoom = zoomLevel => this.setState({ zoomLevel });
+  updateZoom = zoom =>
+    this.setState({
+      zoomLevel: parseFloat(zoom.target ? zoom.target.value : zoom).toFixed(2)
+    });
 
   render() {
     const {

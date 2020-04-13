@@ -84,7 +84,7 @@ class GameOfLifeGrid extends Component {
     const { zoomLevel, updateZoom } = this.props;
     e.preventDefault();
 
-    let newZoomLevel = zoomLevel;
+    let newZoomLevel = parseFloat(zoomLevel);
     if (e.deltaY > 0) {
       newZoomLevel += 0.05;
       if (newZoomLevel >= 2) newZoomLevel = 2;
@@ -92,8 +92,7 @@ class GameOfLifeGrid extends Component {
       newZoomLevel -= 0.05;
       if (newZoomLevel <= 0.5) newZoomLevel = 0.5;
     }
-
-    newZoomLevel = parseFloat(newZoomLevel).toFixed(2);
+    // newZoomLevel = parseFloat(newZoomLevel).toFixed(2);
 
     this.p5Canvas.scale(newZoomLevel);
     updateZoom(newZoomLevel);
@@ -258,6 +257,8 @@ class GameOfLifeGrid extends Component {
       xPosition = centerX / 2;
       yPosition = centerY / 2;
 
+      console.log(xPosition, yPosition);
+
       grid =
         incomingGrid.length < 1
           ? this.setupGrid(numberOfColumns, numberOfRows)
@@ -267,6 +268,7 @@ class GameOfLifeGrid extends Component {
     s.draw = () => {
       s.background(0);
       s.scale(zoomLevelVar);
+      s.translate(xPosition, yPosition);
 
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
 
