@@ -16,10 +16,11 @@ let centerX = 0;
 let centerY = 0;
 let xPosition = 0; // pan x and y
 let yPosition = 0;
-let mouseX = 0;
-let mouseY = 0;
 let zoomLevelVar = 1;
 const paddingForHeight = 0.84;
+
+let clickStartX = null;
+let clickStartY = null;
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -39,7 +40,7 @@ class GameOfLifeGrid extends Component {
 
   componentDidMount = () => {
     this.p5Canvas = new p5(this.Sketch, this.p5Ref);
-    this.p5Ref.addEventListener("wheel", e => this.scaleFunctionality(e));
+    // this.p5Ref.addEventListener("wheel", e => this.scaleFunctionality(e));
     // this.p5Ref.addEventListener("pointermove", e => this.scaleFunctionality(e));
   };
 
@@ -172,8 +173,13 @@ class GameOfLifeGrid extends Component {
     return newArray;
   };
 
+  mousePressed = e => {
+    console.log(e);
+  };
+
   handleClick = e => {
     const { selectedShape, zoomLevel } = this.props;
+    console.log(e);
 
     // we want to know what square we pressed
     // so we need to take into account where user clicked on canvas (clickPos),
@@ -238,9 +244,12 @@ class GameOfLifeGrid extends Component {
     s.setup = () => {
       let canvas = s.createCanvas(w, h).parent(this.p5Ref);
 
-      // add click event for adding squares
-      canvas.mouseClicked(e => this.handleClick(e));
-      canvas.touchMoved(e => this.handleMove(e));
+      // add event handlers
+      console.log(canvas);
+      // canvas.mouseClicked(e => this.handleClick(e));
+      // canvas.mouseDragged(e => this.handleMove(e));
+      // canvas.mousePressed(e => this.mousePressed(e));
+      canvas.mouseWheel(e => this.scaleFunctionality(e));
 
       // figure out how big canvas should be
       numberOfColumns = Math.round((s.width / resolution) * 2);
@@ -323,7 +332,21 @@ class GameOfLifeGrid extends Component {
       return s.resizeCanvas(w, h);
     };
 
+    s.mousePressed = e => {
+      clickStartX = e.x;
+      clickStartY = e.y;
+    };
+
+    s.mouseReleased = e => {
+      if (e.x === clickStartX && e.y === clickStartY) {
+        this.handleClick(e);
+      }
+      clickStartX = null;
+      clickStartY = null;
+    };
+
     s.mouseDragged = e => {
+      e.preventDefault();
       const { movementX, movementY } = e;
       xPosition -= movementX;
       yPosition -= movementY;
