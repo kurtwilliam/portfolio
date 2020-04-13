@@ -174,20 +174,19 @@ class GameOfLifeGrid extends Component {
 
   handleClick = e => {
     const { selectedShape, zoomLevel } = this.props;
-    const clickPosX = e.layerX;
-    const clickPosY = e.layerY;
 
     // we want to know what square we pressed
     // so we need to take into account where user clicked on canvas (clickPos),
-    // the size of square (resolution), how big the canvas is scaled (zoomLevel)
+    // the Position of canvas the size of square (resolution)
+    // how big the canvas is scaled (zoomLevel)
+    const clickPosX = e.layerX + xPosition;
+    const clickPosY = e.layerY + yPosition;
+
     const xPos = Math.floor(clickPosX / resolution / zoomLevel);
     const yPos = Math.floor(clickPosY / resolution / zoomLevel);
 
     let x = xPos * resolution;
     let y = yPos * resolution;
-    console.log(xPos, yPos);
-    console.log(x, y);
-    console.log(xPos * resolution * zoomLevel);
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
@@ -254,8 +253,8 @@ class GameOfLifeGrid extends Component {
       centerY = Math.floor(numberOfRows / 2);
 
       // set center of canvas to be center of screen
-      xPosition = centerX / 2;
-      yPosition = centerY / 2;
+      xPosition = (centerX * resolution) / 2;
+      yPosition = (centerY * resolution) / 2;
 
       console.log(xPosition, yPosition);
 
@@ -268,7 +267,7 @@ class GameOfLifeGrid extends Component {
     s.draw = () => {
       s.background(0);
       s.scale(zoomLevelVar);
-      s.translate(xPosition, yPosition);
+      s.translate(-xPosition, -yPosition);
 
       incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
 
