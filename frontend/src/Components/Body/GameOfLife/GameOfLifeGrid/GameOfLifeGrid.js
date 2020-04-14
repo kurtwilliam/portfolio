@@ -347,19 +347,26 @@ class GameOfLifeGrid extends Component {
           let y = rowNum * resolution;
 
           // draw borders if at edge
-          // x pos, y pos,
+          // x pos, y pos, width, height
           if (colNum === 0) {
+            // left border
             s.stroke("#FF0000");
             s.rect(x, y, 1, resolution);
-          } else if (colNum === numberOfColumns) {
+          }
+          if (colNum === numberOfColumns - 1) {
+            // right border
             s.stroke("#FF0000");
-            s.rect(x - resolution, y, 1, resolution);
-          } else if (rowNum === 0) {
+            s.rect(x + resolution, y, 1, resolution);
+          }
+          if (rowNum === 0) {
+            // top border
             s.stroke("#FF0000");
             s.rect(x, y, resolution, 1);
-          } else if (rowNum === numberOfRows) {
+          }
+          if (rowNum === numberOfRows - 1) {
+            // bottom border
             s.stroke("#FF0000");
-            s.rect(x, y - resolution, resolution, 1);
+            s.rect(x, y + resolution, resolution, 1);
           }
 
           if (grid[colNum][rowNum].state === "alive") {
