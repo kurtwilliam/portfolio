@@ -15,14 +15,13 @@ let numberOfColumns = 0;
 let numberOfRows = 0;
 let centerX = 0;
 let centerY = 0;
-let xPosition = 0; // pan x and y
-let yPosition = 0;
-let zoomLevelVar = 1;
 let speedVar = 0;
 const paddingForHeight = 0.84;
 
+let zoomLevelVar = 1;
+
 // affects # col and # rows - affects performance
-const gridSizeMultiplier = 2.2;
+const gridSizeMultiplier = 1.5;
 
 // for figuring out if it is a click for drawing
 let clickStartX = null;
@@ -39,6 +38,8 @@ let canvasWidth = 0;
 let canvasHeight = 0;
 
 // Size of the Grid (can be bigger/smaller depending on No of col/rows/zoom)
+let gridXPos = 0; // pan x and y
+let gridYPos = 0;
 let gridWidth = 0;
 let gridHeight = 0;
 
@@ -164,6 +165,8 @@ class GameOfLifeGrid extends Component {
     if (randomize) toggleState("randomize");
 
     if (!randomize) {
+      console.log(newGrid);
+      console.log(centerX);
       // square in top left for testing purposes
       // newGrid[1][1].state = "alive";
       // newGrid[1][2].state = "alive";
@@ -215,8 +218,8 @@ class GameOfLifeGrid extends Component {
     // so we need to take into account where user clicked on canvas (clickPos),
     // the Position of canvas the size of square (resolution)
     // how big the canvas is scaled (zoomLevel)
-    const clickPosX = e.layerX + xPosition * zoomLevel;
-    const clickPosY = e.layerY + yPosition * zoomLevel;
+    const clickPosX = e.layerX + gridXPos * zoomLevel;
+    const clickPosY = e.layerY + gridYPos * zoomLevel;
 
     const xPos = Math.floor(clickPosX / resolution / zoomLevel);
     const yPos = Math.floor(clickPosY / resolution / zoomLevel);
@@ -315,15 +318,15 @@ class GameOfLifeGrid extends Component {
       s.frameRate(speed);
 
       // get center of canvas
-      centerX = Math.floor(numberOfColumns / gridSizeMultiplier);
-      centerY = Math.floor(numberOfRows / gridSizeMultiplier);
-
-      // set center of canvas to be center of screen
-      xPosition = (centerX * resolution) / 2;
-      yPosition = (centerY * resolution) / 2;
+      centerX = Math.floor(numberOfColumns / 2);
+      centerY = Math.floor(numberOfRows / 2);
 
       gridWidth = numberOfColumns * resolution;
       gridHeight = numberOfRows * resolution;
+
+      // set center of canvas to be center of screen
+      gridXPos = (gridWidth - canvasWidth) / 2;
+      gridYPos = (gridHeight - canvasHeight) / 2;
 
       grid =
         incomingGrid.length < 1
@@ -335,7 +338,8 @@ class GameOfLifeGrid extends Component {
       s.background(0);
       s.scale(zoomLevelVar);
       s.frameRate(speedVar);
-      s.translate(-xPosition, -yPosition);
+      s.translate(-gridXPos, -gridYPos);
+      console.log(gridXPos, gridYPos);
       if (shouldDraw) {
         this.drawCalculateNeighbours();
       }
@@ -403,8 +407,8 @@ class GameOfLifeGrid extends Component {
   drawCanvasOneFrameWithoutMakingNewGrid = () => {};
 
   centerCanvas = () => {
-    xPosition = (browserWidth - gridWidth) / 2;
-    yPosition = (browserHeight - gridHeight) / 2;
+    gridXPos = -(canvasWidth - gridWidth) * 2;
+    gridYPos = -(canvasHeight - gridHeight) * 2;
   };
 
   isCanvasSmallerThanScreen = () => {
@@ -417,23 +421,28 @@ class GameOfLifeGrid extends Component {
     if (this.isCanvasSmallerThanScreen() === true) {
       return this.centerCanvas();
     } else {
+      console.log(gridYPos, zoomLevelVar, canvasHeight, gridHeight);
       if (
-        xPosition < -1 ||
-        yPosition < -1 ||
-        yPosition * zoomLevelVar + canvasHeight > gridHeight + 4 ||
-        xPosition * zoomLevelVar + canvasWidth > gridWidth + 4
+        gridXPos < -1 ||
+        gridYPos < -1 ||
+        gridYPos * zoomLevelVar + canvasHeight > gridHeight + 4 ||
+        gridXPos * zoomLevelVar + canvasWidth > gridWidth + 4
       ) {
-        if (xPosition < 0) {xPosition = -1;}
-        if (yPosition < 0) {yPosition = -1; }
-        if (xPosition * zoomLevelVar + canvasWidth > gridWidth) {
-          xPosition = gridWidth - canvasWidth + 3;
+        if (gridXPos < 0) {
+          gridXPos = -1;
         }
-        if (yPosition * zoomLevelVar + canvasHeight > gridHeight) {
-          yPosition = gridHeight - canvasHeight + 3;
+        if (gridYPos < 0) {
+          gridYPos = -1;
+        }
+        if (gridXPos * zoomLevelVar + canvasWidth > gridWidth) {
+          gridXPos = gridWidth - canvasWidth + 3;
+        }
+        if (gridYPos * zoomLevelVar + canvasHeight > gridHeight) {
+          gridYPos = gridHeight - canvasHeight + 3;
         }
       } else {
-        xPosition -= movementX;
-        yPosition -= movementY;
+        gridXPos -= movementX;
+        gridYPos -= movementY;
       }
     }
   };
