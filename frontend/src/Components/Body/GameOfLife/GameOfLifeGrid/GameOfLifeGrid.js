@@ -189,8 +189,8 @@ class GameOfLifeGrid extends Component {
     // so we need to take into account where user clicked on canvas (clickPos),
     // the Position of canvas the size of square (resolution)
     // how big the canvas is scaled (zoomLevel)
-    const clickPosX = e.layerX + xPosition;
-    const clickPosY = e.layerY + yPosition;
+    const clickPosX = e.layerX + xPosition * zoomLevel;
+    const clickPosY = e.layerY + yPosition * zoomLevel;
 
     const xPos = Math.floor(clickPosX / resolution / zoomLevel);
     const yPos = Math.floor(clickPosY / resolution / zoomLevel);
@@ -248,11 +248,6 @@ class GameOfLifeGrid extends Component {
   };
 
   mousePressed = e => {
-    console.log(e);
-    console.log(e.clientX > canvasXPos);
-    console.log(e.clientX < canvasXPos + canvasWidth);
-    console.log(e.clientY > canvasYPos);
-    console.log(e.clientY < canvasYPos + canvasHeight);
     if (
       e &&
       e.clientX > canvasXPos &&
@@ -348,10 +343,26 @@ class GameOfLifeGrid extends Component {
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-          if (grid[colNum][rowNum].state === "alive") {
-            let x = colNum * resolution;
-            let y = rowNum * resolution;
+          let x = colNum * resolution;
+          let y = rowNum * resolution;
 
+          // draw borders if at edge
+          // x pos, y pos,
+          if (colNum === 0) {
+            s.stroke("#FF0000");
+            s.rect(x, y, 1, resolution);
+          } else if (colNum === numberOfColumns) {
+            s.stroke("#FF0000");
+            s.rect(x - resolution, y, 1, resolution);
+          } else if (rowNum === 0) {
+            s.stroke("#FF0000");
+            s.rect(x, y, resolution, 1);
+          } else if (rowNum === numberOfRows) {
+            s.stroke("#FF0000");
+            s.rect(x, y - resolution, resolution, 1);
+          }
+
+          if (grid[colNum][rowNum].state === "alive") {
             s.fill(255);
             s.stroke(0);
             s.rect(x, y, resolution - 1, resolution - 1);
@@ -377,6 +388,8 @@ class GameOfLifeGrid extends Component {
       ) {
         xPosition -= movementX;
         yPosition -= movementY;
+
+        s.translate(-xPosition, -yPosition);
       }
     };
   };
