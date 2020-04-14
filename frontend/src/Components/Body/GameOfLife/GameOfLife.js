@@ -16,10 +16,12 @@ class GameOfLife extends Component {
     selectedShape: ""
   };
 
-  handleChange = e =>
+  handleChange = e => {
+    console.log(e.target.value);
     this.setState({
       [e.target.name]: parseInt(e.target.value, 10)
     });
+  };
 
   toggleState = e => {
     // if click event, e is normal event

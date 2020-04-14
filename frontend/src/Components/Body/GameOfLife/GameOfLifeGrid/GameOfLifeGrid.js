@@ -5,7 +5,6 @@ import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
 import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
 
 import shapes from "../shapes";
-console.log(shapes);
 
 let grid = [];
 let incomingGrid = [];
@@ -21,6 +20,11 @@ const paddingForHeight = 0.84;
 
 let clickStartX = null;
 let clickStartY = null;
+
+let canvasXPos = 0;
+let canvasYPos = 0;
+let canvasWidth = 0;
+let canvasHeight = 0;
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -40,6 +44,11 @@ class GameOfLifeGrid extends Component {
 
   componentDidMount = () => {
     this.p5Canvas = new p5(this.Sketch, this.p5Ref);
+
+    this.p5Ref.addEventListener("mousedown", e => this.mousePressed(e));
+    this.p5Ref.addEventListener("mouseup", e => this.mouseReleased(e));
+
+    // canvas.mouseReleased(e => this.mouseReleased(e));
     // this.p5Ref.addEventListener("wheel", e => this.scaleFunctionality(e));
     // this.p5Ref.addEventListener("pointermove", e => this.scaleFunctionality(e));
   };
@@ -173,13 +182,8 @@ class GameOfLifeGrid extends Component {
     return newArray;
   };
 
-  mousePressed = e => {
-    console.log(e);
-  };
-
   handleClick = e => {
     const { selectedShape, zoomLevel } = this.props;
-    console.log(e);
 
     // we want to know what square we pressed
     // so we need to take into account where user clicked on canvas (clickPos),
@@ -235,6 +239,32 @@ class GameOfLifeGrid extends Component {
     }
   };
 
+  mouseReleased = e => {
+    if (e.x === clickStartX && e.y === clickStartY) {
+      this.handleClick(e);
+    }
+    clickStartX = null;
+    clickStartY = null;
+  };
+
+  mousePressed = e => {
+    console.log(e);
+    console.log(e.clientX > canvasXPos);
+    console.log(e.clientX < canvasXPos + canvasWidth);
+    console.log(e.clientY > canvasYPos);
+    console.log(e.clientY < canvasYPos + canvasHeight);
+    if (
+      e &&
+      e.clientX > canvasXPos &&
+      e.clientX < canvasXPos + canvasWidth &&
+      e.clientY > canvasYPos &&
+      e.clientY < canvasYPos + canvasHeight
+    ) {
+      clickStartX = e.x;
+      clickStartY = e.y;
+    }
+  };
+
   Sketch = s => {
     const { browserDimensions } = this.state;
     const { speed, selectedShape } = this.props;
@@ -244,12 +274,16 @@ class GameOfLifeGrid extends Component {
     s.setup = () => {
       let canvas = s.createCanvas(w, h).parent(this.p5Ref);
 
-      // add event handlers
-      console.log(canvas);
-      // canvas.mouseClicked(e => this.handleClick(e));
-      // canvas.mouseDragged(e => this.handleMove(e));
-      // canvas.mousePressed(e => this.mousePressed(e));
+      canvasWidth = w;
+      canvasHeight = h;
+      canvasXPos = canvas.elt.offsetLeft;
+      canvasYPos = canvas.elt.offsetTop;
+
+      // add event handlers - defining here to canvas
+      // makes it so they only apply to canvas
       canvas.mouseWheel(e => this.scaleFunctionality(e));
+      // canvas.mousePressed(e => this.mousePressed(e));
+      // canvas.mouseReleased(e => this.mouseReleased(e));
 
       // figure out how big canvas should be
       numberOfColumns = Math.round((s.width / resolution) * 2);
@@ -265,8 +299,6 @@ class GameOfLifeGrid extends Component {
       // set center of canvas to be center of screen
       xPosition = (centerX * resolution) / 2;
       yPosition = (centerY * resolution) / 2;
-
-      console.log(xPosition, yPosition);
 
       grid =
         incomingGrid.length < 1
@@ -328,31 +360,25 @@ class GameOfLifeGrid extends Component {
       }
     };
 
-    const windowResized = () => {
-      return s.resizeCanvas(w, h);
-    };
-
-    s.mousePressed = e => {
-      clickStartX = e.x;
-      clickStartY = e.y;
-    };
-
-    s.mouseReleased = e => {
-      if (e.x === clickStartX && e.y === clickStartY) {
-        this.handleClick(e);
-      }
-      clickStartX = null;
-      clickStartY = null;
-    };
+    function windowResized() {
+      s.resizeCanvas(w, h);
+    }
 
     s.mouseDragged = e => {
-      e.preventDefault();
-      const { movementX, movementY } = e;
-      xPosition -= movementX;
-      yPosition -= movementY;
-    };
+      // first we gotta check to make sure were still
+      // within the canvas during the drag
+      const { movementX, movementY, clientX, clientY } = e;
 
-    this.Sketch.windowResized = windowResized;
+      if (
+        clientX > canvasXPos &&
+        clientX < canvasXPos + canvasWidth &&
+        clientY > canvasYPos &&
+        clientY < canvasYPos + canvasHeight
+      ) {
+        xPosition -= movementX;
+        yPosition -= movementY;
+      }
+    };
   };
 
   countNeighbors = (grid, x, y) => {
