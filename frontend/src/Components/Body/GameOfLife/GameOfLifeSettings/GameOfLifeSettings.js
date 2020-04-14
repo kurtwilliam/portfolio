@@ -9,8 +9,8 @@ const speedMax = 60;
 const gridMin = 200;
 const gridMax = 600;
 
-const zoomMin = 200;
-const zoomMax = 600;
+const zoomMin = 0.25;
+const zoomMax = 2;
 
 class GameOfLifeSettings extends Component {
   render() {
@@ -51,8 +51,8 @@ class GameOfLifeSettings extends Component {
               <input
                 type="range"
                 name="zoomLevel"
-                min={0.5}
-                max={2.0}
+                min={zoomMin}
+                max={zoomMax}
                 value={zoomLevel}
                 onChange={updateZoom}
                 step={0.05}

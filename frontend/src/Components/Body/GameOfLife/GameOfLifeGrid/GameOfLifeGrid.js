@@ -6,6 +6,8 @@ import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
 
 import shapes from "../shapes";
 
+// variables that change for drawing
+let shouldDraw = true;
 let grid = [];
 let incomingGrid = [];
 let resolution = 10;
@@ -16,15 +18,29 @@ let centerY = 0;
 let xPosition = 0; // pan x and y
 let yPosition = 0;
 let zoomLevelVar = 1;
+let speedVar = 0;
 const paddingForHeight = 0.84;
 
+// affects # col and # rows - affects performance
+const gridSizeMultiplier = 2.2;
+
+// for figuring out if it is a click for drawing
 let clickStartX = null;
 let clickStartY = null;
 
+// dimensions of browser - includes padding on top and bottom!
+let browserWidth = 0;
+let browserHeight = 0;
+
+// where does the canvas sit on screen and its dimensions
 let canvasXPos = 0;
 let canvasYPos = 0;
 let canvasWidth = 0;
 let canvasHeight = 0;
+
+// Size of the Grid (can be bigger/smaller depending on No of col/rows/zoom)
+let gridWidth = 0;
+let gridHeight = 0;
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -37,7 +53,10 @@ class GameOfLifeGrid extends Component {
   };
 
   componentWillMount = () => {
+    const { speed, zoomLevel } = this.props;
     this.calculateWidthAndHeight();
+    speedVar = speed;
+    zoomLevelVar = zoomLevel;
 
     window.addEventListener("resize", this.calculateWidthAndHeight);
   };
@@ -68,7 +87,8 @@ class GameOfLifeGrid extends Component {
     if (paused !== prevProps.paused) {
       this.p5Canvas.frameRate(paused === true ? 0 : speed);
     } else if (paused !== true && speed !== prevProps.speed) {
-      this.p5Canvas.frameRate(speed);
+      speedVar = speed;
+      this.p5Canvas.frameRate(speedVar);
     } else if (clear) {
       this.clearGrid();
       toggleState("clear");
@@ -94,18 +114,20 @@ class GameOfLifeGrid extends Component {
     const { zoomLevel, updateZoom } = this.props;
     e.preventDefault();
 
-    let newZoomLevel = parseFloat(zoomLevel);
+    zoomLevelVar = parseFloat(zoomLevel);
     if (e.deltaY > 0) {
-      newZoomLevel += 0.05;
-      if (newZoomLevel >= 2) newZoomLevel = 2;
+      zoomLevelVar += 0.05;
+      if (zoomLevelVar >= 2) zoomLevelVar = 2;
     } else {
-      newZoomLevel -= 0.05;
-      if (newZoomLevel <= 0.5) newZoomLevel = 0.5;
+      zoomLevelVar -= 0.05;
+      if (zoomLevelVar <= 0.25) zoomLevelVar = 0.25;
     }
-    // newZoomLevel = parseFloat(newZoomLevel).toFixed(2);
 
-    this.p5Canvas.scale(newZoomLevel);
-    updateZoom(newZoomLevel);
+    gridWidth = numberOfColumns * resolution * zoomLevelVar;
+    gridHeight = numberOfRows * resolution * zoomLevelVar;
+
+    updateZoom(zoomLevelVar);
+    this.p5Canvas.scale(zoomLevelVar);
   };
 
   clearGrid = () => {
@@ -121,6 +143,10 @@ class GameOfLifeGrid extends Component {
     const { innerWidth: width, innerHeight: height } = window;
     // height calculation for what the
     // settings and explanation sizes are
+
+    browserWidth = width;
+    browserHeight = height * paddingForHeight;
+
     return this.setState(
       { browserDimensions: [width, height * paddingForHeight] },
       () => this.p5Canvas.resizeCanvas(width, height)
@@ -242,6 +268,8 @@ class GameOfLifeGrid extends Component {
   mouseReleased = e => {
     if (e.x === clickStartX && e.y === clickStartY) {
       this.handleClick(e);
+    } else {
+      this.recalculatePosition(e.movementX, e.movementY);
     }
     clickStartX = null;
     clickStartY = null;
@@ -261,16 +289,15 @@ class GameOfLifeGrid extends Component {
   };
 
   Sketch = s => {
-    const { browserDimensions } = this.state;
     const { speed, selectedShape } = this.props;
-    let w = browserDimensions[0];
-    let h = browserDimensions[1];
 
     s.setup = () => {
-      let canvas = s.createCanvas(w, h).parent(this.p5Ref);
+      let canvas = s
+        .createCanvas(browserWidth, browserHeight)
+        .parent(this.p5Ref);
 
-      canvasWidth = w;
-      canvasHeight = h;
+      canvasWidth = browserWidth;
+      canvasHeight = browserHeight;
       canvasXPos = canvas.elt.offsetLeft;
       canvasYPos = canvas.elt.offsetTop;
 
@@ -281,19 +308,22 @@ class GameOfLifeGrid extends Component {
       // canvas.mouseReleased(e => this.mouseReleased(e));
 
       // figure out how big canvas should be
-      numberOfColumns = Math.round((s.width / resolution) * 2);
-      numberOfRows = Math.round((s.height / resolution) * 2);
+      numberOfColumns = Math.round((s.width / resolution) * gridSizeMultiplier);
+      numberOfRows = Math.round((s.height / resolution) * gridSizeMultiplier);
 
       // set framerate depending on speed
       s.frameRate(speed);
 
       // get center of canvas
-      centerX = Math.floor(numberOfColumns / 2);
-      centerY = Math.floor(numberOfRows / 2);
+      centerX = Math.floor(numberOfColumns / gridSizeMultiplier);
+      centerY = Math.floor(numberOfRows / gridSizeMultiplier);
 
       // set center of canvas to be center of screen
       xPosition = (centerX * resolution) / 2;
       yPosition = (centerY * resolution) / 2;
+
+      gridWidth = numberOfColumns * resolution;
+      gridHeight = numberOfRows * resolution;
 
       grid =
         incomingGrid.length < 1
@@ -304,42 +334,11 @@ class GameOfLifeGrid extends Component {
     s.draw = () => {
       s.background(0);
       s.scale(zoomLevelVar);
+      s.frameRate(speedVar);
       s.translate(-xPosition, -yPosition);
-
-      incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
-
-      if (grid.length > 0) {
-        for (let colNum = 0; colNum < numberOfColumns; colNum++) {
-          for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-            let state = grid[colNum][rowNum].state;
-            let sumOfAliveNeighbours = this.countNeighbors(
-              grid,
-              colNum,
-              rowNum
-            );
-
-            let stateToUpdateTo = "";
-            if (state === "alive") {
-              if (sumOfAliveNeighbours <= 1) {
-                stateToUpdateTo = "dead";
-              } else if (sumOfAliveNeighbours > 1 && sumOfAliveNeighbours < 4) {
-                stateToUpdateTo = "alive";
-              } else if (sumOfAliveNeighbours >= 4) {
-                stateToUpdateTo = "dead";
-              }
-            } else {
-              if (sumOfAliveNeighbours === 3) {
-                stateToUpdateTo = "alive";
-              } else {
-                stateToUpdateTo = "dead";
-              }
-            }
-            incomingGrid[colNum][rowNum].state = stateToUpdateTo;
-          }
-        }
+      if (shouldDraw) {
+        this.drawCalculateNeighbours();
       }
-
-      grid = incomingGrid;
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -356,7 +355,7 @@ class GameOfLifeGrid extends Component {
           if (colNum === numberOfColumns - 1) {
             // right border
             s.stroke("#FF0000");
-            s.rect(x + resolution, y, 1, resolution);
+            s.rect(x + resolution - 1, y, 1, resolution);
           }
           if (rowNum === 0) {
             // top border
@@ -366,7 +365,7 @@ class GameOfLifeGrid extends Component {
           if (rowNum === numberOfRows - 1) {
             // bottom border
             s.stroke("#FF0000");
-            s.rect(x, y + resolution, resolution, 1);
+            s.rect(x, y + resolution - 1, resolution, 1);
           }
 
           if (grid[colNum][rowNum].state === "alive") {
@@ -376,29 +375,100 @@ class GameOfLifeGrid extends Component {
           }
         }
       }
+
+      // shouldDraw = true;
     };
 
     function windowResized() {
-      s.resizeCanvas(w, h);
+      s.resizeCanvas(browserWidth, browserHeight);
     }
 
     s.mouseDragged = e => {
-      // first we gotta check to make sure were still
-      // within the canvas during the drag
       const { movementX, movementY, clientX, clientY } = e;
 
+      // first we gotta check to make sure were still
+      // within the canvas during the drag so it doesn't just
+      // run the function wherever we touch
       if (
         clientX > canvasXPos &&
-        clientX < canvasXPos + canvasWidth &&
+        clientX < canvasXPos + browserWidth &&
         clientY > canvasYPos &&
-        clientY < canvasYPos + canvasHeight
+        clientY < canvasYPos + browserHeight
       ) {
-        xPosition -= movementX;
-        yPosition -= movementY;
-
-        s.translate(-xPosition, -yPosition);
+        this.recalculatePosition(movementX, movementY);
       }
     };
+  };
+
+  drawCanvasOneFrameWithoutMakingNewGrid = () => {};
+
+  centerCanvas = () => {
+    xPosition = (browserWidth - gridWidth) / 2;
+    yPosition = (browserHeight - gridHeight) / 2;
+  };
+
+  isCanvasSmallerThanScreen = () => {
+    if (gridWidth < canvasWidth || gridHeight < canvasHeight) {
+      return true;
+    } else return false;
+  };
+
+  recalculatePosition = (movementX, movementY) => {
+    if (this.isCanvasSmallerThanScreen() === true) {
+      return this.centerCanvas();
+    } else {
+      if (
+        xPosition < -1 ||
+        yPosition < -1 ||
+        yPosition * zoomLevelVar + canvasHeight > gridHeight + 4 ||
+        xPosition * zoomLevelVar + canvasWidth > gridWidth + 4
+      ) {
+        if (xPosition < 0) {xPosition = -1;}
+        if (yPosition < 0) {yPosition = -1; }
+        if (xPosition * zoomLevelVar + canvasWidth > gridWidth) {
+          xPosition = gridWidth - canvasWidth + 3;
+        }
+        if (yPosition * zoomLevelVar + canvasHeight > gridHeight) {
+          yPosition = gridHeight - canvasHeight + 3;
+        }
+      } else {
+        xPosition -= movementX;
+        yPosition -= movementY;
+      }
+    }
+  };
+
+  drawCalculateNeighbours = () => {
+    incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
+
+    if (grid.length > 0) {
+      for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+        for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+          let state = grid[colNum][rowNum].state;
+          let sumOfAliveNeighbours = this.countNeighbors(grid, colNum, rowNum);
+
+          let stateToUpdateTo = "";
+          if (state === "alive") {
+            if (sumOfAliveNeighbours <= 1) {
+              stateToUpdateTo = "dead";
+            } else if (sumOfAliveNeighbours > 1 && sumOfAliveNeighbours < 4) {
+              stateToUpdateTo = "alive";
+            } else if (sumOfAliveNeighbours >= 4) {
+              stateToUpdateTo = "dead";
+            }
+          } else {
+            if (sumOfAliveNeighbours === 3) {
+              stateToUpdateTo = "alive";
+            } else {
+              stateToUpdateTo = "dead";
+            }
+          }
+          incomingGrid[colNum][rowNum].state = stateToUpdateTo;
+        }
+      }
+    }
+
+    grid = incomingGrid;
   };
 
   countNeighbors = (grid, x, y) => {
