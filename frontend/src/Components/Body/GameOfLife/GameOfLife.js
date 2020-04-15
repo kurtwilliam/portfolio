@@ -14,13 +14,13 @@ class GameOfLife extends Component {
     gridSize: 400,
     zoomLevel: 0.5,
     selectedShape: "",
-    cursorAction: "grab"
+    cursorAction: "draw"
   };
 
   handleChange = e =>
     this.setState({
       [e.target.name]:
-        typeof e.target.value === "number"
+        e.target.name !== "cursorAction"
           ? parseInt(e.target.value, 10)
           : e.target.value
     });
@@ -57,7 +57,7 @@ class GameOfLife extends Component {
       selectedShape,
       cursorAction
     } = this.state;
-    console.log(cursorAction);
+
     return (
       <GameOfLifeLayout>
         <GameOfLifeSettings

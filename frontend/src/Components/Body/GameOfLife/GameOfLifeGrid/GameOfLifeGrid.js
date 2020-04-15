@@ -43,6 +43,9 @@ let gridYPos = 0;
 let gridWidth = 0;
 let gridHeight = 0;
 
+// affects # col and # rows - affects performance
+let cursorState = "";
+
 class GameOfLifeGrid extends Component {
   state = {
     grid: [],
@@ -54,11 +57,11 @@ class GameOfLifeGrid extends Component {
   };
 
   componentWillMount = () => {
-    const { speed, zoomLevel } = this.props;
+    const { speed, zoomLevel, cursorAction } = this.props;
     this.calculateWidthAndHeight();
     speedVar = speed;
     zoomLevelVar = zoomLevel;
-
+    cursorState = cursorAction;
     window.addEventListener("resize", this.calculateWidthAndHeight);
   };
 
@@ -82,7 +85,8 @@ class GameOfLifeGrid extends Component {
       randomize,
       toggleState,
       selectedShape,
-      zoomLevel
+      zoomLevel,
+      cursorAction
     } = this.props;
 
     if (paused !== prevProps.paused) {
@@ -99,7 +103,14 @@ class GameOfLifeGrid extends Component {
       toggleState("randomize");
     } else if (zoomLevel !== prevProps.zoomLevel) {
       zoomLevelVar = zoomLevel;
+      this.calculateGridWidthAndHeight();
+      if (this.isCanvasSmallerThanScreen() === true) {
+        this.recalculatePosition(null, null, true);
+      }
+      // this.scaleFunctionality();
       this.p5Canvas.scale(zoomLevelVar);
+    } else if (cursorAction !== prevProps.cursorAction) {
+      cursorState = cursorAction;
     }
     // else if (selectedShape !== prevProps.selectedShape) {
 
@@ -123,7 +134,6 @@ class GameOfLifeGrid extends Component {
       zoomLevelVar -= 0.05;
       if (zoomLevelVar <= 0.25) zoomLevelVar = 0.25;
     }
-
     this.calculateGridWidthAndHeight();
     this.recalculatePosition(null, null, true);
     updateZoom(zoomLevelVar);
@@ -140,6 +150,7 @@ class GameOfLifeGrid extends Component {
   };
 
   calculateGridWidthAndHeight = () => {
+    console.log(numberOfColumns, resolution, zoomLevelVar);
     gridWidth = numberOfColumns * resolution * zoomLevelVar;
     gridHeight = numberOfRows * resolution * zoomLevelVar;
   };
@@ -336,8 +347,8 @@ class GameOfLifeGrid extends Component {
 
     s.draw = () => {
       s.background(0);
-      s.scale(zoomLevelVar);
       s.frameRate(speedVar);
+      s.scale(zoomLevelVar);
       s.translate(-gridXPos, -gridYPos);
 
       if (shouldDraw) {
@@ -399,7 +410,11 @@ class GameOfLifeGrid extends Component {
         clientY > canvasYPos &&
         clientY < canvasYPos + browserHeight
       ) {
-        this.recalculatePosition(movementX, movementY);
+        if (cursorState === "draw") {
+          this.handleClick(e);
+        } else if (cursorState === "grab") {
+          this.recalculatePosition(movementX, movementY);
+        }
       }
     };
   };
