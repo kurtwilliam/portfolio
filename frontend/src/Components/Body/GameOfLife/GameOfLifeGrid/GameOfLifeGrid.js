@@ -21,7 +21,7 @@ const paddingForHeight = 0.84;
 let zoomLevelVar = 1;
 
 // affects # col and # rows - affects performance
-const gridSizeMultiplier = 1.5;
+const gridSizeMultiplier = 2.5;
 
 // for figuring out if it is a click for drawing
 let clickStartX = null;
@@ -124,9 +124,7 @@ class GameOfLifeGrid extends Component {
       if (zoomLevelVar <= 0.25) zoomLevelVar = 0.25;
     }
 
-    gridWidth = numberOfColumns * resolution * zoomLevelVar;
-    gridHeight = numberOfRows * resolution * zoomLevelVar;
-
+    this.calculateGridWidthAndHeight();
     this.recalculatePosition(null, null, true);
     updateZoom(zoomLevelVar);
     this.p5Canvas.scale(zoomLevelVar);
@@ -139,6 +137,11 @@ class GameOfLifeGrid extends Component {
       }
     }
     this.p5Canvas.background(0);
+  };
+
+  calculateGridWidthAndHeight = () => {
+    gridWidth = numberOfColumns * resolution * zoomLevelVar;
+    gridHeight = numberOfRows * resolution * zoomLevelVar;
   };
 
   calculateWidthAndHeight = () => {
@@ -166,8 +169,6 @@ class GameOfLifeGrid extends Component {
     if (randomize) toggleState("randomize");
 
     if (!randomize) {
-      console.log(newGrid);
-      console.log(centerX);
       // square in top left for testing purposes
       // newGrid[1][1].state = "alive";
       // newGrid[1][2].state = "alive";
@@ -280,8 +281,6 @@ class GameOfLifeGrid extends Component {
   };
 
   mousePressed = e => {
-    console.log(e.clientX);
-
     if (
       e &&
       e.clientX > canvasXPos &&
@@ -324,12 +323,10 @@ class GameOfLifeGrid extends Component {
       centerX = Math.floor(numberOfColumns / 2);
       centerY = Math.floor(numberOfRows / 2);
 
-      gridWidth = numberOfColumns * resolution;
-      gridHeight = numberOfRows * resolution;
+      this.calculateGridWidthAndHeight();
 
       // set center of canvas to be center of screen
-      gridXPos = (gridWidth - canvasWidth) / 2;
-      gridYPos = (gridHeight - canvasHeight) / 2;
+      this.centerCanvas();
 
       grid =
         incomingGrid.length < 1
@@ -425,6 +422,7 @@ class GameOfLifeGrid extends Component {
       return this.centerCanvas();
     } else {
       if (
+        // thse just check if the moving of grid is out of bounds
         gridXPos < -1 ||
         gridYPos < -1 ||
         gridYPos * zoomLevelVar + canvasHeight > gridHeight + 4 ||
@@ -512,9 +510,13 @@ class GameOfLifeGrid extends Component {
   };
 
   render() {
+    const { cursorAction } = this.props;
     return (
       <GameOfLifeGridContainer>
-        <GameOfLifeGridLayout ref={ref => (this.p5Ref = ref)} />
+        <GameOfLifeGridLayout
+          cursorAction={cursorAction}
+          ref={ref => (this.p5Ref = ref)}
+        />
       </GameOfLifeGridContainer>
     );
   }

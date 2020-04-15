@@ -12,13 +12,17 @@ class GameOfLife extends Component {
     randomize: false,
     clear: false,
     gridSize: 400,
-    zoomLevel: 1.0,
-    selectedShape: ""
+    zoomLevel: 0.5,
+    selectedShape: "",
+    cursorAction: "grab"
   };
 
   handleChange = e =>
     this.setState({
-      [e.target.name]: parseInt(e.target.value, 10)
+      [e.target.name]:
+        typeof e.target.value === "number"
+          ? parseInt(e.target.value, 10)
+          : e.target.value
     });
 
   toggleState = e => {
@@ -50,9 +54,10 @@ class GameOfLife extends Component {
       clear,
       randomize,
       zoomLevel,
-      selectedShape
+      selectedShape,
+      cursorAction
     } = this.state;
-
+    console.log(cursorAction);
     return (
       <GameOfLifeLayout>
         <GameOfLifeSettings
@@ -65,6 +70,7 @@ class GameOfLife extends Component {
           updateSelectedShape={this.updateSelectedShape}
           updateZoom={this.updateZoom}
           zoomLevel={zoomLevel}
+          cursorAction={cursorAction}
         />
         <GameOfLifeGrid
           speed={speed}
@@ -76,6 +82,7 @@ class GameOfLife extends Component {
           selectedShape={selectedShape}
           updateZoom={this.updateZoom}
           zoomLevel={zoomLevel}
+          cursorAction={cursorAction}
         />
         <GameOfLifeExplanation />
       </GameOfLifeLayout>

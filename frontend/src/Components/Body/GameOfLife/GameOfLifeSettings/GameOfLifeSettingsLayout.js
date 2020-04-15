@@ -21,7 +21,7 @@ const GameOfLifeSettingsLayout = styled.div`
     align-items: center;
   }
 
-  .gol__settings--range {
+  .gol__settings--setting {
     display: flex;
     flex-direction: column;
     margin-left: 12px;

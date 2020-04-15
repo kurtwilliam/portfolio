@@ -23,7 +23,9 @@ class GameOfLifeSettings extends Component {
       updateSelectedShape,
       selectedShape,
       zoomLevel,
-      updateZoom
+      updateZoom,
+      handleChangeCheckbox,
+      cursorAction
     } = this.props;
     return (
       <>
@@ -34,7 +36,7 @@ class GameOfLifeSettings extends Component {
               onClick={toggleState}
               name="paused"
             ></button>
-            <div className="gol__settings--range">
+            <div className="gol__settings--setting">
               <label>Speed - {speed} frames/s</label>
               <input
                 type="range"
@@ -46,7 +48,7 @@ class GameOfLifeSettings extends Component {
                 step={1}
               />
             </div>
-            <div className="gol__settings--range">
+            <div className="gol__settings--setting">
               <label>Zoom - {zoomLevel}</label>
               <input
                 type="range"
@@ -58,18 +60,44 @@ class GameOfLifeSettings extends Component {
                 step={0.05}
               />
             </div>
-            <div className="gol__settings--range">
+            <div className="gol__settings--setting">
               <button onClick={toggleState} name="clear">
                 Clear
               </button>
             </div>
-            <div className="gol__settings--range">
+            <div className="gol__settings--setting">
               <button onClick={toggleState} name="randomize">
                 Randomize
               </button>
             </div>
+            <div className="gol__settings--setting">
+              <span>Cursor Action</span>
+              <div className="gol__settings--setting__radio">
+                <label>
+                  Draw
+                  <input
+                    type="radio"
+                    name="cursorAction"
+                    value="draw"
+                    defaultChecked
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+              <div className="gol__settings--setting__radio">
+                <label>
+                  Move
+                  <input
+                    type="radio"
+                    name="cursorAction"
+                    value="grab"
+                    onChange={handleChange}
+                  />
+                </label>
+              </div>
+            </div>
 
-            <div className="gol__settings--range">
+            <div className="gol__settings--setting">
               <button onClick={() => updateSelectedShape("")}>
                 Add Shapes
               </button>
