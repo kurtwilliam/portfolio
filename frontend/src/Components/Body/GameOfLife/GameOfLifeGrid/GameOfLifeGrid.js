@@ -150,7 +150,6 @@ class GameOfLifeGrid extends Component {
   };
 
   calculateGridWidthAndHeight = () => {
-    console.log(numberOfColumns, resolution, zoomLevelVar);
     gridWidth = numberOfColumns * resolution * zoomLevelVar;
     gridHeight = numberOfRows * resolution * zoomLevelVar;
   };
@@ -450,11 +449,11 @@ class GameOfLifeGrid extends Component {
         if (gridYPos < 0) {
           gridYPos = -1;
         }
-        if (gridXPos * zoomLevelVar + canvasWidth > gridWidth) {
-          gridXPos = gridWidth - canvasWidth + 3;
+        if (gridXPos * zoomLevelVar + canvasWidth > gridWidth + 4) {
+          gridXPos = (gridWidth - canvasWidth) / zoomLevelVar + 3;
         }
-        if (gridYPos * zoomLevelVar + canvasHeight > gridHeight) {
-          gridYPos = gridHeight - canvasHeight + 3;
+        if (gridYPos * zoomLevelVar + canvasHeight > gridHeight + 4) {
+          gridYPos = (gridHeight - canvasHeight) / zoomLevelVar + 3;
         }
       } else {
         gridXPos -= movementX;

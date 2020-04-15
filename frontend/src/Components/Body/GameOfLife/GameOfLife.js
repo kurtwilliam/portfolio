@@ -12,7 +12,7 @@ class GameOfLife extends Component {
     randomize: false,
     clear: false,
     gridSize: 400,
-    zoomLevel: 0.5,
+    zoomLevel: 0.75,
     selectedShape: "",
     cursorAction: "draw"
   };
