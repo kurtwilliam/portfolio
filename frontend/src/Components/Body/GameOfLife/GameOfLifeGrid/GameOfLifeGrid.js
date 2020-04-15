@@ -126,7 +126,9 @@ class GameOfLifeGrid extends Component {
 
     gridWidth = numberOfColumns * resolution * zoomLevelVar;
     gridHeight = numberOfRows * resolution * zoomLevelVar;
-
+    // this.recalculatePosition();
+    console.log(numberOfColumns, resolution, zoomLevelVar);
+    console.log(gridWidth);
     updateZoom(zoomLevelVar);
     this.p5Canvas.scale(zoomLevelVar);
   };
@@ -279,6 +281,8 @@ class GameOfLifeGrid extends Component {
   };
 
   mousePressed = e => {
+    console.log(e.clientX);
+
     if (
       e &&
       e.clientX > canvasXPos &&
@@ -339,7 +343,7 @@ class GameOfLifeGrid extends Component {
       s.scale(zoomLevelVar);
       s.frameRate(speedVar);
       s.translate(-gridXPos, -gridYPos);
-      console.log(gridXPos, gridYPos);
+
       if (shouldDraw) {
         this.drawCalculateNeighbours();
       }
@@ -407,8 +411,8 @@ class GameOfLifeGrid extends Component {
   drawCanvasOneFrameWithoutMakingNewGrid = () => {};
 
   centerCanvas = () => {
-    gridXPos = -(canvasWidth - gridWidth) * 2;
-    gridYPos = -(canvasHeight - gridHeight) * 2;
+    gridXPos = (gridWidth - canvasWidth) / 2 / zoomLevelVar;
+    gridYPos = (gridHeight - canvasHeight) / 2 / zoomLevelVar;
   };
 
   isCanvasSmallerThanScreen = () => {
@@ -421,7 +425,6 @@ class GameOfLifeGrid extends Component {
     if (this.isCanvasSmallerThanScreen() === true) {
       return this.centerCanvas();
     } else {
-      console.log(gridYPos, zoomLevelVar, canvasHeight, gridHeight);
       if (
         gridXPos < -1 ||
         gridYPos < -1 ||
