@@ -1,5 +1,5 @@
 export default {
-  name: "Bouncin Beans",
+  name: "Pure Glider",
   order: 10,
   type: "spaceship",
   source: "https://www.conwaylife.com/wiki/File:Pure_glider_gen_1.png",

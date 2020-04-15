@@ -241,10 +241,10 @@ class GameOfLifeGrid extends Component {
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
+    console.log(shapes);
+    console.log(shapes[0]);
     const currentShape =
-      selectedShape === ""
-        ? shapes["Dot"].config
-        : shapes[selectedShape].config;
+      selectedShape === "" ? shapes[0].config : shapes[selectedShape].config;
     // const centerOfShapeCol = Math.floor(currentShape.length / 2);
     // const centerOfShapeRow = Math.floor(
     //   currentShape[centerOfShapeCol].length / 2
