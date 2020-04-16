@@ -103,12 +103,8 @@ class GameOfLifeGrid extends Component {
       toggleState("randomize");
     } else if (zoomLevel !== prevProps.zoomLevel) {
       zoomLevelVar = zoomLevel;
-      this.calculateGridWidthAndHeight();
-      if (this.isCanvasSmallerThanScreen() === true) {
-        this.recalculatePosition(null, null, true);
-      }
-      // this.scaleFunctionality();
-      this.p5Canvas.scale(zoomLevelVar);
+
+      this.checkGridFitsScreen();
     } else if (cursorAction !== prevProps.cursorAction) {
       cursorState = cursorAction;
     }
@@ -123,7 +119,7 @@ class GameOfLifeGrid extends Component {
   };
 
   scaleFunctionality = e => {
-    const { zoomLevel, updateZoom } = this.props;
+    const { zoomLevel } = this.props;
     e.preventDefault();
 
     zoomLevelVar = parseFloat(zoomLevel);
@@ -134,11 +130,25 @@ class GameOfLifeGrid extends Component {
       zoomLevelVar -= 0.05;
       if (zoomLevelVar <= 0.25) zoomLevelVar = 0.25;
     }
-    this.calculateGridWidthAndHeight();
-    this.recalculatePosition(null, null, true);
-    updateZoom(zoomLevelVar);
-    this.p5Canvas.scale(zoomLevelVar);
+
+    // before we actually reflect the new zoom, we need to confirm
+    // it's still within the screen.
+    this.checkGridFitsScreen();
   };
+
+  checkGridFitsScreen = () => {
+    this.calculateGridWidthAndHeight();
+    if (this.isCanvasSmallerThanScreen()) {
+      this.fitGridToScreen();
+      this.calculateGridWidthAndHeight();
+    }
+    this.recalculatePosition(null, null, true);
+    this.props.updateZoom(zoomLevelVar);
+    return this.p5Canvas.scale(zoomLevelVar);
+  };
+
+  fitGridToScreen = () =>
+    (zoomLevelVar = (canvasWidth / (numberOfColumns * resolution)).toFixed(2));
 
   clearGrid = () => {
     for (let colNum = 0; colNum < numberOfColumns; colNum++) {
@@ -150,8 +160,8 @@ class GameOfLifeGrid extends Component {
   };
 
   calculateGridWidthAndHeight = () => {
-    gridWidth = numberOfColumns * resolution * zoomLevelVar;
-    gridHeight = numberOfRows * resolution * zoomLevelVar;
+    gridWidth = Math.floor(numberOfColumns * resolution * zoomLevelVar);
+    gridHeight = Math.floor(numberOfRows * resolution * zoomLevelVar);
   };
 
   calculateWidthAndHeight = () => {
@@ -274,12 +284,6 @@ class GameOfLifeGrid extends Component {
           resolution - 1,
           resolution - 1
         );
-        // this.p5Canvas.rect(
-        //   x + col * resolution * zoomLevel,
-        //   y + row * resolution * zoomLevel,
-        //   resolution - 1,
-        //   resolution - 1
-        // );
       }
     }
   };
@@ -327,8 +331,12 @@ class GameOfLifeGrid extends Component {
       // canvas.mouseReleased(e => this.mouseReleased(e));
 
       // figure out how big canvas should be
-      numberOfColumns = Math.round((s.width / resolution) * gridSizeMultiplier);
-      numberOfRows = Math.round((s.height / resolution) * gridSizeMultiplier);
+      numberOfColumns = Math.floor(
+        (Math.floor(s.width) / resolution) * gridSizeMultiplier
+      );
+      numberOfRows = Math.floor(
+        (Math.floor(s.height) / resolution) * gridSizeMultiplier
+      );
 
       // set framerate depending on speed
       s.frameRate(speed);

@@ -24,7 +24,6 @@ class GameOfLifeSettings extends Component {
       selectedShape,
       zoomLevel,
       updateZoom,
-      handleChangeCheckbox,
       cursorAction
     } = this.props;
     return (

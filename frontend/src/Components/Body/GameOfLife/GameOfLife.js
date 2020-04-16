@@ -38,13 +38,16 @@ class GameOfLife extends Component {
       selectedShape:
         shapeName === "" && prevState.selectedShape === ""
           ? Object.keys(shapes)[0]
-          : shapeName
+          : shapeName,
+      cursorAction: shapeName !== "" ? "draw" : prevState.cursorAction
     }));
 
-  updateZoom = zoom =>
+  updateZoom = zoom => {
+    // console.log();
     this.setState({
       zoomLevel: parseFloat(zoom.target ? zoom.target.value : zoom).toFixed(2)
     });
+  };
 
   render() {
     const {
