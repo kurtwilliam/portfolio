@@ -7,7 +7,6 @@ import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
 import shapes from "../shapes";
 
 // variables that change for drawing
-let shouldDraw = true;
 let grid = [];
 let incomingGrid = [];
 let resolution = 10;
@@ -43,8 +42,11 @@ let gridYPos = 0;
 let gridWidth = 0;
 let gridHeight = 0;
 
-// affects # col and # rows - affects performance
+// Is the mouse draw or grab?
 let cursorState = "";
+
+// Bool to change grid without recalculating grid
+let redrawCanvas = false;
 
 class GameOfLifeGrid extends Component {
   state = {
@@ -286,10 +288,12 @@ class GameOfLifeGrid extends Component {
         );
       }
     }
+
+    this.drawCanvasOneFrameWithoutMakingNewGrid();
   };
 
   mouseReleased = e => {
-    if (e.x === clickStartX && e.y === clickStartY) {
+    if (e.x === clickStartX && e.y === clickStartY && cursorState === "draw") {
       this.handleClick(e);
     } else {
       this.recalculatePosition(e.movementX, e.movementY);
@@ -358,11 +362,10 @@ class GameOfLifeGrid extends Component {
 
     s.draw = () => {
       s.background(0);
-      s.frameRate(speedVar);
       s.scale(zoomLevelVar);
       s.translate(-gridXPos, -gridYPos);
 
-      if (shouldDraw) {
+      if (!redrawCanvas) {
         this.drawCalculateNeighbours();
       }
 
@@ -401,8 +404,9 @@ class GameOfLifeGrid extends Component {
           }
         }
       }
+      s.frameRate(speedVar);
 
-      // shouldDraw = true;
+      redrawCanvas = false;
     };
 
     function windowResized() {
@@ -411,6 +415,8 @@ class GameOfLifeGrid extends Component {
 
     s.mouseDragged = e => {
       const { movementX, movementY, clientX, clientY } = e;
+      // TODO investigate what happened to drawing speed
+      // investigate performance first
 
       // first we gotta check to make sure were still
       // within the canvas during the drag so it doesn't just
@@ -430,7 +436,10 @@ class GameOfLifeGrid extends Component {
     };
   };
 
-  drawCanvasOneFrameWithoutMakingNewGrid = () => {};
+  drawCanvasOneFrameWithoutMakingNewGrid = () => {
+    redrawCanvas = true;
+    this.p5Canvas.frameRate(1000);
+  };
 
   centerCanvas = () => {
     gridXPos = (gridWidth - canvasWidth) / 2 / zoomLevelVar;
@@ -471,6 +480,7 @@ class GameOfLifeGrid extends Component {
         gridXPos -= movementX;
         gridYPos -= movementY;
       }
+      this.drawCanvasOneFrameWithoutMakingNewGrid();
     }
   };
 
