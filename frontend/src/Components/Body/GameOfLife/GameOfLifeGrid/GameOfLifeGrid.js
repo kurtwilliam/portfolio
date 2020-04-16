@@ -241,8 +241,6 @@ class GameOfLifeGrid extends Component {
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
-    console.log(shapes);
-    console.log(shapes[0]);
     const currentShape =
       selectedShape === "" ? shapes[0].config : shapes[selectedShape].config;
     // const centerOfShapeCol = Math.floor(currentShape.length / 2);
@@ -271,11 +269,17 @@ class GameOfLifeGrid extends Component {
         this.p5Canvas.stroke(0);
 
         this.p5Canvas.rect(
-          x + (col * resolution) / zoomLevel,
-          y + (row * resolution) / zoomLevel,
+          (x * resolution) / zoomLevel,
+          (y * resolution) / zoomLevel,
           resolution - 1,
           resolution - 1
         );
+        // this.p5Canvas.rect(
+        //   x + col * resolution * zoomLevel,
+        //   y + row * resolution * zoomLevel,
+        //   resolution - 1,
+        //   resolution - 1
+        // );
       }
     }
   };
