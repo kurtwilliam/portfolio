@@ -1,7 +1,7 @@
 export default {
   name: "Toad",
-  order: 10,
-  type: "oscillator",
+
+  type: "Oscillator",
   config: [
     [false, true, true, true],
     [true, true, true, false]

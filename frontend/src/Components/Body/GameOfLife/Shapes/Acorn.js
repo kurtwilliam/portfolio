@@ -1,7 +1,6 @@
 export default {
   name: "Acorn",
-  order: 10,
-  type: "methuselah",
+  type: "Methuselah",
   config: [
     [false, true, false, false, false, false, false],
     [false, false, false, true, false, false, false],

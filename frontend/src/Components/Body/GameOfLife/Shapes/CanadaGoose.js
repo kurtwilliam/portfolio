@@ -1,7 +1,7 @@
 export default {
   name: "Canada Goose",
-  order: 51,
-  type: "spaceship",
+
+  type: "SpaceShip",
   source: "https://www.conwaylife.com/wiki/Canada_goose",
   config: [
     [true, true, true],

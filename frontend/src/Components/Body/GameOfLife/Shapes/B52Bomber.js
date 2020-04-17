@@ -1,7 +1,6 @@
 export default {
   name: "B-52 Bomber",
-  order: 10,
-  type: "gun",
+  type: "Gun",
   source: "https://www.conwaylife.com/wiki/B-52_bomber",
   config: [
     [

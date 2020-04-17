@@ -1,7 +1,7 @@
 export default {
   name: "Copper Head",
-  order: 24,
-  type: "spaceship",
+
+  type: "SpaceShip",
   source: "https://www.conwaylife.com/wiki/Copperhead",
   config: [
     [false, true, true, false, false, true, true, false],

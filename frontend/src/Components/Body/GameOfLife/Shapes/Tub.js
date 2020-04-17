@@ -1,12 +1,9 @@
 export default {
-  name: "Explosion",
-
-  type: "Oscillator",
+  name: "Tub",
+  type: "StillLife",
   config: [
     [false, true, false],
     [true, false, true],
-    [true, false, true],
-    [false, true, false],
     [false, true, false]
   ]
 };

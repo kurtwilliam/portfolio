@@ -1,7 +1,7 @@
 export default {
   name: "Spider",
-  order: 22,
-  type: "spaceship",
+
+  type: "SpaceShip",
   source: "https://www.conwaylife.com/wiki/Spider",
   config: [
     [

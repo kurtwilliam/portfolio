@@ -1,7 +1,7 @@
 export default {
   name: "Blinker",
-  order: 10,
-  type: "oscillator",
+
+  type: "Oscillator",
   config: [
     [
       false,

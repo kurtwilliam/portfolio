@@ -1,7 +1,7 @@
 export default {
   name: "R Pentomino",
-  order: 15,
-  type: "methuselah",
+
+  type: "Methuselah",
   source: "https://www.conwaylife.com/wiki/R-pentomino",
   config: [
     [false, true, true],

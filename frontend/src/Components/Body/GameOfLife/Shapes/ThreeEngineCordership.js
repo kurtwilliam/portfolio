@@ -1,7 +1,7 @@
 export default {
   name: "3-Engine Cordership",
-  order: 20,
-  type: "spaceship",
+
+  type: "SpaceShip",
   source:"https://www.conwaylife.com/wiki/3-engine_Cordership#Image_gallery",
   config: 
     [

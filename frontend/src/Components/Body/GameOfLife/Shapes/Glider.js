@@ -1,7 +1,7 @@
 export default {
   name: "Glider",
-  order: 4,
-  type: "spaceship",
+
+  type: "SpaceShip",
   source: "https://www.conwaylife.com/wiki/Glider",
   config: [
     [false, true, false],

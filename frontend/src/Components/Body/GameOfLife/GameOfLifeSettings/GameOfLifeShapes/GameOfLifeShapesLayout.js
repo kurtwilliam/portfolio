@@ -76,20 +76,26 @@ const GameOfLifeShapesLayout = styled.div`
         font-size: 1.2rem;
       }
 
-      &.gun {
+      &.Gun {
         border-left: 4px solid green;
       }
-      &.spaceship {
+      &.SpaceShip {
         border-left: 4px solid maroon;
       }
-      &.oscillator {
+      &.Oscillator {
         border-left: 4px solid yellow;
       }
-      &.methuselah {
+      &.Methuselah {
         border-left: 4px solid lightblue;
       }
-      &.stillLife {
+      &.StillLife {
         border-left: 4px solid black;
+      }
+      &.Puffer {
+        border-left: 4px solid yellow;
+      }
+      &.Agar {
+        border-left: 4px solid brown;
       }
 
       &__square {
@@ -117,20 +123,26 @@ const GameOfLifeShapesLayout = styled.div`
     }
 
     &--type {
-      &__gun {
+      &__Gun {
         background: green;
       }
-      &__spaceship {
+      &__SpaceShip {
         background: maroon;
       }
-      &__oscillator {
+      &__Oscillator {
         background: yellow;
       }
-      &__methuselah {
+      &__Methuselah {
         background: lightblue;
       }
-      &__stillLife {
+      &__StillLife {
         background: black;
+      }
+      &__Puffer {
+        background: yellow;
+      }
+      &__Agar {
+        background: brown;
       }
     }
   }

@@ -1,7 +1,7 @@
 export default {
   name: "Block",
-  order: 2,
-  type: "stillLife",
+
+  type: "StillLife",
   source: "",
   config: [
     [true, true],

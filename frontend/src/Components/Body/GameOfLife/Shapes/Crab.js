@@ -1,7 +1,7 @@
 export default {
   name: "Crab",
-  order: 42,
-  type: "spaceship",
+
+  type: "SpaceShip",
   source: "https://www.conwaylife.com/wiki/Crab",
   config: [
     [false, false, false, false, false, false, false, false, true, true],

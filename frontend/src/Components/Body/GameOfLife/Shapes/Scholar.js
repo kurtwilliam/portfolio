@@ -1,7 +1,7 @@
 export default {
   name: "Scholar",
-  order: 29,
-  type: "spaceship",
+
+  type: "SpaceShip",
   source: "https://www.conwaylife.com/wiki/Scholar",
   config: [
     [false,false,false,false,false,false,false,false,false,false,true,true,true,false,false,false,false,false,false,false,false,false,false,],

@@ -1,7 +1,7 @@
 export default {
   name: "Pulsar",
-  order: 10,
-  type: "oscillator",
+
+  type: "Oscillator",
   config: [
     [true, false, true, false, true],
     [true, false, false, false, true],

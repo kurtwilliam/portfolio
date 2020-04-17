@@ -1,7 +1,7 @@
 export default {
   name: "Bouncin Beans",
-  order: 10,
-  type: "oscillator",
+
+  type: "Oscillator",
   config: [
     [false, true, true, false, true, true, false],
     [false, true, true, false, true, true, false],

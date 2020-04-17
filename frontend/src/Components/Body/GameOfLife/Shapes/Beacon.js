@@ -1,7 +1,7 @@
 export default {
   name: "Beacon",
-  order: 10,
-  type: "oscillator",
+
+  type: "Oscillator",
   config: [
     [true, true, false, false],
     [true, true, false, false],

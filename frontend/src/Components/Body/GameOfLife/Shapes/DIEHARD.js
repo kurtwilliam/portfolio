@@ -1,7 +1,7 @@
 export default {
   name: "DIEHARD",
-  order: 10,
-  type: "methuselah",
+
+  type: "Methuselah",
   config: [
     [false, false, false, false, false, false, true, false],
     [true, true, false, false, false, false, false, false],

@@ -78,6 +78,11 @@ class GameOfLifeExplanation extends Component {
           mutation and properly copying/updating nested objects in application
           state 😐. Yay.
         </p>
+        <p>
+          Crazy Ones: [State] Zero Encoded by Zero Population 261841×261841
+          https://www.conwaylife.com/wiki/0E0P_metacell
+          Caterloopillar https://www.conwaylife.com/wiki/Caterloopillar
+        </p>
       </GameOfLifeExplanationLayout>
     );
   }

@@ -1,7 +1,7 @@
 export default {
   name: "Bug",
-  order: 10,
-  type: "oscillator",
+
+  type: "Oscillator",
   config: [
     [true, true, true, true, true, true],
     [false, false, false, false, false, true],

@@ -1,7 +1,7 @@
 export default {
   name: "Big Spaceship",
-  order: 10,
-  type: "spaceship",
+
+  type: "SpaceShip",
   config: [
     [false, false, false, true, true, false],
     [true, true, true, false, true, true],

@@ -1,7 +1,6 @@
 export default {
   name: "Achims p144",
-  order: 30,
-  type: "oscillator",
+  type: "Oscillator",
   source: "https://www.conwaylife.com/wiki/Achim%27s_p144",
   config: [
     [

@@ -1,7 +1,6 @@
 export default {
   name: "Space Ship",
-  order: 9,
-  type: "spaceship",
+  type: "SpaceShip",
   source: "https://www.conwaylife.com/wiki/Lightweight_spaceship",
   config: [
     [false, true, true, true, true],

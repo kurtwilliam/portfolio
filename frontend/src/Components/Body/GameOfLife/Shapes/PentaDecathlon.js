@@ -1,6 +1,6 @@
 export default {
   name: "Penta-Decathlon",
-  order: 10,
-  type: "oscillator",
+
+  type: "Oscillator",
   config: [[true, true, true, true, true, true, true, true, true, true]]
 };

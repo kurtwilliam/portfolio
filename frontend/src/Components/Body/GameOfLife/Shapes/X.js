@@ -1,7 +1,6 @@
 export default {
   name: "X",
-  order: 10,
-  type: "methuselah",
+  type: "Methuselah",
   source: "",
   config: [
     [false, true, false],
