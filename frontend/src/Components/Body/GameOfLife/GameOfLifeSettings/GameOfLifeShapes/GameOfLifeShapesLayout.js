@@ -19,6 +19,7 @@ const GameOfLifeShapesLayout = styled.div`
   transition: left 200ms;
   flex-direction: column;
   max-height: 84vh;
+  min-width: 225px;
   // overflow-y: scroll;
 
   &.hidden {
@@ -113,6 +114,24 @@ const GameOfLifeShapesLayout = styled.div`
 
     &--row {
       display: flex;
+    }
+
+    &--type {
+      &__gun {
+        background: green;
+      }
+      &__spaceship {
+        background: maroon;
+      }
+      &__oscillator {
+        background: yellow;
+      }
+      &__methuselah {
+        background: lightblue;
+      }
+      &__stillLife {
+        background: black;
+      }
     }
   }
 `;
