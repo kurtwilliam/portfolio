@@ -70,8 +70,8 @@ class GameOfLifeGrid extends Component {
   componentDidMount = () => {
     this.p5Canvas = new p5(this.Sketch, this.p5Ref);
 
-    // this.p5Ref.addEventListener("mousedown", e => this.mousePressed(e));
-    // this.p5Ref.addEventListener("mouseup", e => this.mouseReleased(e));
+    this.p5Ref.addEventListener("mousedown", e => this.mousePressed(e));
+    this.p5Ref.addEventListener("mouseup", e => this.mouseReleased(e));
 
     // canvas.mouseReleased(e => this.mouseReleased(e));
     // this.p5Ref.addEventListener("wheel", e => this.scaleFunctionality(e));
@@ -279,12 +279,39 @@ class GameOfLifeGrid extends Component {
         this.p5Canvas.fill(fill);
         this.p5Canvas.stroke(0);
         this.p5Canvas.rect(
-          x + row * resolution,
-          y + col * resolution,
+          x + col * resolution,
+          y + row * resolution,
           resolution,
           resolution
         );
       }
+    }
+  };
+
+  mouseReleased = e => {
+    if (cursorState === "draw" && e.x === clickStartX && e.y === clickStartY) {
+      this.handleClick(e);
+    } else if (
+      cursorState === "grab" &&
+      e.x !== clickStartX &&
+      e.y !== clickStartY
+    ) {
+      this.recalculatePosition(e.movementX, e.movementY);
+    }
+    clickStartX = null;
+    clickStartY = null;
+  };
+
+  mousePressed = e => {
+    if (
+      e &&
+      e.clientX > canvasXPos &&
+      e.clientX < canvasXPos + canvasWidth &&
+      e.clientY > canvasYPos &&
+      e.clientY < canvasYPos + canvasHeight
+    ) {
+      clickStartX = e.x;
+      clickStartY = e.y;
     }
   };
 
@@ -304,7 +331,7 @@ class GameOfLifeGrid extends Component {
       // add event handlers - defining here to canvas
       // makes it so they only apply to canvas
       canvas.mouseWheel(e => this.scaleFunctionality(e));
-      // canvas.mousePressed(e => this.mousePressed(e));
+      // canvas.mousePressed(e => mousePressed(e));
       // canvas.mouseReleased(e => this.mouseReleased(e));
 
       // figure out how big canvas should be
