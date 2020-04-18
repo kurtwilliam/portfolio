@@ -70,8 +70,8 @@ class GameOfLifeGrid extends Component {
   componentDidMount = () => {
     this.p5Canvas = new p5(this.Sketch, this.p5Ref);
 
-    this.p5Ref.addEventListener("mousedown", e => this.mousePressed(e));
-    this.p5Ref.addEventListener("mouseup", e => this.mouseReleased(e));
+    // this.p5Ref.addEventListener("mousedown", e => this.mousePressed(e));
+    // this.p5Ref.addEventListener("mouseup", e => this.mouseReleased(e));
 
     // canvas.mouseReleased(e => this.mouseReleased(e));
     // this.p5Ref.addEventListener("wheel", e => this.scaleFunctionality(e));
@@ -275,43 +275,16 @@ class GameOfLifeGrid extends Component {
         // if outside of grid when rendering
         if (!incomingGrid[xPos + col] || !incomingGrid[xPos + col][yPos + row])
           continue;
-
         incomingGrid[xPos + col][yPos + row].state = state;
         this.p5Canvas.fill(fill);
         this.p5Canvas.stroke(0);
-
         this.p5Canvas.rect(
-          (x * resolution) / zoomLevel,
-          (y * resolution) / zoomLevel,
-          resolution - 1,
-          resolution - 1
+          x + row * resolution,
+          y + col * resolution,
+          resolution,
+          resolution
         );
       }
-    }
-
-    this.drawCanvasOneFrameWithoutMakingNewGrid();
-  };
-
-  mouseReleased = e => {
-    if (e.x === clickStartX && e.y === clickStartY && cursorState === "draw") {
-      this.handleClick(e);
-    } else {
-      this.recalculatePosition(e.movementX, e.movementY);
-    }
-    clickStartX = null;
-    clickStartY = null;
-  };
-
-  mousePressed = e => {
-    if (
-      e &&
-      e.clientX > canvasXPos &&
-      e.clientX < canvasXPos + canvasWidth &&
-      e.clientY > canvasYPos &&
-      e.clientY < canvasYPos + canvasHeight
-    ) {
-      clickStartX = e.x;
-      clickStartY = e.y;
     }
   };
 
