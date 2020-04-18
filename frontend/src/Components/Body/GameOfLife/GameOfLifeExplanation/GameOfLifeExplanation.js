@@ -79,9 +79,16 @@ class GameOfLifeExplanation extends Component {
           state 😐. Yay.
         </p>
         <p>
+          I learned how to optimize performance; using the performance tab in
+          google chrome I identified which function calls were slowest and
+          improved them. Some examples are: not creating new arrays at each
+          interval, more checks to see if each loop is actually necessary, and
+          more efficiently counting neighbours.
+        </p>
+        <p>
           Crazy Ones: [State] Zero Encoded by Zero Population 261841×261841
-          https://www.conwaylife.com/wiki/0E0P_metacell
-          Caterloopillar https://www.conwaylife.com/wiki/Caterloopillar
+          https://www.conwaylife.com/wiki/0E0P_metacell Caterloopillar
+          https://www.conwaylife.com/wiki/Caterloopillar
         </p>
       </GameOfLifeExplanationLayout>
     );

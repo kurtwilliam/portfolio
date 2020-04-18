@@ -219,16 +219,17 @@ class GameOfLifeGrid extends Component {
     for (let colNum = 0; colNum < cols; colNum++) {
       newArray[colNum] = [];
       for (let rowNum = 0; rowNum < rows; rowNum++) {
+        const state =
+          shouldRandomize === true
+            ? Math.random() < 0.5
+              ? "dead"
+              : "alive"
+            : "dead";
         newArray[colNum][rowNum] = {
-          state:
-            shouldRandomize === true
-              ? Math.random() < 0.5
-                ? "dead"
-                : "alive"
-              : "dead",
+          state,
           id: `row${rowNum}col${colNum}`,
-          rowId: rowNum,
-          colId: colNum
+          nextState: null,
+          prevState: state
         };
       }
     }
@@ -281,8 +282,8 @@ class GameOfLifeGrid extends Component {
         this.p5Canvas.rect(
           x + col * resolution,
           y + row * resolution,
-          resolution,
-          resolution
+          resolution - 1,
+          resolution - 1
         );
       }
     }
@@ -361,6 +362,7 @@ class GameOfLifeGrid extends Component {
     };
 
     s.draw = () => {
+      // TODO: refactor
       s.background(0);
       s.scale(zoomLevelVar);
       s.translate(-gridXPos, -gridYPos);
@@ -485,6 +487,7 @@ class GameOfLifeGrid extends Component {
   };
 
   drawCalculateNeighbours = () => {
+    // TODO: refactor
     incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
 
     if (grid.length > 0) {
