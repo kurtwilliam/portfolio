@@ -263,21 +263,20 @@ class GameOfLifeGrid extends Component {
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
-    // const isDot = selectedShape === "" || selectedShape === "Dot";
-    // console.log(isDot)
-
     const currentShape =
       selectedShape === "" ? shapes[0].config : shapes[selectedShape].config;
 
     for (let row = 0; row < currentShape.length; row++) {
       for (let col = 0; col < currentShape[row].length; col++) {
+        // if outside of grid when rendering
+        if (!grid[xPos + col] || !grid[xPos + col][yPos + row]) continue;
         // get mouse position
         // and change there depending if alive/not
         // then change the incoming grid
         let state = "dead";
         let fill = 0;
         if (currentShape[row][col] === true) {
-          // incase deleting cells
+          // incase deleting cells and is single dot
           if (
             (selectedShape === "" || selectedShape === "Dot") &&
             grid[xPos + col][yPos + row].state === "alive"
@@ -289,8 +288,6 @@ class GameOfLifeGrid extends Component {
           }
         }
 
-        // if outside of grid when rendering
-        if (!grid[xPos + col] || !grid[xPos + col][yPos + row]) continue;
         grid[xPos + col][yPos + row].state = state;
 
         this.p5Canvas.fill(fill);
@@ -320,16 +317,8 @@ class GameOfLifeGrid extends Component {
   };
 
   mousePressed = e => {
-    // if (
-    //   e &&
-    //   e.clientX > canvasXPos &&
-    //   e.clientX < canvasXPos + canvasWidth &&
-    //   e.clientY > canvasYPos &&
-    //   e.clientY < canvasYPos + canvasHeight
-    // ) {
     clickStartX = e.x;
     clickStartY = e.y;
-    // }
   };
 
   Sketch = s => {
@@ -402,10 +391,12 @@ class GameOfLifeGrid extends Component {
           let x = colNum * resolution;
           let y = rowNum * resolution;
 
-          grid[colNum][rowNum].state =
-            grid[colNum][rowNum].nextState !== null
-              ? grid[colNum][rowNum].nextState
-              : "dead";
+          if (!redrawCanvas) {
+            grid[colNum][rowNum].state =
+              grid[colNum][rowNum].nextState !== null
+                ? grid[colNum][rowNum].nextState
+                : "dead";
+          }
 
           if (grid[colNum][rowNum].state === "alive") {
             s.fill(255);

@@ -42,12 +42,10 @@ class GameOfLife extends Component {
       cursorAction: shapeName !== "" ? "draw" : prevState.cursorAction
     }));
 
-  updateZoom = zoom => {
-    // console.log();
+  updateZoom = zoom =>
     this.setState({
       zoomLevel: parseFloat(zoom.target ? zoom.target.value : zoom).toFixed(2)
     });
-  };
 
   render() {
     const {
@@ -60,7 +58,6 @@ class GameOfLife extends Component {
       selectedShape,
       cursorAction
     } = this.state;
-    console.log('paused',paused)
 
     return (
       <GameOfLifeLayout>
@@ -93,15 +90,5 @@ class GameOfLife extends Component {
     );
   }
 }
-
-// const GameOfLife = () => {
-//   const [grid, gridOverlay] = useState({});
-//   return (
-//     <GameOfLifeLayout>
-//       {/* <GameOfLifeGrid />
-//       <GameOfLifeOverlay /> */}
-//     </GameOfLifeLayout>
-//   );
-// };
 
 export default GameOfLife;
