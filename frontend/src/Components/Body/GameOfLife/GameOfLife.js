@@ -60,6 +60,7 @@ class GameOfLife extends Component {
       selectedShape,
       cursorAction
     } = this.state;
+    console.log('paused',paused)
 
     return (
       <GameOfLifeLayout>

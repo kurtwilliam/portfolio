@@ -44,6 +44,7 @@ let gridHeight = 0;
 
 // Is the mouse draw or grab?
 let cursorState = "";
+let isPaused = false;
 
 // Bool to change grid without recalculating grid
 let redrawCanvas = false;
@@ -97,6 +98,7 @@ class GameOfLifeGrid extends Component {
     } = this.props;
 
     if (paused !== prevProps.paused) {
+      isPaused = paused;
       this.p5Canvas.frameRate(paused === true ? 0 : speed);
     } else if (paused !== true && speed !== prevProps.speed) {
       speedVar = speed;
@@ -243,6 +245,7 @@ class GameOfLifeGrid extends Component {
   };
 
   handleClick = e => {
+    if (e.target.tagName !== "CANVAS") return;
     const { selectedShape, zoomLevel } = this.props;
 
     // we want to know what square we pressed
@@ -260,12 +263,11 @@ class GameOfLifeGrid extends Component {
 
     // if we are clicking the grid to put on a shape
     // use the mouse pos to fill in the surrounding shapes
+    // const isDot = selectedShape === "" || selectedShape === "Dot";
+    // console.log(isDot)
+
     const currentShape =
       selectedShape === "" ? shapes[0].config : shapes[selectedShape].config;
-    // const centerOfShapeCol = Math.floor(currentShape.length / 2);
-    // const centerOfShapeRow = Math.floor(
-    //   currentShape[centerOfShapeCol].length / 2
-    // );
 
     for (let row = 0; row < currentShape.length; row++) {
       for (let col = 0; col < currentShape[row].length; col++) {
@@ -275,14 +277,22 @@ class GameOfLifeGrid extends Component {
         let state = "dead";
         let fill = 0;
         if (currentShape[row][col] === true) {
-          state = "alive";
-          fill = 255;
+          // incase deleting cells
+          if (
+            (selectedShape === "" || selectedShape === "Dot") &&
+            grid[xPos + col][yPos + row].state === "alive"
+          ) {
+            state = "dead";
+          } else {
+            state = "alive";
+            fill = 255;
+          }
         }
 
         // if outside of grid when rendering
         if (!grid[xPos + col] || !grid[xPos + col][yPos + row]) continue;
-
         grid[xPos + col][yPos + row].state = state;
+
         this.p5Canvas.fill(fill);
         this.p5Canvas.stroke(0);
         this.p5Canvas.rect(
@@ -310,20 +320,20 @@ class GameOfLifeGrid extends Component {
   };
 
   mousePressed = e => {
-    if (
-      e &&
-      e.clientX > canvasXPos &&
-      e.clientX < canvasXPos + canvasWidth &&
-      e.clientY > canvasYPos &&
-      e.clientY < canvasYPos + canvasHeight
-    ) {
-      clickStartX = e.x;
-      clickStartY = e.y;
-    }
+    // if (
+    //   e &&
+    //   e.clientX > canvasXPos &&
+    //   e.clientX < canvasXPos + canvasWidth &&
+    //   e.clientY > canvasYPos &&
+    //   e.clientY < canvasYPos + canvasHeight
+    // ) {
+    clickStartX = e.x;
+    clickStartY = e.y;
+    // }
   };
 
   Sketch = s => {
-    const { speed, selectedShape } = this.props;
+    const { speed, selectedShape, paused } = this.props;
 
     s.setup = () => {
       let canvas = s
@@ -376,6 +386,16 @@ class GameOfLifeGrid extends Component {
       if (!redrawCanvas) {
         this.drawCalculateNeighbours();
       }
+      // draw borders
+      s.stroke("#FF0000");
+      s.fill("rgba(255,0,0,0)");
+
+      s.rect(
+        0,
+        0,
+        gridWidth * gridSizeMultiplier,
+        gridHeight * gridSizeMultiplier
+      );
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -391,13 +411,14 @@ class GameOfLifeGrid extends Component {
             s.fill(255);
             s.stroke(0);
             s.rect(x, y, resolution - 1, resolution - 1);
-          } else {
           }
-          grid[colNum][rowNum].nextState = null;
+          if (!redrawCanvas) {
+            grid[colNum][rowNum].nextState = null;
+          }
         }
       }
 
-      s.frameRate(speedVar);
+      s.frameRate(isPaused ? 0 : speedVar);
 
       redrawCanvas = false;
     };
