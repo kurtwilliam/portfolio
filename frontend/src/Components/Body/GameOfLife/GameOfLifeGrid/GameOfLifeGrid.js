@@ -8,7 +8,7 @@ import shapes from "../shapes";
 
 // variables that change for drawing
 let grid = [];
-let incomingGrid = [];
+// let incomingGrid = [];
 let resolution = 10;
 let numberOfColumns = 0;
 let numberOfRows = 0;
@@ -48,10 +48,15 @@ let cursorState = "";
 // Bool to change grid without recalculating grid
 let redrawCanvas = false;
 
+// For counting neighbour conditions
+let minAliveNeighbours = 2;
+let maxAliveNeighbours = 3;
+let minDeadNeighbours = 3;
+let maxDeadNeighbours = 3;
+
 class GameOfLifeGrid extends Component {
   state = {
     grid: [],
-    incomingGrid: [],
     shouldUpdate: true,
     shouldUpdateRowId: null,
     shouldUpdateSquareId: null,
@@ -155,7 +160,8 @@ class GameOfLifeGrid extends Component {
   clearGrid = () => {
     for (let colNum = 0; colNum < numberOfColumns; colNum++) {
       for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-        incomingGrid[colNum][rowNum].state = "dead";
+        grid[colNum][rowNum].state = "dead";
+        grid[colNum][rowNum].nextState = "dead";
       }
     }
     this.p5Canvas.background(0);
@@ -204,11 +210,11 @@ class GameOfLifeGrid extends Component {
       // newGrid[numberOfColumns - 3][2].state = "alive";
       //
       // flourish in center
-      newGrid[centerX][centerY].state = "alive";
-      newGrid[centerX][centerY - 1].state = "alive";
-      newGrid[centerX][centerY + 1].state = "alive";
-      newGrid[centerX - 1][centerY].state = "alive";
-      newGrid[centerX + 1][centerY].state = "alive";
+      newGrid[centerX][centerY].nextState = "alive";
+      newGrid[centerX][centerY - 1].nextState = "alive";
+      newGrid[centerX][centerY + 1].nextState = "alive";
+      newGrid[centerX - 1][centerY].nextState = "alive";
+      newGrid[centerX + 1][centerY].nextState = "alive";
     }
 
     return newGrid;
@@ -274,9 +280,9 @@ class GameOfLifeGrid extends Component {
         }
 
         // if outside of grid when rendering
-        if (!incomingGrid[xPos + col] || !incomingGrid[xPos + col][yPos + row])
-          continue;
-        incomingGrid[xPos + col][yPos + row].state = state;
+        if (!grid[xPos + col] || !grid[xPos + col][yPos + row]) continue;
+
+        grid[xPos + col][yPos + row].state = state;
         this.p5Canvas.fill(fill);
         this.p5Canvas.stroke(0);
         this.p5Canvas.rect(
@@ -356,9 +362,9 @@ class GameOfLifeGrid extends Component {
       this.centerCanvas();
 
       grid =
-        incomingGrid.length < 1
-          ? this.setupGrid(numberOfColumns, numberOfRows)
-          : incomingGrid;
+        grid[0] && grid[0][0].nextState !== null
+          ? grid
+          : this.setupGrid(numberOfColumns, numberOfRows);
     };
 
     s.draw = () => {
@@ -376,36 +382,21 @@ class GameOfLifeGrid extends Component {
           let x = colNum * resolution;
           let y = rowNum * resolution;
 
-          // draw borders if at edge
-          // x pos, y pos, width, height
-          if (colNum === 0) {
-            // left border
-            s.stroke("#FF0000");
-            s.rect(x, y, 1, resolution);
-          }
-          if (colNum === numberOfColumns - 1) {
-            // right border
-            s.stroke("#FF0000");
-            s.rect(x + resolution - 1, y, 1, resolution);
-          }
-          if (rowNum === 0) {
-            // top border
-            s.stroke("#FF0000");
-            s.rect(x, y, resolution, 1);
-          }
-          if (rowNum === numberOfRows - 1) {
-            // bottom border
-            s.stroke("#FF0000");
-            s.rect(x, y + resolution - 1, resolution, 1);
-          }
+          grid[colNum][rowNum].state =
+            grid[colNum][rowNum].nextState !== null
+              ? grid[colNum][rowNum].nextState
+              : "dead";
 
           if (grid[colNum][rowNum].state === "alive") {
             s.fill(255);
             s.stroke(0);
             s.rect(x, y, resolution - 1, resolution - 1);
+          } else {
           }
+          grid[colNum][rowNum].nextState = null;
         }
       }
+
       s.frameRate(speedVar);
 
       redrawCanvas = false;
@@ -488,54 +479,62 @@ class GameOfLifeGrid extends Component {
 
   drawCalculateNeighbours = () => {
     // TODO: refactor
-    incomingGrid = this.createNestedArray(numberOfColumns, numberOfRows);
+    for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+      for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+        let state = grid[colNum][rowNum].state;
 
-    if (grid.length > 0) {
-      for (let colNum = 0; colNum < numberOfColumns; colNum++) {
-        for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-          let state = grid[colNum][rowNum].state;
-          let sumOfAliveNeighbours = this.countNeighbors(grid, colNum, rowNum);
+        // NOTE
+        // If cell is DEAD at this point, sumOfAliveNeighbours wont be higher than maxDeadNeighbours + 1
+        // If cell is DEAD at this point, sumOfAliveNeighbours wont be higher than maxAliveNeighbours + 1
+        // for performance
+        let sumOfAliveNeighbours = this.countNeighbors(colNum, rowNum, state);
 
-          let stateToUpdateTo = "";
-          if (state === "alive") {
-            if (sumOfAliveNeighbours <= 1) {
-              stateToUpdateTo = "dead";
-            } else if (sumOfAliveNeighbours > 1 && sumOfAliveNeighbours < 4) {
-              stateToUpdateTo = "alive";
-            } else if (sumOfAliveNeighbours >= 4) {
-              stateToUpdateTo = "dead";
-            }
+        let stateToUpdateTo = "";
+        if (state === "alive") {
+          if (
+            sumOfAliveNeighbours >= minAliveNeighbours &&
+            sumOfAliveNeighbours <= maxAliveNeighbours
+          ) {
+            stateToUpdateTo = "alive";
           } else {
-            if (sumOfAliveNeighbours === 3) {
-              stateToUpdateTo = "alive";
-            } else {
-              stateToUpdateTo = "dead";
-            }
+            stateToUpdateTo = "dead";
           }
-          incomingGrid[colNum][rowNum].state = stateToUpdateTo;
+        } else {
+          if (
+            sumOfAliveNeighbours >= minDeadNeighbours &&
+            sumOfAliveNeighbours <= maxDeadNeighbours
+          ) {
+            stateToUpdateTo = "alive";
+          } else {
+            stateToUpdateTo = "dead";
+          }
         }
+        grid[colNum][rowNum].nextState =
+          grid[colNum][rowNum].nextState !== null
+            ? grid[colNum][rowNum].nextState
+            : stateToUpdateTo;
       }
     }
-
-    grid = incomingGrid;
+    // }
   };
 
-  countNeighbors = (grid, x, y) => {
+  countNeighbors = (x, y, state) => {
     let sumOfAliveNeighbours = 0;
     // -1 to +1 of x position of this square
+
+    const maxNeighbours =
+      state === "alive" ? maxAliveNeighbours : maxDeadNeighbours;
     for (let i = -1; i < 2; i++) {
       // -1 to +1 of y position of this square
       for (let j = -1; j < 2; j++) {
+        if (sumOfAliveNeighbours >= maxNeighbours + 1) break;
+        if (i === 0 && j === 0) continue;
         let xCoord = x + i;
         let yCoord = y + j;
 
         // check if coordinates are in grid
         // and its not current square
-        if (
-          grid[xCoord] === undefined ||
-          grid[xCoord][yCoord] === undefined ||
-          (i === 0 && j === 0)
-        )
+        if (grid[xCoord] === undefined || grid[xCoord][yCoord] === undefined)
           continue;
 
         // if neighbour is alive and it's not the current square
