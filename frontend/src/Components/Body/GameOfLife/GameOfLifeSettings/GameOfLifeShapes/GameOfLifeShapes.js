@@ -19,11 +19,13 @@ class GameOfLifeShapes extends Component {
     this.setState({ types });
   }
 
+  updateSelectedType = selectedType => this.setState({ selectedType });
+
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
     const { updateSelectedShape, selectedShape } = this.props;
-    const { types, selectedType } = this.state;
+    const { types, selectedType, updateSelectedType } = this.state;
 
     return (
       <GameOfLifeShapesLayout
@@ -32,7 +34,15 @@ class GameOfLifeShapes extends Component {
         }`}
       >
         <span className={`gol__shapes--shape cancel`} key="cancel">
-          <span onClick={() => updateSelectedShape("")}>{"<"}</span>
+          <span
+            onClick={() =>
+              selectedType !== "all"
+                ? this.updateSelectedType("all")
+                : updateSelectedShape("")
+            }
+          >
+            {"<"}
+          </span>
           <select
             className={`gol__shapes--type`}
             onChange={this.handleChange}

@@ -85,7 +85,7 @@ class GameOfLife extends Component {
           zoomLevel={zoomLevel}
           cursorAction={cursorAction}
         />
-        <GameOfLifeExplanation />
+        {/* <GameOfLifeExplanation /> */}
       </GameOfLifeLayout>
     );
   }

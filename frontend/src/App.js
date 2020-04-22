@@ -40,24 +40,23 @@ const GlobalStyle = createGlobalStyle`
   p,span,a,label,button,textarea,li,figcaption { font-family:'Work Sans', sans-serif; font-size:1.6rem; }
 `;
 
-const client = new ApolloClient({
-  uri: "https://nodejs-d46mbauhe.now.sh"
-});
+// const client = new ApolloClient({
+//   uri: "https://nodejs-d46mbauhe.now.sh"
+// });
 
 const App = () => (
-  <ApolloProvider client={client}>
-    <ThemeProvider theme={theme}>
-      <BodyCont>
-        <Router>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/hiragana" component={Hiragana} />
-          <Route exact path="/game-of-life" component={GameOfLife} />
-        </Router>
-        <GlobalStyle />
-        <Footer />
-      </BodyCont>
-    </ThemeProvider>
-  </ApolloProvider>
+  // <ApolloProvider client={client}>
+  <ThemeProvider theme={theme}>
+    <BodyCont>
+      <Router>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/hiragana" component={Hiragana} />
+        <Route exact path="/game-of-life" component={GameOfLife} />
+      </Router>
+      <GlobalStyle />
+    </BodyCont>
+  </ThemeProvider>
+  // </ApolloProvider>
 );
 
 export default App;

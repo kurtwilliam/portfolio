@@ -18,7 +18,7 @@ const GameOfLifeShapesLayout = styled.div`
   bottom: 8vh;
   transition: left 200ms;
   flex-direction: column;
-  max-height: 84vh;
+  max-height: 92vh;
   min-width: 225px;
   // overflow-y: scroll;
 

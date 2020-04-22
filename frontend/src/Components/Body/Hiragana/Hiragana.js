@@ -10,6 +10,7 @@ import Character from "./Character";
 import Container from "../../shared/Container";
 import Gradient from "../../shared/Gradient";
 import InnerCont from "../../shared/InnerCont";
+import Footer from "../../Footer";
 
 class Hiragana extends Component {
   state = {
@@ -96,130 +97,133 @@ class Hiragana extends Component {
     } = this.state;
 
     return (
-      <Gradient>
-        <Container>
-          <InnerCont>
-            {word.length > 0 ? (
-              <HiraganaOverlay onClick={this.closeWordOverlay}>
-                <div
-                  className="hiraganaOverlay__content"
-                  onClick={
-                    words[word].sound && audioPlaying === ""
-                      ? e => this.addNewSound(e, words[word].sound)
-                      : e => e.stopPropagation()
-                  }
-                >
-                  {words[word].content}
-                  {!words[word].sound ? <span>🚫💬</span> : null}
+      <>
+        <Gradient>
+          <Container>
+            <InnerCont>
+              {word.length > 0 ? (
+                <HiraganaOverlay onClick={this.closeWordOverlay}>
+                  <div
+                    className="hiraganaOverlay__content"
+                    onClick={
+                      words[word].sound && audioPlaying === ""
+                        ? e => this.addNewSound(e, words[word].sound)
+                        : e => e.stopPropagation()
+                    }
+                  >
+                    {words[word].content}
+                    {!words[word].sound ? <span>🚫💬</span> : null}
+                  </div>
+                  <div
+                    className="hiraganaOverlay__word"
+                    onClick={this.toggleEnglish}
+                  >
+                    {splitWord.map((char, i) => {
+                      return (
+                        <p
+                          key={char + i}
+                          className={`${
+                            char === currentCharacter && !english
+                              ? "highlight"
+                              : ""
+                          }`}
+                        >
+                          {english ? (i === 0 ? words[word].eng : null) : char}
+                        </p>
+                      );
+                    })}
+                  </div>
+                </HiraganaOverlay>
+              ) : null}
+
+              <HiraganaContainer>
+                <div className="hiragana__instructions">
+                  <p>🖱️ = 🔊</p>
+                  <p>🖱️🖱️ = 🖼️</p>
                 </div>
-                <div
-                  className="hiraganaOverlay__word"
-                  onClick={this.toggleEnglish}
-                >
-                  {splitWord.map((char, i) => {
-                    return (
-                      <p
-                        key={char + i}
-                        className={`${
-                          char === currentCharacter && !english
-                            ? "highlight"
-                            : ""
-                        }`}
-                      >
-                        {english ? (i === 0 ? words[word].eng : null) : char}
-                      </p>
-                    );
-                  })}
-                </div>
-              </HiraganaOverlay>
-            ) : null}
+                <form className="hiragana__syllabary">
+                  <label htmlFor="hiragana__syllabary">
+                    <input
+                      id="hiragana__syllabary"
+                      type="radio"
+                      name="syllabary"
+                      value="hiragana"
+                      onChange={this.changeSyllabary}
+                      checked={syllabary === "hiragana"}
+                    />
+                    ひらがな
+                  </label>
+                  <label htmlFor="katakana__syllabary">
+                    <input
+                      id="katakana__syllabary"
+                      type="radio"
+                      name="syllabary"
+                      value="katakana"
+                      onChange={this.changeSyllabary}
+                      checked={syllabary === "katakana"}
+                    />
+                    カタカナ
+                  </label>
+                </form>
+                <Chart>
+                  {Object.keys(hiraganaChart).map((y, i) => (
+                    <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
+                      {hiraganaChart[y].map((char, index) => (
+                        <Character
+                          key={char.x + y}
+                          index={index}
+                          character={char}
+                          y={parseInt(y)}
+                          highlightX={highlightX}
+                          highlightY={highlightY}
+                          highlightLetters={this.highlightLetters}
+                          openWordOverlay={this.openWordOverlay}
+                          addNewSound={this.addNewSound}
+                          lastColumn={12}
+                          currentChart={currentChart}
+                          thisChart={"hiragana"}
+                          syllabary={syllabary}
+                        />
+                      ))}
+                    </ChartRow>
+                  ))}
+                </Chart>
 
-            <HiraganaContainer>
-              <div className="hiragana__instructions">
-                <p>🖱️ = 🔊</p>
-                <p>🖱️🖱️ = 🖼️</p>
-              </div>
-              <form className="hiragana__syllabary">
-                <label htmlFor="hiragana__syllabary">
-                  <input
-                    id="hiragana__syllabary"
-                    type="radio"
-                    name="syllabary"
-                    value="hiragana"
-                    onChange={this.changeSyllabary}
-                    checked={syllabary === "hiragana"}
-                  />
-                  ひらがな
-                </label>
-                <label htmlFor="katakana__syllabary">
-                  <input
-                    id="katakana__syllabary"
-                    type="radio"
-                    name="syllabary"
-                    value="katakana"
-                    onChange={this.changeSyllabary}
-                    checked={syllabary === "katakana"}
-                  />
-                  カタカナ
-                </label>
-              </form>
-              <Chart>
-                {Object.keys(hiraganaChart).map((y, i) => (
-                  <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
-                    {hiraganaChart[y].map((char, index) => (
-                      <Character
-                        key={char.x + y}
-                        index={index}
-                        character={char}
-                        y={parseInt(y)}
-                        highlightX={highlightX}
-                        highlightY={highlightY}
-                        highlightLetters={this.highlightLetters}
-                        openWordOverlay={this.openWordOverlay}
-                        addNewSound={this.addNewSound}
-                        lastColumn={12}
-                        currentChart={currentChart}
-                        thisChart={"hiragana"}
-                        syllabary={syllabary}
-                      />
-                    ))}
-                  </ChartRow>
-                ))}
-              </Chart>
+                <Chart>
+                  {Object.keys(hiraganaChartMuddied).map((y, i) => (
+                    <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
+                      {hiraganaChartMuddied[y].map((char, index) => (
+                        <Character
+                          key={char.x + y}
+                          index={index}
+                          character={char}
+                          y={parseInt(y)}
+                          highlightX={highlightX}
+                          highlightY={highlightY}
+                          highlightLetters={this.highlightLetters}
+                          openWordOverlay={this.openWordOverlay}
+                          addNewSound={this.addNewSound}
+                          lastColumn={6}
+                          currentChart={currentChart}
+                          thisChart={"hiraganaMuddied"}
+                          syllabary={syllabary}
+                        />
+                      ))}
+                    </ChartRow>
+                  ))}
+                </Chart>
 
-              <Chart>
-                {Object.keys(hiraganaChartMuddied).map((y, i) => (
-                  <ChartRow key={y} className={`${i === 0 ? "hidden" : ""}`}>
-                    {hiraganaChartMuddied[y].map((char, index) => (
-                      <Character
-                        key={char.x + y}
-                        index={index}
-                        character={char}
-                        y={parseInt(y)}
-                        highlightX={highlightX}
-                        highlightY={highlightY}
-                        highlightLetters={this.highlightLetters}
-                        openWordOverlay={this.openWordOverlay}
-                        addNewSound={this.addNewSound}
-                        lastColumn={6}
-                        currentChart={currentChart}
-                        thisChart={"hiraganaMuddied"}
-                        syllabary={syllabary}
-                      />
-                    ))}
-                  </ChartRow>
-                ))}
-              </Chart>
-
-              <audio
-                src={audioPlaying !== "" ? audioPlaying : null}
-                ref={ref => (this.player = ref)}
-                onEnded={this.removeSound}
-              />
-            </HiraganaContainer>
-          </InnerCont>
-        </Container>
-      </Gradient>
+                <audio
+                  src={audioPlaying !== "" ? audioPlaying : null}
+                  ref={ref => (this.player = ref)}
+                  onEnded={this.removeSound}
+                />
+              </HiraganaContainer>
+            </InnerCont>
+          </Container>
+        </Gradient>
+        <Footer />
+      </>
     );
   }
 }

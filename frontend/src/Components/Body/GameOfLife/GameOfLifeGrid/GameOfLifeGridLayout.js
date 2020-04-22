@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const GameOfLifeGridLayout = styled.div`
   width: 100%;
-  height: 84vh;
+  height: 92vh;
   display: flex;
   flex-direction: column;
   align-self: center;

@@ -70,7 +70,7 @@ class GameOfLifeSettings extends Component {
               </button>
             </div>
             <div className="gol__settings--setting">
-              <span>Cursor Action</span>
+              <span>Touch Action</span>
               <div className="gol__settings--setting__radio">
                 <label>
                   Draw
@@ -98,7 +98,7 @@ class GameOfLifeSettings extends Component {
 
             <div className="gol__settings--setting">
               <button onClick={() => updateSelectedShape("")}>
-                Add Shapes
+                Add Patterns
               </button>
             </div>
           </div>

@@ -15,7 +15,7 @@ let numberOfRows = 0;
 let centerX = 0;
 let centerY = 0;
 let speedVar = 0;
-const paddingForHeight = 0.84;
+const paddingForHeight = 0.92;
 
 let zoomLevelVar = 1;
 
