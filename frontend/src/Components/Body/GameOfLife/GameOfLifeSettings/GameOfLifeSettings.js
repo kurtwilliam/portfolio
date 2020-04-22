@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from "react";
 import GameOfLifeSettingsLayout from "./GameOfLifeSettingsLayout";
 import GameOfLifeShapes from "./GameOfLifeShapes";
-import GridSquare from "../GameOfLifeGrid/GridRow/GridSquare";
+// import GridSquare from "../GameOfLifeGrid/GridRow/GridSquare";
 
 const speedMin = 1;
 const speedMax = 60;
@@ -30,6 +30,11 @@ class GameOfLifeSettings extends Component {
       <>
         <GameOfLifeSettingsLayout>
           <div className="gol__settings--container">
+            <div className="gol__settings--setting">
+              <button onClick={() => updateSelectedShape("")}>
+                Add Patterns
+              </button>
+            </div>
             <button
               className={`${paused ? "pause" : "pause paused"}`}
               onClick={toggleState}
@@ -94,12 +99,6 @@ class GameOfLifeSettings extends Component {
                   />
                 </label>
               </div>
-            </div>
-
-            <div className="gol__settings--setting">
-              <button onClick={() => updateSelectedShape("")}>
-                Add Patterns
-              </button>
             </div>
           </div>
           {/* <label>Zoom</label>
