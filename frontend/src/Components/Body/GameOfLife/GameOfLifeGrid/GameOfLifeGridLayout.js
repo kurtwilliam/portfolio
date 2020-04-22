@@ -6,6 +6,11 @@ const GameOfLifeGridLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-self: center;
+  z-index: 100;
+
+  canvas {
+    z-index: 100;
+  }
 
   cursor: ${props => (props.cursorAction === "grab" ? "grab" : "pointer")};
 `;

@@ -13,6 +13,7 @@ const GameOfLifeSettingsLayout = styled.div`
   align-items: center;
   padding: 12px;
   background: rgb(100, 100, 100);
+  z-index: 1000;
 
   .gol__settings--container {
     display: flex;
@@ -28,6 +29,17 @@ const GameOfLifeSettingsLayout = styled.div`
 
     input {
       cursor: pointer;
+    }
+
+    input[type="range"] {
+      cursor: pointer;
+      height: 8px;
+    }
+    input[type="range"]::-webkit-slider-thumb,
+    input[type="range"]::-moz-range-thumb,
+    input[type="range"]::-ms-thumb {
+      height: 8px;
+      width: 8px;
     }
   }
 

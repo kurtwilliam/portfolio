@@ -367,8 +367,10 @@ class GameOfLifeGrid extends Component {
     };
 
     s.draw = () => {
+      // clear canvas to make background tarnsparent
+      s.clear();
       // TODO: refactor
-      s.background(0);
+      // s.background(0);
       s.scale(zoomLevelVar);
       s.translate(-gridXPos, -gridYPos);
 

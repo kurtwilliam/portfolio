@@ -3,6 +3,7 @@ import GameOfLifeLayout from "./GameOfLifeLayout";
 import GameOfLifeGrid from "./GameOfLifeGrid";
 import GameOfLifeSettings from "./GameOfLifeSettings";
 import GameOfLifeExplanation from "./GameOfLifeExplanation";
+import GameOfLifeStars from "./GameOfLifeStars";
 import shapes from "./shapes";
 
 class GameOfLife extends Component {
@@ -86,6 +87,7 @@ class GameOfLife extends Component {
           cursorAction={cursorAction}
         />
         {/* <GameOfLifeExplanation /> */}
+        <GameOfLifeStars />
       </GameOfLifeLayout>
     );
   }

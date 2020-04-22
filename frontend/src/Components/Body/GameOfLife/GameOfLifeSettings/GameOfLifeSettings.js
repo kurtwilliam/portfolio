@@ -41,7 +41,7 @@ class GameOfLifeSettings extends Component {
               name="paused"
             ></button>
             <div className="gol__settings--setting">
-              <label>Speed - {speed} frames/s</label>
+              <label>Speed - {speed} FPS</label>
               <input
                 type="range"
                 name="speed"
