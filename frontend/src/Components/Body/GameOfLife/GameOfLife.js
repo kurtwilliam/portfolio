@@ -16,7 +16,7 @@ class GameOfLife extends Component {
     zoomLevel: 0.75,
     selectedPattern: "",
     cursorAction: "draw",
-    displayedInfo: "patterns" // settings patterns help
+    displayedInfo: "settings" // settings patterns help
   };
 
   handleChange = e =>
@@ -49,10 +49,7 @@ class GameOfLife extends Component {
       zoomLevel: parseFloat(zoom.target ? zoom.target.value : zoom).toFixed(2)
     });
 
-  updateDisplayedInfo = displayedInfo => {
-    console.log(displayedInfo);
-    this.setState({ displayedInfo });
-  };
+  updateDisplayedInfo = displayedInfo => this.setState({ displayedInfo });
 
   render() {
     const {
@@ -68,7 +65,12 @@ class GameOfLife extends Component {
     } = this.state;
 
     return (
-      <GameOfLifeLayout>
+      <GameOfLifeLayout className="gol">
+        {displayedInfo === "help" && (
+          <GameOfLifeExplanation
+            updateDisplayedInfo={this.updateDisplayedInfo}
+          />
+        )}
         <GameOfLifeSettings
           speed={speed}
           paused={paused}
@@ -95,8 +97,7 @@ class GameOfLife extends Component {
           zoomLevel={zoomLevel}
           cursorAction={cursorAction}
         />
-        {/* <GameOfLifeExplanation /> */}
-        <GameOfLifeStars />
+        {/* <GameOfLifeStars /> */}
       </GameOfLifeLayout>
     );
   }

@@ -2,15 +2,19 @@ import styled from "styled-components";
 
 const GameOfLifeSettingsLayout = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 8vh;
-  width: 100%;
+  top: ${p => p.theme.golBorderWidth};
+  right: ${p => p.theme.golBorderWidth};
+  bottom: ${p => p.theme.golBorderWidth};
+  margin-left: ${p => p.theme.golBorderWidth};
+  // height: calc(
+  //   100vh - ${p => p.theme.golBorderWidth} - ${p => p.theme.golBorderWidth}
+  // );
+  width: 25vw;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   // padding: 12px;
   background: rgb(100, 100, 100);
   z-index: 1000;
@@ -19,6 +23,7 @@ const GameOfLifeSettingsLayout = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-direction:column;
     align-items: center;
     // overflow-y: scroll;
     max-width: 768px;
@@ -37,12 +42,53 @@ const GameOfLifeSettingsLayout = styled.div`
     input[type="range"] {
       cursor: pointer;
       height: 8px;
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+
+      &:focus {
+        outline: none;
+      }
     }
-    input[type="range"]::-webkit-slider-thumb,
-    input[type="range"]::-moz-range-thumb,
+    input[type="range"]::-ms-track {
+      width: 100%;
+      cursor: pointer;
+
+      /* Hides the slider so custom styles can be added */
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      height: 8px;
+      width: 8px;
+      // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      // border: 1px solid #000000;
+    }
+    input[type="range"]::-moz-range-thumb {
+      height: 8px;
+      width: 8px;
+      // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      // border: 1px solid #000000;
+    }
     input[type="range"]::-ms-thumb {
       height: 8px;
       width: 8px;
+      // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      // border: 1px solid #000000;
+    }
+
+    input[type="range"]::-webkit-slider-runnable-track,
+    input[type="range"]::-moz-range-track {
+      height: 8px;
+      width: 100%;
+      background: red;
+      border-radius: 10px;
+    }
+    input[type="range"]:focus::-webkit-slider-runnable-track {
+    }
+    &__radio {
+      font-size: initial;
     }
   }
 

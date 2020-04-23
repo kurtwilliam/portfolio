@@ -2,10 +2,19 @@ import React, { Component, useEffect } from "react";
 import GameOfLifeExplanationLayout from "./GameOfLifeExplanationLayout";
 
 class GameOfLifeExplanation extends Component {
+  closeModal = e => {
+    e.stopPropagation();
+    this.props.updateDisplayedInfo("settings");
+  };
   render() {
+    const { updateDisplayedInfo } = this.props;
     return (
-      <GameOfLifeExplanationLayout>
-        <h3>So, what am I looking at...?</h3>
+      <GameOfLifeExplanationLayout onClick={e => this.closeModal}>
+        <div className="gol__explanation--modal">
+          <button>So, what am I looking at...?</button>
+          <button>Developer notes</button>
+        </div>
+        {/*<h3>So, what am I looking at...?</h3>
         <p>
           <a
             target="_blank"
@@ -89,7 +98,7 @@ class GameOfLifeExplanation extends Component {
           Crazy Ones: [State] Zero Encoded by Zero Population 261841×261841
           https://www.conwaylife.com/wiki/0E0P_metacell Caterloopillar
           https://www.conwaylife.com/wiki/Caterloopillar
-        </p>
+          </p>*/}
       </GameOfLifeExplanationLayout>
     );
   }

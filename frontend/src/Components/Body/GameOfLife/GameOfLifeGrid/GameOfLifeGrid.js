@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import p5 from "p5";
+import { withTheme } from "styled-components";
 
 import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
 import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
@@ -15,7 +16,10 @@ let numberOfRows = 0;
 let centerX = 0;
 let centerY = 0;
 let speedVar = 0;
-const paddingForHeight = 0.92;
+
+let fillColor = "";
+let strokeColor = "";
+let bgColor = "";
 
 let zoomLevelVar = 1;
 
@@ -66,7 +70,6 @@ class GameOfLifeGrid extends Component {
 
   componentWillMount = () => {
     const { speed, zoomLevel, cursorAction } = this.props;
-    this.calculateWidthAndHeight();
     speedVar = speed;
     zoomLevelVar = zoomLevel;
     cursorState = cursorAction;
@@ -78,6 +81,13 @@ class GameOfLifeGrid extends Component {
 
     this.p5Ref.addEventListener("mousedown", e => this.mousePressed(e));
     this.p5Ref.addEventListener("mouseup", e => this.mouseReleased(e));
+    this.calculateWidthAndHeight();
+
+    console.log(this.props.theme);
+
+    fillColor = this.props.theme.golBlack;
+    strokeColor = this.props.theme.golBlack;
+    bgColor = this.props.theme.golOffWhite;
 
     // canvas.mouseReleased(e => this.mouseReleased(e));
     // this.p5Ref.addEventListener("wheel", e => this.scaleFunctionality(e));
@@ -175,16 +185,16 @@ class GameOfLifeGrid extends Component {
   };
 
   calculateWidthAndHeight = () => {
-    const { innerWidth: width, innerHeight: height } = window;
-    // height calculation for what the
-    // settings and explanation sizes are
-
-    browserWidth = width;
-    browserHeight = height * paddingForHeight;
+    browserWidth = this.p5Ref.clientWidth;
+    browserHeight = this.p5Ref.clientHeight;
 
     return this.setState(
-      { browserDimensions: [width, height * paddingForHeight] },
-      () => this.p5Canvas.resizeCanvas(width, height)
+      { browserDimensions: [this.p5Ref.clientWidth, this.p5Ref.clientHeight] },
+      () =>
+        this.p5Canvas.resizeCanvas(
+          this.p5Ref.clientWidth,
+          this.p5Ref.clientHeight
+        )
     );
   };
 
@@ -276,7 +286,7 @@ class GameOfLifeGrid extends Component {
         // and change there depending if alive/not
         // then change the incoming grid
         let state = "dead";
-        let fill = 0;
+        let fill = bgColor;
         if (currentPattern[row][col] === true) {
           // incase deleting cells and is single dot
           if (
@@ -286,14 +296,14 @@ class GameOfLifeGrid extends Component {
             state = "dead";
           } else {
             state = "alive";
-            fill = 255;
+            fill = fillColor;
           }
         }
 
         grid[xPos + col][yPos + row].state = state;
 
         this.p5Canvas.fill(fill);
-        this.p5Canvas.stroke(0);
+        this.p5Canvas.stroke(bgColor);
         this.p5Canvas.rect(
           x + col * resolution,
           y + row * resolution,
@@ -305,7 +315,12 @@ class GameOfLifeGrid extends Component {
   };
 
   mouseReleased = e => {
-    if (cursorState === "draw" && e.x === clickStartX && e.y === clickStartY) {
+    if (
+      cursorState === "draw" &&
+      e.x === clickStartX &&
+      e.y === clickStartY &&
+      this.props.selectedPattern === "Dot"
+    ) {
       this.handleClick(e);
     } else if (
       cursorState === "grab" &&
@@ -372,23 +387,24 @@ class GameOfLifeGrid extends Component {
       // clear canvas to make background tarnsparent
       s.clear();
       // TODO: refactor
-      // s.background(0);
+      s.background(bgColor);
       s.scale(zoomLevelVar);
       s.translate(-gridXPos, -gridYPos);
 
       if (!redrawCanvas) {
         this.drawCalculateNeighbours();
       }
-      // draw borders
-      s.stroke("#FF0000");
-      s.fill("rgba(255,0,0,0)");
 
-      s.rect(
-        0,
-        0,
-        gridWidth * gridSizeMultiplier,
-        gridHeight * gridSizeMultiplier
-      );
+      // draw borders
+      // s.stroke("#FF0000");
+      // s.fill("rgba(255,0,0,0)");
+
+      // s.rect(
+      //   0,
+      //   0,
+      //   gridWidth * gridSizeMultiplier,
+      //   gridHeight * gridSizeMultiplier
+      // );
 
       for (let colNum = 0; colNum < numberOfColumns; colNum++) {
         for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -403,8 +419,8 @@ class GameOfLifeGrid extends Component {
           }
 
           if (grid[colNum][rowNum].state === "alive") {
-            s.fill(255);
-            s.stroke(0);
+            s.fill(fillColor);
+            s.stroke(bgColor);
             s.rect(x, y, resolution - 1, resolution - 1);
           }
           if (!redrawCanvas) {
@@ -566,14 +582,12 @@ class GameOfLifeGrid extends Component {
   render() {
     const { cursorAction } = this.props;
     return (
-      <GameOfLifeGridContainer>
-        <GameOfLifeGridLayout
-          cursorAction={cursorAction}
-          ref={ref => (this.p5Ref = ref)}
-        />
-      </GameOfLifeGridContainer>
+      <GameOfLifeGridContainer
+        cursorAction={cursorAction}
+        ref={ref => (this.p5Ref = ref)}
+      ></GameOfLifeGridContainer>
     );
   }
 }
 
-export default GameOfLifeGrid;
+export default withTheme(GameOfLifeGrid);

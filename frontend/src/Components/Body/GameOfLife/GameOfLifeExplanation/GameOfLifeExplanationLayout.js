@@ -1,14 +1,32 @@
 import styled from "styled-components";
 
 const GameOfLifeExplanationLayout = styled.div`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
-  max-width: 768px;
-  padding: 2vh 16px 32px;
-  color: rgb(180, 180, 180);
+  height: auto;
+  z-index: 100000;
+  background: rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  h3 {
-    text-align: center;
-    margin-bottom: 2vh;
+  .gol__explanation {
+    &--modal {
+      max-width: 90vw;
+      max-height: 90vh;
+      min-width: 20vw;
+      min-height: 20vh;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+    }
   }
 `;
 

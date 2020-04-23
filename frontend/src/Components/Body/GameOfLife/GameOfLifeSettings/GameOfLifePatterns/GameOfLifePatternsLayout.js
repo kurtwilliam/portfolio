@@ -4,7 +4,7 @@ const GameOfLifePatternsLayout = styled.div`
   position: relative;
   display: flex;
   background: rgba(200, 200, 200, 1);
-  max-height: 8vh;
+  max-height: 10vh;
   width: 100%;
   height: 100%;
 

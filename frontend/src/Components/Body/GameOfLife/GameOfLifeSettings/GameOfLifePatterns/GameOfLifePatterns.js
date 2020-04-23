@@ -23,10 +23,7 @@ class GameOfLifePatterns extends Component {
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
-  changeDisplay = () => {
-    console.log("changeDispl");
-    this.props.updateDisplayedInfo("settings");
-  };
+  changeDisplay = () => this.props.updateDisplayedInfo("settings");
 
   render() {
     const { updateSelectedPattern, selectedPattern } = this.props;

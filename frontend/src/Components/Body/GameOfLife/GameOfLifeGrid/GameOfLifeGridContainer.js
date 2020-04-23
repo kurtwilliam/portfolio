@@ -1,11 +1,16 @@
 import styled from "styled-components";
 
-const GameOfLifeGridLayout = styled.div`
-  width: 100%;
-  height: 92vh;
+const GameOfLifeGridContainer = styled.div`
+  position: absolute;
+  top: ${p => p.theme.golBorderWidth};
+  left: ${p => p.theme.golBorderWidth};
+  bottom: ${p => p.theme.golBorderWidth};
+  width: 72vw;
+  // height: calc(100vh - 2vw);
   overflow: hidden;
   max-width: 100%;
-  margin-top: 8vh;
+
+  background: ${p => p.theme.golOffWhite};
 `;
 
-export default GameOfLifeGridLayout;
+export default GameOfLifeGridContainer;

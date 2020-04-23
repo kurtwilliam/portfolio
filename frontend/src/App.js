@@ -14,7 +14,12 @@ const theme = {
   grey: "#B9B4AF",
   main: "#232323",
   gradient:
-    "linear-gradient(#5F6460, #AC836B, #C5E199, #5DC99F, #3B6D81, #6F677F, #812A3A, #79341A, #504235)"
+    "linear-gradient(#5F6460, #AC836B, #C5E199, #5DC99F, #3B6D81, #6F677F, #812A3A, #79341A, #504235)",
+  golBrown: "rgb(77,33,27)",
+  golTan: "rgb(151,138,88)",
+  golOffWhite: "rgb(210,210,206)",
+  golBlack: "rgb(62,65,62)",
+  golBorderWidth: "1vw"
 };
 
 const GlobalStyle = createGlobalStyle`
