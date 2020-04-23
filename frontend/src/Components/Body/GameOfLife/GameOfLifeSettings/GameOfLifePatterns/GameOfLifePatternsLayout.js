@@ -1,59 +1,47 @@
 import styled from "styled-components";
 
-const GameOfLifeShapesLayout = styled.div`
-  position: absolute;
-  left: 0;
-  bottom: 0;
+const GameOfLifePatternsLayout = styled.div`
+  position: relative;
   display: flex;
-  justify-content: flex-start;
-  align-items: space-between;
-  // flex-wrap: wrap;
   background: rgba(200, 200, 200, 1);
-  overflow: auto;
-  min-height: min-content;
-
-  // for sidebar
-  // padding: 8px 4px;
-  top: 8vh;
-  bottom: 8vh;
-  transition: left 200ms;
-  flex-direction: column;
-  max-height: 92vh;
-  min-width: 225px;
-  // overflow-y: scroll;
-
-  &.hidden {
-    // color: black;
-    left: -100%;
-  }
-
-  // for bottom
-  // transition: bottom 200ms;
-  // padding: 4px 8px;
-  // height: 8vh;
-  // right: 0;
-  // &.hidden {
-  //   color: black;
-  //   bottom: -8vh;
-  // }
+  max-height: 8vh;
+  width: 100%;
+  height: 100%;
 
   span {
     color: black;
   }
 
-  .gol__shapes {
-    &--shape {
+  .gol__patterns {
+    &--scroll {
+      display: flex;
+      flex-wrap: wrap;
+      overflow-y: scroll;
+      width: 85%;
+    }
+    &--settings {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 15%;
+      padding: 4px;
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    &--pattern {
       position: relative;
       display: flex;
-      // flex-direction: column;
       justify-content: space-between;
-      align-items: flex-end;
-      // background: black;
-      // margin: 0px 4px;
+      align-items: center;
       cursor: pointer;
-      padding: 8px;
-      width: 100%;
+      padding: 4px 8px;
+      width: 50%;
       border-bottom: 1px solid rgba(100, 100, 100, 1);
+      font-size: 1.2rem;
 
       &.selected,
       &:hover {
@@ -68,7 +56,8 @@ const GameOfLifeShapesLayout = styled.div`
 
       span {
         color: #454545;
-        font-size: 1.2rem;
+        font-size: 1rem;
+        height: 1rem;
       }
 
       &.cancel {
@@ -78,24 +67,31 @@ const GameOfLifeShapesLayout = styled.div`
 
       &.Gun {
         border-left: 4px solid green;
+        border: 1px solid green;
       }
       &.SpaceShip {
         border-left: 4px solid maroon;
+        border: 1px solid maroon;
       }
       &.Oscillator {
         border-left: 4px solid yellow;
+        border: 1px solid yellow;
       }
       &.Methuselah {
         border-left: 4px solid lightblue;
+        border: 1px solid lightblue;
       }
       &.StillLife {
         border-left: 4px solid black;
+        border: 1px solid black;
       }
       &.Puffer {
         border-left: 4px solid yellow;
+        border: 1px solid yellow;
       }
       &.Agar {
         border-left: 4px solid brown;
+        border: 1px solid brown;
       }
 
       &__square {
@@ -148,4 +144,4 @@ const GameOfLifeShapesLayout = styled.div`
   }
 `;
 
-export default GameOfLifeShapesLayout;
+export default GameOfLifePatternsLayout;

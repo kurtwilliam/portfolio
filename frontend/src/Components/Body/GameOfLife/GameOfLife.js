@@ -4,7 +4,7 @@ import GameOfLifeGrid from "./GameOfLifeGrid";
 import GameOfLifeSettings from "./GameOfLifeSettings";
 import GameOfLifeExplanation from "./GameOfLifeExplanation";
 import GameOfLifeStars from "./GameOfLifeStars";
-import shapes from "./shapes";
+import patterns from "./patterns";
 
 class GameOfLife extends Component {
   state = {
@@ -14,8 +14,9 @@ class GameOfLife extends Component {
     clear: false,
     gridSize: 400,
     zoomLevel: 0.75,
-    selectedShape: "",
-    cursorAction: "draw"
+    selectedPattern: "",
+    cursorAction: "draw",
+    displayedInfo: "patterns" // settings patterns help
   };
 
   handleChange = e =>
@@ -34,19 +35,24 @@ class GameOfLife extends Component {
       [name]: !prevState[name]
     }));
   };
-  updateSelectedShape = shapeName =>
+  updateSelectedPattern = patternName =>
     this.setState(prevState => ({
-      selectedShape:
-        shapeName === "" && prevState.selectedShape === ""
-          ? Object.keys(shapes)[0]
-          : shapeName,
-      cursorAction: shapeName !== "" ? "draw" : prevState.cursorAction
+      selectedPattern:
+        patternName === "" && prevState.selectedPattern === ""
+          ? Object.keys(patterns)[0]
+          : patternName,
+      cursorAction: patternName !== "" ? "draw" : prevState.cursorAction
     }));
 
   updateZoom = zoom =>
     this.setState({
       zoomLevel: parseFloat(zoom.target ? zoom.target.value : zoom).toFixed(2)
     });
+
+  updateDisplayedInfo = displayedInfo => {
+    console.log(displayedInfo);
+    this.setState({ displayedInfo });
+  };
 
   render() {
     const {
@@ -56,8 +62,9 @@ class GameOfLife extends Component {
       clear,
       randomize,
       zoomLevel,
-      selectedShape,
-      cursorAction
+      selectedPattern,
+      cursorAction,
+      displayedInfo
     } = this.state;
 
     return (
@@ -68,11 +75,13 @@ class GameOfLife extends Component {
           gridSize={gridSize}
           handleChange={this.handleChange}
           toggleState={this.toggleState}
-          selectedShape={selectedShape}
-          updateSelectedShape={this.updateSelectedShape}
+          selectedPattern={selectedPattern}
+          updateSelectedPattern={this.updateSelectedPattern}
           updateZoom={this.updateZoom}
           zoomLevel={zoomLevel}
           cursorAction={cursorAction}
+          updateDisplayedInfo={this.updateDisplayedInfo}
+          displayedInfo={displayedInfo}
         />
         <GameOfLifeGrid
           speed={speed}
@@ -81,7 +90,7 @@ class GameOfLife extends Component {
           clear={clear}
           randomize={randomize}
           toggleState={this.toggleState}
-          selectedShape={selectedShape}
+          selectedPattern={selectedPattern}
           updateZoom={this.updateZoom}
           zoomLevel={zoomLevel}
           cursorAction={cursorAction}

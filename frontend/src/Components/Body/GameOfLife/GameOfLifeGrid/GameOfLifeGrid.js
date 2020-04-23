@@ -4,7 +4,7 @@ import p5 from "p5";
 import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
 import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
 
-import shapes from "../shapes";
+import patterns from "../patterns";
 
 // variables that change for drawing
 let grid = [];
@@ -92,7 +92,7 @@ class GameOfLifeGrid extends Component {
       clear,
       randomize,
       toggleState,
-      selectedShape,
+      selectedPattern,
       zoomLevel,
       cursorAction
     } = this.props;
@@ -117,7 +117,7 @@ class GameOfLifeGrid extends Component {
     } else if (cursorAction !== prevProps.cursorAction) {
       cursorState = cursorAction;
     }
-    // else if (selectedShape !== prevProps.selectedShape) {
+    // else if (selectedPattern !== prevProps.selectedPattern) {
 
     // }
     // if (
@@ -246,7 +246,7 @@ class GameOfLifeGrid extends Component {
 
   handleClick = e => {
     if (e.target.tagName !== "CANVAS") return;
-    const { selectedShape, zoomLevel } = this.props;
+    const { selectedPattern, zoomLevel } = this.props;
 
     // we want to know what square we pressed
     // so we need to take into account where user clicked on canvas (clickPos),
@@ -261,13 +261,15 @@ class GameOfLifeGrid extends Component {
     let x = xPos * resolution;
     let y = yPos * resolution;
 
-    // if we are clicking the grid to put on a shape
-    // use the mouse pos to fill in the surrounding shapes
-    const currentShape =
-      selectedShape === "" ? shapes[0].config : shapes[selectedShape].config;
+    // if we are clicking the grid to put on a pattern
+    // use the mouse pos to fill in the surrounding patterns
+    const currentPattern =
+      selectedPattern === ""
+        ? patterns[0].config
+        : patterns[selectedPattern].config;
 
-    for (let row = 0; row < currentShape.length; row++) {
-      for (let col = 0; col < currentShape[row].length; col++) {
+    for (let row = 0; row < currentPattern.length; row++) {
+      for (let col = 0; col < currentPattern[row].length; col++) {
         // if outside of grid when rendering
         if (!grid[xPos + col] || !grid[xPos + col][yPos + row]) continue;
         // get mouse position
@@ -275,10 +277,10 @@ class GameOfLifeGrid extends Component {
         // then change the incoming grid
         let state = "dead";
         let fill = 0;
-        if (currentShape[row][col] === true) {
+        if (currentPattern[row][col] === true) {
           // incase deleting cells and is single dot
           if (
-            (selectedShape === "" || selectedShape === "Dot") &&
+            (selectedPattern === "" || selectedPattern === "Dot") &&
             grid[xPos + col][yPos + row].state === "alive"
           ) {
             state = "dead";
@@ -322,7 +324,7 @@ class GameOfLifeGrid extends Component {
   };
 
   Sketch = s => {
-    const { speed, selectedShape, paused } = this.props;
+    const { speed, selectedPattern, paused } = this.props;
 
     s.setup = () => {
       let canvas = s

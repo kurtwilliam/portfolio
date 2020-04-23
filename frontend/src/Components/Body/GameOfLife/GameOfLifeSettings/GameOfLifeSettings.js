@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from "react";
 import GameOfLifeSettingsLayout from "./GameOfLifeSettingsLayout";
-import GameOfLifeShapes from "./GameOfLifeShapes";
+import GameOfLifePatterns from "./GameOfLifePatterns";
 // import GridSquare from "../GameOfLifeGrid/GridRow/GridSquare";
 
 const speedMin = 1;
@@ -13,6 +13,12 @@ const zoomMin = 0.25;
 const zoomMax = 2;
 
 class GameOfLifeSettings extends Component {
+  clickPatterns = () => {
+    const { updateSelectedPattern, updateDisplayedInfo } = this.props;
+    updateSelectedPattern("");
+    updateDisplayedInfo("patterns");
+  };
+
   render() {
     const {
       speed,
@@ -20,94 +26,111 @@ class GameOfLifeSettings extends Component {
       gridSize,
       handleChange,
       toggleState,
-      updateSelectedShape,
-      selectedShape,
+      updateSelectedPattern,
+      selectedPattern,
       zoomLevel,
       updateZoom,
-      cursorAction
+      displayedInfo,
+      cursorAction,
+      updateDisplayedInfo
     } = this.props;
+    console.log(displayedInfo);
     return (
       <>
         <GameOfLifeSettingsLayout>
           <div className="gol__settings--container">
-            <div className="gol__settings--setting">
-              <button onClick={() => updateSelectedShape("")}>
-                Add Patterns
-              </button>
-            </div>
-            <button
-              className={`${paused ? "pause" : "pause paused"}`}
-              onClick={toggleState}
-              name="paused"
-            ></button>
-            <div className="gol__settings--setting">
-              <label>Speed - {speed} FPS</label>
-              <input
-                type="range"
-                name="speed"
-                min={speedMin}
-                max={speedMax}
-                value={speed}
-                onChange={handleChange}
-                step={1}
+            {displayedInfo === "patterns" ? (
+              <GameOfLifePatterns
+                selectedPattern={selectedPattern}
+                updateSelectedPattern={updateSelectedPattern}
+                updateDisplayedInfo={updateDisplayedInfo}
               />
-            </div>
-            <div className="gol__settings--setting">
-              <label>Zoom - {zoomLevel}</label>
-              <input
-                type="range"
-                name="zoomLevel"
-                min={zoomMin}
-                max={zoomMax}
-                value={zoomLevel}
-                onChange={updateZoom}
-                step={0.05}
-              />
-            </div>
-            <div className="gol__settings--setting">
-              <button onClick={toggleState} name="clear">
-                Clear
-              </button>
-            </div>
-            <div className="gol__settings--setting">
-              <button onClick={toggleState} name="randomize">
-                Randomize
-              </button>
-            </div>
-            <div className="gol__settings--setting">
-              <span>Touch Action</span>
-              <div className="gol__settings--setting__radio">
-                <label>
-                  Draw
+            ) : (
+              <>
+                <div className="gol__settings--setting">
+                  <button onClick={() => this.clickPatterns()}>
+                    Add Patterns
+                  </button>
+                </div>
+                <button
+                  className={`${paused ? "pause" : "pause paused"}`}
+                  onClick={toggleState}
+                  name="paused"
+                ></button>
+                <div className="gol__settings--setting">
+                  <label>Speed - {speed} FPS</label>
                   <input
-                    type="radio"
-                    name="cursorAction"
-                    value="draw"
-                    defaultChecked
+                    type="range"
+                    name="speed"
+                    min={speedMin}
+                    max={speedMax}
+                    value={speed}
                     onChange={handleChange}
+                    step={1}
                   />
-                </label>
-              </div>
-              <div className="gol__settings--setting__radio">
-                <label>
-                  Move
+                </div>
+                <div className="gol__settings--setting">
+                  <label>Zoom - {zoomLevel}</label>
                   <input
-                    type="radio"
-                    name="cursorAction"
-                    value="grab"
-                    onChange={handleChange}
+                    type="range"
+                    name="zoomLevel"
+                    min={zoomMin}
+                    max={zoomMax}
+                    value={zoomLevel}
+                    onChange={updateZoom}
+                    step={0.05}
                   />
-                </label>
-              </div>
-            </div>
+                </div>
+                <div className="gol__settings--setting">
+                  <button onClick={toggleState} name="clear">
+                    Clear
+                  </button>
+                </div>
+                <div className="gol__settings--setting">
+                  <button onClick={toggleState} name="randomize">
+                    Randomize
+                  </button>
+                </div>
+                <div className="gol__settings--setting">
+                  <span>Touch Action</span>
+                  <div className="gol__settings--setting__radio">
+                    <label>
+                      Draw
+                      <input
+                        type="radio"
+                        name="cursorAction"
+                        value="draw"
+                        defaultChecked
+                        onChange={handleChange}
+                      />
+                    </label>
+                  </div>
+                  <div className="gol__settings--setting__radio">
+                    <label>
+                      Move
+                      <input
+                        type="radio"
+                        name="cursorAction"
+                        value="grab"
+                        onChange={handleChange}
+                      />
+                    </label>
+                  </div>
+                </div>
+                <div className="gol__settings--setting">
+                  <button
+                    onClick={() => updateDisplayedInfo("help")}
+                    name="randomize"
+                  >
+                    ?
+                  </button>
+                </div>
+              </>
+            )}
           </div>
           {/* <label>Zoom</label>
         <input /> */}
         </GameOfLifeSettingsLayout>
-        <GameOfLifeShapes
-          selectedShape={selectedShape}
-          updateSelectedShape={updateSelectedShape}
-        />
       </>
     );
   }

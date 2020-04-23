@@ -33,7 +33,7 @@ function numericalSortObjectOfObjects(data, attr) {
   return result;
 }
 
-// Aggregate all shapes into an object
+// Aggregate all patterns into an object
 const getFiles = () => {
   let context = require.context(".", true, /\.js$/);
   const files = {};
