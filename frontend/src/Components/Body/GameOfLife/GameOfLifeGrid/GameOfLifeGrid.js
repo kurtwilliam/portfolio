@@ -21,6 +21,8 @@ let fillColor = "";
 let strokeColor = "";
 let bgColor = "";
 
+let selectedPatternVar = "";
+
 let zoomLevelVar = 1;
 
 // affects # col and # rows - affects performance
@@ -106,6 +108,7 @@ class GameOfLifeGrid extends Component {
       zoomLevel,
       cursorAction
     } = this.props;
+    selectedPatternVar = selectedPattern;
 
     if (paused !== prevProps.paused) {
       isPaused = paused;
@@ -127,6 +130,7 @@ class GameOfLifeGrid extends Component {
     } else if (cursorAction !== prevProps.cursorAction) {
       cursorState = cursorAction;
     }
+    console.log(selectedPattern);
     // else if (selectedPattern !== prevProps.selectedPattern) {
 
     // }
@@ -315,12 +319,7 @@ class GameOfLifeGrid extends Component {
   };
 
   mouseReleased = e => {
-    if (
-      cursorState === "draw" &&
-      e.x === clickStartX &&
-      e.y === clickStartY &&
-      this.props.selectedPattern === "Dot"
-    ) {
+    if (cursorState === "draw" && e.x === clickStartX && e.y === clickStartY) {
       this.handleClick(e);
     } else if (
       cursorState === "grab" &&
@@ -452,7 +451,8 @@ class GameOfLifeGrid extends Component {
         clientY > canvasYPos &&
         clientY < canvasYPos + browserHeight
       ) {
-        if (cursorState === "draw") {
+        console.log(selectedPattern);
+        if (cursorState === "draw" && selectedPatternVar === "Dot") {
           this.handleClick(e);
         } else if (cursorState === "grab") {
           this.recalculatePosition(movementX, movementY);

@@ -19,11 +19,23 @@ class GameOfLifePatterns extends Component {
     this.setState({ types });
   }
 
+  shouldComponentUpdate(prevProps) {
+    if (prevProps.types !== this.props.types) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   updateSelectedType = selectedType => this.setState({ selectedType });
 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
-  changeDisplay = () => this.props.updateDisplayedInfo("settings");
+  changeDisplay = () => {
+    const { updateDisplayedInfo, updateSelectedPattern } = this.props;
+    updateSelectedPattern("");
+    updateDisplayedInfo("settings");
+  };
 
   render() {
     const { updateSelectedPattern, selectedPattern } = this.props;
@@ -61,7 +73,7 @@ class GameOfLifePatterns extends Component {
             ))}
           </select>
         </div>
-        <div className="gol__patterns--scroll">
+        <div className="gol__patterns--container">
           {Object.keys(patterns).map((patternId, i) =>
             selectedType === "all" ||
             patterns[patternId].type === selectedType ? (
@@ -73,13 +85,34 @@ class GameOfLifePatterns extends Component {
                 key={patternId}
                 title={`Type: ${patterns[patternId].type}`}
               >
-                {patterns[patternId].name}
-                <span>
-                  {patterns[patternId].config[0].length} x{" "}
-                  {patterns[patternId].config.length}
-                </span>
+                {patterns[patternId].config.map((row, rowIndex) => (
+                  <div className={`gol__patterns--pattern__row`} key={rowIndex}>
+                    {row.map((col, colIndex) => (
+                      <div
+                        className={`gol__patterns--pattern__col ${
+                          col ? "alive" : null
+                        }`}
+                        key={`${rowIndex},${colIndex}`}
+                      />
+                    ))}
+                  </div>
+                ))}
               </span>
-            ) : null
+            ) : // <span
+            //   className={`gol__patterns--pattern ${
+            //     patterns[patternId].type
+            //   } ${selectedPattern === patternId ? "selected" : ""}`}
+            //   onClick={() => updateSelectedPattern(patternId)}
+            //   key={patternId}
+            //   title={`Type: ${patterns[patternId].type}`}
+            // >
+            //   {patterns[patternId].name}
+            //   <span>
+            //     {patterns[patternId].config[0].length} x{" "}
+            //     {patterns[patternId].config.length}
+            //   </span>
+            // </span>
+            null
           )}
         </div>
       </GameOfLifePatternsLayout>

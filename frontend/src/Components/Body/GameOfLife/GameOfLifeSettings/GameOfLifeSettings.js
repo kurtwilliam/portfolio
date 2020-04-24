@@ -1,6 +1,8 @@
 import React, { Component, useEffect } from "react";
 import GameOfLifeSettingsLayout from "./GameOfLifeSettingsLayout";
 import GameOfLifePatterns from "./GameOfLifePatterns";
+import GameOfLifeHelp from "./GameOfLifeHelp";
+
 // import GridSquare from "../GameOfLifeGrid/GridRow/GridSquare";
 
 const speedMin = 1;
@@ -34,30 +36,33 @@ class GameOfLifeSettings extends Component {
       cursorAction,
       updateDisplayedInfo
     } = this.props;
-    console.log(displayedInfo);
+
     return (
       <>
         <GameOfLifeSettingsLayout>
           <div className="gol__settings--container">
-            {displayedInfo === "patterns" ? (
+            {displayedInfo === "patterns" && (
               <GameOfLifePatterns
                 selectedPattern={selectedPattern}
                 updateSelectedPattern={updateSelectedPattern}
                 updateDisplayedInfo={updateDisplayedInfo}
               />
-            ) : (
+            )}
+            {displayedInfo === "settings" && (
               <>
                 <div className="gol__settings--setting">
                   <button onClick={() => this.clickPatterns()}>
-                    Add Patterns
+                    Draw Patterns
                   </button>
                 </div>
-                <button
-                  className={`${paused ? "pause" : "pause paused"}`}
-                  onClick={toggleState}
-                  name="paused"
-                ></button>
                 <div className="gol__settings--setting__container">
+                  <div className="gol__settings--setting">
+                    <button
+                      className={`${paused ? "pause" : "pause paused"}`}
+                      onClick={toggleState}
+                      name="paused"
+                    ></button>
+                  </div>
                   <div className="gol__settings--setting">
                     <label>Speed - {speed} FPS</label>
                     <input
@@ -127,10 +132,17 @@ class GameOfLifeSettings extends Component {
                     onClick={() => updateDisplayedInfo("help")}
                     name="randomize"
                   >
-                    ?
+                    What is this?
                   </button>
                 </div>
               </>
+            )}
+            {displayedInfo === "help" && (
+              <GameOfLifeHelp
+                selectedPattern={selectedPattern}
+                updateSelectedPattern={updateSelectedPattern}
+                updateDisplayedInfo={updateDisplayedInfo}
+              />
             )}
           </div>
           {/* <label>Zoom</label>

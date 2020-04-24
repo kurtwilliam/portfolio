@@ -6,14 +6,9 @@ const GameOfLifeSettingsLayout = styled.div`
   right: ${p => p.theme.golBorderWidth};
   bottom: ${p => p.theme.golBorderWidth};
   margin-left: ${p => p.theme.golBorderWidth};
-  // height: calc(
-  //   100vh - ${p => p.theme.golBorderWidth} - ${p => p.theme.golBorderWidth}
-  // );
   width: 25vw;
   color: white;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   // padding: 12px;
   background: rgb(100, 100, 100);
@@ -22,12 +17,12 @@ const GameOfLifeSettingsLayout = styled.div`
   .gol__settings--container {
     width: 100%;
     display: flex;
-    justify-content: center;
-    flex-direction:column;
-    align-items: center;
-    // overflow-y: scroll;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
     max-width: 768px;
     max-height: 100%;
+    padding: 16px;
   }
 
   .gol__settings--setting {
@@ -93,12 +88,12 @@ const GameOfLifeSettingsLayout = styled.div`
   }
 
   button {
-    background: transparent;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 8px;
-    color: white;
-    cursor: pointer;
+    // background: transparent;
+    // border: none;
+    // border-radius: 4px;
+    // padding: 4px 8px;
+    // color: white;
+    // cursor: pointer;
   }
 
   button.pause {

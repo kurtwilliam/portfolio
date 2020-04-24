@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import GameOfLifeLayout from "./GameOfLifeLayout";
 import GameOfLifeGrid from "./GameOfLifeGrid";
 import GameOfLifeSettings from "./GameOfLifeSettings";
-import GameOfLifeExplanation from "./GameOfLifeExplanation";
+// import GameOfLife from "./GameOfLifeHelp";
 import GameOfLifeStars from "./GameOfLifeStars";
 import patterns from "./patterns";
 
@@ -66,11 +66,11 @@ class GameOfLife extends Component {
 
     return (
       <GameOfLifeLayout className="gol">
-        {displayedInfo === "help" && (
-          <GameOfLifeExplanation
+        {/* {displayedInfo === "help" && (
+          <GameOfLifeHelp
             updateDisplayedInfo={this.updateDisplayedInfo}
           />
-        )}
+        )} */}
         <GameOfLifeSettings
           speed={speed}
           paused={paused}
