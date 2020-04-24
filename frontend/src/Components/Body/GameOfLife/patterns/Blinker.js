@@ -1,4 +1,6 @@
 export default {
+  id: 11,
+
   name: "Blinker",
 
   type: "Oscillator",

@@ -17,7 +17,6 @@ class GameOfLifeHelp extends Component {
       <GameOfLifeHelpLayout onClick={e => this.closeModal}>
         {hideDevNotes ? (
           <div className="gol__help">
-            <button>So, what am I looking at...?</button>
             <button>Developer notes</button>
           </div>
         ) : (

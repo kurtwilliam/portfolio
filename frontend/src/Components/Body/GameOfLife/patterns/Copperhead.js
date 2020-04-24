@@ -1,4 +1,6 @@
 export default {
+  id: 18,
+
   name: "Copper Head",
 
   type: "SpaceShip",

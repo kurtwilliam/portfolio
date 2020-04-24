@@ -1,4 +1,6 @@
 export default {
+  id: 20,
+
   name: "David Hilbert",
   type: "Oscillator",
   source: "https://www.conwaylife.com/wiki/David_Hilbert",

@@ -1,4 +1,5 @@
 export default {
+  id: 17,
   name: "Chicken Wire",
   type: "Agar",
   source: "https://www.conwaylife.com/patterns/chickenwire.cells",

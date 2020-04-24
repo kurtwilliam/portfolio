@@ -1,4 +1,6 @@
 export default {
+  id: 28,
+
   name: "Gosper Glider Gun",
 
   type: "Gun",

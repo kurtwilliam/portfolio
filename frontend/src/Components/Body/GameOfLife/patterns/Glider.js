@@ -1,4 +1,6 @@
 export default {
+  id: 26,
+
   name: "Glider",
 
   type: "SpaceShip",

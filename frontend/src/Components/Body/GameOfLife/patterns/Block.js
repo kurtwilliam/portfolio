@@ -1,4 +1,6 @@
 export default {
+  id: 12,
+
   name: "Block",
 
   type: "StillLife",

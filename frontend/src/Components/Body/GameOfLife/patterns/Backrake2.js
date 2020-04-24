@@ -1,4 +1,6 @@
 export default {
+  id: 6,
+
   name: "Backrake 2",
   type: "Puffer",
   source: "https://www.conwaylife.com/wiki/Backrake_2",

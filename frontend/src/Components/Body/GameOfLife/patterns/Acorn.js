@@ -1,4 +1,6 @@
 export default {
+  id: 2,
+
   name: "Acorn",
   type: "Methuselah",
   config: [

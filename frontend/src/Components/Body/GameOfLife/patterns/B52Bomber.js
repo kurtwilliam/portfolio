@@ -1,4 +1,6 @@
 export default {
+  id: 4,
+
   name: "B-52 Bomber",
   type: "Gun",
   source: "https://www.conwaylife.com/wiki/B-52_bomber",

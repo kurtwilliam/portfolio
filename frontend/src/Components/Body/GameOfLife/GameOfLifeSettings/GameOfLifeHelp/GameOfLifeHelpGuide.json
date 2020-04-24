@@ -1,0 +1,47 @@
+[
+  {
+    "shouldZoom": false,
+    "shouldCenter": false,
+    "shouldClear": false,
+    "showNeighbourCount": false,
+    "speed": 1,
+    "shapeToGenerate": "",
+    "html": "<p>MicroBiome Simulator is a cellular automaton based off of the <a href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>Game of Life</a> by John Horton Conway.</p></br><p>In this simulation, the grid on the left 'evolves' over time, depending on the status of it's cells.</p>"
+  },
+  {
+    "shouldZoom": true,
+    "shouldCenter": true,
+    "shouldClear": true,
+    "showNeighbourCount": false,
+    "speed": 1,
+    "shapeToGenerate": "Block",
+    "html": "<p>Each cell is either Alive or Dead. The dark cells are alive, and you can't see the Dead cells. Whether or not a cell is alive depends on how many of it's neighbours are alive.</p>"
+  },
+  {
+    "shouldZoom": false,
+    "shouldCenter": false,
+    "shouldClear": false,
+    "showNeighbourCount": true,
+    "speed": 1,
+    "shapeToGenerate": "",
+    "html": "<p>If a cell is alive and has 2 or 3 alive neighbours, it remains alive. If a cell is dead but has 3 alive neighbours, it comes to life.</p></br><p>The numbers in the cells on the left represent how many neighbours it has alive. This square stays the same, as the alive cells always have 3 alive neighbours and the dead cells never have 3.</p>"
+  },
+  {
+    "shouldZoom": false,
+    "shouldCenter": false,
+    "shouldClear": true,
+    "showNeighbourCount": true,
+    "speed": 1,
+    "shapeToGenerate": "",
+    "html": "<p>This is another example of a common pattern that emerges. Notice the neighbour counts; the center never changes because it always has 3 neighbours, but the outside squares switch.</p>"
+  },
+  {
+    "shouldZoom": false,
+    "shouldCenter": false,
+    "shouldClear": true,
+    "showNeighbourCount": true,
+    "speed": 1,
+    "shapeToGenerate": "",
+    "html": "<p>Simple enough, right?</p></br><p>Patterns can get a little bit more complicated though, and there are different types of patterns. This type is called an oscillator, as the pattern keeps repeating.</p></br>"
+  }
+]

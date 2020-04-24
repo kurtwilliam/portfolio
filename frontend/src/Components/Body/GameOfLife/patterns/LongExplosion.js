@@ -1,4 +1,5 @@
 export default {
+  id: 29,
   name: "Long Explosion",
 
   type: "Oscillator",

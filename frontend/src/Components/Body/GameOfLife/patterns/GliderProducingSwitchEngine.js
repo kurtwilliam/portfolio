@@ -1,4 +1,6 @@
 export default {
+  id: 27,
+
   name: "Glider Producing Switch Engine",
   type: "Puffer",
   source: "https://www.conwaylife.com/wiki/Glider-producing_switch_engine",

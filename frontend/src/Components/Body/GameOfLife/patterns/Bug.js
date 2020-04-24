@@ -1,4 +1,6 @@
 export default {
+  id: 15,
+
   name: "Bug",
 
   type: "Oscillator",

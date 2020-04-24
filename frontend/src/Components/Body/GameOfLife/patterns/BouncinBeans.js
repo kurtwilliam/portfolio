@@ -1,4 +1,6 @@
 export default {
+  id: 14,
+
   name: "Bouncin Beans",
 
   type: "Oscillator",

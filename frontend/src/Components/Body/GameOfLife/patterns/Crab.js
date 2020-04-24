@@ -1,4 +1,6 @@
 export default {
+  id: 19,
+
   name: "Crab",
 
   type: "SpaceShip",

@@ -1,4 +1,6 @@
 export default {
+  id: 7,
+
   name: "Beacon",
 
   type: "Oscillator",

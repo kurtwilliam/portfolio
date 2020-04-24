@@ -1,4 +1,6 @@
 export default {
+  id: 23,
+
   name: "Eater 2",
   type: "StillLife",
   source: "https://www.conwaylife.com/wiki/Eater_2",

@@ -83,7 +83,7 @@ class GameOfLifePatterns extends Component {
                 } ${selectedPattern === patternId ? "selected" : ""}`}
                 onClick={() => updateSelectedPattern(patternId)}
                 key={patternId}
-                title={`Type: ${patterns[patternId].type}`}
+                title={`Type: ${patterns[patternId].type} , Name: ${patterns[patternId].name}`}
               >
                 {patterns[patternId].config.map((row, rowIndex) => (
                   <div className={`gol__patterns--pattern__row`} key={rowIndex}>

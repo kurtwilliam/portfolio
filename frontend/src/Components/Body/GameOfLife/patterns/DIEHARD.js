@@ -1,4 +1,6 @@
 export default {
+  id: 21,
+
   name: "DIEHARD",
 
   type: "Methuselah",
