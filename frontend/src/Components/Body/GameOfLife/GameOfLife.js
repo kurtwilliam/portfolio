@@ -16,7 +16,8 @@ class GameOfLife extends Component {
     zoomLevel: 0.75,
     selectedPattern: "",
     cursorAction: "draw",
-    displayedInfo: "settings" // settings patterns help
+    displayedInfo: "settings", // settings patterns help
+    currentHelpPage: 0
   };
 
   handleChange = e =>
@@ -50,6 +51,7 @@ class GameOfLife extends Component {
     });
 
   updateDisplayedInfo = displayedInfo => this.setState({ displayedInfo });
+  updateHelpPage = currentHelpPage => this.setState({ currentHelpPage });
 
   render() {
     const {
@@ -61,7 +63,8 @@ class GameOfLife extends Component {
       zoomLevel,
       selectedPattern,
       cursorAction,
-      displayedInfo
+      displayedInfo,
+      currentHelpPage
     } = this.state;
 
     return (
@@ -84,6 +87,8 @@ class GameOfLife extends Component {
           cursorAction={cursorAction}
           updateDisplayedInfo={this.updateDisplayedInfo}
           displayedInfo={displayedInfo}
+          currentHelpPage={currentHelpPage}
+          updateHelpPage={this.updateHelpPage}
         />
         <GameOfLifeGrid
           speed={speed}
@@ -96,6 +101,7 @@ class GameOfLife extends Component {
           updateZoom={this.updateZoom}
           zoomLevel={zoomLevel}
           cursorAction={cursorAction}
+          currentHelpPage={currentHelpPage}
         />
         {/* <GameOfLifeStars /> */}
       </GameOfLifeLayout>

@@ -28,7 +28,7 @@ const GameOfLifeSettingsLayout = styled.div`
   .gol__settings--setting {
     display: flex;
     flex-direction: column;
-    margin-left: 12px;
+    // margin-left: 12px;
 
     input {
       cursor: pointer;

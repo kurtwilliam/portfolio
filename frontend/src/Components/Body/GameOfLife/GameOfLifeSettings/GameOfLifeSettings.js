@@ -34,7 +34,9 @@ class GameOfLifeSettings extends Component {
       updateZoom,
       displayedInfo,
       cursorAction,
-      updateDisplayedInfo
+      updateDisplayedInfo,
+      currentHelpPage,
+      updateHelpPage
     } = this.props;
 
     return (
@@ -142,6 +144,8 @@ class GameOfLifeSettings extends Component {
                 selectedPattern={selectedPattern}
                 updateSelectedPattern={updateSelectedPattern}
                 updateDisplayedInfo={updateDisplayedInfo}
+                currentHelpPage={currentHelpPage}
+                updateHelpPage={updateHelpPage}
               />
             )}
           </div>
