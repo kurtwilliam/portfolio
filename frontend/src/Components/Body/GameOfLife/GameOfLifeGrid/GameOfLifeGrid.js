@@ -182,7 +182,6 @@ class GameOfLifeGrid extends Component {
       for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
         grid[colNum][rowNum].state = "dead";
         grid[colNum][rowNum].nextState = "dead";
-        grid[colNum][rowNum].nextNbrs = 0;
         grid[colNum][rowNum].nbrs = 0;
       }
     }
@@ -392,8 +391,6 @@ class GameOfLifeGrid extends Component {
       // set center of canvas to be center of screen
       this.centerCanvas();
 
-      console.log(grid);
-
       grid =
         grid[0] && grid[0][0].nextState !== null
           ? grid
@@ -424,6 +421,21 @@ class GameOfLifeGrid extends Component {
       // );
 
       if (showNeighbourCountVar === true) {
+        // TODO: Refactor - need this loop because
+        // at the end of draw loop nextstate is set to null,
+        // but in the drawCalculateNeighbours fn the nextState
+        // isn't calculated yet. Can we do this elsewhere?
+
+        for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+          for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+            grid[colNum][rowNum].nbrs = this.countNeighbors(
+              colNum,
+              rowNum,
+              grid[colNum][rowNum].nextState,
+              true
+            );
+          }
+        }
         for (let colNum = 0; colNum < numberOfColumns; colNum++) {
           for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
             // TODO: refactor into if statement? ignore state reassignment
@@ -437,6 +449,7 @@ class GameOfLifeGrid extends Component {
             }
 
             const neighbours = grid[colNum][rowNum].nbrs;
+
             const textSize = 5;
 
             if (grid[colNum][rowNum].state === "alive") {
@@ -464,7 +477,6 @@ class GameOfLifeGrid extends Component {
             }
 
             if (!redrawCanvas) {
-              grid[colNum][rowNum].nbrs = grid[colNum][rowNum].nextNbrs;
               grid[colNum][rowNum].nextState = null;
             }
           }
@@ -610,15 +622,12 @@ class GameOfLifeGrid extends Component {
           grid[colNum][rowNum].nextState !== null
             ? grid[colNum][rowNum].nextState
             : stateToUpdateTo;
-
-        // Don't expect this to be accurate 100% of the time!
-        grid[colNum][rowNum].nextNbrs = sumOfAliveNeighbours;
       }
     }
     // }
   };
 
-  countNeighbors = (x, y, state) => {
+  countNeighbors = (x, y, state, next) => {
     let sumOfAliveNeighbours = 0;
     // -1 to +1 of x position of this square
 
@@ -641,8 +650,12 @@ class GameOfLifeGrid extends Component {
         if (grid[xCoord] === undefined || grid[xCoord][yCoord] === undefined)
           continue;
 
-        // if neighbour is alive and it's not the current square
-        if (grid[xCoord][yCoord].state === "alive") {
+        // if neighbour is alive
+        if (
+          next
+            ? grid[xCoord][yCoord].nextState === "alive"
+            : grid[xCoord][yCoord].state === "alive"
+        ) {
           sumOfAliveNeighbours += 1;
         }
       }
@@ -665,8 +678,6 @@ class GameOfLifeGrid extends Component {
     const yDraw = yPosGrid * resolution;
 
     // use center of grid coordinates to center shape
-    // const patternCol = centerX - patternColLength;
-    // const patternRow = centerY - patternRowLength;
 
     this.addPatternToCoords(
       patternConfig,
@@ -687,7 +698,7 @@ class GameOfLifeGrid extends Component {
       updateState
     } = this.props;
     const currentPage = guide[currentHelpPage];
-    console.log(currentHelpPage);
+
     const {
       shouldZoom,
       shouldCenter,
