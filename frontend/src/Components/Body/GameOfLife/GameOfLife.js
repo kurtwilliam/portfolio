@@ -50,8 +50,7 @@ class GameOfLife extends Component {
       zoomLevel: parseFloat(zoom.target ? zoom.target.value : zoom).toFixed(2)
     });
 
-  updateDisplayedInfo = displayedInfo => this.setState({ displayedInfo });
-  updateHelpPage = currentHelpPage => this.setState({ currentHelpPage });
+  updateState = (name, value) => this.setState({ [name]: value });
 
   render() {
     const {
@@ -85,10 +84,9 @@ class GameOfLife extends Component {
           updateZoom={this.updateZoom}
           zoomLevel={zoomLevel}
           cursorAction={cursorAction}
-          updateDisplayedInfo={this.updateDisplayedInfo}
           displayedInfo={displayedInfo}
           currentHelpPage={currentHelpPage}
-          updateHelpPage={this.updateHelpPage}
+          updateState={this.updateState}
         />
         <GameOfLifeGrid
           speed={speed}
@@ -103,6 +101,7 @@ class GameOfLife extends Component {
           cursorAction={cursorAction}
           currentHelpPage={currentHelpPage}
           displayedInfo={displayedInfo}
+          updateState={this.updateState}
         />
         {/* <GameOfLifeStars /> */}
       </GameOfLifeLayout>

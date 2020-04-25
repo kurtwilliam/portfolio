@@ -25,6 +25,7 @@ let bgColor = "";
 let selectedPatternVar = "";
 let showNeighbourCountVar = false;
 let zoomLevelVar = 1;
+let displayedInfoVar = "settings";
 
 // affects # col and # rows - affects performance
 const gridSizeMultiplier = 2.5;
@@ -117,7 +118,12 @@ class GameOfLifeGrid extends Component {
       currentHelpPage !== prevProps.currentHelpPage
     ) {
       this.updateGridForHelpSettings();
-    } else if (paused !== prevProps.paused) {
+    }
+
+    if (displayedInfo !== prevProps.displayedInfo) {
+      displayedInfoVar = displayedInfo;
+    }
+    if (paused !== prevProps.paused) {
       isPaused = paused;
       this.p5Canvas.frameRate(paused === true ? 0 : speed);
     } else if (paused !== true && speed !== prevProps.speed) {
@@ -176,9 +182,12 @@ class GameOfLifeGrid extends Component {
       for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
         grid[colNum][rowNum].state = "dead";
         grid[colNum][rowNum].nextState = "dead";
+        grid[colNum][rowNum].nextNbrs = 0;
+        grid[colNum][rowNum].nbrs = 0;
       }
     }
     this.p5Canvas.background(bgColor);
+    this.drawCanvasOneFrameWithoutMakingNewGrid();
   };
 
   calculateGridWidthAndHeight = () => {
@@ -212,7 +221,7 @@ class GameOfLifeGrid extends Component {
 
     if (randomize) toggleState("randomize");
 
-    if (!randomize) {
+    if (!randomize && displayedInfoVar !== "help") {
       // square in top left for testing purposes
       // newGrid[1][1].state = "alive";
       // newGrid[1][2].state = "alive";
@@ -252,7 +261,8 @@ class GameOfLifeGrid extends Component {
           id: `row${rowNum}col${colNum}`,
           nextState: null,
           prevState: state,
-          neighbours: 0
+          nbrs: 0, // neighbours
+          nextNbrs: 0 // prev neighbours
         };
       }
     }
@@ -413,8 +423,6 @@ class GameOfLifeGrid extends Component {
       //   gridHeight * gridSizeMultiplier
       // );
 
-      console.log(grid);
-
       if (showNeighbourCountVar === true) {
         for (let colNum = 0; colNum < numberOfColumns; colNum++) {
           for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
@@ -428,23 +436,35 @@ class GameOfLifeGrid extends Component {
                   : "dead";
             }
 
-            const neighbours = grid[colNum][rowNum].neighbours;
+            const neighbours = grid[colNum][rowNum].nbrs;
+            const textSize = 5;
 
             if (grid[colNum][rowNum].state === "alive") {
               s.fill(fillColor);
               s.stroke(bgColor);
               s.rect(x, y, resolution - 1, resolution - 1);
-              s.textSize(6);
-              s.fill(theme.golBlack);
-              s.text(grid[colNum][rowNum].neighbours, x, y);
+              if (neighbours !== 0) {
+                s.textSize(6);
+                s.fill(bgColor);
+                s.text(
+                  neighbours,
+                  x + resolution / 2 - textSize / 2,
+                  y + resolution / 2 - 1 + textSize / 2
+                );
+              }
             } else if (neighbours !== 0) {
               s.textSize(6);
-              s.fill(theme.golBlack);
+              s.fill(fillColor);
 
-              s.text(grid[colNum][rowNum].neighbours, x, y);
+              s.text(
+                neighbours,
+                x + resolution / 2 - textSize / 2,
+                y + resolution / 2 - 1 + textSize / 2
+              );
             }
 
             if (!redrawCanvas) {
+              grid[colNum][rowNum].nbrs = grid[colNum][rowNum].nextNbrs;
               grid[colNum][rowNum].nextState = null;
             }
           }
@@ -592,7 +612,7 @@ class GameOfLifeGrid extends Component {
             : stateToUpdateTo;
 
         // Don't expect this to be accurate 100% of the time!
-        grid[colNum][rowNum].neighbours = sumOfAliveNeighbours;
+        grid[colNum][rowNum].nextNbrs = sumOfAliveNeighbours;
       }
     }
     // }
@@ -613,8 +633,8 @@ class GameOfLifeGrid extends Component {
         )
           break;
         if (i === 0 && j === 0) continue;
-        let xCoord = x + i;
-        let yCoord = y + j;
+        let xCoord = x + j;
+        let yCoord = y + i;
 
         // check if coordinates are in grid
         // and its not current square
@@ -663,10 +683,11 @@ class GameOfLifeGrid extends Component {
       displayedInfo,
       currentHelpPage,
       toggleState,
-      zoomLevel
+      zoomLevel,
+      updateState
     } = this.props;
     const currentPage = guide[currentHelpPage];
-
+    console.log(currentHelpPage);
     const {
       shouldZoom,
       shouldCenter,
@@ -687,6 +708,7 @@ class GameOfLifeGrid extends Component {
     if (speed) {
       speedVar = speed;
       this.p5Canvas.frameRate(speedVar);
+      updateState("speed", speed);
     }
 
     if (shouldCenter) {
@@ -698,6 +720,7 @@ class GameOfLifeGrid extends Component {
     if (patternToGenerate) {
       this.addPatternToCenterOfCanvas(patternToGenerate);
     }
+    this.drawCanvasOneFrameWithoutMakingNewGrid();
   };
 
   render() {

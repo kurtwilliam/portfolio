@@ -20,11 +20,11 @@
   {
     "shouldZoom": 2,
     "shouldCenter": false,
-    "shouldClear": false,
+    "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 1,
-    "patternToGenerate": "",
-    "html": "<p>If a cell is <strong>alive</strong> and has <strong>2 or 3 alive</strong> neighbours, it remains alive. If a cell is <strong>dead</strong> but has <strong>3 alive</strong> neighbours, it comes to life.</p></br><p>The numbers in the cells on the left represent how many neighbours it has alive. Notice the neighbour counts; the center never changes because it always has 3 neighbours, but the outside squares switch.</p>"
+    "patternToGenerate": "Line",
+    "html": "<p>If a cell is <strong>alive</strong> and has <strong>2 or 3 alive</strong> neighbours, it remains alive. If a cell is <strong>dead</strong> but has <strong>3 alive</strong> neighbours, it comes to life.</p></br><p>The numbers in the cells on the left represent how many neighbours it has alive. Notice the neighbour counts; the center never changes because it always has 3 neighbours, but the outside squares switch because the dead cells have 3.</p>"
   },
   {
     "shouldZoom": 2,
@@ -32,8 +32,8 @@
     "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 1,
-    "patternToGenerate": "Block",
-    "html": "<p>This is another common pattern that emerges. This square stays the same, as the <strong>alive</strong> cells always have <strong>3 alive</strong> neighbours and the <strong>dead</strong> cells never have <strong>less than 2</strong>.</p>"
+    "patternToGenerate": "Penta-Decathlon",
+    "html": "<p>This is another common pattern that emerges. This square stays the same, as the <strong>alive</strong> cells always have <strong>3 alive</strong> neighbours and the <strong>dead</strong> cells never have <strong>more than 2</strong>.</p>"
   },
   {
     "shouldZoom": 1.75,

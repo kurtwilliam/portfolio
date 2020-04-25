@@ -16,9 +16,9 @@ const zoomMax = 2;
 
 class GameOfLifeSettings extends Component {
   clickPatterns = () => {
-    const { updateSelectedPattern, updateDisplayedInfo } = this.props;
+    const { updateSelectedPattern, updateState } = this.props;
     updateSelectedPattern("");
-    updateDisplayedInfo("patterns");
+    updateState("displayedInfo", "patterns");
   };
 
   render() {
@@ -34,9 +34,8 @@ class GameOfLifeSettings extends Component {
       updateZoom,
       displayedInfo,
       cursorAction,
-      updateDisplayedInfo,
       currentHelpPage,
-      updateHelpPage
+      updateState
     } = this.props;
 
     return (
@@ -47,7 +46,7 @@ class GameOfLifeSettings extends Component {
               <GameOfLifePatterns
                 selectedPattern={selectedPattern}
                 updateSelectedPattern={updateSelectedPattern}
-                updateDisplayedInfo={updateDisplayedInfo}
+                updateState={updateState}
               />
             )}
             {displayedInfo === "settings" && (
@@ -131,7 +130,7 @@ class GameOfLifeSettings extends Component {
                 </div>
                 <div className="gol__settings--setting">
                   <button
-                    onClick={() => updateDisplayedInfo("help")}
+                    onClick={() => updateState("displayedInfo", "help")}
                     name="randomize"
                   >
                     What is this?
@@ -143,9 +142,8 @@ class GameOfLifeSettings extends Component {
               <GameOfLifeHelp
                 selectedPattern={selectedPattern}
                 updateSelectedPattern={updateSelectedPattern}
-                updateDisplayedInfo={updateDisplayedInfo}
+                updateState={updateState}
                 currentHelpPage={currentHelpPage}
-                updateHelpPage={updateHelpPage}
               />
             )}
           </div>

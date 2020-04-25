@@ -16,7 +16,7 @@ class GameOfLifeHelp extends Component {
     this.setState(prevState => ({ hideDevNotes: !prevState.hideDevNotes }));
 
   render() {
-    const { updateDisplayedInfo, currentHelpPage, updateHelpPage } = this.props;
+    const { currentHelpPage, updateState } = this.props;
     const { hideDevNotes } = this.state;
     return (
       <GameOfLifeHelpLayout>
@@ -29,12 +29,20 @@ class GameOfLifeHelp extends Component {
             <>
               {ReactHtmlParser(guide[currentHelpPage].html)}
               {currentHelpPage > 0 && (
-                <button onClick={() => updateHelpPage(currentHelpPage - 1)}>
+                <button
+                  onClick={() =>
+                    updateState("currentHelpPage", currentHelpPage - 1)
+                  }
+                >
                   Previous
                 </button>
               )}
               {currentHelpPage < guide.length - 1 && (
-                <button onClick={() => updateHelpPage(currentHelpPage + 1)}>
+                <button
+                  onClick={() =>
+                    updateState("currentHelpPage", currentHelpPage + 1)
+                  }
+                >
                   Next
                 </button>
               )}
