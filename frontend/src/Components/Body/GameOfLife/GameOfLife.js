@@ -8,7 +8,7 @@ import patterns from "./patterns";
 
 class GameOfLife extends Component {
   state = {
-    speed: 2,
+    speed: 1,
     paused: false,
     randomize: false,
     clear: false,
@@ -102,6 +102,7 @@ class GameOfLife extends Component {
           zoomLevel={zoomLevel}
           cursorAction={cursorAction}
           currentHelpPage={currentHelpPage}
+          displayedInfo={displayedInfo}
         />
         {/* <GameOfLifeStars /> */}
       </GameOfLifeLayout>

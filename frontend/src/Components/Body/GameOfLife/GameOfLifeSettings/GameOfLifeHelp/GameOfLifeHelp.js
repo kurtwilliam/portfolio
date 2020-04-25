@@ -18,7 +18,6 @@ class GameOfLifeHelp extends Component {
   render() {
     const { updateDisplayedInfo, currentHelpPage, updateHelpPage } = this.props;
     const { hideDevNotes } = this.state;
-    console.log(hideDevNotes);
     return (
       <GameOfLifeHelpLayout>
         <div className="gol__help">

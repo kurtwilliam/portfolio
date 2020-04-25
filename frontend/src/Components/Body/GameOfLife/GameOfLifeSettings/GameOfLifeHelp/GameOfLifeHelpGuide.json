@@ -5,7 +5,7 @@
     "shouldClear": false,
     "showNeighbourCount": false,
     "speed": 1,
-    "shapeToGenerate": "",
+    "patternToGenerate": "",
     "html": "<p>MicroBiome Simulator is a cellular automaton based off of the <a target='__blank' href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>Game of Life</a> by John Horton Conway.</p></br><p>In this simulation, the grid on the left 'evolves' over time, depending on the status of it's cells.</p>"
   },
   {
@@ -14,7 +14,7 @@
     "shouldClear": true,
     "showNeighbourCount": false,
     "speed": 1,
-    "shapeToGenerate": "Line",
+    "patternToGenerate": "Line",
     "html": "<p>Each cell is either Alive or Dead. The dark cells are alive, and you can't see the Dead cells. Whether or not a cell is alive depends on how many of it's neighbours are alive.</p>"
   },
   {
@@ -23,7 +23,7 @@
     "shouldClear": false,
     "showNeighbourCount": true,
     "speed": 1,
-    "shapeToGenerate": "",
+    "patternToGenerate": "",
     "html": "<p>If a cell is <strong>alive</strong> and has <strong>2 or 3 alive</strong> neighbours, it remains alive. If a cell is <strong>dead</strong> but has <strong>3 alive</strong> neighbours, it comes to life.</p></br><p>The numbers in the cells on the left represent how many neighbours it has alive. Notice the neighbour counts; the center never changes because it always has 3 neighbours, but the outside squares switch.</p>"
   },
   {
@@ -32,7 +32,7 @@
     "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 1,
-    "shapeToGenerate": "Block",
+    "patternToGenerate": "Block",
     "html": "<p>This is another common pattern that emerges. This square stays the same, as the <strong>alive</strong> cells always have <strong>3 alive</strong> neighbours and the <strong>dead</strong> cells never have <strong>less than 2</strong>.</p>"
   },
   {
@@ -41,7 +41,7 @@
     "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 2,
-    "shapeToGenerate": "Long Explosion",
+    "patternToGenerate": "Long Explosion",
     "html": "<p>Simple enough, right?</p></br><p>Patterns can get a little bit more complicated though, and there are different types of patterns. This type is called an <strong>oscillator</strong>, as the pattern keeps repeating.</p>"
   },
   {
@@ -50,7 +50,7 @@
     "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 5,
-    "shapeToGenerate": "Big Spaceship",
+    "patternToGenerate": "Big Spaceship",
     "html": "<p>And, this type is a <strong>Space Ship</strong> because it moves across the grid.</p>"
   },
   {
@@ -59,7 +59,7 @@
     "shouldClear": true,
     "showNeighbourCount": false,
     "speed": 30,
-    "shapeToGenerate": "Scholar",
+    "patternToGenerate": "Scholar",
     "html": "<p>A bigger spaceship...</p>"
   },
   {
@@ -68,7 +68,7 @@
     "shouldClear": true,
     "showNeighbourCount": false,
     "speed": 30,
-    "shapeToGenerate": "Venetian Blinds",
+    "patternToGenerate": "Venetian Blinds",
     "html": "<p>And a type called Agar... I think you get the picture.</p></br><p>To see more patterns, you can <button>Add Patterns</button> here.</p></br><p>If you want to learn more, check out the <a target='__blank' href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>wiki</a>.</p></br><p>If you want to know how it was made, check out the <button>Developer Notes</button>.</p>"
   }
 ]

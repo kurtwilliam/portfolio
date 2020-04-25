@@ -6,6 +6,7 @@ import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
 import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
 
 import patterns from "../patterns";
+import guide from "../GameOfLifeSettings/GameOfLifeHelp/GameOfLifeHelpGuide";
 
 // variables that change for drawing
 let grid = [];
@@ -22,7 +23,7 @@ let strokeColor = "";
 let bgColor = "";
 
 let selectedPatternVar = "";
-
+let showNeighbourCountVar = false;
 let zoomLevelVar = 1;
 
 // affects # col and # rows - affects performance
@@ -61,9 +62,10 @@ let maxAliveNeighbours = 3;
 let minDeadNeighbours = 3;
 let maxDeadNeighbours = 3;
 
+// help sidebar options
+
 class GameOfLifeGrid extends Component {
   state = {
-    grid: [],
     shouldUpdate: true,
     shouldUpdateRowId: null,
     shouldUpdateSquareId: null,
@@ -85,8 +87,6 @@ class GameOfLifeGrid extends Component {
     this.p5Ref.addEventListener("mouseup", e => this.mouseReleased(e));
     this.calculateWidthAndHeight();
 
-    console.log(this.props.theme);
-
     fillColor = this.props.theme.golBlack;
     strokeColor = this.props.theme.golBlack;
     bgColor = this.props.theme.golOffWhite;
@@ -106,11 +106,18 @@ class GameOfLifeGrid extends Component {
       toggleState,
       selectedPattern,
       zoomLevel,
-      cursorAction
+      cursorAction,
+      displayedInfo,
+      currentHelpPage
     } = this.props;
     selectedPatternVar = selectedPattern;
 
-    if (paused !== prevProps.paused) {
+    if (
+      displayedInfo === "help" &&
+      currentHelpPage !== prevProps.currentHelpPage
+    ) {
+      this.updateGridForHelpSettings();
+    } else if (paused !== prevProps.paused) {
       isPaused = paused;
       this.p5Canvas.frameRate(paused === true ? 0 : speed);
     } else if (paused !== true && speed !== prevProps.speed) {
@@ -130,15 +137,6 @@ class GameOfLifeGrid extends Component {
     } else if (cursorAction !== prevProps.cursorAction) {
       cursorState = cursorAction;
     }
-    console.log(selectedPattern);
-    // else if (selectedPattern !== prevProps.selectedPattern) {
-
-    // }
-    // if (
-    //   gridSize !== prevProps.gridSize
-    // ) {
-    //   this.p5Canvas.frameRate(speed);
-    // }
   };
 
   scaleFunctionality = e => {
@@ -180,7 +178,7 @@ class GameOfLifeGrid extends Component {
         grid[colNum][rowNum].nextState = "dead";
       }
     }
-    this.p5Canvas.background(0);
+    this.p5Canvas.background(bgColor);
   };
 
   calculateGridWidthAndHeight = () => {
@@ -209,6 +207,8 @@ class GameOfLifeGrid extends Component {
       numberOfRows,
       randomize
     );
+
+    console.log(newGrid);
 
     if (randomize) toggleState("randomize");
 
@@ -251,7 +251,8 @@ class GameOfLifeGrid extends Component {
           state,
           id: `row${rowNum}col${colNum}`,
           nextState: null,
-          prevState: state
+          prevState: state,
+          neighbours: 0
         };
       }
     }
@@ -277,13 +278,17 @@ class GameOfLifeGrid extends Component {
 
     // if we are clicking the grid to put on a pattern
     // use the mouse pos to fill in the surrounding patterns
-    const currentPattern =
+    const patternConfig =
       selectedPattern === ""
         ? patterns[0].config
         : patterns[selectedPattern].config;
 
-    for (let row = 0; row < currentPattern.length; row++) {
-      for (let col = 0; col < currentPattern[row].length; col++) {
+    this.addPatternToCoords(patternConfig, selectedPattern, xPos, yPos, x, y);
+  };
+
+  addPatternToCoords = (patternConfig, selectedPattern, xPos, yPos, x, y) => {
+    for (let row = 0; row < patternConfig.length; row++) {
+      for (let col = 0; col < patternConfig[row].length; col++) {
         // if outside of grid when rendering
         if (!grid[xPos + col] || !grid[xPos + col][yPos + row]) continue;
         // get mouse position
@@ -291,7 +296,7 @@ class GameOfLifeGrid extends Component {
         // then change the incoming grid
         let state = "dead";
         let fill = bgColor;
-        if (currentPattern[row][col] === true) {
+        if (patternConfig[row][col] === true) {
           // incase deleting cells and is single dot
           if (
             (selectedPattern === "" || selectedPattern === "Dot") &&
@@ -305,6 +310,7 @@ class GameOfLifeGrid extends Component {
         }
 
         grid[xPos + col][yPos + row].state = state;
+        grid[xPos + col][yPos + row].nextState = state;
 
         this.p5Canvas.fill(fill);
         this.p5Canvas.stroke(bgColor);
@@ -338,7 +344,7 @@ class GameOfLifeGrid extends Component {
   };
 
   Sketch = s => {
-    const { speed, selectedPattern, paused } = this.props;
+    const { speed, selectedPattern, paused, theme } = this.props;
 
     s.setup = () => {
       let canvas = s
@@ -376,6 +382,8 @@ class GameOfLifeGrid extends Component {
       // set center of canvas to be center of screen
       this.centerCanvas();
 
+      console.log(grid);
+
       grid =
         grid[0] && grid[0][0].nextState !== null
           ? grid
@@ -405,25 +413,63 @@ class GameOfLifeGrid extends Component {
       //   gridHeight * gridSizeMultiplier
       // );
 
-      for (let colNum = 0; colNum < numberOfColumns; colNum++) {
-        for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
-          let x = colNum * resolution;
-          let y = rowNum * resolution;
+      console.log(grid);
 
-          if (!redrawCanvas) {
-            grid[colNum][rowNum].state =
-              grid[colNum][rowNum].nextState !== null
-                ? grid[colNum][rowNum].nextState
-                : "dead";
-          }
+      if (showNeighbourCountVar === true) {
+        for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+          for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+            // TODO: refactor into if statement? ignore state reassignment
+            let x = colNum * resolution;
+            let y = rowNum * resolution;
+            if (!redrawCanvas) {
+              grid[colNum][rowNum].state =
+                grid[colNum][rowNum].nextState !== null
+                  ? grid[colNum][rowNum].nextState
+                  : "dead";
+            }
 
-          if (grid[colNum][rowNum].state === "alive") {
-            s.fill(fillColor);
-            s.stroke(bgColor);
-            s.rect(x, y, resolution - 1, resolution - 1);
+            const neighbours = grid[colNum][rowNum].neighbours;
+
+            if (grid[colNum][rowNum].state === "alive") {
+              s.fill(fillColor);
+              s.stroke(bgColor);
+              s.rect(x, y, resolution - 1, resolution - 1);
+              s.textSize(6);
+              s.fill(theme.golBlack);
+              s.text(grid[colNum][rowNum].neighbours, x, y);
+            } else if (neighbours !== 0) {
+              s.textSize(6);
+              s.fill(theme.golBlack);
+
+              s.text(grid[colNum][rowNum].neighbours, x, y);
+            }
+
+            if (!redrawCanvas) {
+              grid[colNum][rowNum].nextState = null;
+            }
           }
-          if (!redrawCanvas) {
-            grid[colNum][rowNum].nextState = null;
+        }
+      } else {
+        for (let colNum = 0; colNum < numberOfColumns; colNum++) {
+          for (let rowNum = 0; rowNum < numberOfRows; rowNum++) {
+            // TODO: refactor into if statement? ignore state reassignment
+            let x = colNum * resolution;
+            let y = rowNum * resolution;
+            if (!redrawCanvas) {
+              grid[colNum][rowNum].state =
+                grid[colNum][rowNum].nextState !== null
+                  ? grid[colNum][rowNum].nextState
+                  : "dead";
+            }
+
+            if (grid[colNum][rowNum].state === "alive") {
+              s.fill(fillColor);
+              s.stroke(bgColor);
+              s.rect(x, y, resolution - 1, resolution - 1);
+            }
+            if (!redrawCanvas) {
+              grid[colNum][rowNum].nextState = null;
+            }
           }
         }
       }
@@ -451,7 +497,6 @@ class GameOfLifeGrid extends Component {
         clientY > canvasYPos &&
         clientY < canvasYPos + browserHeight
       ) {
-        console.log(selectedPattern);
         if (cursorState === "draw" && selectedPatternVar === "Dot") {
           this.handleClick(e);
         } else if (cursorState === "grab") {
@@ -518,7 +563,7 @@ class GameOfLifeGrid extends Component {
         // NOTE
         // If cell is DEAD at this point, sumOfAliveNeighbours wont be higher than maxDeadNeighbours + 1
         // If cell is DEAD at this point, sumOfAliveNeighbours wont be higher than maxAliveNeighbours + 1
-        // for performance
+        // for performance, UNLESS showNeighbourCount = true;
         let sumOfAliveNeighbours = this.countNeighbors(colNum, rowNum, state);
 
         let stateToUpdateTo = "";
@@ -545,6 +590,9 @@ class GameOfLifeGrid extends Component {
           grid[colNum][rowNum].nextState !== null
             ? grid[colNum][rowNum].nextState
             : stateToUpdateTo;
+
+        // Don't expect this to be accurate 100% of the time!
+        grid[colNum][rowNum].neighbours = sumOfAliveNeighbours;
       }
     }
     // }
@@ -559,7 +607,11 @@ class GameOfLifeGrid extends Component {
     for (let i = -1; i < 2; i++) {
       // -1 to +1 of y position of this square
       for (let j = -1; j < 2; j++) {
-        if (sumOfAliveNeighbours >= maxNeighbours + 1) break;
+        if (
+          showNeighbourCountVar !== true &&
+          sumOfAliveNeighbours >= maxNeighbours + 1
+        )
+          break;
         if (i === 0 && j === 0) continue;
         let xCoord = x + i;
         let yCoord = y + j;
@@ -577,6 +629,75 @@ class GameOfLifeGrid extends Component {
     }
 
     return sumOfAliveNeighbours;
+  };
+
+  addPatternToCenterOfCanvas = pattern => {
+    // find pattern
+    const patternConfig = patterns.find((pat, i) => pat.name === pattern)
+      .config;
+    // figure out length and width
+    const patternColLength = patternConfig[0].length;
+    const patternRowLength = patternConfig.length;
+
+    const xPosGrid = Math.floor(centerX - patternColLength / 2);
+    const yPosGrid = Math.floor(centerY - patternRowLength / 2);
+    const xDraw = xPosGrid * resolution;
+    const yDraw = yPosGrid * resolution;
+
+    // use center of grid coordinates to center shape
+    // const patternCol = centerX - patternColLength;
+    // const patternRow = centerY - patternRowLength;
+
+    this.addPatternToCoords(
+      patternConfig,
+      pattern,
+      xPosGrid,
+      yPosGrid,
+      xDraw,
+      yDraw
+    );
+  };
+
+  updateGridForHelpSettings = () => {
+    const {
+      displayedInfo,
+      currentHelpPage,
+      toggleState,
+      zoomLevel
+    } = this.props;
+    const currentPage = guide[currentHelpPage];
+
+    const {
+      shouldZoom,
+      shouldCenter,
+      shouldClear,
+      patternToGenerate,
+      speed,
+      showNeighbourCount
+    } = currentPage;
+
+    if (shouldClear) {
+      this.clearGrid();
+    }
+    if (shouldZoom > 0) {
+      zoomLevelVar = shouldZoom;
+      this.checkGridFitsScreen();
+    }
+
+    if (speed) {
+      speedVar = speed;
+      this.p5Canvas.frameRate(speedVar);
+    }
+
+    if (shouldCenter) {
+      this.centerCanvas();
+    }
+
+    showNeighbourCountVar = showNeighbourCount;
+
+    if (patternToGenerate) {
+      this.addPatternToCenterOfCanvas(patternToGenerate);
+    }
   };
 
   render() {
