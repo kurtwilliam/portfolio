@@ -51,12 +51,17 @@ class GameOfLifeSettings extends Component {
             )}
             {displayedInfo === "settings" && (
               <>
-                <div className="gol__settings--setting">
-                  <button onClick={() => this.clickPatterns()}>
-                    Draw Patterns
-                  </button>
+                <div className="gol__settings--setting gol__settings--button">
+                  <button
+                    onClick={() => this.clickPatterns()}
+                    className="gol__settings--patternsButton"
+                  ></button>
+                  <span>Draw Patterns</span>
                 </div>
                 <div className="gol__settings--setting__container">
+                  <span className="gol__settings--setting__title">
+                    Grid Settings
+                  </span>
                   <div className="gol__settings--setting">
                     <button
                       className={`${paused ? "pause" : "pause paused"}`}
@@ -88,8 +93,8 @@ class GameOfLifeSettings extends Component {
                       step={0.05}
                     />
                   </div>
-                </div>
-                <div className="gol__settings--setting__container">
+                  {/* </div>
+                <div className="gol__settings--setting__container"> */}
                   <div className="gol__settings--setting">
                     <button onClick={toggleState} name="clear">
                       Clear
@@ -102,30 +107,34 @@ class GameOfLifeSettings extends Component {
                   </div>
                 </div>
 
-                <div className="gol__settings--setting">
-                  <span>Touch Action</span>
-                  <div className="gol__settings--setting__radio">
-                    <label>
-                      Draw
-                      <input
-                        type="radio"
-                        name="cursorAction"
-                        value="draw"
-                        defaultChecked
-                        onChange={handleChange}
-                      />
-                    </label>
-                  </div>
-                  <div className="gol__settings--setting__radio">
-                    <label>
-                      Move
-                      <input
-                        type="radio"
-                        name="cursorAction"
-                        value="grab"
-                        onChange={handleChange}
-                      />
-                    </label>
+                <div className="gol__settings--setting__container">
+                  <div className="gol__settings--setting">
+                    <span className="gol__settings--setting__title">
+                      Touch Action
+                    </span>
+                    <div className="gol__settings--setting__radio">
+                      <label>
+                        <input
+                          type="radio"
+                          name="cursorAction"
+                          value="draw"
+                          defaultChecked
+                          onChange={handleChange}
+                        />
+                        Draw
+                      </label>
+                    </div>
+                    <div className="gol__settings--setting__radio">
+                      <label>
+                        <input
+                          type="radio"
+                          name="cursorAction"
+                          value="grab"
+                          onChange={handleChange}
+                        />
+                        Move
+                      </label>
+                    </div>
                   </div>
                 </div>
                 <div className="gol__settings--setting">

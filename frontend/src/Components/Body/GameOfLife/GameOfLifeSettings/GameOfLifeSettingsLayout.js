@@ -2,16 +2,15 @@ import styled from "styled-components";
 
 const GameOfLifeSettingsLayout = styled.div`
   position: absolute;
-  top: ${p => p.theme.golBorderWidth};
-  right: ${p => p.theme.golBorderWidth};
-  bottom: ${p => p.theme.golBorderWidth};
-  margin-left: ${p => p.theme.golBorderWidth};
+  top: ${p => p.theme.golBorderWidth}vw;
+  right: ${p => p.theme.golBorderWidth}vw;
+  bottom: ${p => p.theme.golBorderWidth}vw;
+  margin-left: ${p => p.theme.golBorderWidth}vw;
   width: 25vw;
   color: white;
   display: flex;
   flex-direction: column;
-  // padding: 12px;
-  background: rgb(100, 100, 100);
+  background: ${p => p.theme.golGrey};
   z-index: 1000;
 
   .gol__settings--container {
@@ -28,10 +27,28 @@ const GameOfLifeSettingsLayout = styled.div`
   .gol__settings--setting {
     display: flex;
     flex-direction: column;
-    // margin-left: 12px;
 
     input {
       cursor: pointer;
+    }
+
+    &__container {
+      position: relative;
+      border: 2px solid ${p => p.theme.golOffWhite};
+      padding: 8px;
+      margin-bottom: 16px;
+      min-width: 150px;
+    }
+
+    &__title {
+      text-transform: uppercase;
+      font-size: 1rem;
+      position: absolute;
+      left: 8px;
+      top: -7px;
+      // transform: translate(0, -50%); // transform wonky with text height
+      padding: 0 4px;
+      background: ${p => p.theme.golGrey};
     }
 
     input[type="range"] {
@@ -77,7 +94,7 @@ const GameOfLifeSettingsLayout = styled.div`
     input[type="range"]::-moz-range-track {
       height: 8px;
       width: 100%;
-      background: red;
+      background: ${p => p.theme.golHighlight};
       border-radius: 10px;
     }
     input[type="range"]:focus::-webkit-slider-runnable-track {
@@ -87,13 +104,15 @@ const GameOfLifeSettingsLayout = styled.div`
     }
   }
 
+  // general styles
   button {
-    // background: transparent;
-    // border: none;
-    // border-radius: 4px;
-    // padding: 4px 8px;
-    // color: white;
-    // cursor: pointer;
+    width: 24px;
+    height: 16px;
+    line-height: 28px;
+    font-size: 1.2rem;
+    border-raidus: 40px;
+    background: ${p => p.theme.golHighlight};
+    border-radius: 50px;
   }
 
   button.pause {

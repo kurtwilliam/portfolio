@@ -19,7 +19,9 @@ const theme = {
   golTan: "rgb(151,138,88)",
   golOffWhite: "rgb(210,210,206)",
   golBlack: "rgb(62,65,62)",
-  golBorderWidth: "1vw"
+  golBorderWidth: 1.5,
+  golHighlight: "maroon",
+  golGrey: "rgb(143, 142, 152)"
 };
 
 const GlobalStyle = createGlobalStyle`

@@ -456,7 +456,7 @@ class GameOfLifeGrid extends Component {
               s.fill(fillColor);
               s.stroke(bgColor);
               s.rect(x, y, resolution - 1, resolution - 1);
-              if (neighbours !== 0) {
+              // if (neighbours !== 0) {
                 s.textSize(6);
                 s.fill(bgColor);
                 s.text(
@@ -464,7 +464,7 @@ class GameOfLifeGrid extends Component {
                   x + resolution / 2 - textSize / 2,
                   y + resolution / 2 - 1 + textSize / 2
                 );
-              }
+              // }
             } else if (neighbours !== 0) {
               s.textSize(6);
               s.fill(fillColor);

@@ -7,7 +7,7 @@ const GameOfLifeLayout = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: green;
+  background: rgb(50, 50, 50);
 `;
 
 export default GameOfLifeLayout;

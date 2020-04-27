@@ -15,15 +15,31 @@ class GameOfLifeHelp extends Component {
   toggleNotes = () =>
     this.setState(prevState => ({ hideDevNotes: !prevState.hideDevNotes }));
 
+  componentDidUpdate = () => {
+    const { updateState } = this.props;
+
+    let addPatterns = document.getElementById("addPatterns");
+    let developerNotes = document.getElementById("developerNotes");
+    console.log(addPatterns);
+    if (addPatterns || developerNotes) {
+      addPatterns.addEventListener("click", () =>
+        updateState("displayedInfo", "patterns")
+      );
+      developerNotes.addEventListener("click", () => this.toggleNotes());
+    }
+  };
+
   render() {
     const { currentHelpPage, updateState } = this.props;
     const { hideDevNotes } = this.state;
     return (
       <GameOfLifeHelpLayout>
         <div className="gol__help">
-          <button>x</button>
+          <button onClick={() => updateState("displayedInfo", "settings")}>
+            x
+          </button>
           <button className="" onClick={() => this.toggleNotes()}>
-            Developer Notes
+            {hideDevNotes ? "Developer Notes" : "Tutorial"}
           </button>
           {hideDevNotes ? (
             <>
