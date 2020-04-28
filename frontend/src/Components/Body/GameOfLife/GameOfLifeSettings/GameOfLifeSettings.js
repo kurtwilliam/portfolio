@@ -3,7 +3,11 @@ import GameOfLifeSettingsLayout from "./GameOfLifeSettingsLayout";
 import GameOfLifePatterns from "./GameOfLifePatterns";
 import GameOfLifeHelp from "./GameOfLifeHelp";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStopwatch } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStopwatch,
+  faSearch,
+  faBackspace
+} from "@fortawesome/free-solid-svg-icons";
 // import GridSquare from "../GameOfLifeGrid/GridRow/GridSquare";
 
 const speedMin = 1;
@@ -63,10 +67,7 @@ class GameOfLifeSettings extends Component {
                   <div className="gol__settings--setting__rangeCont">
                     <div className="gol__settings--setting">
                       <label>
-                        <FontAwesomeIcon
-                          icon={faStopwatch}
-                          // color={theme.golOffWhite}
-                        />
+                        <FontAwesomeIcon icon={faStopwatch} />
                         Speed - {speed} FPS
                       </label>
                       <input
@@ -80,7 +81,10 @@ class GameOfLifeSettings extends Component {
                       />
                     </div>
                     <div className="gol__settings--setting">
-                      <label>Zoom - {zoomLevel}</label>
+                      <label>
+                        <FontAwesomeIcon icon={faSearch} />
+                        Zoom - {zoomLevel}
+                      </label>
                       <input
                         type="range"
                         name="zoomLevel"
@@ -96,14 +100,6 @@ class GameOfLifeSettings extends Component {
                 <div className="gol__settings--setting__container"> */}
                   <div className="gol__settings--setting gol__settings--setting__button">
                     <button
-                      onClick={toggleState}
-                      name="clear"
-                      className="gol__settings--patternsButton"
-                    ></button>
-                    <span>Clear</span>
-                  </div>
-                  <div className="gol__settings--setting gol__settings--setting__button">
-                    <button
                       className={`${
                         paused ? "pause" : "pause paused"
                       } gol__settings--patternsButton`}
@@ -111,6 +107,16 @@ class GameOfLifeSettings extends Component {
                       name="paused"
                     ></button>
                     <span>{paused ? "Play" : "Pause"}</span>
+                  </div>
+                  <div className="gol__settings--setting gol__settings--setting__button">
+                    <button
+                      onClick={toggleState}
+                      name="clear"
+                      className="gol__settings--patternsButton"
+                    ></button>
+                    <span>
+                      {/* <FontAwesomeIcon icon={faBackspace} />*/} Clear
+                    </span>
                   </div>
                   <div className="gol__settings--setting gol__settings--setting__button">
                     <button

@@ -55,7 +55,7 @@ class GameOfLifePatterns extends Component {
             // }
             onClick={() => this.changeDisplay()}
           >
-            Hide
+            Add New Patterns
           </span>
           <select
             className={`gol__patterns--type`}
@@ -102,44 +102,3 @@ class GameOfLifePatterns extends Component {
 }
 
 export default GameOfLifePatterns;
-
-{
-  /* <span
-                className={`gol__patterns--pattern ${
-                  patterns[patternId].type
-                } ${selectedPattern === patternId ? "selected" : ""}`}
-                onClick={() => updateSelectedPattern(patternId)}
-                key={patternId}
-                title={`Type: ${patterns[patternId].type} , Name: ${patterns[patternId].name}`}
-              >
-                {patterns[patternId].config.map((row, rowIndex) => (
-                  <div className={`gol__patterns--pattern__row`} key={rowIndex}>
-                    {row.map((col, colIndex) => (
-                      <div
-                        className={`gol__patterns--pattern__col ${
-                          col ? "alive" : null
-                        }`}
-                        key={`${rowIndex},${colIndex}`}
-                      />
-                    ))}
-                  </div>
-                ))}
-              </span>
-              
-// <span
-            //   className={`gol__patterns--pattern ${
-            //     patterns[patternId].type
-            //   } ${selectedPattern === patternId ? "selected" : ""}`}
-            //   onClick={() => updateSelectedPattern(patternId)}
-            //   key={patternId}
-            //   title={`Type: ${patterns[patternId].type}`}
-            // >
-            //   {patterns[patternId].name}
-            //   <span>
-            //     {patterns[patternId].config[0].length} x{" "}
-            //     {patterns[patternId].config.length}
-            //   </span>
-            // </span>
-
-              */
-}

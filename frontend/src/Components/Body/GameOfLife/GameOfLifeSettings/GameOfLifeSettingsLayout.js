@@ -20,10 +20,6 @@ const GameOfLifeSettingsLayout = styled.div`
   div {
     color: ${p => p.theme.golOffWhite};
   }
-  label,
-  button {
-    // color: ${p => p.theme.golBlack};
-  }
 
   .gol__settings--container {
     width: 100%;
@@ -71,15 +67,6 @@ const GameOfLifeSettingsLayout = styled.div`
       color: ${p => p.theme.golOffWhite};
       margin-right: 4px;
     }
-
-    // &__pauseCont {
-    //   display: flex;
-    //   align-items: center;
-
-    //   div:first-child {
-    //     margin-right: 8px;
-    //   }
-    // }
 
     &__rangeCont {
       display: flex;
@@ -180,11 +167,10 @@ const GameOfLifeSettingsLayout = styled.div`
         align-items: center;
         font-size: 1.2rem;
         text-transform: uppercase;
-        margin-bottom:0;
+        margin-bottom: 0;
         div {
           margin-right: 4px;
         }
-        
       }
       margin-bottom: 8px;
       &:last-of-type {
@@ -214,27 +200,6 @@ const GameOfLifeSettingsLayout = styled.div`
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.4) inset;
     }
   }
-
-  // button.pause {
-  //   width: 28px;
-  //   height: 28px;
-  //   border-style: solid;
-  //   border-width: 14px 0 14px 28px;
-  //   box-sizing: border-box;
-  //   background: transparent;
-  //   border-radius: 0;
-  //   padding: 0;
-  //   border-color: transparent transparent transparent #202020;
-  //   // transition: 25ms all ease;
-  //   cursor: pointer;
-
-  //   &.paused {
-  //     width: 28px;
-
-  //     border-style: double;
-  //     border-width: 0 0 0 28px;
-  //   }
-  // }
 `;
 
 export default GameOfLifeSettingsLayout;
