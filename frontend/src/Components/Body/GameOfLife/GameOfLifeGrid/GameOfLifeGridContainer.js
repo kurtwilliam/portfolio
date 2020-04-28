@@ -9,8 +9,13 @@ const GameOfLifeGridContainer = styled.div`
   // height: calc(100vh - ${p => p.theme.golBorderWidth * 2}vw);
   overflow: hidden;
   max-width: 100%;
-
+  border-radius: 4px;
+  z-index:1000;
   background: ${p => p.theme.golOffWhite};
+
+  canvas {
+    box-shadow: 4px 4px 20px #000 inset;
+  }
 `;
 
 export default GameOfLifeGridContainer;

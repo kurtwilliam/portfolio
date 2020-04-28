@@ -96,14 +96,20 @@ class GameOfLifeSettings extends Component {
                   {/* </div>
                 <div className="gol__settings--setting__container"> */}
                   <div className="gol__settings--setting">
-                    <button onClick={toggleState} name="clear">
-                      Clear
-                    </button>
+                    <button
+                      onClick={toggleState}
+                      name="clear"
+                      className="gol__settings--patternsButton"
+                    ></button>
+                    <span>Clear</span>
                   </div>
                   <div className="gol__settings--setting">
-                    <button onClick={toggleState} name="randomize">
-                      Randomize
-                    </button>
+                    <button
+                      className="gol__settings--patternsButton"
+                      onClick={toggleState}
+                      name="randomize"
+                    ></button>
+                    <span>Randomize</span>
                   </div>
                 </div>
 

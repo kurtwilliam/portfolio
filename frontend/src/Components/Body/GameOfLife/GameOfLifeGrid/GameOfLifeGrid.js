@@ -220,7 +220,7 @@ class GameOfLifeGrid extends Component {
 
     if (randomize) toggleState("randomize");
 
-    if (!randomize && displayedInfoVar !== "help") {
+    if (!randomize && displayedInfoVar !== "help" && newGrid[centerX]) {
       // square in top left for testing purposes
       // newGrid[1][1].state = "alive";
       // newGrid[1][2].state = "alive";
