@@ -7,11 +7,23 @@ const GameOfLifeSettingsLayout = styled.div`
   bottom: ${p => p.theme.golBorderWidth}vw;
   margin-left: ${p => p.theme.golBorderWidth}vw;
   width: 25vw;
-  color: white;
+  // color: white;
   display: flex;
   flex-direction: column;
   background: ${p => p.theme.golGrey};
   z-index: 1000;
+
+  p,
+  span,
+  label,
+  button,
+  div {
+    color: ${p => p.theme.golOffWhite};
+  }
+  label,
+  button {
+    // color: ${p => p.theme.golBlack};
+  }
 
   .gol__settings--container {
     width: 100%;
@@ -51,12 +63,51 @@ const GameOfLifeSettingsLayout = styled.div`
       background: ${p => p.theme.golGrey};
     }
 
+    label {
+      margin-bottom: 2px;
+    }
+
+    label svg {
+      color: ${p => p.theme.golOffWhite};
+      margin-right: 4px;
+    }
+
+    &__pauseCont {
+      display: flex;
+      align-items: center;
+
+      div:first-child {
+        margin-right: 8px;
+      }
+    }
+
+    &__rangeCont {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__button {
+      flex-direction: row;
+      align-items: center;
+      margin-bottom: 8px;
+
+      span {
+        margin-left: 4px;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      }
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+
     input[type="range"] {
       cursor: pointer;
       height: 8px;
       -webkit-appearance: none;
       width: 100%;
       background: transparent;
+      margin-bottom: 8px;
 
       &:focus {
         outline: none;
@@ -90,7 +141,12 @@ const GameOfLifeSettingsLayout = styled.div`
       // border: 1px solid #000000;
     }
 
-    input[type="range"]::-webkit-slider-runnable-track,
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 8px;
+      width: 100%;
+      background: ${p => p.theme.golHighlight};
+      border-radius: 10px;
+    }
     input[type="range"]::-moz-range-track {
       height: 8px;
       width: 100%;
@@ -101,18 +157,74 @@ const GameOfLifeSettingsLayout = styled.div`
     }
     &__radio {
       font-size: initial;
+
+      input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        & + div {
+          background: ${p => p.theme.golOffWhite};
+        }
+
+        &:checked ~ div {
+          background: ${p => p.theme.golHighlight};
+        }
+      }
+
+      label {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        margin-bottom:0;
+        div {
+          margin-right: 4px;
+        }
+        
+      }
+      margin-bottom: 8px;
+      &:last-of-type {
+        margin-bottom: 0;
+      }
     }
   }
 
   // general styles
-  button {
+  button,
+  input[type="radio"] + div {
     width: 24px;
     height: 16px;
-    line-height: 28px;
+    // line-height: 28px;
     font-size: 1.2rem;
-    border-raidus: 40px;
+    border: 2px solid ${p => p.theme.golOffWhite};
     background: ${p => p.theme.golHighlight};
     border-radius: 50px;
+    cursor: pointer;
+    transition: all 50ms;
+
+    &:hover {
+      filter: brightness(92%);
+    }
+
+    &:active {
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.4) inset;
+    }
+  }
+
+  .gol__settings--helpButton {
+    flex-direction:row;
+    align-items:center;
+    margin-bottom:16px;
+
+    button {
+      width:auto;height:auto;
+      padding: 6px 10px;
+      font-size:1.6rem;
+    }
   }
 
   button.pause {

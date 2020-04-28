@@ -4,65 +4,45 @@ const GameOfLifePatternsLayout = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  background: rgba(200, 200, 200, 1);
   width: 100%;
   height: 100%;
-  padding: 8px;
+  overflow:hidden;
 
   span {
     color: black;
   }
 
   .gol__patterns {
+    width:100%;
+
+    &.hidden {
+      .gol__patterns--container {
+        max-height:0;
+      }
+    }
     &--container {
       display: flex;
-      flex-wrap: wrap;
-      align-items:center;
-      width: 100%;
-    }
-    &--settings {
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: column;
-      justify-content: space-around;
-      width: 15%;
-      padding: 4px;
-
-      span {
-        cursor: pointer;
-      }
+      flex-direction:column;
+      max-width: 100%;
+      max-height:auto;
+      overflow-y:scroll;
+      transition:all 200ms;
     }
 
     &--pattern {
       width:auto;
       height:auto;
-      background: ${p => p.theme.golOffWhite};
+      // background: ${p => p.theme.golOffWhite};
       border: 1px solid ${p => p.theme.golOffWhite};
       display:flex;
-      // flex-wrap:wrap;
-      flex-direction:column;
+      justify-content:space-between;
+      align-items:center;
       cursor:pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-
-      &__row {
-        display:flex;
-        justify-content:flex-start
-        align-items:flex-start;
-      }
-      &__col {
-        width:5px;
-        height:5px;
-        background: ${p => p.theme.golOffWhite};
-        border: 1px solid ${p => p.theme.golOffWhite};
-
-        &.alive {
-          background: ${p => p.theme.golBlack};
-        }
-      }
+      font-size:1.2rem;
 
       &.selected {
         
-      }
+      }}
 
       // position: relative;
       // display: flex;
@@ -139,39 +119,39 @@ const GameOfLifePatternsLayout = styled.div`
       // &__empty {
       //   background: transparent;
       // }
-    }
+    // }
 
-    &--row {
-      display: flex;
-    }
+    // &--row {
+    //   display: flex;
+    // }
 
-    &--row {
-      display: flex;
-    }
+    // &--row {
+    //   display: flex;
+    // }
 
-    &--type {
-      &__Gun {
-        background: green;
-      }
-      &__SpaceShip {
-        background: maroon;
-      }
-      &__Oscillator {
-        background: yellow;
-      }
-      &__Methuselah {
-        background: lightblue;
-      }
-      &__StillLife {
-        background: black;
-      }
-      &__Puffer {
-        background: yellow;
-      }
-      &__Agar {
-        background: brown;
-      }
-    }
+    // &--type {
+    //   &__Gun {
+    //     background: green;
+    //   }
+    //   &__SpaceShip {
+    //     background: maroon;
+    //   }
+    //   &__Oscillator {
+    //     background: yellow;
+    //   }
+    //   &__Methuselah {
+    //     background: lightblue;
+    //   }
+    //   &__StillLife {
+    //     background: black;
+    //   }
+    //   &__Puffer {
+    //     background: yellow;
+    //   }
+    //   &__Agar {
+    //     background: brown;
+    //   }
+    // }
   }
 `;
 

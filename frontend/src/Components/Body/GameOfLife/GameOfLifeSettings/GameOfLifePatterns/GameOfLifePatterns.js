@@ -13,14 +13,15 @@ class GameOfLifePatterns extends Component {
     types[0] = "all";
     for (let i = 0; i < patterns.length; i++) {
       if (types.indexOf(patterns[i].type) === -1) {
+        console.log(types);
         types.push(patterns[i].type);
       }
     }
     this.setState({ types });
   }
 
-  shouldComponentUpdate(prevProps) {
-    if (prevProps.types !== this.props.types) {
+  shouldComponentUpdate(prevProps, prevState) {
+    if (prevProps.types !== this.props.types || this.state !== prevState) {
       return true;
     } else {
       return false;
@@ -54,7 +55,7 @@ class GameOfLifePatterns extends Component {
             // }
             onClick={() => this.changeDisplay()}
           >
-            Back
+            Hide
           </span>
           <select
             className={`gol__patterns--type`}
@@ -74,10 +75,36 @@ class GameOfLifePatterns extends Component {
           </select>
         </div>
         <div className="gol__patterns--container">
+          <div className="gol__patterns--pattern">
+            Name
+            <span>Dimensions</span>
+          </div>
           {Object.keys(patterns).map((patternId, i) =>
             selectedType === "all" ||
             patterns[patternId].type === selectedType ? (
-              <span
+              <div
+                className="gol__patterns--pattern"
+                key={patterns[patternId].name}
+                onClick={() => updateSelectedPattern(patternId)}
+              >
+                {patterns[patternId].name}
+                <span>
+                  {patterns[patternId].config[0].length} x{" "}
+                  {patterns[patternId].config.length}
+                </span>
+              </div>
+            ) : null
+          )}
+        </div>
+      </GameOfLifePatternsLayout>
+    );
+  }
+}
+
+export default GameOfLifePatterns;
+
+{
+  /* <span
                 className={`gol__patterns--pattern ${
                   patterns[patternId].type
                 } ${selectedPattern === patternId ? "selected" : ""}`}
@@ -98,7 +125,8 @@ class GameOfLifePatterns extends Component {
                   </div>
                 ))}
               </span>
-            ) : // <span
+              
+// <span
             //   className={`gol__patterns--pattern ${
             //     patterns[patternId].type
             //   } ${selectedPattern === patternId ? "selected" : ""}`}
@@ -112,12 +140,6 @@ class GameOfLifePatterns extends Component {
             //     {patterns[patternId].config.length}
             //   </span>
             // </span>
-            null
-          )}
-        </div>
-      </GameOfLifePatternsLayout>
-    );
-  }
-}
 
-export default GameOfLifePatterns;
+              */
+}
