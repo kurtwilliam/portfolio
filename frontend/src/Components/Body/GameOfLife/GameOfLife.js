@@ -103,6 +103,12 @@ class GameOfLife extends Component {
           displayedInfo={displayedInfo}
           updateState={this.updateState}
         />
+        <button
+          className={"gol__settings--helpButton"}
+          onClick={() => this.updateState("displayedInfo", "help")}
+        >
+          What is this?
+        </button>
         {/* <GameOfLifeStars /> */}
       </GameOfLifeLayout>
     );

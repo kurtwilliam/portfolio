@@ -72,14 +72,14 @@ const GameOfLifeSettingsLayout = styled.div`
       margin-right: 4px;
     }
 
-    &__pauseCont {
-      display: flex;
-      align-items: center;
+    // &__pauseCont {
+    //   display: flex;
+    //   align-items: center;
 
-      div:first-child {
-        margin-right: 8px;
-      }
-    }
+    //   div:first-child {
+    //     margin-right: 8px;
+    //   }
+    // }
 
     &__rangeCont {
       display: flex;
@@ -215,38 +215,26 @@ const GameOfLifeSettingsLayout = styled.div`
     }
   }
 
-  .gol__settings--helpButton {
-    flex-direction:row;
-    align-items:center;
-    margin-bottom:16px;
+  // button.pause {
+  //   width: 28px;
+  //   height: 28px;
+  //   border-style: solid;
+  //   border-width: 14px 0 14px 28px;
+  //   box-sizing: border-box;
+  //   background: transparent;
+  //   border-radius: 0;
+  //   padding: 0;
+  //   border-color: transparent transparent transparent #202020;
+  //   // transition: 25ms all ease;
+  //   cursor: pointer;
 
-    button {
-      width:auto;height:auto;
-      padding: 6px 10px;
-      font-size:1.6rem;
-    }
-  }
+  //   &.paused {
+  //     width: 28px;
 
-  button.pause {
-    width: 28px;
-    height: 28px;
-    border-style: solid;
-    border-width: 14px 0 14px 28px;
-    box-sizing: border-box;
-    background: transparent;
-    border-radius: 0;
-    padding: 0;
-    border-color: transparent transparent transparent #202020;
-    // transition: 25ms all ease;
-    cursor: pointer;
-
-    &.paused {
-      width: 28px;
-
-      border-style: double;
-      border-width: 0 0 0 28px;
-    }
-  }
+  //     border-style: double;
+  //     border-width: 0 0 0 28px;
+  //   }
+  // }
 `;
 
 export default GameOfLifeSettingsLayout;

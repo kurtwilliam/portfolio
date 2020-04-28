@@ -49,11 +49,6 @@ class GameOfLifeSettings extends Component {
             {/* )} */}
             {displayedInfo === "settings" && (
               <>
-                <div className="gol__settings--setting gol__settings--helpButton">
-                  <button onClick={() => updateState("displayedInfo", "help")}>
-                    What is this?
-                  </button>
-                </div>
                 {/* <div className="gol__settings--setting gol__settings--button">
                   <button
                     onClick={() => this.clickPatterns()}
@@ -65,45 +60,36 @@ class GameOfLifeSettings extends Component {
                   <span className="gol__settings--setting__title">
                     Grid Settings
                   </span>
-                  <div className="gol__settings--setting__pauseCont">
+                  <div className="gol__settings--setting__rangeCont">
                     <div className="gol__settings--setting">
-                      <button
-                        className={`${paused ? "pause" : "pause paused"}`}
-                        onClick={toggleState}
-                        name="paused"
-                      ></button>
+                      <label>
+                        <FontAwesomeIcon
+                          icon={faStopwatch}
+                          // color={theme.golOffWhite}
+                        />
+                        Speed - {speed} FPS
+                      </label>
+                      <input
+                        type="range"
+                        name="speed"
+                        min={speedMin}
+                        max={speedMax}
+                        value={speed}
+                        onChange={handleChange}
+                        step={1}
+                      />
                     </div>
-                    <div className="gol__settings--setting__rangeCont">
-                      <div className="gol__settings--setting">
-                        <label>
-                          <FontAwesomeIcon
-                            icon={faStopwatch}
-                            // color={theme.golOffWhite}
-                          />
-                          Speed - {speed} FPS
-                        </label>
-                        <input
-                          type="range"
-                          name="speed"
-                          min={speedMin}
-                          max={speedMax}
-                          value={speed}
-                          onChange={handleChange}
-                          step={1}
-                        />
-                      </div>
-                      <div className="gol__settings--setting">
-                        <label>Zoom - {zoomLevel}</label>
-                        <input
-                          type="range"
-                          name="zoomLevel"
-                          min={zoomMin}
-                          max={zoomMax}
-                          value={zoomLevel}
-                          onChange={updateZoom}
-                          step={0.05}
-                        />
-                      </div>
+                    <div className="gol__settings--setting">
+                      <label>Zoom - {zoomLevel}</label>
+                      <input
+                        type="range"
+                        name="zoomLevel"
+                        min={zoomMin}
+                        max={zoomMax}
+                        value={zoomLevel}
+                        onChange={updateZoom}
+                        step={0.05}
+                      />
                     </div>
                   </div>
                   {/* </div>
@@ -115,6 +101,16 @@ class GameOfLifeSettings extends Component {
                       className="gol__settings--patternsButton"
                     ></button>
                     <span>Clear</span>
+                  </div>
+                  <div className="gol__settings--setting gol__settings--setting__button">
+                    <button
+                      className={`${
+                        paused ? "pause" : "pause paused"
+                      } gol__settings--patternsButton`}
+                      onClick={toggleState}
+                      name="paused"
+                    ></button>
+                    <span>{paused ? "Play" : "Pause"}</span>
                   </div>
                   <div className="gol__settings--setting gol__settings--setting__button">
                     <button
