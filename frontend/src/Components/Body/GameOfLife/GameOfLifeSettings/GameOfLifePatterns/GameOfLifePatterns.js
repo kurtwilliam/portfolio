@@ -21,7 +21,11 @@ class GameOfLifePatterns extends Component {
   }
 
   shouldComponentUpdate(prevProps, prevState) {
-    if (prevProps.types !== this.props.types || this.state !== prevState) {
+    if (
+      prevProps.types !== this.props.types ||
+      this.state !== prevState ||
+      prevProps.selectedPattern !== this.props.selectedPattern
+    ) {
       return true;
     } else {
       return false;
@@ -76,25 +80,41 @@ class GameOfLifePatterns extends Component {
         </div>
         <div className="gol__patterns--container">
           <div className="gol__patterns--pattern">
-            Name
-            <span>Dimensions</span>
+            <div className="gol__patterns--pattern__row">
+              <span>Name</span>
+              <span>Dimensions</span>
+            </div>
           </div>
-          {Object.keys(patterns).map((patternId, i) =>
-            selectedType === "all" ||
-            patterns[patternId].type === selectedType ? (
+          {Object.keys(patterns).map((patternId, i) => {
+            const pattern = patterns[patternId];
+            const { type, name, source } = pattern;
+            console.log(selectedPattern, name);
+            return selectedType === "all" || type === selectedType ? (
               <div
-                className="gol__patterns--pattern"
-                key={patterns[patternId].name}
-                onClick={() => updateSelectedPattern(patterns[patternId].name)}
+                className={`gol__patterns--pattern ${
+                  selectedPattern === name ? "selected" : ""
+                }`}
+                key={name}
+                onClick={() => updateSelectedPattern(name)}
               >
-                {patterns[patternId].name}
-                <span>
-                  {patterns[patternId].config[0].length} x{" "}
-                  {patterns[patternId].config.length}
-                </span>
+                <div className="gol__patterns--pattern__row">
+                  <span>{name}</span>
+                  <span>
+                    {patterns[patternId].config[0].length} x{" "}
+                    {patterns[patternId].config.length}
+                  </span>
+                </div>
+                <div className="gol__patterns--pattern__hidden">
+                  <span>Type: {type}</span>
+                  {source ? (
+                    <a href={`${source}`} target="__blank">
+                      Wiki Source
+                    </a>
+                  ) : null}
+                </div>
               </div>
-            ) : null
-          )}
+            ) : null;
+          })}
         </div>
       </GameOfLifePatternsLayout>
     );

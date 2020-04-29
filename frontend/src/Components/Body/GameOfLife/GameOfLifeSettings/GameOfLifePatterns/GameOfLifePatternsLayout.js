@@ -41,27 +41,58 @@ const GameOfLifePatternsLayout = styled.div`
     }
 
     &--pattern {
-      width: auto;
-      height: auto;
       border-bottom: 1px solid ${p => p.theme.golOffWhite};
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
+      justify-content: center;
       cursor: pointer;
-      font-size: 1.4rem;
+      padding: 4px 2px;
+      font-size: 1.2rem;
 
-      &:hover {
-        background: ${p => p.theme.golHighlight};
+      &:first-of-type {
+        cursor: inherit;
+        span {
+          font-weight: bold;
+        }
+      }
+
+      div {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        transition: all 120ms;
+      }
+
+      &:hover .gol__patterns--pattern__hidden {
+        max-height: 100px;
       }
 
       &.selected {
-        background: ${p => p.theme.golHighlight};
-        font-size: 1.2rem;
+        border-left: 2px solid ${p => p.theme.golHighlight};
+
+        .gol__patterns--pattern__hidden {
+          max-height: 100px;
+        }
       }
 
       span {
-        color: ${p => p.theme.golHighlight};
+        display: block;
+        color: rgb(50, 50, 50);
         font-size: 1.2rem;
+
+        &:first-of-type {
+          color: ${p => p.theme.golOffWhite};
+          font-size: 1.4rem;
+          text-transform: capitalize;
+        }
+      }
+      &__hidden {
+        overflow: hidden;
+        max-height: 0;
+
+        span {
+          font-size: 1.2rem !important;
+        }
       }
     }
 

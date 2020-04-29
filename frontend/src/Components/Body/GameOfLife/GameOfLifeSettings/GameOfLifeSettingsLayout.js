@@ -17,8 +17,10 @@ const GameOfLifeSettingsLayout = styled.div`
   span,
   label,
   button,
+  a,
   div {
     color: ${p => p.theme.golOffWhite};
+    font-size: inherit;
   }
 
   .gol__settings--container {
@@ -61,6 +63,7 @@ const GameOfLifeSettingsLayout = styled.div`
 
     label {
       margin-bottom: 2px;
+      font-size: 1.4rem;
     }
 
     label svg {
