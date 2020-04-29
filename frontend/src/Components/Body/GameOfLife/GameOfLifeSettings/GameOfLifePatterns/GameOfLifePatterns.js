@@ -85,7 +85,7 @@ class GameOfLifePatterns extends Component {
               <div
                 className="gol__patterns--pattern"
                 key={patterns[patternId].name}
-                onClick={() => updateSelectedPattern(patternId)}
+                onClick={() => updateSelectedPattern(patterns[patternId].name)}
               >
                 {patterns[patternId].name}
                 <span>

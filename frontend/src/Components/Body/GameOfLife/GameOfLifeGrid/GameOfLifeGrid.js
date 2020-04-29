@@ -112,6 +112,7 @@ class GameOfLifeGrid extends Component {
       currentHelpPage
     } = this.props;
     selectedPatternVar = selectedPattern;
+    console.log(selectedPattern);
 
     if (
       displayedInfo === "help" &&
@@ -290,7 +291,7 @@ class GameOfLifeGrid extends Component {
     const patternConfig =
       selectedPattern === ""
         ? patterns[0].config
-        : patterns[selectedPattern].config;
+        : patterns.find(pattern => pattern.name === selectedPattern).config;
 
     this.addPatternToCoords(patternConfig, selectedPattern, xPos, yPos, x, y);
   };
@@ -334,7 +335,7 @@ class GameOfLifeGrid extends Component {
   };
 
   mouseReleased = e => {
-    if (cursorState === "draw" && e.x === clickStartX && e.y === clickStartY) {
+    if (cursorState === "draw") {
       this.handleClick(e);
     } else if (
       cursorState === "grab" &&
@@ -457,13 +458,13 @@ class GameOfLifeGrid extends Component {
               s.stroke(bgColor);
               s.rect(x, y, resolution - 1, resolution - 1);
               // if (neighbours !== 0) {
-                s.textSize(6);
-                s.fill(bgColor);
-                s.text(
-                  neighbours,
-                  x + resolution / 2 - textSize / 2,
-                  y + resolution / 2 - 1 + textSize / 2
-                );
+              s.textSize(6);
+              s.fill(bgColor);
+              s.text(
+                neighbours,
+                x + resolution / 2 - textSize / 2,
+                y + resolution / 2 - 1 + textSize / 2
+              );
               // }
             } else if (neighbours !== 0) {
               s.textSize(6);
