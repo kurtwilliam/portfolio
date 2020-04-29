@@ -16,7 +16,7 @@ class GameOfLife extends Component {
     zoomLevel: 0.75,
     selectedPattern: "",
     cursorAction: "draw",
-    displayedInfo: "settings", // settings patterns help
+    displayedInfo: "help", // settings patterns help
     currentHelpPage: 0
   };
 

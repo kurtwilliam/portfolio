@@ -46,7 +46,8 @@ const GameOfLifePatternsLayout = styled.div`
       flex-direction: column;
       justify-content: center;
       cursor: pointer;
-      padding: 4px 2px;
+      padding: 2px;
+      border-left: 2px solid transparent;
       font-size: 1.2rem;
 
       &:first-of-type {
@@ -63,8 +64,8 @@ const GameOfLifePatternsLayout = styled.div`
         transition: all 120ms;
       }
 
-      &:hover .gol__patterns--pattern__hidden {
-        max-height: 100px;
+      &:hover {
+        border-left: 2px solid ${p => p.theme.golOffWhite};
       }
 
       &.selected {

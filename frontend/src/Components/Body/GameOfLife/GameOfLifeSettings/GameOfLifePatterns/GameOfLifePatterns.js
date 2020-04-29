@@ -3,6 +3,7 @@
 import React, { Component, useEffect } from "react";
 import GameOfLifePatternsLayout from "./GameOfLifePatternsLayout";
 import patterns from "../../patterns";
+
 class GameOfLifePatterns extends Component {
   state = {
     selectedType: "all",
@@ -88,7 +89,6 @@ class GameOfLifePatterns extends Component {
           {Object.keys(patterns).map((patternId, i) => {
             const pattern = patterns[patternId];
             const { type, name, source } = pattern;
-            console.log(selectedPattern, name);
             return selectedType === "all" || type === selectedType ? (
               <div
                 className={`gol__patterns--pattern ${

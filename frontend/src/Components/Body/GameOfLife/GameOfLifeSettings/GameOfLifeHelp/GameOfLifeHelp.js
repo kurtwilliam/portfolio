@@ -5,6 +5,8 @@ import ReactHtmlParser, {
   convertNodeToElement,
   htmlparser2
 } from "react-html-parser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import guide from "./GameOfLifeHelpGuide.json";
 
 class GameOfLifeHelp extends Component {
@@ -12,20 +14,22 @@ class GameOfLifeHelp extends Component {
     hideDevNotes: true
   };
 
-  toggleNotes = () =>
+  toggleNotes = () => {
+    console.log(this.state.hideDevNotes);
     this.setState(prevState => ({ hideDevNotes: !prevState.hideDevNotes }));
+  };
 
   componentDidUpdate = () => {
     const { updateState } = this.props;
 
     let addPatterns = document.getElementById("addPatterns");
     let developerNotes = document.getElementById("developerNotes");
-    console.log(addPatterns);
+
     if (addPatterns || developerNotes) {
       addPatterns.addEventListener("click", () =>
         updateState("displayedInfo", "patterns")
       );
-      developerNotes.addEventListener("click", () => this.toggleNotes());
+      developerNotes.addEventListener("click", () => this.toggleNotes);
     }
   };
 
@@ -35,36 +39,55 @@ class GameOfLifeHelp extends Component {
     return (
       <GameOfLifeHelpLayout>
         <div className="gol__help">
-          <button onClick={() => updateState("displayedInfo", "settings")}>
-            x
+          <button
+            className="gol__help--close"
+            onClick={() => updateState("displayedInfo", "settings")}
+          >
+            <FontAwesomeIcon icon={faTimes} />
           </button>
-          <button className="" onClick={() => this.toggleNotes()}>
-            {hideDevNotes ? "Developer Notes" : "Tutorial"}
-          </button>
+
           {hideDevNotes ? (
             <>
               {ReactHtmlParser(guide[currentHelpPage].html)}
-              {currentHelpPage > 0 && (
-                <button
-                  onClick={() =>
-                    updateState("currentHelpPage", currentHelpPage - 1)
-                  }
-                >
-                  Previous
-                </button>
-              )}
-              {currentHelpPage < guide.length - 1 && (
-                <button
-                  onClick={() =>
-                    updateState("currentHelpPage", currentHelpPage + 1)
-                  }
-                >
-                  Next
-                </button>
-              )}
+              <div className="gol__help--pages">
+                {currentHelpPage > 0 ? (
+                  <button
+                    onClick={() =>
+                      updateState("currentHelpPage", currentHelpPage - 1)
+                    }
+                  >
+                    Previous
+                  </button>
+                ) : (
+                  <span></span>
+                )}
+                {currentHelpPage < guide.length - 1 ? (
+                  <button
+                    onClick={() =>
+                      updateState("currentHelpPage", currentHelpPage + 1)
+                    }
+                  >
+                    Next
+                  </button>
+                ) : (
+                  <span></span>
+                )}
+              </div>
+              <button
+                className="gol__help--switch"
+                onClick={() => this.toggleNotes()}
+              >
+                Developer Notes
+              </button>
             </>
           ) : (
             <div className="gol__help">
+              <button
+                className="gol__help--switch"
+                onClick={() => this.toggleNotes()}
+              >
+                Tutorial
+              </button>
               <h2>Developer Notes and Learnings</h2>
               <p>
                 The biggest lesson for me is, just because you can use a
