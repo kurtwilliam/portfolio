@@ -52,6 +52,7 @@ class GameOfLifeHelp extends Component {
               <div className="gol__help--pages">
                 {currentHelpPage > 0 ? (
                   <button
+                    className="gol__help--pages__previous"
                     onClick={() =>
                       updateState("currentHelpPage", currentHelpPage - 1)
                     }

@@ -139,7 +139,7 @@ class GameOfLifeSettings extends Component {
                           type="radio"
                           name="cursorAction"
                           value="draw"
-                          defaultChecked
+                          checked={cursorAction === "draw" && true}
                           onChange={handleChange}
                         />
                         <div></div>
@@ -152,6 +152,7 @@ class GameOfLifeSettings extends Component {
                           type="radio"
                           name="cursorAction"
                           value="grab"
+                          checked={cursorAction === "grab" && true}
                           onChange={handleChange}
                         />
                         <div></div>

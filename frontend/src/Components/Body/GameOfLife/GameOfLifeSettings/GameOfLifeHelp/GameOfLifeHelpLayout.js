@@ -27,7 +27,6 @@ const GameOfLifeHelpLayout = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // overflow-y: scroll;
 
     u {
       cursor: pointer;
@@ -67,8 +66,14 @@ const GameOfLifeHelpLayout = styled.div`
       right: 0;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       button {
         padding: 4px 8px;
+
+        &.gol__help--pages__previous {
+          background: none;
+          border: none;
+        }
       }
     }
   }

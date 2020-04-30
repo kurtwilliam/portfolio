@@ -335,6 +335,8 @@ class GameOfLifeGrid extends Component {
   };
 
   mouseReleased = e => {
+    console.log(cursorState);
+
     if (cursorState === "draw") {
       this.handleClick(e);
     } else if (
