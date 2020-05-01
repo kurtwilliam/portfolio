@@ -37,7 +37,7 @@ const GameOfLifePatternsLayout = styled.div`
 
       &::-webkit-scrollbar-track {
         border-radius: 10px;
-        background:${p => p.theme.golHighlight};
+        // background:${p => p.theme.golHighlight};
         // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       }
 
@@ -54,13 +54,59 @@ const GameOfLifePatternsLayout = styled.div`
       align-items: center;
 
       select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        outline:none;
+        background: transparent;
+        background-repeat: no-repeat;
+        background-color:${p => p.theme.golHighlight};
+        background-image: url("data:image/svg+xml;utf8,<svg fill='${p =>
+          p.theme
+            .golOffWhite}' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+        background-position-x: 100%;
+        background-position-y: 50%;
+        border: 1px solid #dfdfdf;
         border-radius:50px;
-        text-transform:uppercase;
+        text-transform:capitalize;
+        padding:2px 24px 2px 4px;
+        // padding-right:24px;
+        border:2px solid ${p => p.theme.golOffWhite};
+        // background:${p => p.theme.golHighlight};
+        color:${p => p.theme.golOffWhite};
+        display:flex;
+        justify-content:center;
+
+        &:focus {
+
+          option {
+            background:${p => p.theme.golOffWhite};
+            color:${p => p.theme.golBlack};
+            text-transform:capitalize;
+
+            &:hover {
+              background:${p => p.theme.golOffWhiteDarker};
+            }
+          }
+          
+        }
+
+        option:hover {
+          background:${p => p.theme.golHighlight};
+        }
       }
 
       & > span {
-        font-size: 1.8rem;
+        font-size: 1.4rem;
         color: ${p => p.theme.golOffWhite};
+        text-transform: capitalize;
+        // font-size: 1rem;
+        // position: absolute;
+        // left: 8px;
+        // top: -7px;
+        // font-weight: bold;
+        // transform: translate(0, -50%); // transform wonky with text height
+        // padding: 0 4px;
+        // background: ${p => p.theme.golBlack};
       }
     }
 
@@ -81,6 +127,10 @@ const GameOfLifePatternsLayout = styled.div`
         span {
           font-weight: bold;
         }
+      }
+
+      &:last-of-type {
+        border-bottom: none;
       }
 
       div {

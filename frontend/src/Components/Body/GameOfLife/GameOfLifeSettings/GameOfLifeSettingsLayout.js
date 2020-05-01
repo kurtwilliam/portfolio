@@ -200,6 +200,7 @@ const GameOfLifeSettingsLayout = styled.div`
     border-radius: 50px;
     cursor: pointer;
     transition: all 50ms;
+    outline: none;
 
     &:hover {
       filter: brightness(92%);
