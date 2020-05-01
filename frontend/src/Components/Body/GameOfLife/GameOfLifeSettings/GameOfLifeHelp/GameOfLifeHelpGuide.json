@@ -28,7 +28,7 @@
   },
   {
     "shouldZoom": 2,
-    "shouldCenter": false,
+    "shouldCenter": true,
     "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 1,
@@ -40,7 +40,7 @@
     "shouldCenter": true,
     "shouldClear": true,
     "showNeighbourCount": true,
-    "speed": 2,
+    "speed": 3,
     "patternToGenerate": "Long Explosion",
     "html": "<p>Simple enough, right?</p></br><p>Patterns can get a little bit more complicated though, and there are different types of patterns. This type is called an <strong>oscillator</strong>, as the pattern keeps repeating.</p>"
   },

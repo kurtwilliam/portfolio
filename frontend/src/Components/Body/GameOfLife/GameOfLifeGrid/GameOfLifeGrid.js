@@ -720,28 +720,28 @@ class GameOfLifeGrid extends Component {
     if (shouldClear) {
       this.clearGrid();
     }
+    this.drawCanvasOneFrameWithoutMakingNewGrid();
+
     if (shouldZoom > 0) {
       zoomLevelVar = shouldZoom;
       this.checkGridFitsScreen();
     }
 
+    if (shouldCenter) {
+      this.centerCanvas();
+    }
     if (speed) {
       speedVar = speed;
       this.p5Canvas.frameRate(speedVar);
       updateState("speed", speed);
     }
 
-    if (shouldCenter) {
-      this.centerCanvas();
-    }
-
     showNeighbourCountVar = showNeighbourCount;
 
     if (patternToGenerate) {
-      this.addPatternToCenterOfCanvas(patternToGenerate);
+      this.addPatternToCenterOfCanvas(patternToGenerate, true);
       // this.addPatternToCenterOfCanvas(patternToGenerate, true);
     }
-    this.drawCanvasOneFrameWithoutMakingNewGrid();
   };
 
   render() {
