@@ -7,6 +7,8 @@ const GameOfLifePatternsLayout = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border: 2px solid ${p => p.theme.golOffWhiteDark};
+  padding: 8px;
 
   span {
     color: black;
@@ -41,7 +43,7 @@ const GameOfLifePatternsLayout = styled.div`
     }
 
     &--pattern {
-      border-bottom: 1px solid ${p => p.theme.golOffWhite};
+      border-bottom: 1px solid ${p => p.theme.golOffWhiteDark};
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -65,7 +67,7 @@ const GameOfLifePatternsLayout = styled.div`
       }
 
       &:hover {
-        border-left: 2px solid ${p => p.theme.golOffWhite};
+        border-left: 2px solid ${p => p.theme.golOffWhiteDark};
       }
 
       &.selected {

@@ -10,7 +10,7 @@ const GameOfLifeSettingsLayout = styled.div`
   // color: white;
   display: flex;
   flex-direction: column;
-  background: ${p => p.theme.golGrey};
+  background: transparent;
   z-index: 1000;
 
   p,
@@ -31,7 +31,7 @@ const GameOfLifeSettingsLayout = styled.div`
     align-items: flex-start;
     max-width: 768px;
     max-height: 100%;
-    padding: 16px;
+    // padding: 16px;
   }
 
   .gol__settings--setting {
@@ -44,10 +44,10 @@ const GameOfLifeSettingsLayout = styled.div`
 
     &__container {
       position: relative;
-      border: 2px solid ${p => p.theme.golOffWhite};
+      border: 2px solid ${p => p.theme.golOffWhiteDark};
       padding: 8px;
       margin-bottom: 16px;
-      min-width: 150px;
+      min-width: 106px;
     }
 
     &__title {
@@ -56,9 +56,10 @@ const GameOfLifeSettingsLayout = styled.div`
       position: absolute;
       left: 8px;
       top: -7px;
+      font-weight: bold;
       // transform: translate(0, -50%); // transform wonky with text height
       padding: 0 4px;
-      background: ${p => p.theme.golGrey};
+      background: ${p => p.theme.golBlack};
     }
 
     label {

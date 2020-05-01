@@ -18,7 +18,8 @@ const theme = {
   golBrown: "rgb(77,33,27)",
   golTan: "rgb(151,138,88)",
   golOffWhite: "rgb(210,210,206)",
-  golBlack: "rgb(62,65,62)",
+  golOffWhiteDark: "rgb(133, 133, 128);",
+  golBlack: "rgb(52,55,52)",
   golBorderWidth: 1.5,
   golHighlight: "maroon",
   golGrey: "rgb(143, 142, 152)"

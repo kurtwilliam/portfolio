@@ -7,7 +7,7 @@ const GameOfLifeLayout = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: rgb(50, 50, 50);
+  background: ${p => p.theme.golBlack};
 
   .gol__settings--helpButton {
     &:hover {

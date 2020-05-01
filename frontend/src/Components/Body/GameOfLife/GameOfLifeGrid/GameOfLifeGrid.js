@@ -320,7 +320,7 @@ class GameOfLifeGrid extends Component {
         }
 
         grid[xPos + col][yPos + row].state = state;
-        grid[xPos + col][yPos + row].nextState = state;
+        // grid[xPos + col][yPos + row].nextState = state;
 
         this.p5Canvas.fill(fill);
         this.p5Canvas.stroke(bgColor);
