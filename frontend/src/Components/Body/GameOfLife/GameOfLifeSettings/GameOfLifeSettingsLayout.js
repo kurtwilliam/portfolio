@@ -186,8 +186,8 @@ const GameOfLifeSettingsLayout = styled.div`
   // general styles
   button,
   input[type="radio"] + div {
-    width: 24px;
-    height: 16px;
+    width: 32px;
+    height: 18px;
     // line-height: 28px;
     font-size: 1.2rem;
     border: 2px solid ${p => p.theme.golOffWhite};

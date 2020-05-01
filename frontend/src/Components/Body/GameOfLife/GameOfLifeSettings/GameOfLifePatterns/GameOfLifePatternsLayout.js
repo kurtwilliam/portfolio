@@ -29,6 +29,23 @@ const GameOfLifePatternsLayout = styled.div`
       max-height: auto;
       overflow-y: scroll;
       transition: all 200ms;
+
+      &::-webkit-scrollbar {
+        width: 10px;
+        position: relative;
+      }
+
+      &::-webkit-scrollbar-track {
+        border-radius: 10px;
+
+        // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: ${p => p.theme.golOffWhiteDark};
+        // border: 2px solid ${p => p.theme.golWhiteDark} inset;
+      }
     }
 
     &--settings {
@@ -54,6 +71,8 @@ const GameOfLifePatternsLayout = styled.div`
 
       &:first-of-type {
         cursor: inherit;
+        &:hover{border-left: 2px solid transparent;}
+
         span {
           font-weight: bold;
         }
@@ -80,7 +99,7 @@ const GameOfLifePatternsLayout = styled.div`
 
       span {
         display: block;
-        color: rgb(50, 50, 50);
+        color: ${p => p.theme.golOffWhiteDark};
         font-size: 1.2rem;
 
         &:first-of-type {

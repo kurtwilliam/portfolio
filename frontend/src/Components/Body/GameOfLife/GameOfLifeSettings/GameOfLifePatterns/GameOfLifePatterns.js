@@ -60,7 +60,7 @@ class GameOfLifePatterns extends Component {
             // }
             onClick={() => this.changeDisplay()}
           >
-            Add New Patterns
+            Draw Patterns
           </span>
           <select
             className={`gol__patterns--type`}
