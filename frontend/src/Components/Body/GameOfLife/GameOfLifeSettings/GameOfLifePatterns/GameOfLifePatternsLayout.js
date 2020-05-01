@@ -37,13 +37,13 @@ const GameOfLifePatternsLayout = styled.div`
 
       &::-webkit-scrollbar-track {
         border-radius: 10px;
-
+        background:${p => p.theme.golHighlight};
         // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       }
 
       &::-webkit-scrollbar-thumb {
         border-radius: 10px;
-        background: ${p => p.theme.golOffWhiteDark};
+        background: ${p => p.theme.golOffWhite};
         // border: 2px solid ${p => p.theme.golWhiteDark} inset;
       }
     }
@@ -52,6 +52,11 @@ const GameOfLifePatternsLayout = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
+
+      select {
+        border-radius:50px;
+        text-transform:uppercase;
+      }
 
       & > span {
         font-size: 1.8rem;

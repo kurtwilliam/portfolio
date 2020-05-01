@@ -93,6 +93,10 @@ const GameOfLifeSettingsLayout = styled.div`
     }
 
     input[type="range"] {
+      &,
+      &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+      }
       cursor: pointer;
       height: 8px;
       -webkit-appearance: none;
@@ -103,48 +107,49 @@ const GameOfLifeSettingsLayout = styled.div`
       &:focus {
         outline: none;
       }
-    }
-    input[type="range"]::-ms-track {
-      width: 100%;
-      cursor: pointer;
-
-      /* Hides the slider so custom styles can be added */
-      background: transparent;
-      border-color: transparent;
-      color: transparent;
-    }
-    input[type="range"]::-webkit-slider-thumb {
-      height: 8px;
-      width: 8px;
-      // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      // border: 1px solid #000000;
-    }
-    input[type="range"]::-moz-range-thumb {
-      height: 8px;
-      width: 8px;
-      // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      // border: 1px solid #000000;
-    }
-    input[type="range"]::-ms-thumb {
-      height: 8px;
-      width: 8px;
-      // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-      // border: 1px solid #000000;
-    }
-
-    input[type="range"]::-webkit-slider-runnable-track {
-      height: 8px;
-      width: 100%;
-      background: ${p => p.theme.golHighlight};
-      border-radius: 10px;
-    }
-    input[type="range"]::-moz-range-track {
-      height: 8px;
-      width: 100%;
-      background: ${p => p.theme.golHighlight};
-      border-radius: 10px;
-    }
-    input[type="range"]:focus::-webkit-slider-runnable-track {
+      &::-ms-track {
+        width: 100%;
+        cursor: pointer;
+        /* Hides the slider so custom styles can be added */
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
+      }
+      &::-webkit-slider-thumb {
+        height: 8px;
+        width: 8px;
+        border: none;
+        border-radius: 50%;
+        background: ${p => p.theme.golOffWhite};
+      }
+      &::-moz-range-thumb {
+        height: 8px;
+        width: 8px;
+        border: none;
+        border-radius: 50%;
+        background: ${p => p.theme.golOffWhite};
+      }
+      &::-ms-thumb {
+        height: 8px;
+        width: 8px;
+        border: none;
+        border-radius: 50%;
+        background: ${p => p.theme.golOffWhite};
+      }
+      &::-webkit-slider-runnable-track {
+        height: 8px;
+        width: 100%;
+        background: ${p => p.theme.golHighlight};
+        border-radius: 10px;
+      }
+      &::-moz-range-track {
+        height: 8px;
+        width: 100%;
+        background: ${p => p.theme.golHighlight};
+        border-radius: 10px;
+      }
+      &:focus::-webkit-slider-runnable-track {
+      }
     }
     &__radio {
       font-size: initial;
