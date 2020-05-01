@@ -32,7 +32,7 @@
     "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 1,
-    "patternToGenerate": "Penta-Decathlon",
+    "patternToGenerate": "Block",
     "html": "<p>This is another common pattern that emerges. This square stays the same, as the <strong>alive</strong> cells always have <strong>3 alive</strong> neighbours and the <strong>dead</strong> cells never have <strong>more than 2</strong>.</p>"
   },
   {

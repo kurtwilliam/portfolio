@@ -112,7 +112,6 @@ class GameOfLifeGrid extends Component {
       currentHelpPage
     } = this.props;
     selectedPatternVar = selectedPattern;
-    console.log(selectedPattern);
 
     if (
       displayedInfo === "help" &&
@@ -217,8 +216,6 @@ class GameOfLifeGrid extends Component {
       randomize
     );
 
-    console.log(newGrid);
-
     if (randomize) toggleState("randomize");
 
     if (!randomize && displayedInfoVar !== "help" && newGrid[centerX]) {
@@ -296,7 +293,15 @@ class GameOfLifeGrid extends Component {
     this.addPatternToCoords(patternConfig, selectedPattern, xPos, yPos, x, y);
   };
 
-  addPatternToCoords = (patternConfig, selectedPattern, xPos, yPos, x, y) => {
+  addPatternToCoords = (
+    patternConfig,
+    selectedPattern,
+    xPos,
+    yPos,
+    x,
+    y,
+    isTutorial
+  ) => {
     for (let row = 0; row < patternConfig.length; row++) {
       for (let col = 0; col < patternConfig[row].length; col++) {
         // if outside of grid when rendering
@@ -319,8 +324,10 @@ class GameOfLifeGrid extends Component {
           }
         }
 
+        if (isTutorial) {
+          grid[xPos + col][yPos + row].nextState = state;
+        }
         grid[xPos + col][yPos + row].state = state;
-        // grid[xPos + col][yPos + row].nextState = state;
 
         this.p5Canvas.fill(fill);
         this.p5Canvas.stroke(bgColor);
@@ -665,7 +672,7 @@ class GameOfLifeGrid extends Component {
     return sumOfAliveNeighbours;
   };
 
-  addPatternToCenterOfCanvas = pattern => {
+  addPatternToCenterOfCanvas = (pattern, isTutorial) => {
     // find pattern
     const patternConfig = patterns.find((pat, i) => pat.name === pattern)
       .config;
@@ -686,7 +693,8 @@ class GameOfLifeGrid extends Component {
       xPosGrid,
       yPosGrid,
       xDraw,
-      yDraw
+      yDraw,
+      isTutorial
     );
   };
 
@@ -731,6 +739,7 @@ class GameOfLifeGrid extends Component {
 
     if (patternToGenerate) {
       this.addPatternToCenterOfCanvas(patternToGenerate);
+      // this.addPatternToCenterOfCanvas(patternToGenerate, true);
     }
     this.drawCanvasOneFrameWithoutMakingNewGrid();
   };

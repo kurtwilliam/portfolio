@@ -14,7 +14,7 @@ class GameOfLife extends Component {
     clear: false,
     gridSize: 400,
     zoomLevel: 0.75,
-    selectedPattern: "",
+    selectedPattern: "Dot",
     cursorAction: "draw",
     displayedInfo: "settings", // settings patterns help
     currentHelpPage: 0

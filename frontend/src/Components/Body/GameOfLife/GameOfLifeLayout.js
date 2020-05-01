@@ -31,6 +31,7 @@ const GameOfLifeLayout = styled.div`
     padding: 6px 10px;
     font-size: 1.6rem;
     color: ${p => p.theme.golOffWhite};
+    outline: none;
   }
 `;
 
