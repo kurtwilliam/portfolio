@@ -1,8 +1,10 @@
 import React from "react";
 import JungleSearch from "./JungleSearch";
+import Hiragana from "./Hiragana/HiraganaChunk";
 import AestheticDimension from "./AestheticDimension";
 import Shooter from "./Shooter";
 import EmailBuilder from "./EmailBuilder";
+import MicroBiomeSimulator from "./GameOfLife/GameOfLifeChunk";
 import WordSandwiches from "./WordSandwiches";
 import NewYou from "./NewYou";
 
@@ -12,11 +14,13 @@ import NewYou from "./NewYou";
 
 const Body = () => (
   <main>
+    <MicroBiomeSimulator />
+    <Hiragana />
     <EmailBuilder />
     {/* <Shooter /> */}
     <AestheticDimension />
     {/* <WordSandwiches /> */}
-    <NewYou />
+    {/* <NewYou /> */}
     {/* <JungleSearch /> */}
   </main>
 );

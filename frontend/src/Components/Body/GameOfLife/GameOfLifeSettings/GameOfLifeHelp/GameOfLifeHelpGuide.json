@@ -69,6 +69,6 @@
     "showNeighbourCount": false,
     "speed": 30,
     "patternToGenerate": "Venetian Blinds",
-    "html": "<p>And a type called Agar... I think you get the picture.</p></br><p>To see more patterns, you can <u id='addPatterns'>Add Patterns</u> here.</p></br><p>If you want to learn more, check out the <u target='__blank' href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>wiki</a>.</p></br><p>If you want to know how it was made, check out the <u id='developerNotes'>Developer Notes</a>.</p>"
+    "html": "<p>And a type called Agar... I think you get the picture.</p></br><p>To see more patterns, you can <u id='addPatterns'>Add Patterns</u> here.</p></br><p>If you want to learn more, check out the <a target='__blank' href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>wiki</a>.</p></br><p>If you want to know how it was made, check out the <u id='developerNotes'>Developer Notes</a>.</p>"
   }
 ]

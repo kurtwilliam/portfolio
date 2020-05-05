@@ -14,7 +14,6 @@ class GameOfLifePatterns extends Component {
     types[0] = "all";
     for (let i = 0; i < patterns.length; i++) {
       if (types.indexOf(patterns[i].type) === -1) {
-        console.log(types);
         types.push(patterns[i].type);
       }
     }
@@ -39,7 +38,7 @@ class GameOfLifePatterns extends Component {
 
   changeDisplay = () => {
     const { updateState, updateSelectedPattern } = this.props;
-    updateSelectedPattern("");
+    updateSelectedPattern("Dot");
     updateState("displayedInfo", "settings");
   };
 

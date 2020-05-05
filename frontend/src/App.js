@@ -8,7 +8,11 @@ import GameOfLife from "./Components/Routes/GameOfLife";
 import Footer from "./Components/Footer";
 import BodyCont from "./Components/shared/BodyCont";
 import Ogg from "./assets/fonts/Ogg-Roman.otf";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { Router, Route, Link } from "react-router-dom";
+
+import { createBrowserHistory } from "history";
+
+const customHistory = createBrowserHistory();
 
 const theme = {
   grey: "#B9B4AF",
@@ -23,7 +27,14 @@ const theme = {
   golBlack: "rgb(52,55,52)",
   golBorderWidth: 1.5,
   golHighlight: "maroon",
-  golGrey: "rgb(143, 142, 152)"
+  golGrey: "rgb(143, 142, 152)",
+  golPrimary1: "#22A657",
+  golPrimary2: "#D3FBC5",
+  golPrimary3: "#0E6D34",
+  golButtonColor: "#363834",
+  golTextColor: "#1C1919",
+  golGrey1: "#959695"
+  // golScrewGradient:"",
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -57,7 +68,7 @@ const App = () => (
   // <ApolloProvider client={client}>
   <ThemeProvider theme={theme}>
     <BodyCont>
-      <Router>
+      <Router history={customHistory}>
         <Route exact path="/" component={Home} />
         <Route exact path="/hiragana" component={Hiragana} />
         <Route exact path="/game-of-life" component={GameOfLife} />

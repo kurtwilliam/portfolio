@@ -20,12 +20,6 @@ const zoomMin = 0.25;
 const zoomMax = 2;
 
 class GameOfLifeSettings extends Component {
-  clickPatterns = () => {
-    const { updateSelectedPattern, updateState } = this.props;
-    updateSelectedPattern("");
-    updateState("displayedInfo", "patterns");
-  };
-
   render() {
     const {
       speed,
@@ -43,23 +37,13 @@ class GameOfLifeSettings extends Component {
       updateState,
       theme
     } = this.props;
-
+    console.log(displayedInfo);
     return (
       <>
         <GameOfLifeSettingsLayout>
           <div className="gol__settings--container">
-            {/* {displayedInfo === "patterns" && ( */}
-
-            {/* )} */}
             {displayedInfo === "settings" && (
               <>
-                {/* <div className="gol__settings--setting gol__settings--button">
-                  <button
-                    onClick={() => this.clickPatterns()}
-                    className="gol__settings--patternsButton"
-                  ></button>
-                  <span>Draw Patterns</span>
-                </div> */}
                 <div className="gol__settings--setting__container">
                   <span className="gol__settings--setting__title">
                     Grid Settings
