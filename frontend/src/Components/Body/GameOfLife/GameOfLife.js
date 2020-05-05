@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import GameOfLifeLayout from "./GameOfLifeLayout";
 import GameOfLifeGrid from "./GameOfLifeGrid";
 import GameOfLifeSettings from "./GameOfLifeSettings";
-// import GameOfLife from "./GameOfLifeHelp";
-import GameOfLifeStars from "./GameOfLifeStars";
 import patterns from "./patterns";
+
+import GameOfLifeForeground from "./GameOfLifeForeground";
+import GameOfLifeMidground from "./GameOfLifeMidground";
+import GameOfLifeBackground from "./GameOfLifeBackground";
 
 class GameOfLife extends Component {
   state = {
@@ -73,43 +75,40 @@ class GameOfLife extends Component {
             updateDisplayedInfo={this.updateDisplayedInfo}
           />
         )} */}
-        <GameOfLifeSettings
-          speed={speed}
-          paused={paused}
-          gridSize={gridSize}
-          handleChange={this.handleChange}
-          toggleState={this.toggleState}
-          selectedPattern={selectedPattern}
-          updateSelectedPattern={this.updateSelectedPattern}
-          updateZoom={this.updateZoom}
-          zoomLevel={zoomLevel}
-          cursorAction={cursorAction}
-          displayedInfo={displayedInfo}
-          currentHelpPage={currentHelpPage}
-          updateState={this.updateState}
-        />
-        <GameOfLifeGrid
-          speed={speed}
-          paused={paused}
-          gridSize={gridSize}
-          clear={clear}
-          randomize={randomize}
-          toggleState={this.toggleState}
-          selectedPattern={selectedPattern}
-          updateZoom={this.updateZoom}
-          zoomLevel={zoomLevel}
-          cursorAction={cursorAction}
-          currentHelpPage={currentHelpPage}
-          displayedInfo={displayedInfo}
-          updateState={this.updateState}
-        />
-        <button
-          className={"gol__settings--helpButton"}
-          onClick={() => this.updateState("displayedInfo", "help")}
-        >
-          What is this?
-        </button>
-        {/* <GameOfLifeStars /> */}
+        <GameOfLifeBackground />
+        <GameOfLifeMidground>
+          <GameOfLifeSettings
+            speed={speed}
+            paused={paused}
+            gridSize={gridSize}
+            handleChange={this.handleChange}
+            toggleState={this.toggleState}
+            selectedPattern={selectedPattern}
+            updateSelectedPattern={this.updateSelectedPattern}
+            updateZoom={this.updateZoom}
+            zoomLevel={zoomLevel}
+            cursorAction={cursorAction}
+            displayedInfo={displayedInfo}
+            currentHelpPage={currentHelpPage}
+            updateState={this.updateState}
+          />
+          <GameOfLifeGrid
+            speed={speed}
+            paused={paused}
+            gridSize={gridSize}
+            clear={clear}
+            randomize={randomize}
+            toggleState={this.toggleState}
+            selectedPattern={selectedPattern}
+            updateZoom={this.updateZoom}
+            zoomLevel={zoomLevel}
+            cursorAction={cursorAction}
+            currentHelpPage={currentHelpPage}
+            displayedInfo={displayedInfo}
+            updateState={this.updateState}
+          />
+        </GameOfLifeMidground>
+        <GameOfLifeForeground updateState={this.updateState} />
       </GameOfLifeLayout>
     );
   }

@@ -24,7 +24,6 @@ const theme = {
   golOffWhite: "rgb(210,210,206)",
   golOffWhiteDark: "rgb(133, 133, 128);",
   golOffWhiteDarker: "rgb(120, 120, 115);",
-  golBlack: "rgb(52,55,52)",
   golBorderWidth: 1.5,
   golHighlight: "maroon",
   golGrey: "rgb(143, 142, 152)",
@@ -33,7 +32,9 @@ const theme = {
   golPrimary3: "#0E6D34",
   golButtonColor: "#363834",
   golTextColor: "#1C1919",
-  golGrey1: "#959695"
+  golGrey1: "#959695",
+  golWhite: "white",
+  golBlack: "black"
   // golScrewGradient:"",
 };
 

@@ -89,17 +89,23 @@ class GameOfLifeHelp extends Component {
               >
                 Tutorial
               </button>
-              <h2>Developer Notes and Learnings</h2>
+              <h2>Notes and Learnings</h2>
+              <p>Designed by Devin, built by Kurt.</p>
               <p>
-                The biggest lesson for me is, just because you can use a
-                library/framework to build something doesn't mean you should (in
-                this project, React)😅. Also to research the right tools for the
-                job before you build anything.
+                Built using React, p5.js, and Styled-Components, but Vanilla
+                JavaScript, HTML and CSS would have been fine. Doesn't use React
+                hooks (because I couldn't update React versions without wifi
+                when initially building)
               </p>
               <p>
-                I originally built the grid in React by rendering div's as the
-                grid but it was not performant at all. I researched, and decided
-                a normal HTML canvas was the way to go. I settled on the{" "}
+                Just because you can use a library/framework to build something
+                doesn't mean you should. In the future I will research the right
+                tools for the job before building anything.
+              </p>
+              <p>
+                The grid was originally built in React by rendering div's as the
+                grid, but performance was terrible. After research I decided a
+                normal HTML canvas was the way to go. I settled on the{" "}
                 <a href="https://p5js.org/" target="_blank">
                   p5
                 </a>{" "}
@@ -107,23 +113,24 @@ class GameOfLifeHelp extends Component {
                 instead of globally to allow React to play nicely with it.{" "}
               </p>
               <p>
-                The state structure is a two dimentional array (array of arrays)
-                for rows and nested objects for squares. Thus, when I built in
-                React the first time I was revisiting past learnings about
-                accidental state mutation and properly copying/updating nested
-                objects in application state 😐. Yay.
+                The grid state structure is a two dimentional array (array of
+                arrays) for rows and nested objects for squares. Thus, when I
+                built it in React the first time I was revisiting past learnings
+                about accidental state mutation and properly copying/updating
+                nested objects in application state 😐. Yay.
               </p>
               <p>
                 I learned how to optimize performance; using the performance tab
                 in google chrome I identified which function calls were slowest
-                and improved them. Some examples are: not creating new arrays at
-                each interval, more checks to see if each loop is actually
-                necessary, and more efficiently counting neighbours.
+                and improved them. Some improvements were: not creating new
+                arrays on each interval, more checks to see if each loop is
+                actually necessary, and more efficiently counting neighbouring
+                cells.
               </p>
               <p>
-                Crazy Ones: [State] Zero Encoded by Zero Population
-                261841×261841 https://www.conwaylife.com/wiki/0E0P_metacell
-                Caterloopillar https://www.conwaylife.com/wiki/Caterloopillar
+                Big Ones: [State] Zero Encoded by Zero Population 261841×261841
+                https://www.conwaylife.com/wiki/0E0P_metacell Caterloopillar
+                https://www.conwaylife.com/wiki/Caterloopillar
               </p>
             </div>
           )}
