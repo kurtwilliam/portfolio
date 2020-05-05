@@ -24,7 +24,7 @@ const theme = {
   golOffWhite: "rgb(210,210,206)",
   golOffWhiteDark: "rgb(133, 133, 128);",
   golOffWhiteDarker: "rgb(120, 120, 115);",
-  golBorderWidth: 1.5,
+  golBorderWidth: 2.5,
   golHighlight: "maroon",
   golGrey: "rgb(143, 142, 152)",
   golPrimary1: "#22A657",
