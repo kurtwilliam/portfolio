@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const GameOfLifeForegroundLayout = styled.div`
+  z-index: 1000000;
   .gol__settings--helpButton {
     &:hover {
       filter: brightness(92%);

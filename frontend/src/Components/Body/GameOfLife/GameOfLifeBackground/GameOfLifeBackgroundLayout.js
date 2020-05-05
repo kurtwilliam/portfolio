@@ -8,6 +8,7 @@ const GameOfLifeBackgroundLayout = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 100;
 `;
 
 export default GameOfLifeBackgroundLayout;

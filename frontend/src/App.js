@@ -33,6 +33,7 @@ const theme = {
   golButtonColor: "#363834",
   golTextColor: "#1C1919",
   golGrey1: "#959695",
+  golCream: "#C4C4C4",
   golWhite: "white",
   golBlack: "black"
   // golScrewGradient:"",
