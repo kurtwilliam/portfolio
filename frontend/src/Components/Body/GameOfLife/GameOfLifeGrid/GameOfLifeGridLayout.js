@@ -9,6 +9,30 @@ const GameOfLifeGridLayout = styled.div`
   max-width: 100%;
   z-index: 1000;
 
+  & > svg {
+    position: absolute;
+    z-index: 100000;
+  }
+
+  & > svg:first-of-type {
+    left: -20px;
+    bottom: 17px;
+  }
+
+  & > svg:nth-child(4) {
+    left: -26px;
+    top: 81px;
+  }
+
+  & > svg:nth-child(5) {
+    right: -21px;
+    bottom: 227px;
+  }
+  & > svg:nth-child(6) {
+    left: 100px;
+    top: -88px;
+  }
+
   .gol__grid {
     &--container {
       position: absolute;
@@ -23,6 +47,30 @@ const GameOfLifeGridLayout = styled.div`
       border: 4px solid ${p => p.theme.golPrimary3};
       border-radius: 80px;
       background: ${p => p.theme.golOffWhite};
+    }
+
+    &--germStars {
+      position: absolute;
+      bottom: 0;
+      right: -60px;
+
+      svg {
+        position: absolute;
+        z-index: 100000;
+      }
+
+      & svg:nth-child(1) {
+        position: relative;
+        z-index: 100010;
+      }
+      & svg:nth-child(2) {
+        right: 63px;
+        bottom: 56px;
+      }
+      & svg:nth-child(3) {
+        right: 50px;
+        bottom: -38px;
+      }
     }
 
     &--helpButton {

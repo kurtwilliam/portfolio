@@ -11,9 +11,9 @@ const SquiggleBL = () => (
     <path
       d="M60.2396 2C53.3527 25.0562 38.9271 42.2005 21.1643 58.0825C16.1527 62.5635 4.22532 68.4968 2 75.1728"
       stroke="#363834"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

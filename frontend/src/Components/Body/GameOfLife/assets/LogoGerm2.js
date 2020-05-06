@@ -23,16 +23,16 @@ const LogoGerm2 = () => (
     <path
       d="M24.6726 21.6729C24.6726 22.6729 24.6726 23.6729 24.6726 24.6729"
       stroke="black"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M31.6726 25.6729C31.6726 26.0062 31.6726 26.3395 31.6726 26.6729"
       stroke="black"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );

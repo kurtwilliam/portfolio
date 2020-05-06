@@ -3,8 +3,14 @@ import p5 from "p5";
 import { withTheme } from "styled-components";
 
 import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
-import QuestionMarkCircle from "../assets/QuestionMarkCircle";
 import QuestionMark from "../assets/QuestionMark";
+import SquiggleBL from "../assets/SquiggleBL";
+import SquiggleTL from "../assets/SquiggleTL";
+import SquiggleBR from "../assets/SquiggleBR";
+import StarTL from "../assets/StarTL";
+import StarBRSmall from "../assets/StarBRSmall";
+import StarBR from "../assets/StarBR";
+import GermBR from "../assets/GermBR";
 
 import patterns from "../patterns";
 import guide from "../GameOfLifeSettings/GameOfLifeHelp/GameOfLifeHelpGuide";
@@ -763,6 +769,15 @@ class GameOfLifeGrid extends Component {
           </span>
           ok what is this?
         </button>
+        <SquiggleBL />
+        <SquiggleTL />
+        <SquiggleBR />
+        <StarTL />
+        <div className="gol__grid--germStars">
+          <GermBR />
+          <StarBRSmall />
+          <StarBR />
+        </div>
       </GameOfLifeGridLayout>
     );
   }

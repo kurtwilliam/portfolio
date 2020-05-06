@@ -34,8 +34,8 @@ const Screw = () => (
         y2="20"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#707070" />
-        <stop offset="0.583333" stop-color="#EAEAEA" />
+        <stop stopColor="#707070" />
+        <stop offset="0.583333" stopColor="#EAEAEA" />
       </linearGradient>
       <linearGradient
         id="paint1_linear"
@@ -45,8 +45,8 @@ const Screw = () => (
         y2="17"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#707070" />
-        <stop offset="0.583333" stop-color="#EAEAEA" />
+        <stop stopColor="#707070" />
+        <stop offset="0.583333" stopColor="#EAEAEA" />
       </linearGradient>
     </defs>
   </svg>

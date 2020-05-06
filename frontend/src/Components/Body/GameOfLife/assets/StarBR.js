@@ -1,6 +1,6 @@
 import React from "react";
 
-const ForegroundStar2 = () => (
+const StarBR = () => (
   <svg
     width="115"
     height="112"
@@ -15,4 +15,4 @@ const ForegroundStar2 = () => (
   </svg>
 );
 
-export default ForegroundStar2;
+export default StarBR;
