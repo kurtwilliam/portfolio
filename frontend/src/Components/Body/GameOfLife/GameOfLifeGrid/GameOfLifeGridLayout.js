@@ -51,8 +51,11 @@ const GameOfLifeGridLayout = styled.div`
 
     &--germStars {
       position: absolute;
-      bottom: 0;
+      bottom: -37px;
       right: -60px;
+      overflow: hidden;
+      width: 150px;
+      height: 160px;
 
       svg {
         position: absolute;
@@ -62,14 +65,17 @@ const GameOfLifeGridLayout = styled.div`
       & svg:nth-child(1) {
         position: relative;
         z-index: 100010;
+        left: 90px;
+        top: 58px;
+        transform: translate(-50%, -50%);
       }
       & svg:nth-child(2) {
-        right: 63px;
-        bottom: 56px;
+        right: 59px;
+        bottom: 87px;
       }
       & svg:nth-child(3) {
-        right: 50px;
-        bottom: -38px;
+        right: 47px;
+        bottom: -2px;
       }
     }
 
