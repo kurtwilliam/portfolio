@@ -2,13 +2,11 @@ import React, { Component, useEffect } from "react";
 import GameOfLifeSettingsLayout from "./GameOfLifeSettingsLayout";
 import GameOfLifePatterns from "./GameOfLifePatterns";
 import GameOfLifeHelp from "./GameOfLifeHelp";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faStopwatch,
-  faSearch,
-  faBackspace
-} from "@fortawesome/free-solid-svg-icons";
-// import GridSquare from "../GameOfLifeGrid/GridRow/GridSquare";
+import LogoGerm from "../assets/LogoGerm";
+import LogoGermBig from "../assets/LogoGermBig";
+import BacterialColony from "../../../../assets/GameOfLife/BacterialColony.png";
+import ControlsContainer from "../assets/ControlsContainer";
+// import LogoGerm from "../assets/LogoGerm";
 
 const speedMin = 1;
 const speedMax = 60;
@@ -37,112 +35,119 @@ class GameOfLifeSettings extends Component {
       updateState,
       theme
     } = this.props;
-    console.log(displayedInfo);
     return (
       <>
         <GameOfLifeSettingsLayout>
+          <div className="gol__settings--logo">
+            <img src={BacterialColony} />
+            <LogoGermBig />
+            <LogoGerm />
+          </div>
           <div className="gol__settings--container">
             {displayedInfo === "settings" && (
               <>
-                <div className="gol__settings--setting__container">
-                  <span className="gol__settings--setting__title">
-                    Grid Settings
-                  </span>
-                  <div className="gol__settings--setting__rangeCont">
-                    <div className="gol__settings--setting">
-                      <label>
-                        <FontAwesomeIcon icon={faStopwatch} />
-                        Speed - {speed} FPS
-                      </label>
-                      <input
-                        type="range"
-                        name="speed"
-                        min={speedMin}
-                        max={speedMax}
-                        value={speed}
-                        onChange={handleChange}
-                        step={1}
-                      />
-                    </div>
-                    <div className="gol__settings--setting">
-                      <label>
-                        <FontAwesomeIcon icon={faSearch} />
-                        Zoom - {zoomLevel}
-                      </label>
-                      <input
-                        type="range"
-                        name="zoomLevel"
-                        min={zoomMin}
-                        max={zoomMax}
-                        value={zoomLevel}
-                        onChange={updateZoom}
-                        step={0.05}
-                      />
-                    </div>
-                  </div>
-                  {/* </div>
-                <div className="gol__settings--setting__container"> */}
-                  <div className="gol__settings--setting gol__settings--setting__button">
-                    <button
-                      className={`${
-                        paused ? "pause" : "pause paused"
-                      } gol__settings--patternsButton`}
-                      onClick={toggleState}
-                      name="paused"
-                    ></button>
-                    <span>{paused ? "Play" : "Pause"}</span>
-                  </div>
-                  <div className="gol__settings--setting gol__settings--setting__button">
-                    <button
-                      onClick={toggleState}
-                      name="clear"
-                      className="gol__settings--patternsButton"
-                    ></button>
-                    <span>
-                      {/* <FontAwesomeIcon icon={faBackspace} />*/} Clear
-                    </span>
-                  </div>
-                  <div className="gol__settings--setting gol__settings--setting__button">
-                    <button
-                      className="gol__settings--patternsButton"
-                      onClick={toggleState}
-                      name="randomize"
-                    ></button>
-                    <span>Randomize</span>
-                  </div>
-                </div>
-
-                <div className="gol__settings--setting__container">
-                  <div className="gol__settings--setting">
+                <div className="gol__settings--settings">
+                  <div className="gol__settings--setting__container">
                     <span className="gol__settings--setting__title">
-                      Touch Action
+                      Observe
                     </span>
-                    <div className="gol__settings--setting__radio">
-                      <label>
+                    <div className="gol__settings--setting__rangeCont">
+                      <div className="gol__settings--setting">
+                        <label>
+                          Speed <span>{speed}</span>
+                        </label>
                         <input
-                          type="radio"
-                          name="cursorAction"
-                          value="draw"
-                          checked={cursorAction === "draw" && true}
+                          type="range"
+                          name="speed"
+                          min={speedMin}
+                          max={speedMax}
+                          value={speed}
                           onChange={handleChange}
+                          step={1}
                         />
-                        <div></div>
-                        Draw
-                      </label>
-                    </div>
-                    <div className="gol__settings--setting__radio">
-                      <label>
+                      </div>
+                      <div className="gol__settings--setting">
+                        <label>
+                          Zoom <span>{zoomLevel}</span>
+                        </label>
                         <input
-                          type="radio"
-                          name="cursorAction"
-                          value="grab"
-                          checked={cursorAction === "grab" && true}
-                          onChange={handleChange}
+                          type="range"
+                          name="zoomLevel"
+                          min={zoomMin}
+                          max={zoomMax}
+                          value={zoomLevel}
+                          onChange={updateZoom}
+                          step={0.05}
                         />
-                        <div></div>
-                        Move
-                      </label>
+                      </div>
                     </div>
+                    {/* </div>
+                <div className="gol__settings--setting__container"> */}
+                    <div className="gol__settings--setting gol__settings--setting__button">
+                      <button
+                        className={`${
+                          paused ? "pause" : "pause paused"
+                        } gol__settings--patternsButton`}
+                        onClick={toggleState}
+                        name="paused"
+                      ></button>
+                      <span>{paused ? "Play" : "Pause"}</span>
+                    </div>
+                    <div className="gol__settings--setting gol__settings--setting__button">
+                      <button
+                        onClick={toggleState}
+                        name="clear"
+                        className="gol__settings--patternsButton"
+                      ></button>
+                      <span>
+                        {/* <FontAwesomeIcon icon={faBackspace} />*/} Clear
+                      </span>
+                    </div>
+                    <div className="gol__settings--setting gol__settings--setting__button">
+                      <button
+                        className="gol__settings--patternsButton"
+                        onClick={toggleState}
+                        name="randomize"
+                      ></button>
+                      <span>Randomize</span>
+                    </div>
+                  </div>
+
+                  <div className="gol__settings--setting__container">
+                    <div className="gol__settings--setting">
+                      <span className="gol__settings--setting__title">
+                        Touch Action
+                      </span>
+                      <div className="gol__settings--setting__radio">
+                        <label>
+                          <input
+                            type="radio"
+                            name="cursorAction"
+                            value="draw"
+                            checked={cursorAction === "draw" && true}
+                            onChange={handleChange}
+                          />
+                          <div></div>
+                          Draw
+                        </label>
+                      </div>
+                      <div className="gol__settings--setting__radio">
+                        <label>
+                          <input
+                            type="radio"
+                            name="cursorAction"
+                            value="grab"
+                            checked={cursorAction === "grab" && true}
+                            onChange={handleChange}
+                          />
+                          <div></div>
+                          Move
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="gol__settings--controls">
+                    <ControlsContainer />
                   </div>
                 </div>
                 <GameOfLifePatterns

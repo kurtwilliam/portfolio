@@ -1,6 +1,6 @@
 import React from "react";
 
-const LogoGerm2 = () => (
+const LogoGerm = () => (
   <svg
     width="54"
     height="54"
@@ -37,4 +37,4 @@ const LogoGerm2 = () => (
   </svg>
 );
 
-export default LogoGerm2;
+export default LogoGerm;

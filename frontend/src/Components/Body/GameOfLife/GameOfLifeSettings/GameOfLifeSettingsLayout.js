@@ -23,167 +23,217 @@ const GameOfLifeSettingsLayout = styled.div`
     font-size: inherit;
   }
 
-  .gol__settings--container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    max-width: 768px;
-    max-height: 100%;
-    // padding: 16px;
-  }
-
-  .gol__settings--setting {
-    display: flex;
-    flex-direction: column;
-
-    input {
-      cursor: pointer;
+  .gol__settings {
+    &--container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      align-items: flex-start;
+      max-width: 768px;
+      max-height: 100%;
+      margin-top: 64px;
     }
 
-    &__container {
-      position: relative;
-      border: 2px solid ${p => p.theme.golOffWhiteDark};
-      padding: 8px;
-      margin-bottom: 16px;
-      min-width: 106px;
+    &--settings {
+      width: 100%;
+      height: auto;
     }
 
-    &__title {
-      text-transform: uppercase;
-      font-size: 1rem;
+    &--logo {
       position: absolute;
-      left: 8px;
-      top: -7px;
-      font-weight: bold;
-      // transform: translate(0, -50%); // transform wonky with text height
-      padding: 0 4px;
-      background: ${p => p.theme.golBlack};
+      width: 100%;
+
+      img {
+        position: absolute;
+        width: 70%;
+        left: -20px;
+        top: -5px;
+      }
+
+      svg {
+        position: absolute;
+        z-index: 1000000;
+
+        &:first-of-type {
+          top: -40px;
+          right: 45px;
+        }
+
+        &:last-of-type {
+          top: -10px;
+          right: 10px;
+        }
+      }
     }
 
-    label {
-      margin-bottom: 2px;
-      font-size: 1.4rem;
-    }
-
-    label svg {
-      color: ${p => p.theme.golOffWhite};
-      margin-right: 4px;
-    }
-
-    &__rangeCont {
+    &--setting {
       display: flex;
       flex-direction: column;
-    }
 
-    &__button {
-      flex-direction: row;
-      align-items: center;
-      margin-bottom: 8px;
-
-      span {
-        margin-left: 4px;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-      }
-      &:last-of-type {
-        margin-bottom: 0;
-      }
-    }
-
-    input[type="range"] {
-      &,
-      &::-webkit-slider-thumb {
-        -webkit-appearance: none;
-      }
-      cursor: pointer;
-      height: 8px;
-      -webkit-appearance: none;
-      width: 100%;
-      background: transparent;
-      margin-bottom: 8px;
-
-      &:focus {
-        outline: none;
-      }
-      &::-ms-track {
-        width: 100%;
+      input {
         cursor: pointer;
-        /* Hides the slider so custom styles can be added */
-        background: transparent;
-        border-color: transparent;
-        color: transparent;
       }
-      &::-webkit-slider-thumb {
-        height: 8px;
-        width: 8px;
-        border: none;
-        border-radius: 50%;
-        background: ${p => p.theme.golOffWhite};
-      }
-      &::-moz-range-thumb {
-        height: 8px;
-        width: 8px;
-        border: none;
-        border-radius: 50%;
-        background: ${p => p.theme.golOffWhite};
-      }
-      &::-ms-thumb {
-        height: 8px;
-        width: 8px;
-        border: none;
-        border-radius: 50%;
-        background: ${p => p.theme.golOffWhite};
-      }
-      &::-webkit-slider-runnable-track {
-        height: 8px;
-        width: 100%;
-        background: ${p => p.theme.golPrimary3};
-        border-radius: 10px;
-      }
-      &::-moz-range-track {
-        height: 8px;
-        width: 100%;
-        background: ${p => p.theme.golPrimary3};
-        border-radius: 10px;
-      }
-      &:focus::-webkit-slider-runnable-track {
-      }
-    }
-    &__radio {
-      font-size: initial;
 
-      input[type="radio"] {
+      &__container {
+        position: relative;
+        // border: 2px solid ${p => p.theme.golOffWhiteDark};
+        padding: 8px;
+        margin-bottom: 16px;
+        min-width: 106px;
+      }
+
+      &__title {
+        text-transform: capitalize;
+        font-size: 1rem;
         position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-
-        & + div {
-          background: ${p => p.theme.golOffWhite};
-        }
-
-        &:checked ~ div {
-          background: ${p => p.theme.golPrimary3};
-        }
+        left: 8px;
+        top: -7px;
+        font-weight: bold;
+        // transform: translate(0, -50%); // transform wonky with text height
+        padding: 0 4px;
+        background: ${p => p.theme.golWhite};
+        color: ${p => p.theme.golPrimary3};
       }
 
       label {
+        font-weight: bold;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-size: 1.2rem;
+        justify-content: space-between;
+        margin-bottom: 2px;
+        font-size: 2rem;
+        letter-spacing: 0.1rem;
+        color: ${p => p.theme.golTextColor};
         text-transform: uppercase;
-        margin-bottom: 0;
-        div {
-          margin-right: 4px;
+        span {
+          color: ${p => p.theme.golTextColor};
         }
       }
-      margin-bottom: 8px;
-      &:last-of-type {
-        margin-bottom: 0;
+
+      &__rangeCont {
+        display: flex;
+        flex-direction: column;
+      }
+
+      &__button {
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 8px;
+
+        span {
+          margin-left: 4px;
+          font-size: 1.2rem;
+          text-transform: uppercase;
+        }
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+
+      input[type="range"] {
+        &,
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+        }
+        cursor: pointer;
+        height: 8px;
+        -webkit-appearance: none;
+        width: 100%;
+        background: transparent;
+        margin-bottom: 8px;
+
+        &:focus {
+          outline: none;
+        }
+        &::-ms-track {
+          width: 100%;
+          cursor: pointer;
+          /* Hides the slider so custom styles can be added */
+          background: transparent;
+          border-color: transparent;
+          color: transparent;
+        }
+        &::-webkit-slider-thumb {
+          height: 8px;
+          width: 8px;
+          border: none;
+          border-radius: 50%;
+          background: ${p => p.theme.golOffWhite};
+        }
+        &::-moz-range-thumb {
+          height: 8px;
+          width: 8px;
+          border: none;
+          border-radius: 50%;
+          background: ${p => p.theme.golOffWhite};
+        }
+        &::-ms-thumb {
+          height: 8px;
+          width: 8px;
+          border: none;
+          border-radius: 50%;
+          background: ${p => p.theme.golOffWhite};
+        }
+        &::-webkit-slider-runnable-track {
+          height: 8px;
+          width: 100%;
+          background: ${p => p.theme.golPrimary3};
+          border-radius: 10px;
+        }
+        &::-moz-range-track {
+          height: 8px;
+          width: 100%;
+          background: ${p => p.theme.golPrimary3};
+          border-radius: 10px;
+        }
+        &:focus::-webkit-slider-runnable-track {
+        }
+      }
+      &__radio {
+        font-size: initial;
+
+        input[type="radio"] {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+          height: 0;
+          width: 0;
+
+          & + div {
+            background: ${p => p.theme.golOffWhite};
+          }
+
+          &:checked ~ div {
+            background: ${p => p.theme.golPrimary3};
+          }
+        }
+
+        label {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          font-size: 1.2rem;
+          text-transform: uppercase;
+          margin-bottom: 0;
+          div {
+            margin-right: 4px;
+          }
+        }
+        margin-bottom: 8px;
+        &:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    &--controls {
+      width: 100%;
+      position: absolute;
+      top:0;
+      left:0;
+
+      svg {
+        width: 100%;
       }
     }
   }
