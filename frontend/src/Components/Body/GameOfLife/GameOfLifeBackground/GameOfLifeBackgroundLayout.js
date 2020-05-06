@@ -9,7 +9,7 @@ const GameOfLifeBackgroundLayout = styled.div`
   right: 0;
   bottom: 0;
   z-index: 100;
-  overflow: hidden;
+  // overflow: hidden;
 `;
 
 export default GameOfLifeBackgroundLayout;

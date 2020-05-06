@@ -8,6 +8,11 @@ const GameOfLifeLayout = styled.div`
   align-items: center;
   flex-direction: column;
   background: ${p => p.theme.golWhite};
+  font-family: "Roboto", sans-serif;
+
+  & * {
+    font-family: inherit;
+  }
 `;
 
 export default GameOfLifeLayout;

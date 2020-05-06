@@ -3,7 +3,8 @@ import p5 from "p5";
 import { withTheme } from "styled-components";
 
 import GameOfLifeGridLayout from "./GameOfLifeGridLayout";
-import GameOfLifeGridContainer from "./GameOfLifeGridContainer";
+import QuestionMarkCircle from "../assets/QuestionMarkCircle";
+import QuestionMark from "../assets/QuestionMark";
 
 import patterns from "../patterns";
 import guide from "../GameOfLifeSettings/GameOfLifeHelp/GameOfLifeHelpGuide";
@@ -745,12 +746,24 @@ class GameOfLifeGrid extends Component {
   };
 
   render() {
-    const { cursorAction } = this.props;
+    const { cursorAction, updateState } = this.props;
     return (
-      <GameOfLifeGridContainer
-        cursorAction={cursorAction}
-        ref={ref => (this.p5Ref = ref)}
-      ></GameOfLifeGridContainer>
+      <GameOfLifeGridLayout>
+        <div
+          className="gol__grid--container"
+          cursorAction={cursorAction}
+          ref={ref => (this.p5Ref = ref)}
+        ></div>
+        <button
+          className={"gol__grid--helpButton"}
+          onClick={() => updateState("displayedInfo", "help")}
+        >
+          <span>
+            <QuestionMark />
+          </span>
+          ok what is this?
+        </button>
+      </GameOfLifeGridLayout>
     );
   }
 }

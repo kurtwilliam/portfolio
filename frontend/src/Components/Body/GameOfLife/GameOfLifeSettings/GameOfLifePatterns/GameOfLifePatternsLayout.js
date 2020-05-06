@@ -37,7 +37,7 @@ const GameOfLifePatternsLayout = styled.div`
 
       &::-webkit-scrollbar-track {
         border-radius: 10px;
-        // background:${p => p.theme.golHighlight};
+        // background:${p => p.theme.golPrimary3};
         // box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       }
 
@@ -59,7 +59,7 @@ const GameOfLifePatternsLayout = styled.div`
         outline:none;
         background: transparent;
         background-repeat: no-repeat;
-        background-color:${p => p.theme.golHighlight};
+        background-color:${p => p.theme.golPrimary3};
         background-image: url("data:image/svg+xml;utf8,<svg fill='${p =>
           p.theme
             .golOffWhite}' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
@@ -71,7 +71,7 @@ const GameOfLifePatternsLayout = styled.div`
         padding:2px 24px 2px 4px;
         // padding-right:24px;
         border:2px solid ${p => p.theme.golOffWhite};
-        // background:${p => p.theme.golHighlight};
+        // background:${p => p.theme.golPrimary3};
         color:${p => p.theme.golOffWhite};
         display:flex;
         justify-content:center;
@@ -91,7 +91,7 @@ const GameOfLifePatternsLayout = styled.div`
         }
 
         option:hover {
-          background:${p => p.theme.golHighlight};
+          background:${p => p.theme.golPrimary3};
         }
       }
 
@@ -145,7 +145,7 @@ const GameOfLifePatternsLayout = styled.div`
       }
 
       &.selected {
-        border-left: 2px solid ${p => p.theme.golHighlight};
+        border-left: 2px solid ${p => p.theme.golPrimary3};
 
         .gol__patterns--pattern__hidden {
           max-height: 100px;

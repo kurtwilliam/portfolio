@@ -5,16 +5,7 @@ import GameOfLifeForegroundLayout from "./GameOfLifeForegroundLayout";
 class GameOfLifeForeground extends Component {
   render() {
     const { updateState } = this.props;
-    return (
-      <GameOfLifeForegroundLayout>
-        <button
-          className={"gol__settings--helpButton"}
-          onClick={() => updateState("displayedInfo", "help")}
-        >
-          What is this?
-        </button>
-      </GameOfLifeForegroundLayout>
-    );
+    return <GameOfLifeForegroundLayout></GameOfLifeForegroundLayout>;
   }
 }
 

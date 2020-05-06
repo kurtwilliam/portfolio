@@ -139,13 +139,13 @@ const GameOfLifeSettingsLayout = styled.div`
       &::-webkit-slider-runnable-track {
         height: 8px;
         width: 100%;
-        background: ${p => p.theme.golHighlight};
+        background: ${p => p.theme.golPrimary3};
         border-radius: 10px;
       }
       &::-moz-range-track {
         height: 8px;
         width: 100%;
-        background: ${p => p.theme.golHighlight};
+        background: ${p => p.theme.golPrimary3};
         border-radius: 10px;
       }
       &:focus::-webkit-slider-runnable-track {
@@ -166,7 +166,7 @@ const GameOfLifeSettingsLayout = styled.div`
         }
 
         &:checked ~ div {
-          background: ${p => p.theme.golHighlight};
+          background: ${p => p.theme.golPrimary3};
         }
       }
 
@@ -196,7 +196,7 @@ const GameOfLifeSettingsLayout = styled.div`
     // line-height: 28px;
     font-size: 1.2rem;
     border: 2px solid ${p => p.theme.golOffWhite};
-    background: ${p => p.theme.golHighlight};
+    background: ${p => p.theme.golPrimary3};
     border-radius: 50px;
     cursor: pointer;
     transition: all 50ms;

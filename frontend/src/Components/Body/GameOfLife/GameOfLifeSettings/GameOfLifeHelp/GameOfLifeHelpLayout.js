@@ -44,7 +44,7 @@ const GameOfLifeHelpLayout = styled.div`
       font-size: 2.4rem;
       z-index: 10000000;
       svg {
-        color: ${p => p.theme.golHighlight};
+        color: ${p => p.theme.golPrimary3};
         height: 2.4rem;
       }
     }

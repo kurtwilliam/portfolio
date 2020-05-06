@@ -36,11 +36,10 @@ const theme = {
   golCream: "#C4C4C4",
   golWhite: "white",
   golBlack: "black"
-  // golScrewGradient:"",
 };
 
 const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Work+Sans');
+  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700|Work+Sans&display=swap');  
   @font-face {
     font-family: 'Ogg';
     src: url(${Ogg});
@@ -62,12 +61,7 @@ const GlobalStyle = createGlobalStyle`
   p,span,a,label,button,textarea,li,figcaption { font-family:'Work Sans', sans-serif; font-size:1.6rem; }
 `;
 
-// const client = new ApolloClient({
-//   uri: "https://nodejs-d46mbauhe.now.sh"
-// });
-
 const App = () => (
-  // <ApolloProvider client={client}>
   <ThemeProvider theme={theme}>
     <BodyCont>
       <Router history={customHistory}>
@@ -78,7 +72,6 @@ const App = () => (
       <GlobalStyle />
     </BodyCont>
   </ThemeProvider>
-  // </ApolloProvider>
 );
 
 export default App;

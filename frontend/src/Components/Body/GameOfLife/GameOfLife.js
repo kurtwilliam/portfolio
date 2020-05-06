@@ -4,7 +4,6 @@ import GameOfLifeGrid from "./GameOfLifeGrid";
 import GameOfLifeSettings from "./GameOfLifeSettings";
 import patterns from "./patterns";
 
-import GameOfLifeForeground from "./GameOfLifeForeground";
 import GameOfLifeMidground from "./GameOfLifeMidground";
 import GameOfLifeBackground from "./GameOfLifeBackground";
 
@@ -70,11 +69,6 @@ class GameOfLife extends Component {
 
     return (
       <GameOfLifeLayout className="gol">
-        {/* {displayedInfo === "help" && (
-          <GameOfLifeHelp
-            updateDisplayedInfo={this.updateDisplayedInfo}
-          />
-        )} */}
         <GameOfLifeBackground />
         <GameOfLifeMidground>
           <GameOfLifeSettings
@@ -108,7 +102,6 @@ class GameOfLife extends Component {
             updateState={this.updateState}
           />
         </GameOfLifeMidground>
-        <GameOfLifeForeground updateState={this.updateState} />
       </GameOfLifeLayout>
     );
   }
