@@ -1,6 +1,6 @@
 import React from "react";
 
-const ForegroundGerm = () => (
+const ControlsContainer = () => (
   <svg
     width="433"
     height="293"
@@ -23,4 +23,4 @@ const ForegroundGerm = () => (
   </svg>
 );
 
-export default ForegroundGerm;
+export default ControlsContainer;

@@ -47,77 +47,70 @@ class GameOfLifeSettings extends Component {
             {displayedInfo === "settings" && (
               <>
                 <div className="gol__settings--settings">
-                  <div className="gol__settings--setting__container">
-                    <span className="gol__settings--setting__title">
-                      Observe
-                    </span>
-                    <div className="gol__settings--setting__rangeCont">
-                      <div className="gol__settings--setting">
-                        <label>
-                          Speed <span>{speed}</span>
-                        </label>
-                        <input
-                          type="range"
-                          name="speed"
-                          min={speedMin}
-                          max={speedMax}
-                          value={speed}
-                          onChange={handleChange}
-                          step={1}
-                        />
-                      </div>
-                      <div className="gol__settings--setting">
-                        <label>
-                          Zoom <span>{zoomLevel}</span>
-                        </label>
-                        <input
-                          type="range"
-                          name="zoomLevel"
-                          min={zoomMin}
-                          max={zoomMax}
-                          value={zoomLevel}
-                          onChange={updateZoom}
-                          step={0.05}
-                        />
-                      </div>
-                    </div>
-                    {/* </div>
-                <div className="gol__settings--setting__container"> */}
-                    <div className="gol__settings--setting gol__settings--setting__button">
-                      <button
-                        className={`${
-                          paused ? "pause" : "pause paused"
-                        } gol__settings--patternsButton`}
-                        onClick={toggleState}
-                        name="paused"
-                      ></button>
-                      <span>{paused ? "Play" : "Pause"}</span>
-                    </div>
-                    <div className="gol__settings--setting gol__settings--setting__button">
-                      <button
-                        onClick={toggleState}
-                        name="clear"
-                        className="gol__settings--patternsButton"
-                      ></button>
-                      <span>
-                        {/* <FontAwesomeIcon icon={faBackspace} />*/} Clear
+                  <div className="gol__settings--settings__top">
+                    <div className="gol__settings--setting__container">
+                      <span className="gol__settings--setting__title">
+                        Observe
                       </span>
+                      <div className="gol__settings--setting__rangeCont">
+                        <div className="gol__settings--setting">
+                          <label>
+                            Speed <span>{speed}</span>
+                          </label>
+                          <input
+                            type="range"
+                            name="speed"
+                            min={speedMin}
+                            max={speedMax}
+                            value={speed}
+                            onChange={handleChange}
+                            step={1}
+                          />
+                        </div>
+                        <div className="gol__settings--setting">
+                          <label>
+                            Zoom <span>{zoomLevel}</span>
+                          </label>
+                          <input
+                            type="range"
+                            name="zoomLevel"
+                            min={zoomMin}
+                            max={zoomMax}
+                            value={zoomLevel}
+                            onChange={updateZoom}
+                            step={0.05}
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div className="gol__settings--setting gol__settings--setting__button">
-                      <button
-                        className="gol__settings--patternsButton"
-                        onClick={toggleState}
-                        name="randomize"
-                      ></button>
-                      <span>Randomize</span>
+                    <div className="gol__settings--setting__container">
+                      <span className="gol__settings--setting__title">
+                        Colony Controls
+                      </span>
+                      <div className="gol__settings--setting gol__settings--setting__button">
+                        <button
+                          className={`${paused ? "pause" : "pause paused"}`}
+                          onClick={toggleState}
+                          name="paused"
+                        ></button>
+                        <span>{paused ? "Play" : "Pause"}</span>
+                      </div>
+                      <div className="gol__settings--setting gol__settings--setting__button">
+                        <button onClick={toggleState} name="clear"></button>
+                        <span>Clear</span>
+                      </div>
+                      <div className="gol__settings--setting gol__settings--setting__button">
+                        <button onClick={toggleState} name="randomize"></button>
+                        <span>Bloom</span>
+                      </div>
                     </div>
                   </div>
 
                   <div className="gol__settings--setting__container">
-                    <div className="gol__settings--setting">
-                      <span className="gol__settings--setting__title">
-                        Touch Action
-                      </span>
+                    <span className="gol__settings--setting__title">
+                      Touch Action
+                    </span>
+                    <div className="gol__settings--setting gol__settings--setting__touch">
                       <div className="gol__settings--setting__radio">
                         <label>
                           <input
@@ -141,7 +134,7 @@ class GameOfLifeSettings extends Component {
                             onChange={handleChange}
                           />
                           <div></div>
-                          Move
+                          Pan
                         </label>
                       </div>
                     </div>
