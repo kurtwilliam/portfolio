@@ -106,11 +106,11 @@ class GameOfLifeSettings extends Component {
                     </div>
                   </div>
 
-                  <div className="gol__settings--setting__container">
+                  <div className="gol__settings--setting__container gol__settings--setting__containerTouch">
                     <span className="gol__settings--setting__title">
                       Touch Action
                     </span>
-                    <div className="gol__settings--setting gol__settings--setting__touch">
+                    <div className="gol__settings--setting">
                       <div className="gol__settings--setting__radio">
                         <label>
                           <input
@@ -140,7 +140,7 @@ class GameOfLifeSettings extends Component {
                     </div>
                   </div>
                   <div className="gol__settings--controls">
-                    <ControlsContainer />
+                    {/* <ControlsContainer /> */}
                   </div>
                 </div>
                 <GameOfLifePatterns

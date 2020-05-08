@@ -31,14 +31,6 @@ class GameOfLifeBackground extends Component {
   componentDidMount() {
     const w = window.innerWidth;
     const h = window.innerHeight;
-
-    // let screws = [];
-    // for (let i = 0; i < numberOfScrews; i++) {
-    //   let screw = [];
-    //   screw[0] = this.getRandomRange(1, 99);
-    //   screw[1] = this.getRandomRange(1, 99);
-    //   screws.push(screw);
-    // }
     this.setState({ w, h });
   }
 
@@ -134,7 +126,6 @@ class GameOfLifeBackground extends Component {
           </div>
         </RightRectangle>
         {screws.map((screw, i) => {
-          console.log(screw);
           return (
             <ScrewCont key={i} x={screw[0]} y={screw[1]}>
               <Screw />

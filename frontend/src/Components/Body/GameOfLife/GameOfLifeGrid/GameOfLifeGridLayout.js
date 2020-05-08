@@ -51,7 +51,7 @@ const GameOfLifeGridLayout = styled.div`
 
     &--germStars {
       position: absolute;
-      bottom: -37px;
+      bottom: -30px;
       right: -60px;
       overflow: hidden;
       width: 150px;

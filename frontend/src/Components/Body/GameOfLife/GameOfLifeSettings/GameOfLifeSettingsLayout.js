@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import ControlsContainer from "../../../../assets/GameOfLife/ControlsContainer.svg";
 
 const circleButton = p => `
   position:relative;
-  height: 28px;
-  width: 28px;
+  height: 22px;
+  width: 22px;
   border-radius: 50%;
   border: 4px solid  ${p.theme.golPrimary1}; 
   background: ${p.theme.golButtonColor};
@@ -62,21 +63,23 @@ const GameOfLifeSettingsLayout = styled.div`
       align-items: flex-start;
       max-width: 768px;
       max-height: 100%;
-      margin-top: 64px;
+      padding-top: 64px;
     }
 
     &--settings {
+      position: relative;
       width: 100%;
       height: auto;
-      display:flex;
-      flex-direction:column;
+      display: flex;
+      flex-direction: column;
 
       &__top {
-        display:flex;
-        justify-content:space-between;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
 
         & > div {
-          width:45%;
+          width: 45%;
         }
       }
     }
@@ -88,7 +91,7 @@ const GameOfLifeSettingsLayout = styled.div`
       img {
         position: absolute;
         width: 70%;
-        left: -20px;
+        left: -25px;
         top: -5px;
       }
 
@@ -112,23 +115,31 @@ const GameOfLifeSettingsLayout = styled.div`
       display: flex;
       flex-direction: column;
 
-      &__touch {
-        display:flex;
-        justify-content:flex-start;
-        flex-direction:row;
-      }
-
       input {
         cursor: pointer;
       }
 
       &__container {
+        z-index: 1000;
         position: relative;
-        // border: 2px solid ${p => p.theme.golOffWhiteDark};
         padding: 8px;
         margin-bottom: 16px;
         min-width: 106px;
-        align-self:flex-start;
+        align-self: flex-start;
+        padding-top: 24px;
+
+        &Touch {
+          padding-top: 14px;
+
+          .gol__settings--setting {
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: row;
+            &__title {
+              top: -16px;
+            }
+          }
+        }
       }
 
       &__title {
@@ -136,10 +147,14 @@ const GameOfLifeSettingsLayout = styled.div`
         font-size: 2rem;
         position: absolute;
         left: 8px;
-        top: -7px;
-        padding: 0 4px;
+        top: -4%;
+        padding: 0 2px;
         background: ${p => p.theme.golWhite};
         color: ${p => p.theme.golPrimary3};
+
+        @media (max-width: 768px) {
+          font-size: 1.6rem;
+        }
       }
 
       label {
@@ -160,7 +175,7 @@ const GameOfLifeSettingsLayout = styled.div`
       &__button {
         flex-direction: row;
         align-items: center;
-        margin-bottom: 8px;
+        margin-bottom: 16px;
 
         span {
           ${capFont}
@@ -192,8 +207,8 @@ const GameOfLifeSettingsLayout = styled.div`
           /* Hides the slider so custom styles can be added */
           background: transparent;
           border-color: transparent;
-          border-radius:4px;
-          height:4px;
+          border-radius: 4px;
+          height: 4px;
           color: transparent;
         }
         &::-webkit-slider-thumb {
@@ -209,15 +224,15 @@ const GameOfLifeSettingsLayout = styled.div`
           height: 8px;
           width: 100%;
           background: ${p => p.theme.golPrimary3};
-          border-radius:4px;
-          height:4px;
+          border-radius: 4px;
+          height: 4px;
         }
         &::-moz-range-track {
           height: 8px;
           width: 100%;
           background: ${p => p.theme.golPrimary3};
-          border-radius:4px;
-          height:4px;
+          border-radius: 4px;
+          height: 4px;
         }
         &:focus::-webkit-slider-runnable-track {
         }
@@ -235,46 +250,47 @@ const GameOfLifeSettingsLayout = styled.div`
 
           & + div {
             ${circleButton}
-            width:32px;height:32px;
-            position:relative;
+            width:32px;
+            height: 32px;
+            position: relative;
             background: ${p => p.theme.golWhite};
-            border: 4px solid  ${p => p.theme.golGrey1}; 
-            margin-right:8px;
+            border: 4px solid ${p => p.theme.golGrey1};
+            margin-right: 8px;
           }
 
           &:checked ~ div {
-            border: 4px solid  ${p => p.theme.golPrimary1}; 
+            border: 4px solid ${p => p.theme.golPrimary1};
             background: ${p => p.theme.golButtonColor};
 
             &:after {
-              content:'';
-              width:6px;
-              height:6px;
-              position:absolute;
+              content: "";
+              width: 6px;
+              height: 6px;
+              position: absolute;
               background: ${p => p.theme.golWhite};
-              border-radius:50%;
-              top:6px;
-              left:6px;
-              transform:translate(0,-50%);
+              border-radius: 50%;
+              top: 6px;
+              left: 6px;
+              transform: translate(0, -50%);
             }
           }
         }
 
         label {
           display: flex;
-          justify-content:flex-start;
-          width:auto;
+          justify-content: flex-start;
+          width: auto;
           align-items: center;
           font-size: 1.2rem;
           text-transform: uppercase;
           margin-bottom: 0;
-          font-size:2rem;
-          margin-right:24px;
+          font-size: 2rem;
+          margin-right: 24px;
           div {
             margin-right: 4px;
           }
         }
-        margin-bottom: 8px;
+
         &:last-of-type {
           margin-bottom: 0;
         }
@@ -282,11 +298,18 @@ const GameOfLifeSettingsLayout = styled.div`
     }
 
     &--controls {
-      width: 100%;
+      width: 105%;
+      height: 100%;
       position: absolute;
-      top:0;
-      left:-1000px;
-      z-index:0;
+      top: -9px;
+      left: -21px;
+      bottom: 0;
+      right: 0;
+      z-index: 0;
+      background-image: url(${ControlsContainer});
+      background-size: cover;
+      background-repeat: no-repeat;
+
       svg {
         width: 100%;
       }
@@ -295,9 +318,10 @@ const GameOfLifeSettingsLayout = styled.div`
 
   // general styles
   button {
-     ${circleButton};
-     width:46px;
-     border-radius:50px;
+    ${circleButton};
+    width: 46px;
+    height: 32px;
+    border-radius: 50px;
   }
 `;
 

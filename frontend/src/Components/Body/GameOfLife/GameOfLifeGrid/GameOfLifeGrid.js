@@ -757,7 +757,6 @@ class GameOfLifeGrid extends Component {
       <GameOfLifeGridLayout>
         <div
           className="gol__grid--container"
-          cursorAction={cursorAction}
           ref={ref => (this.p5Ref = ref)}
         ></div>
         <button
