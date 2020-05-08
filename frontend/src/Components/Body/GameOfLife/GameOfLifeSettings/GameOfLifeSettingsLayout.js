@@ -37,12 +37,15 @@ const GameOfLifeSettingsLayout = styled.div`
   right: ${p => p.theme.golBorderWidth}vw;
   bottom: ${p => p.theme.golBorderWidth}vw;
   margin-left: ${p => p.theme.golBorderWidth}vw;
-  width: 25vw;
-  // color: white;
+  width: 400px;
   display: flex;
   flex-direction: column;
   background: transparent;
   z-index: 1000;
+
+  // @media (max-width: 1500px) {
+  //   width: 360px;
+  // }
 
   p,
   span,
@@ -72,6 +75,8 @@ const GameOfLifeSettingsLayout = styled.div`
       height: auto;
       display: flex;
       flex-direction: column;
+      margin-bottom: 16px;
+      min-height: 300px;
 
       &__top {
         z-index: 1000;
@@ -127,16 +132,23 @@ const GameOfLifeSettingsLayout = styled.div`
         min-width: 106px;
         align-self: flex-start;
         padding-top: 24px;
+        max-width: 420px;
 
         &Touch {
-          padding-top: 14px;
+          position: absolute;
+          padding-top: 18px;
+          top: 183px;
 
           .gol__settings--setting {
             display: flex;
             justify-content: flex-start;
             flex-direction: row;
             &__title {
-              top: -16px;
+              top: -14%;
+              // @media (max-width: 1500px) {
+              //   font-size: 1.6rem;
+              //   top: -7%;
+              // }
             }
           }
         }
@@ -146,15 +158,16 @@ const GameOfLifeSettingsLayout = styled.div`
         text-transform: capitalize;
         font-size: 2rem;
         position: absolute;
-        left: 8px;
+        left: 1%;
         top: -4%;
         padding: 0 2px;
         background: ${p => p.theme.golWhite};
         color: ${p => p.theme.golPrimary3};
 
-        @media (max-width: 768px) {
-          font-size: 1.6rem;
-        }
+        // @media (max-width: 1500px) {
+        //   font-size: 1.6rem;
+        //   top: -3%;
+        // }
       }
 
       label {
@@ -298,14 +311,16 @@ const GameOfLifeSettingsLayout = styled.div`
     }
 
     &--controls {
-      width: 105%;
+      width: calc(100% + 21px);
       height: 100%;
+      max-height: 282px;
       position: absolute;
       top: -9px;
       left: -21px;
       bottom: 0;
       right: 0;
       z-index: 0;
+      max-height: 285px;
       background-image: url(${ControlsContainer});
       background-size: cover;
       background-repeat: no-repeat;

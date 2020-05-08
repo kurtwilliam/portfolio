@@ -4,7 +4,7 @@ const ControlsContainer = () => (
   <svg
     width="433"
     height="293"
-    viewBox="0 0 453 293"
+    viewBox="0 0 453 30"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >

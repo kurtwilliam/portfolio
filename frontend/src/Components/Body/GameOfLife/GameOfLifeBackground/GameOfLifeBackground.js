@@ -18,10 +18,10 @@ class GameOfLifeBackground extends Component {
       [4.5, 65],
       [98, 3],
       [5, 96.7],
-      [70.5, 10],
-      [70.5, 47],
-      [95, 25],
-      [96.5, 27],
+      [69.65, 10, true],
+      [69.65, 47, true],
+      [94.6, 35.7],
+      [96, 38],
       [55.5, 97],
       [98, 97]
     ]
@@ -127,7 +127,7 @@ class GameOfLifeBackground extends Component {
         </RightRectangle>
         {screws.map((screw, i) => {
           return (
-            <ScrewCont key={i} x={screw[0]} y={screw[1]}>
+            <ScrewCont key={i} x={screw[0]} y={screw[1]} right={screw[2]}>
               <Screw />
             </ScrewCont>
           );

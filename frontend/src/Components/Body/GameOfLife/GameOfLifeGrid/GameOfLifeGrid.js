@@ -204,6 +204,7 @@ class GameOfLifeGrid extends Component {
   calculateWidthAndHeight = () => {
     browserWidth = this.p5Ref.clientWidth;
     browserHeight = this.p5Ref.clientHeight;
+    console.log(browserWidth, browserHeight);
 
     return this.setState(
       { browserDimensions: [this.p5Ref.clientWidth, this.p5Ref.clientHeight] },

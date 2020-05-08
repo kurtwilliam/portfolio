@@ -17,6 +17,7 @@ const RightRectangle = styled.div`
   .gol__bg {
     &--longRect {
       width: 100%;
+      max-width: 100%;
       position: relative;
       border-radius: 2px;
       height: ${p => p.theme.golBorderWidth / 5}vw;
@@ -28,13 +29,13 @@ const RightRectangle = styled.div`
       }
 
       &:nth-of-type(3) {
-        width: calc(25vw + ${p => p.theme.golBorderWidth * 1.75}vw);
+        width: calc(400px + ${p => p.theme.golBorderWidth * 1.75}vw);
       }
       &:nth-of-type(4) {
-        width: calc(25vw + ${p => p.theme.golBorderWidth * 1.25}vw);
+        width: calc(400px + ${p => p.theme.golBorderWidth * 1.25}vw);
       }
       &:nth-of-type(5) {
-        width: calc(25vw + ${p => p.theme.golBorderWidth * 1}vw);
+        width: calc(400px + ${p => p.theme.golBorderWidth * 1}vw);
       }
     }
 

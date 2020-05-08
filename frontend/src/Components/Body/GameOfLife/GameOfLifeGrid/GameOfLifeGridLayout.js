@@ -5,9 +5,13 @@ const GameOfLifeGridLayout = styled.div`
   top: ${p => p.theme.golBorderWidth}vw;
   left: ${p => p.theme.golBorderWidth}vw;
   bottom: ${p => p.theme.golBorderWidth}vw;
-  width: calc(100vw - ${p => p.theme.golBorderWidth * 3}vw - 25vw);
+  width: calc(100vw - ${p => p.theme.golBorderWidth * 3}vw - 400px);
   max-width: 100%;
   z-index: 1000;
+
+  // @media (max-width: 1500px) {
+  //   width: calc(100vw - ${p => p.theme.golBorderWidth * 3}vw - 360px);
+  // }
 
   & > svg {
     position: absolute;
@@ -40,7 +44,7 @@ const GameOfLifeGridLayout = styled.div`
       left: 0;
       bottom: 0;
       right: 0;
-      width: calc(100vw - ${p => p.theme.golBorderWidth * 3}vw - 25vw);
+      width: calc(100vw - ${p => p.theme.golBorderWidth * 3}vw - 400px);
       overflow: hidden;
       max-width: 100%;
       border-radius: 80px;
