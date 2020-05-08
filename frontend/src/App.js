@@ -35,7 +35,9 @@ const theme = {
   golGrey1: "#959695",
   golCream: "#C4C4C4",
   golWhite: "white",
-  golBlack: "black"
+  golBlack: "black",
+  golHoleColor1: "#ECEBE9",
+  golHoleColor2: "#DEDDDB"
 };
 
 const GlobalStyle = createGlobalStyle`

@@ -129,6 +129,7 @@ const GameOfLifePatternsLayout = styled.div`
         }
         &:last-of-type {
           min-width: 75px;
+          text-align: right;
         }
       }
       &__hidden {

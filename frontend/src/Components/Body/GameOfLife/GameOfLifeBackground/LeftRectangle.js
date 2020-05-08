@@ -15,7 +15,6 @@ const LeftRectangle = styled.div`
       position: absolute;
       top: ${p => p.theme.golBorderWidth / 2}vw;
       right: ${p => p.theme.golBorderWidth * 2}vw;
-      // transform: translate(-50%, 0);
 
       &__row {
         display: flex;
@@ -27,9 +26,18 @@ const LeftRectangle = styled.div`
             transform: translate(-50%, 0);
           }
         }
+        &:first-of-type .gol__bg--hexagons__hex {
+          background: ${p => p.theme.golHoleColor1};
+          background: linear-gradient(
+            180deg,
+            ${p => p.theme.golHoleColor2} 0%,
+            ${p => p.theme.golHoleColor1} 50%,
+            ${p => p.theme.golHoleColor1} 100%
+          );
+        }
       }
       &__hex {
-        background: ${p => p.theme.golCream};
+        background: ${p => p.theme.golHoleColor1};
         margin: 1px;
 
         width: 16px;
@@ -50,6 +58,15 @@ const LeftRectangle = styled.div`
           0% 75%,
           0% 25%
         );
+
+        &:last-of-type {
+          background: linear-gradient(
+            270deg,
+            ${p => p.theme.golHoleColor2} 0%,
+            ${p => p.theme.golHoleColor1} 50%,
+            ${p => p.theme.golHoleColor1} 100%
+          );
+        }
       }
     }
   }

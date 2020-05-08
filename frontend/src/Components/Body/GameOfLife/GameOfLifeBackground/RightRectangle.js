@@ -21,7 +21,15 @@ const RightRectangle = styled.div`
       position: relative;
       border-radius: 2px;
       height: ${p => p.theme.golBorderWidth / 5}vw;
-      background: ${p => p.theme.golCream};
+      background: ${p => p.theme.golHoleColor1};
+      background: linear-gradient(
+        90deg,
+        ${p => p.theme.golHoleColor2} 0%,
+        ${p => p.theme.golHoleColor1} 6%,
+        ${p => p.theme.golHoleColor1} 98%,
+        ${p => p.theme.golHoleColor2} 100%
+      );
+      box-shadow: 0 3px 4px ${p => p.theme.golHoleColor2} inset;
       margin-top: ${p => p.theme.golBorderWidth / 5}vw;
 
       &:first-of-type {

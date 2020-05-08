@@ -91,6 +91,7 @@ const GameOfLifeSettingsLayout = styled.div`
     &--logo {
       position: absolute;
       width: 100%;
+      z-index: 100000000;
 
       img {
         position: absolute;
@@ -101,7 +102,7 @@ const GameOfLifeSettingsLayout = styled.div`
 
       svg {
         position: absolute;
-        z-index: 1000000;
+        z-index: 10000000;
 
         &:first-of-type {
           top: -40px;

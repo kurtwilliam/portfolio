@@ -8,13 +8,13 @@ const GameOfLifeHelpLayout = styled.div`
   right: 0;
   width: 100%;
   height: auto;
-  z-index: 100000;
-  background: ${p => p.theme.golBlack};
+  z-index: 10000000;
+  background: ${p => p.theme.golWhite};
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 16px;
-  border: 2px solid ${p => p.theme.golOffWhiteDark};
+  // border: 2px solid ${p => p.theme.golOffWhiteDark};
   border-radius: 2px;
 
   button {
@@ -36,7 +36,7 @@ const GameOfLifeHelpLayout = styled.div`
 
     &--close {
       position: absolute;
-      top: -7px;
+      top: 27px;
       right: 0;
 
       background: transparent;
