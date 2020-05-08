@@ -75,7 +75,6 @@ const GameOfLifeSettingsLayout = styled.div`
       height: auto;
       display: flex;
       flex-direction: column;
-      margin-bottom: 16px;
       min-height: 300px;
 
       &__top {
@@ -136,7 +135,7 @@ const GameOfLifeSettingsLayout = styled.div`
 
         &Touch {
           position: absolute;
-          padding-top: 18px;
+          padding-top: 25px;
           top: 183px;
 
           .gol__settings--setting {
@@ -158,7 +157,7 @@ const GameOfLifeSettingsLayout = styled.div`
         text-transform: capitalize;
         font-size: 2rem;
         position: absolute;
-        left: 1%;
+        left: 4%;
         top: -4%;
         padding: 0 2px;
         background: ${p => p.theme.golWhite};
@@ -337,6 +336,19 @@ const GameOfLifeSettingsLayout = styled.div`
     width: 46px;
     height: 32px;
     border-radius: 50px;
+    cursor: pointer;
+  }
+
+  .gol__patterns--title {
+    text-transform: capitalize;
+    font-size: 2rem;
+    position: absolute;
+    left: 4%;
+    top: 0;
+    padding: 0 2px;
+    z-index: 100000;
+    background: ${p => p.theme.golWhite};
+    color: ${p => p.theme.golPrimary3};
   }
 `;
 

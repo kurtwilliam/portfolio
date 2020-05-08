@@ -41,7 +41,7 @@
     "shouldClear": true,
     "showNeighbourCount": true,
     "speed": 3,
-    "patternToGenerate": "Long Explosion",
+    "patternToGenerate": "Pulsar",
     "html": "<p>Simple enough, right?</p></br><p>Patterns can get a little bit more complicated though, and there are different types of patterns. This type is called an <strong>oscillator</strong>, as the pattern keeps repeating.</p>"
   },
   {
