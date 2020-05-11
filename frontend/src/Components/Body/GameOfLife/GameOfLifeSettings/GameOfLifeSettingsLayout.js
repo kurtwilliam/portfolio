@@ -204,12 +204,15 @@ const GameOfLifeSettingsLayout = styled.div`
         &::-webkit-slider-thumb {
           -webkit-appearance: none;
         }
+        position: relative;
         cursor: pointer;
         height: 24px;
         -webkit-appearance: none;
         width: 100%;
         background: transparent;
         margin-bottom: 16px;
+        display: flex;
+        align-items: center;
 
         &:focus {
           outline: none;
@@ -225,7 +228,10 @@ const GameOfLifeSettingsLayout = styled.div`
           color: transparent;
         }
         &::-webkit-slider-thumb {
-          ${circleButton}
+          ${circleButton};
+          margin-top: -12px;
+          width: 32px;
+          height: 32px;
         }
         &::-moz-range-thumb {
           ${circleButton}
