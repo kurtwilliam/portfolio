@@ -774,15 +774,18 @@ class GameOfLifeGrid extends Component {
   };
 
   render() {
-    const { cursorAction, updateState } = this.props;
+    const { cursorAction, updateState, displayedInfo } = this.props;
     return (
       <GameOfLifeGridLayout>
         <div
           className="gol__grid--container"
           ref={ref => (this.p5Ref = ref)}
         ></div>
+
         <button
-          className={"gol__grid--helpButton"}
+          className={`gol__grid--helpButton ${
+            displayedInfo === "help" ? "hidden" : ""
+          }`}
           onClick={() => updateState("displayedInfo", "help")}
         >
           <span>

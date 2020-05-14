@@ -39,6 +39,7 @@ class GameOfLifeHelp extends Component {
     return (
       <GameOfLifeHelpLayout>
         <div className="gol__help">
+          <span className="gol__help--title">Ok what is this?</span>
           <button
             className="gol__help--close"
             onClick={() => updateState("displayedInfo", "settings")}

@@ -122,6 +122,10 @@ const GameOfLifeGridLayout = styled.div`
         align-items: center;
         margin-right: 8px;
       }
+
+      &.hidden {
+        left:-100000px;
+      }
     }
   }
 `;
