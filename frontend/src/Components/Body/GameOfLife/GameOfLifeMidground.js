@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const GameOfLifeMidground = styled.div`
-  z-index: 1000;
+  z-index: 100000;
 `;
 
 export default GameOfLifeMidground;

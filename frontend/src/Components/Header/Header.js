@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import { skillz } from '../../utils';
+import React from "react";
+import styled from "styled-components";
+import { skillz } from "../../utils";
 
-import Skill from './Skill';
-import SkillzContainer from './SkillzContainer';
-import Introduction from './Introduction';
+import Skill from "./Skill";
+import SkillzContainer from "./SkillzContainer";
+import Introduction from "./Introduction";
 
 const HeaderCont = styled.header`
-  min-height: 90vh;
+  // min-height: 90vh;
   margin-bottom: 10vh;
 
   @media (max-width: 768px) {
@@ -18,14 +18,13 @@ const HeaderCont = styled.header`
 const Header = () => (
   <HeaderCont>
     <Introduction>
-      Hi, I'm Kurt, a Web Developer based out of Toronto. I use JavaScript to solve meaningful
-      problems in creative ways.
+      Hi, I'm Kurt, a JavaScript Developer based out of Toronto.
     </Introduction>
-    <SkillzContainer>
+    {/* <SkillzContainer>
       {skillz.map(skill => (
         <Skill key={skill.title} skill={skill} />
       ))}
-    </SkillzContainer>
+    </SkillzContainer> */}
   </HeaderCont>
 );
 

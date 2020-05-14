@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const capFont = p => `
-font-size:2rem;
-letter-spacing:0.1rem;
-color:${p.theme.golTextColor};
-text-transform: uppercase;
+  font-size:2rem;
+  letter-spacing:0.1rem;
+  color:${p.theme.golTextColor};
+  text-transform: uppercase;
 `;
 
 const GameOfLifePatternsLayout = styled.div`
@@ -92,13 +92,6 @@ const GameOfLifePatternsLayout = styled.div`
         justify-content: space-between;
         transition: all 120ms;
       }
-
-      // &:hover {
-      //   span:first-of-type {
-      //     text-transform: uppercase;
-      //     font-weight: bold;
-      //   }
-      // }
 
       &.selected {
         span:first-of-type {

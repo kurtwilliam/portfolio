@@ -3,13 +3,13 @@ import FooterCont from "./FooterCont";
 
 const Footer = () => (
   <FooterCont>
-    <a
+    {/* <a
       href="https://github.com/kurtwilliam"
       target="_blank"
       rel="noopener noreferrer"
     >
       <i className="fab fa-github" />
-    </a>
+    </a> */}
     <a
       href="https://linkedin.com/in/kurtwilliam"
       target="_blank"

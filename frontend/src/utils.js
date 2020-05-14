@@ -10,11 +10,11 @@ export const shuffle = a => {
 export const skillz = [
   {
     title: "JavaScript",
-    skillz: ["ES6", "React", "Redux", "Node", "GraphQL", "Apollo", "jQuery"]
+    skillz: ["ES9", "React", "Redux", "Node"]
   },
   {
-    title: "CSS4",
-    skillz: ["SCSS", "Ant Design", "Styled Components", "Material UI"]
+    title: "CSS",
+    skillz: ["SCSS", "Styled Components", "Ant Design", "Material UI"]
   },
   {
     title: "Design",

@@ -3,17 +3,37 @@ import GameOfLifeChunkLayout from "./GameOfLifeChunkLayout";
 import ChunkDesc from "../../shared/ChunkDesc";
 import { Link } from "react-router-dom";
 
+import LogoGerm from "../GameOfLife/assets/LogoGerm";
+import LogoGermBig from "../GameOfLife/assets/LogoGermBig";
+import Logo from "../../../assets/GameOfLife/BacterialColony.png";
+
 const GameOfLifeChunk = () => (
   <>
     <GameOfLifeChunkLayout>
       <Link
-        href="https://kurtwilliam.com/hiragana"
+        href="https://kurtwilliam.com/bc"
         target="_blank"
         rel="noopener noreferrer"
       ></Link>
-      <div></div>
-      <div></div>
-      <div></div>
+      <div className="logo">
+        <img src={Logo} />
+        <LogoGerm />
+        <LogoGermBig />
+      </div>
+
+      <div className="gol__bg">
+        <div className="gol__bg--rectContTop">
+          <div className="gol__bg--longRect"></div>
+          <div className="gol__bg--longRect"></div>
+          <div className="gol__bg--longRect"></div>
+          <div className="gol__bg--longRect"></div>
+          <div className="gol__bg--longRect"></div>
+        </div>
+        <div className="gol__bg--rectContBottom">
+          <div className="gol__bg--longRect"></div>
+          <div className="gol__bg--longRect"></div>
+        </div>
+      </div>
     </GameOfLifeChunkLayout>
     <ChunkDesc>
       Cellular autonom based off of{" "}
@@ -23,7 +43,7 @@ const GameOfLifeChunk = () => (
       >
         John Conways Game of Life
       </a>
-      . Built with React, P5.js and Styled Components.
+      .<span className="skills">React, P5.js, Styled Components.</span>
     </ChunkDesc>
   </>
 );
