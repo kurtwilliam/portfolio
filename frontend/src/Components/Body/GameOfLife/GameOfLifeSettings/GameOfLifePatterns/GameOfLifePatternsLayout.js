@@ -115,6 +115,7 @@ const GameOfLifePatternsLayout = styled.div`
             font-weight: normal;
             letter-spacing: inherit;
             text-transform: capitalize;
+            min-width: inherit;
           }
         }
       }

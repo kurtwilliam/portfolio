@@ -25,9 +25,7 @@ const GameOfLifeHelpLayout = styled.div`
     position: relative;
     height: 100%;
     width: 100%;
-    // display: flex;
-    // flex-direction: column;
-    // justify-content: center;
+
     border: 12px double #0e6d34;
     border-radius: 14px;
     padding: 24px;
@@ -62,7 +60,7 @@ const GameOfLifeHelpLayout = styled.div`
 
     &--switch {
       position: absolute;
-      bottom: 0;
+      bottom: 24px;
       left: 0;
       right: 0;
       width: 100%;
@@ -71,22 +69,60 @@ const GameOfLifeHelpLayout = styled.div`
       background: transparent;
       border: none;
       text-decoration: underline;
+      font-size: 1.6rem;
+      color: ${p => p.theme.golTextColor};
     }
 
     &--pages {
       position: absolute;
-      bottom: 32px;
+      bottom: 56px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 0 24px;
       button {
-        padding: 4px 8px;
+        background: ${p => p.theme.golPrimary3};
+        padding: 8px 10px;
+        font-size: 2.4rem;
+        font-weight: bold;
+        color: ${p => p.theme.golWhite};
+        outline: none;
+        max-height: 52px;
+        border: none;
+        transition: all 50ms;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        padding-left: 24px;
+
+        &:after,
+        &:before {
+          content: none;
+        }
+
+        span {
+          display: inline-block;
+          width: 36px;
+          height: 36px;
+          border-radius: 50px;
+          background: white;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 12px;
+        }
 
         &.gol__help--pages__previous {
-          background: none;
-          border: none;
+          padding-left: 8px;
+          padding-right: 24px;
+
+          span {
+            transform: scale(-1, -1);
+            margin-left: 0px;
+            margin-right: 12px;
+          }
         }
       }
     }

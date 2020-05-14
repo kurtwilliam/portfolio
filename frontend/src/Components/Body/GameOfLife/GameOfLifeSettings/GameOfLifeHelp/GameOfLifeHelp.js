@@ -8,16 +8,15 @@ import ReactHtmlParser, {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import guide from "./GameOfLifeHelpGuide.json";
+import HelpButtonCaret from "../../assets/HelpButtonCaret";
 
 class GameOfLifeHelp extends Component {
   state = {
     hideDevNotes: true
   };
 
-  toggleNotes = () => {
-    console.log(this.state.hideDevNotes);
+  toggleNotes = () =>
     this.setState(prevState => ({ hideDevNotes: !prevState.hideDevNotes }));
-  };
 
   componentDidUpdate = () => {
     const { updateState } = this.props;
@@ -58,7 +57,10 @@ class GameOfLifeHelp extends Component {
                       updateState("currentHelpPage", currentHelpPage - 1)
                     }
                   >
-                    Previous
+                    <span>
+                      <HelpButtonCaret />
+                    </span>{" "}
+                    previous
                   </button>
                 ) : (
                   <span></span>
@@ -69,21 +71,24 @@ class GameOfLifeHelp extends Component {
                       updateState("currentHelpPage", currentHelpPage + 1)
                     }
                   >
-                    Next
+                    next{" "}
+                    <span>
+                      <HelpButtonCaret />
+                    </span>
                   </button>
                 ) : (
                   <span></span>
                 )}
               </div>
-              <button
+              {/* <button
                 className="gol__help--switch"
                 onClick={() => this.toggleNotes()}
               >
                 Developer Notes
-              </button>
+              </button> */}
             </>
           ) : (
-            <div className="gol__help">
+            <div className="gol__help--notes">
               <button
                 className="gol__help--switch"
                 onClick={() => this.toggleNotes()}

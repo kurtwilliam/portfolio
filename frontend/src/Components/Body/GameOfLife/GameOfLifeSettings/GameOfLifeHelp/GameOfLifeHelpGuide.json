@@ -6,7 +6,7 @@
     "showNeighbourCount": false,
     "speed": 1,
     "patternToGenerate": "",
-    "html": "<p>MicroBiome Simulator is a cellular automaton based off of the <a target='__blank' href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>Game of Life</a> by John Horton Conway.</p></br><p>In this simulation, the grid on the left 'evolves' over time, depending on the status of it's cells.</p>"
+    "html": "<p>MicroBiome Simulator is a collection of colored cells on a grid, that becomes complex over time based on simple math. It's based off of <a target='__blank' href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>The Game of Life</a> by John Horton Conway.</p>"
   },
   {
     "shouldZoom": 5,
