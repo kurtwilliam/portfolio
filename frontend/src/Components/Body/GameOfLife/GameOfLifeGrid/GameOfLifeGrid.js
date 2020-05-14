@@ -32,6 +32,7 @@ let bgColor = "";
 let selectedPatternVar = "";
 let showNeighbourCountVar = false;
 let zoomLevelVar = 1;
+let zoomDiff = 0;
 let displayedInfoVar = "settings";
 
 // affects # col and # rows - affects performance
@@ -56,6 +57,8 @@ let gridXPos = 0; // pan x and y
 let gridYPos = 0;
 let gridWidth = 0;
 let gridHeight = 0;
+let prevGridWidth = 0;
+let prevGridHeight = 0;
 
 // Is the mouse draw or grab?
 let cursorState = "";
@@ -144,9 +147,11 @@ class GameOfLifeGrid extends Component {
       grid = this.createNestedArray(numberOfColumns, numberOfRows, true);
       toggleState("randomize");
     } else if (zoomLevel !== prevProps.zoomLevel) {
+      zoomDiff = parseFloat(zoomLevel) - prevProps.zoomLevel;
       zoomLevelVar = zoomLevel;
 
       this.checkGridFitsScreen();
+      // this.centerCanvas();
     } else if (cursorAction !== prevProps.cursorAction) {
       cursorState = cursorAction;
     }
@@ -172,11 +177,13 @@ class GameOfLifeGrid extends Component {
 
   checkGridFitsScreen = () => {
     this.calculateGridWidthAndHeight();
+
     if (this.isCanvasSmallerThanScreen()) {
       this.fitGridToScreen();
       this.calculateGridWidthAndHeight();
     }
-    this.recalculatePosition(null, null, true);
+    this.recalculatePosition(null, null, true, true);
+
     this.props.updateZoom(zoomLevelVar);
     return this.p5Canvas.scale(zoomLevelVar);
   };
@@ -197,6 +204,8 @@ class GameOfLifeGrid extends Component {
   };
 
   calculateGridWidthAndHeight = () => {
+    prevGridWidth = gridWidth;
+    prevGridHeight = gridHeight;
     gridWidth = Math.floor(numberOfColumns * resolution * zoomLevelVar);
     gridHeight = Math.floor(numberOfRows * resolution * zoomLevelVar);
   };
@@ -204,7 +213,6 @@ class GameOfLifeGrid extends Component {
   calculateWidthAndHeight = () => {
     browserWidth = this.p5Ref.clientWidth;
     browserHeight = this.p5Ref.clientHeight;
-    console.log(browserWidth, browserHeight);
 
     return this.setState(
       { browserDimensions: [this.p5Ref.clientWidth, this.p5Ref.clientHeight] },
@@ -570,10 +578,22 @@ class GameOfLifeGrid extends Component {
     } else return false;
   };
 
-  recalculatePosition = (movementX, movementY, dontMoveCanvas) => {
+  recalculatePosition = (
+    movementX,
+    movementY,
+    dontMoveCanvas,
+    centerCanvasInContainer
+  ) => {
     if (this.isCanvasSmallerThanScreen() === true) {
       return this.centerCanvas();
     } else {
+      if (centerCanvasInContainer) {
+        if (prevGridWidth !== gridWidth && prevGridHeight !== gridHeight) {
+          gridXPos = (gridWidth - canvasWidth) / 2 / zoomLevelVar;
+          gridYPos = (gridHeight - canvasHeight) / 2 / zoomLevelVar;
+        }
+      }
+
       if (
         // thse just check if the moving of grid is out of bounds
         gridXPos < -1 ||
@@ -598,6 +618,7 @@ class GameOfLifeGrid extends Component {
         gridXPos -= movementX;
         gridYPos -= movementY;
       }
+
       this.drawCanvasOneFrameWithoutMakingNewGrid();
     }
   };

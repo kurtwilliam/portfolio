@@ -69,7 +69,7 @@ const App = () => (
       <Router history={customHistory}>
         <Route exact path="/" component={Home} />
         <Route exact path="/hiragana" component={Hiragana} />
-        <Route exact path="/game-of-life" component={GameOfLife} />
+        <Route exact path="/bc" component={GameOfLife} />
       </Router>
       <GlobalStyle />
     </BodyCont>

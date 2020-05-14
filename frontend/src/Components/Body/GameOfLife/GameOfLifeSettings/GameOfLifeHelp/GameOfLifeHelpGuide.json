@@ -1,6 +1,6 @@
 [
   {
-    "shouldZoom": 2,
+    "shouldZoom": 5,
     "shouldCenter": false,
     "shouldClear": false,
     "showNeighbourCount": false,
@@ -9,7 +9,7 @@
     "html": "<p>MicroBiome Simulator is a cellular automaton based off of the <a target='__blank' href='https://www.conwaylife.com/wiki/Conway%27s_Game_of_Life'>Game of Life</a> by John Horton Conway.</p></br><p>In this simulation, the grid on the left 'evolves' over time, depending on the status of it's cells.</p>"
   },
   {
-    "shouldZoom": 2,
+    "shouldZoom": 5,
     "shouldCenter": true,
     "shouldClear": true,
     "showNeighbourCount": false,
@@ -18,7 +18,7 @@
     "html": "<p>Each cell is either Alive or Dead. The dark cells are alive, and you can't see the Dead cells. Whether or not a cell is alive depends on how many of it's neighbours are alive.</p>"
   },
   {
-    "shouldZoom": 2,
+    "shouldZoom": 5,
     "shouldCenter": false,
     "shouldClear": true,
     "showNeighbourCount": true,
@@ -27,7 +27,7 @@
     "html": "<p>If a cell is <strong>alive</strong> and has <strong>2 or 3 alive</strong> neighbours, it remains alive. If a cell is <strong>dead</strong> but has <strong>3 alive</strong> neighbours, it comes to life.</p></br><p>The numbers in the cells on the left represent how many neighbours it has alive. Notice the neighbour counts; the center never changes because it always has 3 neighbours, but the outside squares switch because the dead cells have 3.</p>"
   },
   {
-    "shouldZoom": 2,
+    "shouldZoom": 5,
     "shouldCenter": true,
     "shouldClear": true,
     "showNeighbourCount": true,
@@ -36,7 +36,7 @@
     "html": "<p>This is another common pattern that emerges. This square stays the same, as the <strong>alive</strong> cells always have <strong>3 alive</strong> neighbours and the <strong>dead</strong> cells never have <strong>more than 2</strong>.</p>"
   },
   {
-    "shouldZoom": 1.75,
+    "shouldZoom": 2.5,
     "shouldCenter": true,
     "shouldClear": true,
     "showNeighbourCount": true,
