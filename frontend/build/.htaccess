@@ -1,0 +1,17 @@
+# Make apache follow sym links to files
+Options +FollowSymLinks
+
+# Enable Rewriting
+RewriteEngine On
+
+# If not HTTPS redirect
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP_HOST} ^(www\.)?kurtwilliam.com$ [OR,NC]
+RewriteCond %{HTTP_HOST} ^(www\.)?binkie.town$ [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R,L]
+
+# reroute to index.html if doesn't exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !\/$
+RewriteRule ^ index.html [QSA,L]

@@ -17,8 +17,10 @@ const AestheticDimension = () => [
     />
   </LinkChunk>,
   <ChunkDesc key="chunkdesc">
-    A CMS site built for the design firm Aesthetic Dimension. Built using
-    JavaScript, Craft CMS, Twig and SCSS. Please note I did not design the site.
+    A CMS site built for the design firm Aesthetic Dimension.{" "}
+    <span className="skills">
+      JavaScript, Craft CMS, Twig and SCSS. *I did not design the site.*
+    </span>
   </ChunkDesc>
 ];
 

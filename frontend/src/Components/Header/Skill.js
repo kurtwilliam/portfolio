@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const SkillCont = styled.div`
   width: 100%;
@@ -17,7 +17,8 @@ const SkillCont = styled.div`
 
 const Title = styled.h2`
   font-size: 2.5rem;
-  color: ${props => props.theme.grey};
+  color: ${props => props.theme.main};
+  font-weight: bold;
   margin-bottom: 8px;
 
   @media (max-width: 720px) {

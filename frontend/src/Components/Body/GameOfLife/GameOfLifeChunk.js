@@ -10,11 +10,11 @@ import Logo from "../../../assets/GameOfLife/BacterialColony.png";
 const GameOfLifeChunk = () => (
   <>
     <GameOfLifeChunkLayout>
-      <Link
-        href="https://kurtwilliam.com/bc"
+      <a
+        href="https://ethicsgradient.co/bc"
         target="_blank"
         rel="noopener noreferrer"
-      ></Link>
+      ></a>
       <div className="logo">
         <img src={Logo} />
         <LogoGerm />
@@ -43,7 +43,8 @@ const GameOfLifeChunk = () => (
       >
         John Conways Game of Life
       </a>
-      .<span className="skills">React, P5.js, Styled Components.</span>
+      . (External link, Desktop only)
+      <span className="skills">React, P5.js, Styled Components.</span>
     </ChunkDesc>
   </>
 );

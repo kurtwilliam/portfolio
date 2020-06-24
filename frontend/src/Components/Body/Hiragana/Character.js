@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import words from "../../../data/words";
+import CharacterContainerLayout from "./CharacterContainerLayout";
 
 class Character extends Component {
   state = {
@@ -99,7 +100,7 @@ class Character extends Component {
       thisCharacter = character.kana;
 
     return (
-      <CharacterContainer
+      <CharacterContainerLayout
         className={`character ${character.x === lastColumn ? "hidden" : ""} ${
           playing ? "highlight" : ""
         } ${
@@ -112,46 +113,9 @@ class Character extends Component {
         lastColumn={lastColumn}
       >
         {thisCharacter}
-      </CharacterContainer>
+      </CharacterContainerLayout>
     );
   }
 }
-
-const CharacterContainer = styled.div`
-  padding: 8px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid lightgrey;
-  width: calc(100% / ${props => props.lastColumn});
-  transition: all 30ms;
-  cursor: pointer;
-  max-width: 64px;
-  max-height: 64px;
-
-  &.hidden {
-    border: none;
-    color: lightgrey;
-  }
-
-  &.hiddenOverride {
-    color: black;
-  }
-
-  &.highlight {
-    background: lightgrey;
-  }
-  &.highlight.hidden {
-    background: rgba(0, 0, 0, 0);
-    color: black;
-  }
-
-  &:after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-  }
-`;
 
 export default Character;

@@ -20,11 +20,11 @@ const Header = () => (
     <Introduction>
       Hi, I'm Kurt, a JavaScript Developer based out of Toronto.
     </Introduction>
-    {/* <SkillzContainer>
+    <SkillzContainer>
       {skillz.map(skill => (
         <Skill key={skill.title} skill={skill} />
       ))}
-    </SkillzContainer> */}
+    </SkillzContainer>
   </HeaderCont>
 );
 

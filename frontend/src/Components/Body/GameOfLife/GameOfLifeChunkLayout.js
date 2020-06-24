@@ -8,7 +8,6 @@ const GameOfLifeChunkLayout = styled(Chunk)`
   justify-content: center;
   align-items: center;
   // background: ${p => p.theme.golOffWhite};
-
   .logo {
     position:relative;
     z-index: 10000000;
@@ -89,6 +88,8 @@ right: -10px;
     right: 0;
     width: 100%;
     height: 100%;
+    z-index:1000
+
   }
 `;
 

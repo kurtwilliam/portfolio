@@ -6,17 +6,31 @@ import { Link } from "react-router-dom";
 const HiraganaChunk = () => (
   <>
     <HiraganaChunkLayout>
-      <Link
-        href="https://kurtwilliam.com/hiragana"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        平仮名
+      <Link to="/hiragana" target="_blank" rel="noopener noreferrer">
+        <div className="hiragana-container">
+          <div>
+            hi
+            <span>ひ</span>
+          </div>
+          <div>
+            ra
+            <span>ら</span>
+          </div>
+          <div>
+            ga
+            <span>が</span>
+          </div>
+          <div>
+            na<span>な</span>
+          </div>
+        </div>
+        {/* <br />ʕ ꈍᴥꈍʔ */}
       </Link>
     </HiraganaChunkLayout>
     <ChunkDesc>
-      Simple tool I built to help learn Hiragana. Using sounds and emojis to
-      learn a language.
+      Simple tool I built to teach myself Hiragana. Using sounds and emojis to
+      learn an alphabet.
+      <span className="skills">React, Styled Components</span>
     </ChunkDesc>
   </>
 );
