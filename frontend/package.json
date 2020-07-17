@@ -1,6 +1,6 @@
 {
   "name": "kurtwilliam.com",
-  "version": "v2",
+  "version": "1.0.0",
   "private": false,
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
